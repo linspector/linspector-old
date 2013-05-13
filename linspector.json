@@ -1,0 +1,370 @@
+{
+  "services":
+  {
+    "discusage":
+    {
+      "command": "ssh @host df -a @device"
+    },
+    "load":
+    {
+      "command": "ssh @host uptime"
+    },
+    "dirsize":
+    {
+      "command": "ssh @host du -chs @path"
+    },
+    "filesize":
+    {
+      "command": "ssh @host du -chs @path"
+    },
+    "loggedinusercount":
+    {
+      "command": "ssh @host who | wc -l"
+    },
+    "loggedinusers":
+    {
+      "command": "ssh @host who"
+    },
+    "swapusage":
+    {
+      "command": "ssh @host cat /proc/swaps"
+    },
+    "processcount":
+    {
+      "command": "ssh @host ps ax | wc -l"
+    },
+    "processcountbyname":
+    {
+      "command": "ssh @host ps ax | grep @name | wc -l"
+    },
+    "fileage":
+    {
+      "command": "ssh @host ls -l @file"
+    },
+    "ping":
+    {
+      "command": "ping @host"
+    },
+    "htmlcontent":
+    {
+      "command": "wget -qO- @url",
+      "comment": "Get HTML Content for a string lookup."
+    }
+  },
+  "filters":
+  {
+    "email": 
+    {
+      "command": "/usr/bin/warn_the_admin_mail @member @+message",
+      "comment": "Sends an E-Mail to the member.",
+      "priority": 1
+    },
+    "sms": 
+    {
+      "command": "/usr/bin/warn_the_admin_sms @member @+message",
+      "comment": "Sends a Short Message to the member.",
+      "priority": 0
+    },
+    "foo": 
+    {
+      "command": "/usr/bin/warn_the_admin_foo @member @+message",
+      "priority": 500
+    },
+    "mongowriter":
+    {
+    	"command": "./plugins/mongowriter.py @+message localhost 27017 linspector123",
+    	"priority": 1000
+    }
+  },
+  "members": 
+  {
+    "hanez": 
+    {
+      "name": "Johannes Findeisen",
+      "comment": "Just a nerd doing admin stuff...",
+      "parent": "admin",
+      "filters":
+      {
+        "email": "you@hanez.org",
+        "sms": "+23345567"
+      }
+    },
+    "admin": 
+    {
+      "name": "Peter Hansen",
+      "comment": "The son of Hans-Peter Hansen",
+      "parent": "ultraadmin",
+      "filters":
+      {
+        "email": "admin@systemchaos.org",
+        "sms": "+23345567",
+        "phone": "+435345345"
+      }
+    },
+    "ultraadmin": 
+    {
+      "name": "Hans-Peter Hansen (CEO)",
+      "comment": "The guru of the Datacenter",
+      "parent": "darthvader",
+      "filters":
+      {
+        "email": "bofh@systemchaos.org",
+        "sms": "+23345567",
+        "phone": "+435345345"
+      }
+    },
+    "darthvader": 
+    {
+      "name": "Darth Vader",
+      "comment": "The Father",
+      "filters":
+      {
+        "email": "darth.vader@systemchaos.org"
+      }
+    },
+    "jens": 
+    {
+      "name": "Jens Larssen",
+      "comment": "Our network guru",
+      "filters":
+      {
+        "email": "jens@systemchaos.org",
+        "sms": "+23345567",
+        "phone": "+435345345"
+      }
+    },
+    "ruff": 
+    {
+      "name": "Ruffn Buffn",
+      "filters":
+      {
+        "sms": "+23343457"
+      }
+    },
+    "mongowriter": 
+    {
+      "name": "MongoDB Database writer plugin",
+      "filters":
+      {
+        "mongowriter": "localhost"
+      }
+    }
+  },
+  "periods": 
+  {
+    "twentyfourseven": 
+    {
+    	"year": "*",
+    	"month": "*",
+    	"day": "*",
+    	"week": "*",
+    	"hour": "*",
+    	"minute": "5",
+    	"second": "",
+    	"comment": "All day all night... every five minutes!"
+    },
+    "twentyfour_weekdays": 
+    {
+    	"year": "*",
+    	"month": "*",
+    	"day": "*",
+    	"week": "*",
+    	"day_of_week": "mon,tue,wed,thu,fri",
+    	"hour": "*",
+    	"minute": "5"
+    },
+    "twentyfour_weekend": 
+    {
+    	"year": "*",
+    	"month": "*",
+    	"day": "*",
+    	"week": "*",
+    	"day_of_week": "5-6",
+    	"hour": "*",
+    	"minute": "15"
+    },
+    "onmonday": 
+    {
+    	"year": "*",
+    	"month": "*",
+    	"day": "*",
+    	"week": "*",
+    	"day_of_week": "mon",
+    	"hour": "*",
+    	"minute": "5"
+    },
+    "onfriday": 
+    {
+    	"year": "*",
+    	"month": "*",
+    	"day": "*",
+    	"week": "*",
+    	"day_of_week": "fri",
+    	"hour": "0-20",
+    	"minute": "5"
+    },
+    "onmondayandfriday": 
+    {
+    	"year": "*",
+    	"month": "*",
+    	"day": "*",
+    	"week": "*",
+    	"day_of_week": "mon,fri",
+    	"hour": "*",
+    	"minute": "5"
+    },
+    "hanezbirthday": 
+    {
+    	"year": "*",
+    	"month": "12",
+    	"day": "6"
+    },
+    "ruffdoesnever":
+    {
+    }
+  },
+  "hosts":
+  {
+    "hanez":
+    {
+      "host": "www.hanez.org",
+      "services":
+      {
+        "discusage":
+        [
+          { "device": "/dev/sda1", "warning": "80%", "critical": "90%" },
+          { "device": "/dev/sda2", "warning": "70%", "critical": "90%" },
+          { "device": "/dev/sda3", "warning": "70GB", "critical": "90GB" }
+        ],
+        "load":
+        [
+          { "warning": 8.00, "critical": 12.00 }
+        ],
+        "dirsize":
+        [
+          { "path": "/var/log", "warning": 30000000, "critical": 40000000 }
+        ],
+        "processcount":
+        [
+          { "warning": 3000, "critical": 3800 }
+        ],
+        "processcountbyname":
+        [
+          { "name": "java", "warning": 100, "critical": 200 }
+        ],
+        "fileage":
+        [
+          { "file": "/var/backup/server_1", "warning": 2, "critical": 3 }
+        ],
+        "htmlcontent":
+        [
+          { "url": "@host/test.php", "content": "<h1>Server up!</h1>" }
+        ]
+      }
+    },
+    "www.unixpeople.org":
+    {
+      "host": "23.23.23.23",
+      "parent": "router.systemchaos.org",
+      "services":
+      {
+        "discusage":
+        [
+          { "device": "/dev/sda1", "warning": "80%", "critical": "90%" }
+        ],
+        "load":
+        [
+          { "device": "all", "warning": 8.00, "critical": 12.00 }
+        ]
+      }
+    },
+    "www.systemchaos.org":
+    {
+      "host": "www.systemchaos.org",
+      "parent": "router.systemchaos.org",
+      "services":
+      {
+        "htmlcontent":
+        [
+          { "url": "@host", "content": "<title>SYSTEMCHAOS</title>" }
+        ]
+      }
+    },
+    "router.systemchaos.org":
+    {
+      "services":
+      {
+        "ping":
+        [
+          { "warning": "100ms", "critical": "250ms" }
+        ]
+      }
+    }
+  },
+  "hostgroups":
+  {
+    "all":
+    {
+      "members": ["admin"],
+      "hosts": ["hanez", 
+                "www.unixpeople.org",
+                "www.systemchaos.org",
+                "router.systemchaos.org"],
+      "parent": "network",
+      "threshold": 10,
+      "services":
+      {
+      	"load": ["twentyfourseven"],
+      	"discusage":["twentyfourseven"],
+        "ping": ["twentyfourseven"]
+      }
+    },
+    "hanez":
+    {
+      "members": ["hanez"],
+      "hosts": ["hanez","router.systemchaos.org"],
+      "parent": "network",
+      "threshold": 5,
+      "services": 
+      {
+      "load": ["onmondayandfriday"], 
+      "discusage": ["onmondayandfriday"], 
+      "ping": ["onmondayandfriday"]
+      }
+    },
+    "network":
+    {
+      "members": ["jens"],
+      "hosts": ["router.systemchaos.org"],
+      "threshold": 5,
+      "services":
+      {
+      	"load": ["twentyfourseven"],		  
+      	"ping": ["twentyfourseven"]
+      }
+    },
+    "ruff":
+    {
+      "members": ["ruff", "hanez"],
+      "hosts": ["www.fuff.org"],
+      "threshold": 100,
+      "services":
+      {
+      	"busy_waiting": ["ruffdoesnever"]
+      }
+    }
+  },
+  "layouts" :
+  {
+  	"layout_1":
+  	{
+      "hostgroups": ["all", "hanez", "network"],
+      "enabled": true
+    },
+    "layout_2":
+  	{
+      "hostgroups": ["hanez", "ruff"],
+      "enabled": false
+    }
+  }
+}
