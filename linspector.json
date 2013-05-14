@@ -45,6 +45,14 @@
     {
       "command": "ping @host"
     },
+    "snmpget":
+    {
+      "command": "snmpget -v1 -c public $oid "
+    },
+    "busy_waiting":
+    {
+      "command": "sleep 3600"
+    },
     "htmlcontent":
     {
       "command": "wget -qO- @url",
@@ -76,7 +84,7 @@
     	"priority": 1000
     }
   },
-  "members": 
+  "members":
   {
     "hanez": 
     {
