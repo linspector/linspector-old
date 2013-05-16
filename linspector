@@ -1,0 +1,183 @@
+#!/usr/bin/python -tt
+
+import os, sys, time, getopt, random
+from datetime import datetime
+from lib.core.daemon import Daemon
+from lib.config.config import Config
+from lib.core.command import Command
+from lib.core import logger
+from apscheduler.scheduler import Scheduler
+import pprint
+
+NAME = "linspector"
+VERSION = "0.1/TETRIS"
+
+_configfile = str(sys.path[0]) + "/linspector.json"
+_logfile = str(sys.path[0]) + "/linspector.log"
+_pidfile = "/tmp/linspector.pid"
+
+
+class LinspectorDaemon(Daemon):
+    def run(self):
+        """
+        parse the joblist here and add each job to cron.
+        """
+        sched = Scheduler()
+        sched.start()
+
+        x = sched.add_cron_job(job_function, second='*/1', args=['1!'])
+        if x is not None:
+            logger.writeLogToFile(_logfile, str(x.__dict__))
+        else:
+            logger.writeLogToFile(_logfile, "sdfasdfsdf")
+
+        sched.add_cron_job(job_function, second='*/2', args=['2!'])
+        sched.add_cron_job(job_function, second='*/4', args=['4!'])
+        sched.add_cron_job(job_function, second='*/5', args=['5!'])
+        sched.add_cron_job(job_function, second='*/8', args=['8!'])
+        sched.add_cron_job(job_function, second='*/10', args=['10!'])
+        sched.add_cron_job(job_function, second='*/20', args=['20!'])
+        sched.add_cron_job(job_function, second='*/40', args=['40!'])
+        sched.add_cron_job(job_function, second='*', args=['0!'])
+
+        while True:
+            try:
+                logger.writeLogToFile(_logfile, "Running!")
+            except Exception as err:
+                logger.writeLogToFile(_logfile, str(err))
+                sys.exit(1)
+            time.sleep(1)
+
+
+def job_function(mes):
+    logger.writeLogToFile(_logfile, "Function: job_function says " + str(mes) + ", from cron.")
+
+
+def usage():
+    print "usage: linspector [-cdhlprsSvV]"
+    print "-c, --config=FILE        select configfile to use"
+    print "-d, --daemonize          daemonize process"
+    print "-h, --help               this help"
+    print "-l, --logfile=FILE       set logfile to use"
+    print "-p, --pidfile=FILE       set the pidfile to use (default: /tmp/linspector.pid)"
+    print "-r, --restart            restart the daemon"
+    print "-s, --start              start the daemon"
+    print "-S, --stop               stop the daemon"
+    print "-v, --verbose            verbose mode"
+    print "-V, --version            show version information"
+
+
+def version():
+    print NAME + " " + VERSION
+    print "copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg"
+
+
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:],
+                                   "hl:c:p:vVrsS",
+                                   ["help", "logfile=",
+                                    "config=", "pidfile=",
+                                    "verbose", "version",
+                                    "restart", "start", "stop"])
+    except getopt.GetoptError, err:
+        print str(err)
+        usage()
+        sys.exit(2)
+    verbose = False
+    restart = False
+    start = False
+    stop = False
+    for o, a in opts:
+        if o in ("-v", "--verbose"):
+            verbose = True
+        elif o in ("-V", "--version"):
+            version()
+            sys.exit()
+        elif o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-c", "--config"):
+            configfile = a
+            global _configfile
+            _configfile = a
+        elif o in ("-l", "--logfile"):
+            logfile = a
+            global _logfile
+            _logfile = a
+        elif o in ("-p", "--pidfile"):
+            pidfile = a
+            global _pidfile
+            _pidfile = a
+        elif o in ("-r", "--restart"):
+            restart = True
+        elif o in ("-s", "--start"):
+            start = True
+        elif o in ("-S", "--stop"):
+            stop = True
+
+    if start is True or restart is True:
+        config = Config(_configfile)
+        #pprint.pprint(str(config.layouts))
+        #pprint.pprint(str(config.dict["hostgroups"]))
+        #pprint.pprint(str(config.filters.))
+
+        """
+        for service in config.services:
+            pprint.pprint(str(service))
+
+        for filter in config.filters:
+            pprint.pprint(str(filter))
+
+        for member in config.members:
+            pprint.pprint(str(member))
+
+        for period in config.periods:
+            pprint.pprint(str(period))
+
+        for host in config.hosts:
+            pprint.pprint(str(host))
+        """
+
+        for hostgroup in config.hostgroups:
+            pprint.pprint(str(hostgroup))
+
+        #for layout in config.layouts.layouts:
+        #    pprint.pprint(str(layout
+
+        #logger.writeLogToFile(_logfile, "config.layouts.lyouts: " + str([str(i) for i in config.layouts.layouts]))
+        #logger.writeLogToFile(_logfile, "config.hostgroups: " + config.hostgroups)
+        #logger.writeLogToFile(_logfile, "config.hosts: " + str([str(i) for i in config.hosts]))
+        #logger.writeLogToFile(_logfile, "config.services: " + str([str(i) for i in config.services]))
+        #logger.writeLogToFile(_logfile, "config.members: " + str([str(i) for i in config.members]))
+        #logger.writeLogToFile(_logfile, "config.periods: " + str([str(i) for i in config.periods]))
+        #logger.writeLogToFile(_logfile, "config.filters: " + str([str(i) for i in config.filters]))
+        #logger.writeLogToFile(_logfile, "X:" + config.periods[0])
+
+    """
+    linspector = LinspectorDaemon(_pidfile)
+
+    if start is True:
+        logger.writeLogToFile(_logfile, "Starting Linspector...")
+        logger.writeLogToFile(_logfile, "Path: " + str(sys.path[0]))
+        logger.writeLogToFile(_logfile, "Configfile: " + _configfile)
+        logger.writeLogToFile(_logfile, "Logfile: " + _logfile)
+        logger.writeLogToFile(_logfile, "Pidfile: " + _pidfile)
+        linspector.start()
+    elif stop is True:
+        logger.writeLogToFile(_logfile, "Stopping Linspector...")
+        logger.writeLogToFile(_logfile, "Pidfile: " + _pidfile)
+        linspector.stop()
+        logger.writeLogToFile(_logfile, "Terminated!")
+    elif restart is True:
+        logger.writeLogToFile(_logfile, "Restarting Linspector...")
+        logger.writeLogToFile(_logfile, "Path: " + str(sys.path[0]))
+        logger.writeLogToFile(_logfile, "Configfile: " + _configfile)
+        logger.writeLogToFile(_logfile, "Logfile: " + _logfile)
+        logger.writeLogToFile(_logfile, "Pidfile: " + _pidfile)
+        linspector.restart()
+    sys.exit(0)
+    """
+
+if __name__ == "__main__":
+    main()
