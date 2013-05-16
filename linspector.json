@@ -1,7 +1,7 @@
 {
     "services":
     {
-        "discusage": {"command": "ssh @host df -a @device" },
+        "discusage": {"command": "ssh @host df -a @device", "parser": "df"},
         "load": {"command": "ssh @host uptime"},
         "dirsize": { "command": "ssh @host du -chs @path"},
         "filesize": {"command": "ssh @host du -chs @path"},
@@ -12,10 +12,9 @@
         "processcountbyname": {"command": "ssh @host ps ax | grep @name | wc -l"},
         "fileage": {"command": "ssh @host ls -l @file"},
         "ping": {"command": "ping @host"},
-        "snmpget": {"command": "snmpget -v1 -c public $oid "},
+        "snmpget": {"command": "snmpget -v1 -c public $oid"},
         "busy_waiting": {"command": "sleep 3600"},
-        "htmlcontent": {"command": "wget -qO- @url",
-                        "comment": "Get HTML Content for a string lookup."}
+        "htmlcontent": {"command": "wget -qO- @url", "comment": "Get HTML Content for a string lookup."}
     },
     "filters":
     {
