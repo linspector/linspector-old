@@ -1,10 +1,10 @@
 #!/usr/bin/python -tt
 
-import sys
-import time
-import getopt
+import os, sys, time, getopt, random
+from datetime import datetime
 from lib.core.daemon import Daemon
 from lib.config.config import Config
+from lib.core.command import Command
 from lib.core import logger
 from apscheduler.scheduler import Scheduler
 import pprint
