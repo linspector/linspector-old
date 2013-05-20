@@ -147,7 +147,7 @@
         	"week": "*",
         	"hour": "*",
         	"minute": "5",
-        	"second": "*",
+        	"second": "",
         	"comment": "All day all night... every five minutes!"
         },
         "twentyfour_weekdays": 
