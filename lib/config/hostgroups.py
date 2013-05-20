@@ -51,7 +51,7 @@ def parseHostGroupList(hostgroups, hosts, members, periods, services):
                 print "warning: Service " + serviceName + " is not defined for Hostgroup " + hgname
                 continue
             service = service[0]
-            periods = filter(lambda p: p.name in servicePeriods, periods)
-            hostGroup.services.append(HostGroupService(service, periods))
+            hostGroupPeriods = filter(lambda p: p.name in servicePeriods, periods)
+            hostGroup.services.append(HostGroupService(service, hostGroupPeriods))
         parsedHostGroups.append(hostGroup)
     return parsedHostGroups
