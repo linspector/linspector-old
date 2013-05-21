@@ -19,8 +19,8 @@ def logWarning(message):
     print WARNING + " " + message
 
 
-def logWarningConfig(file="file", missing="missing"):
-    logWarning("in " + file + ": The " + missing + " is not defined")
+def logWarningConfig(thefile="file", missing="missing"):
+    logWarning("in " + thefile + ": The " + missing + " is not defined")
 
 
 def writeLogToFile(logfile, message):
@@ -33,7 +33,7 @@ class Logger:
     def __init__(self, logfile="/dev/null"):
         self.logfile = logfile
 
-    def logSomething(message, verbose=False):
+    def logSomething(self, message, verbose=False):
         f = open(self.logfile, 'a')
         f.write("[" + str(datetime.now()) + "] " + message + '\n')
         f.close()
