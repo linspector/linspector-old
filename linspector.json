@@ -139,7 +139,7 @@
     },
     "periods": 
     {
-        "twentyfoursevenX":
+        "twentyfourseven":
         {
         	"year": "*",
         	"month": "*",
@@ -397,9 +397,9 @@
             "threshold": 10,
             "services":
             {
-            	"load": ["onmondayandfriday"],
-            	"discusage":["onmondayandfriday"],
-                "ping": ["onmondayandfriday"]
+            	"load": ["twentyfourseven"],
+            	"discusage":["twentyfourseven"],
+                "ping": ["twentyfourseven"]
             }
         },
         "all_for_hanez":
