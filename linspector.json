@@ -18,19 +18,19 @@
     },
     "filters":
     {
-        "email": 
+        "email":
         {
             "command": "/usr/bin/warn_the_admin_mail @member @+message",
             "comment": "Sends an E-Mail to the member.",
             "priority": 1
         },
-        "sms": 
+        "sms":
         {
             "command": "/usr/bin/warn_the_admin_sms @member @+message",
             "comment": "Sends a Short Message to the member.",
             "priority": 0
         },
-        "foo": 
+        "foo":
         {
             "command": "/usr/bin/warn_the_admin_foo @member @+message",
             "priority": 500
@@ -43,7 +43,7 @@
     },
     "members":
     {
-        "hanez": 
+        "hanez":
         {
             "name": "Johannes Findeisen",
             "comment": "Just a nerd doing admin stuff...",
@@ -76,7 +76,7 @@
                 "sms": "+2334556733333"
             }
         },
-        "admin": 
+        "admin":
         {
             "name": "Peter Hansen",
             "comment": "The son of Hans-Peter Hansen",
@@ -88,7 +88,7 @@
                 "phone": "+435345345"
             }
         },
-        "ultraadmin": 
+        "ultraadmin":
         {
             "name": "Hans-Peter Hansen (CEO)",
             "comment": "The guru of the Datacenter",
@@ -100,7 +100,7 @@
                 "phone": "+435345345"
             }
         },
-        "darthvader": 
+        "darthvader":
         {
             "name": "Darth Vader",
             "comment": "The Father",
@@ -109,7 +109,7 @@
                 "email": "darth.vader@systemchaos.org"
             }
         },
-        "jens": 
+        "jens":
         {
             "name": "Jens Larssen",
             "comment": "Our network guru",
@@ -120,7 +120,7 @@
                 "phone": "+435345345"
             }
         },
-        "ruff": 
+        "ruff":
         {
             "name": "Ruffn Buffn",
             "filters":
@@ -128,7 +128,7 @@
                 "sms": "+23343457"
             }
         },
-        "mongowriter": 
+        "mongowriter":
         {
             "name": "MongoDB Database writer plugin",
             "filters":
@@ -137,7 +137,7 @@
             }
         }
     },
-    "periods": 
+    "periods":
     {
         "twentyfourseven":
         {
@@ -149,65 +149,6 @@
         	"minute": "5",
         	"second": "",
         	"comment": "All day all night... every five minutes!"
-        },
-        "twentyfour_weekdays": 
-        {
-        	"year": "*",
-        	"month": "*",
-        	"day": "*",
-        	"week": "*",
-        	"day_of_week": "mon,tue,wed,thu,fri",
-        	"hour": "*",
-        	"minute": "5"
-        },
-        "twentyfour_weekend": 
-        {
-        	"year": "*",
-        	"month": "*",
-        	"day": "*",
-        	"week": "*",
-        	"day_of_week": "5-6",
-        	"hour": "*",
-        	"minute": "15"
-        },
-        "onmonday": 
-        {
-        	"year": "*",
-        	"month": "*",
-        	"day": "*",
-        	"week": "*",
-        	"day_of_week": "mon",
-        	"hour": "*",
-        	"minute": "5"
-        },
-        "onfriday": 
-        {
-        	"year": "*",
-        	"month": "*",
-        	"day": "*",
-        	"week": "*",
-        	"day_of_week": "fri",
-        	"hour": "0-20",
-        	"minute": "5"
-        },
-        "onmondayandfriday": 
-        {
-        	"year": "*",
-        	"month": "*",
-        	"day": "*",
-        	"week": "*",
-        	"day_of_week": "mon,fri",
-        	"hour": "*",
-        	"minute": "5"
-        },
-        "hanezbirthday": 
-        {
-        	"year": "*",
-        	"month": "12",
-        	"day": "6"
-        },
-        "ruffdoesnever":
-        {
         }
     },
     "hosts":
@@ -248,137 +189,6 @@
                     { "url": "@host/test.php", "content": "<h1>Server up!</h1>" }
                 ]
             }
-        },
-        "www.unixpeople.org":
-        {
-            "host": "23.23.23.23",
-            "parent": "router.systemchaos.org",
-            "services":
-            {
-                "discusage":
-                [
-                    { "device": "/dev/sda1", "warning": "80%", "critical": "90%" }
-                ],
-                "load":
-                [
-                    { "device": "all", "warning": 8.00, "critical": 12.00 }
-                ]
-            }
-        },
-        "www2.unixpeople.org":
-        {
-            "host": "23.23.23.24",
-            "parent": "router.systemchaos.org",
-            "services":
-            {
-                "discusage":
-                [
-                    { "device": "/dev/sda1", "warning": "80%", "critical": "90%" }
-                ],
-                "load":
-                [
-                    { "device": "all", "warning": 8.00, "critical": 12.00 }
-                ]
-            }
-        },
-        "www3.unixpeople.org": {"host": "23.23.23.25", "parent": "router.systemchaos.org",
-             "services": {"discusage":[{ "device": "/dev/sda1", "warning": "80%", "critical": "90%"}],
-                          "load":[{ "device": "all", "warning": 8.00, "critical": 12.00 }],
-                          "ping":[{"warning": "100ms", "critical": "250ms"}]
-             }
-        },
-        "www.systemchaos.org":
-        {
-            "host": "www.systemchaos.org",
-            "parent": "router.systemchaos.org",
-            "services":
-            {
-                "htmlcontent":
-                [
-                    { "url": "@host", "content": "<title>SYSTEMCHAOS</title>" }
-                ]
-            }
-        },
-        "devserver":
-        {
-            "host": "devserver.systemchaos.org",
-            "parent": "router.systemchaos.org",
-            "services":
-            {
-                "ping":
-                [
-                    { "warning": "100ms", "critical": "250ms" }
-                ]
-            }
-        },
-        "www01.linspector.org": {"host": "www01.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www02.linspector.org": {"host": "www02.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www03.linspector.org": {"host": "www03.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www04.linspector.org": {"host": "www04.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www05.linspector.org": {"host": "www05.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www06.linspector.org": {"host": "www06.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www07.linspector.org": {"host": "www07.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www08.linspector.org": {"host": "www08.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www09.linspector.org": {"host": "www09.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www10.linspector.org": {"host": "www10.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www11.linspector.org": {"host": "www11.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www12.linspector.org": {"host": "www12.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www13.linspector.org": {"host": "www13.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www14.linspector.org": {"host": "www14.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www15.linspector.org": {"host": "www15.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www16.linspector.org": {"host": "www16.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www17.linspector.org": {"host": "www17.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www18.linspector.org": {"host": "www18.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www19.linspector.org": {"host": "www19.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www20.linspector.org": {"host": "www20.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www21.linspector.org": {"host": "www21.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "www22.linspector.org": {"host": "www22.linspector.org", "parent": "router.systemchaos.org",
-            "services": {"ping":[{"warning": "100ms", "critical": "250ms"}]}
-        },
-        "router.systemchaos.org": {"host": "192.168.2.1",
-            "services":{"ping":[{ "warning": "100ms", "critical": "250ms"}]}
         }
     },
     "hostgroups":
@@ -386,13 +196,7 @@
         "all":
         {
             "members": ["admin"],
-            "hosts": ["hanez", "www.unixpeople.org", "www2.unixpeople.org", "www3.unixpeople.org",
-                      "www.systemchaos.org", "router.systemchaos.org", "www01.linspector.org", "www02.linspector.org",
-                      "www03.linspector.org", "www04.linspector.org", "www05.linspector.org", "www06.linspector.org",
-                      "www07.linspector.org", "www08.linspector.org", "www09.linspector.org", "www10.linspector.org",
-                      "www11.linspector.org", "www12.linspector.org", "www13.linspector.org", "www14.linspector.org",
-                      "www15.linspector.org", "www16.linspector.org", "www17.linspector.org", "www18.linspector.org",
-                      "www19.linspector.org", "www20.linspector.org", "www21.linspector.org", "www22.linspector.org"],
+            "hosts": ["hanez"],
             "parent": "network",
             "threshold": 10,
             "services":
@@ -400,133 +204,6 @@
             	"load": ["twentyfourseven"],
             	"discusage":["twentyfourseven"],
                 "ping": ["twentyfourseven"]
-            }
-        },
-        "all_for_hanez":
-        {
-            "members": ["hanez"],
-            "hosts": ["hanez", "www.unixpeople.org", "www2.unixpeople.org", "www3.unixpeople.org",
-                      "www.systemchaos.org", "router.systemchaos.org", "www01.linspector.org", "www02.linspector.org",
-                      "www03.linspector.org", "www04.linspector.org", "www05.linspector.org", "www06.linspector.org",
-                      "www07.linspector.org", "www08.linspector.org", "www09.linspector.org", "www10.linspector.org",
-                      "www11.linspector.org", "www12.linspector.org", "www13.linspector.org", "www14.linspector.org",
-                      "www15.linspector.org", "www16.linspector.org", "www17.linspector.org", "www18.linspector.org",
-                      "www19.linspector.org", "www20.linspector.org", "www21.linspector.org", "www22.linspector.org"],
-            "parent": "network",
-            "threshold": 10,
-            "services":
-            {
-            	"load": ["twentyfourseven"],
-            	"discusage":["twentyfourseven"],
-                "ping": ["twentyfourseven"]
-            }
-        },
-        "all_for_nonexistent":
-        {
-            "members": ["nonexistent"],
-            "hosts": ["hanez", "www.unixpeople.org", "www2.unixpeople.org", "www3.unixpeople.org",
-                      "www.systemchaos.org", "router.systemchaos.org", "www01.linspector.org", "www02.linspector.org",
-                      "www03.linspector.org", "www04.linspector.org", "www05.linspector.org", "www06.linspector.org",
-                      "www07.linspector.org", "www08.linspector.org", "www09.linspector.org", "www10.linspector.org",
-                      "www11.linspector.org", "www12.linspector.org", "www13.linspector.org", "www14.linspector.org",
-                      "www15.linspector.org", "www16.linspector.org", "www17.linspector.org", "www18.linspector.org",
-                      "www19.linspector.org", "www20.linspector.org", "www21.linspector.org", "www22.linspector.org"],
-            "parent": "network",
-            "threshold": 10,
-            "services":
-            {
-            	"load": ["nix"],
-            	"discusage":["nix"],
-                "ping": ["nix"]
-            }
-        },
-        "hanez":
-        {
-            "members": ["hanez", "jens"],
-            "hosts": ["hanez", "router.systemchaos.org", "www.unixpeople.org", "www2.unixpeople.org",
-                      "www3.unixpeople.org"],
-            "parent": "network",
-            "threshold": 5,
-            "services": 
-            {
-                "load": ["hanezbirthday"],
-                "discusage": ["onmondayandfriday"],
-                "ping": ["onmondayandfriday"]
-            }
-        },
-        "unixpeople":
-        {
-            "members": ["unixpeople", "admin", "hanez", "nobody"],
-            "hosts": ["www.unixpeople.org", "www2.unixpeople.org", "www3.unixpeople.org", "www08.linspector.org"],
-            "parent": "network",
-            "threshold": 5,
-            "services":
-            {
-                "load": ["onmondayandfriday"],
-                "discusage": ["onmondayandfriday"],
-                "ping": ["twentyfourseven"]
-            }
-        },
-        "linspector-01":
-        {
-            "members": ["linspector", "hanez", "nobody"],
-            "hosts": ["www01.linspector.org", "www02.linspector.org", "www03.linspector.org", "www04.linspector.org",
-                      "www05.linspector.org", "www06.linspector.org", "www07.linspector.org", "www08.linspector.org"],
-            "parent": "network",
-            "threshold": 5,
-            "services":
-            {
-                "load": ["twentyfourseven"],
-                "discusage": ["twentyfourseven"],
-                "ping": ["twentyfourseven"]
-            }
-        },
-        "linspector-02":
-        {
-            "members": ["linspector", "hanez", "nobody"],
-            "hosts": ["www09.linspector.org", "www10.linspector.org", "www11.linspector.org", "www12.linspector.org",
-                      "www13.linspector.org", "www14.linspector.org", "www15.linspector.org", "www16.linspector.org"],
-            "parent": "network",
-            "threshold": 5,
-            "services":
-            {
-                "load": ["twentyfourseven"],
-                "discusage": ["twentyfourseven"],
-                "ping": ["twentyfourseven"]
-            }
-        },
-        "devserver":
-        {
-            "members": ["devs", "hanez"],
-            "hosts": ["dev.hanez.org"],
-            "parent": "network",
-            "threshold": 5,
-            "services":
-            {
-                "load": ["twentyfourseven"],
-                "discusage": ["twentyfourseven"],
-                "ping": ["twentyfourseven"]
-            }
-        },
-        "network":
-        {
-            "members": ["jens"],
-            "hosts": ["router.systemchaos.org"],
-            "threshold": 5,
-            "services":
-            {
-            	"load": ["onmondayandfriday"],
-            	"ping": ["twentyfourseven"]
-            }
-        },
-        "ruff":
-        {
-            "members": ["ruff", "hanez"],
-            "hosts": ["www.fuff.org", "www.unixpeople.org"],
-            "threshold": 100,
-            "services":
-            {
-            	"busy_waiting": ["ruffdoesnever"]
             }
         }
     },
