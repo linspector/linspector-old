@@ -1,0 +1,11 @@
+
+# TODO
+
+ * Dokumentation des Konzeptes
+ * Workflow Diagramme
+ * Dokumentation der Code Struktur - Klassenhierarchie
+ * Code Fertigstellen
+   * Task Scheduling
+   * Implement clean Logging to files or stdout. Verbose mode too!
+   
+Weiteres siehe NOTES.hanez
