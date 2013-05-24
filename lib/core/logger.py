@@ -5,17 +5,18 @@ import os.path as path
 
 
 class Logger():
-    """Logger class that prints its messages and keeps them also inside a logfile"""
+    """
+    Logger class that prints its messages and keeps them also inside a logfile
+    """
 
     def __init__(self, logfile="./linspector.log", logLevel=logging.DEBUG, logfileLevel=logging.DEBUG):
         """
-initializes a new Logger object.
+        initializes a new Logger object.
 
-params:
-logLevel the LoggingLevel from the console output (DEBUG default)
-logfile the file where to log. Logs are rotated by default.
-logfileLevel the LoggingLevel for the file Logger. (DEBUG default)
-"""
+        :param logLevel: the LoggingLevel from the console output (DEBUG default)
+        :param logfile: the file where to log. Logs are rotated by default.
+        :param logfileLevel: the LoggingLevel for the file Logger. (DEBUG default)
+        """
 
         logfile = path.expanduser(logfile)
         if not path.exists(path.dirname(logfile)):
