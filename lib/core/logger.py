@@ -55,7 +55,6 @@ class Logger():
     def c(self, message):
         self.log.critical(message)
         self.log.critical(message)
-        
 
     def close(self):
         logging.shutdown()
