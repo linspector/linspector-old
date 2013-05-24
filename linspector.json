@@ -208,5 +208,10 @@
         }
     },
     "layouts": {"production": {"hostgroups": ["all", "hanez", "network"], "enabled": true},
-                "lazy":       {"hostgroups": ["hanez", "ruff"], "enabled": false}}
+                "lazy":       {"hostgroups": ["hanez", "ruff"], "enabled": false}
+    },
+    "core": {
+        "max_logfile_size": 1024000,
+        "max_logfile_count": 4
+    }
 }
