@@ -9,65 +9,57 @@ import logging
 import subprocess as sp
 
 
-
 def parseArgs():
     parser = argparse.ArgumentParser(
         description="Linspector is for monitoring the vital information of hosts, services and devices in a network.",
         epilog="linspector is not some program expecting computers to run!",
         prog="linspector")
 
-    parser.add_argument("action", choices=["start", "stop", "restart", "attach"],  
+    parser.add_argument("action", choices=["start", "stop", "restart", "attach"],
                         help="defines if linspector should beeing attached, started, stopped or restarted.")
-    parser.add_argument("--version", action="version", version="%(prog)s "+str(VERSION))
-    parser.add_argument("-c", "--config",  default="./linspector.json", 
-                      help="select configfile to use")
+    parser.add_argument("--version", action="version", version="%(prog)s " + str(VERSION))
+    parser.add_argument("-c", "--config", default="./linspector.json",
+                        help="select configfile to use")
     parser.add_argument("-l", "--logfile", default="./log/linspector.log", metavar="FILE",
-                      help="set logfile to use")
+                        help="set logfile to use")
     parser.add_argument("-p", "--pidfile", default="./tmp/linspector.pid", metavar="FILE",
-                      help="set the pidfile to use (default: /tmp/linspector.pid)")
-    
-                      
-    output=parser.add_mutually_exclusive_group()
-    output.add_argument("-q","--quiet", action="store_const", dest="loglevel", const=logging.ERROR,
-                      help="output only errors")
-    output.add_argument("-w", "--warning", action="store_const", dest="loglevel", const=logging.WARNING, 
-                      help="output warnings")
-    output.add_argument("-v","--verbose", action="store_const", dest="loglevel", const=logging.INFO,
-                      help="output infos")
-    output.add_argument("-d", "--debug", action="store_const", dest="loglevel", const=logging.DEBUG, 
-                      help="output debug infos")
+                        help="set the pidfile to use (default: /tmp/linspector.pid)")
+
+    output = parser.add_mutually_exclusive_group()
+    output.add_argument("-q", "--quiet", action="store_const", dest="loglevel", const=logging.ERROR,
+                        help="output only errors")
+    output.add_argument("-w", "--warning", action="store_const", dest="loglevel", const=logging.WARNING,
+                        help="output warnings")
+    output.add_argument("-v", "--verbose", action="store_const", dest="loglevel", const=logging.INFO,
+                        help="output infos")
+    output.add_argument("-d", "--debug", action="store_const", dest="loglevel", const=logging.DEBUG,
+                        help="output debug infos")
     output.set_defaults(loglevel=logging.INFO)
     return parser.parse_args()
-    
+
+
 def main():
-    args=parseArgs()
-    log=Logger(args.logfile , args.loglevel)
-    
+    args = parseArgs()
+    log = Logger(args.logfile, args.loglevel)
+
     log.i("parsed arguments")
-    
-    if args.action=="start":
+
+    if args.action == "start":
         log.i("starting linspector: reading config...")
-        config=Config(args.config, log)
+        config = Config(args.config, log)
         log.d("parsed config: " + str(config))
         for hg in config.hostgroups:
             log.i(str(hg))
-    elif args.action=="stop":
+    elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
-    elif args.action=="restart":
+    elif args.action == "restart":
         sp.call("./linspector stop")
-        sp.call("./linspector start --config " + args.config + " --logfile " + args.logfile + " --pidfile " + args.pidfile)
-    elif args.action=="attach":
+        sp.call(
+            "./linspector start --config " + args.config + " --logfile " + args.logfile + " --pidfile " + args.pidfile)
+    elif args.action == "attach":
         log.i("attaching linspector is currently unsupported")
-        
-        
-    
-    
-    
+
     log.close()
-    
-    
-    
-    
 
 
 if __name__ == "__main__":
