@@ -1,6 +1,3 @@
-from ..core import logger
-
-
 class Layout:
     def __init__(self, myLayout):
         self.name = myLayout
@@ -39,7 +36,8 @@ class LayoutList:
                             if h is not None:
                                 l.hostgroups.append(h)
                             else:
-                                logger.logWarningConfig(file="hostgroups", missing=group)
+                                # TODO: replace next line with new logging
+                                #logger.logWarningConfig(file="hostgroups", missing=group)
                 self.layouts.append(l)
 
     def __str__(self):
