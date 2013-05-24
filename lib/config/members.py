@@ -26,7 +26,7 @@ class MemberFilter:
         return "Filter:" + str(self.filter) + " Value:" + self.value
 
 
-def parseMemberList(members, filters):
+def parseMemberList(members, filters, log):
     parsedMembers = [Member(nameid, **values) for nameid, values in members.items()]
     for member in parsedMembers:
         mFilter = []
@@ -39,6 +39,6 @@ def parseMemberList(members, filters):
                 memberFilter.command = re.sub('@member', replacement, filt.command)
                 mFilter.append(memberFilter)
             if not found:
-                print "warning: filter: " + filtername + " is not defined in member " + member.name
+                log.w("filter: " + filtername + " is not defined in member " + member.name)
         member.filters = mFilter
     return parsedMembers

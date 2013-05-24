@@ -41,7 +41,7 @@ class HostService:
         return ret;
 
 
-def parseHostList(hosts, services):
+def parseHostList(hosts, services, log):
     '''parse the HostList and replace any command as nessesary '''
     #precompiled regexPattern which finds replacements in service strings
     pattern = re.compile("@(\w+)")
@@ -79,7 +79,7 @@ def parseHostList(hosts, services):
                         #any remainig parm should be a replacement
                     for parm in params:
                         if parm not in replacements:
-                            print "warning: undefined parameter: " + parm + " in host " + host.name + " from service " + service.name
+                            log.w("undefined parameter: " + parm + " in host " + host.name + " from service " + service.name)
                             continue
                             #replace our ServiceCommand with the parameter_value (search, replacement, string)
                         hostService.setCommand(re.sub('@' + parm, params[parm], hostService.getCommand()))
@@ -91,14 +91,14 @@ def parseHostList(hosts, services):
                         #replacements should be empty now.
                     #If not we cannot use this command as some values are missing
                     if replacements:
-                        print "warning: Hostservice " + servicename + " from host " + host.name + " is ignored because of missing replacements: " + str(
-                            replacements)
+                        log.w("Hostservice " + servicename + " from host " + host.name + " is ignored because of missing replacements: " + str(
+                            replacements))
                     else:
                         #anything ok! add to our valid hostServices
                         hostServices.append(hostService)
                 #we could't find the service defined in this host. Service ignored!
             if not found:
-                print "warning: Service " + servicename + " not defined in host " + host.name
+                log.w("Service " + servicename + " not defined in host " + host.name)
             #replace host.service member by parsed HostService Objects
         host.services = hostServices
     return parsedHosts

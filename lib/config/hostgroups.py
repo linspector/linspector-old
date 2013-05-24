@@ -35,7 +35,7 @@ class HostGroupService:
         return "HostgroupService { " + str(self.service) + ", " + str(self.periods) + "}"
 
 
-def parseHostGroupList(hostgroups, hosts, members, periods, services):
+def parseHostGroupList(hostgroups, hosts, members, periods, services, log):
     parsedHostGroups = []
     for hgname, hgValues in hostgroups.items():
         hostGroup = HostGroup(hgname)
@@ -47,8 +47,8 @@ def parseHostGroupList(hostgroups, hosts, members, periods, services):
         hostGroup.services = []
         for serviceName, servicePeriods in hgValues['services'].items():
             service = filter(lambda s: s.name in serviceName, services)
-            if not service:
-                print "warning: Service " + serviceName + " is not defined for Hostgroup " + hgname
+            if len(service) == 0:
+                log.w("Service " + serviceName + " is not defined for Hostgroup " + hgname)
                 continue
             service = service[0]
             hostGroupPeriods = filter(lambda p: p.name in servicePeriods, periods)

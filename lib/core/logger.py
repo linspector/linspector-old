@@ -1,40 +1,62 @@
-from datetime import datetime
-
-DEBUG = "[debug]"
-NOTICE = "[notice]"
-WARNING = "[warning]"
-
-
-def logVerbose(message, verbose=True):
-    if verbose:
-        print DEBUG + " " + str(message)
+import logging
+import logging.handlers
+import os
+import os.path as path
 
 
-def logNotice(message, verbose=True):
-    if verbose:
-        print NOTICE + " " + str(message)
+class Logger():
+    """Logger class that prints its messages and keeps them also inside a logfile"""
 
+    def __init__(self, logfile="./linspector.log", logLevel=logging.DEBUG, logfileLevel=logging.DEBUG):
+        """
+initializes a new Logger object.
 
-def logWarning(message):
-    print WARNING + " " + message
+params:
+logLevel the LoggingLevel from the console output (DEBUG default)
+logfile the file where to log. Logs are rotated by default.
+logfileLevel the LoggingLevel for the file Logger. (DEBUG default)
+"""
 
+        logfile = path.expanduser(logfile)
+        if not path.exists(path.dirname(logfile)):
+            os.makedirs(path.dirname(logfile))
 
-def logWarningConfig(thefile="file", missing="missing"):
-    logWarning("in " + thefile + ": The " + missing + " is not defined")
+        self.log = logging.getLogger("LinspectorLogger")
+        self.log.setLevel(logging.DEBUG)
 
+        consoleHandler = logging.StreamHandler()
+        consoleHandler.setLevel(logLevel)
 
-def writeLogToFile(logfile, message):
-    f = open(logfile, 'a')
-    f.write("[" + str(datetime.now()) + "] " + message + '\n')
-    f.close()
+        fileHandler = logging.handlers.RotatingFileHandler(logfile, maxBytes=1024000, backupCount=4)
+        fileHandler.setLevel(logfileLevel)
 
+        consoleFormatter = logging.Formatter('[%(levelname)s]: %(message)s')
+        fileFormatter = logging.Formatter('%(asctime)s [%(levelname)s]: %(message)s')
 
-class Logger:
-    def __init__(self, logfile="/dev/null"):
-        self.logfile = logfile
+        consoleHandler.setFormatter(consoleFormatter)
+        fileHandler.setFormatter(fileFormatter)
 
-    def logSomething(self, message, verbose=False):
-        f = open(self.logfile, 'a')
-        f.write("[" + str(datetime.now()) + "] " + message + '\n')
-        f.close()
+        self.log.addHandler(consoleHandler)
+        self.log.addHandler(fileHandler)
+
+    def d(self, message):
+        self.log.debug(message)
+
+    def i(self, message):
+        self.log.info(message)
+
+    def w(self, message):
+        self.log.warn(message)
+
+    def e(self, message):
+        self.log.error(message)
+
+    def c(self, message):
+        self.log.critical(message)
+        self.log.critical(message)
+        
+
+    def close(self):
+        logging.shutdown()
+
 

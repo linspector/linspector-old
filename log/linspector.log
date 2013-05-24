@@ -1,0 +1,136 @@
+2013-05-24 02:29:22,700 [INFO]: parsed arguments
+2013-05-24 02:29:22,701 [INFO]: reading config...
+2013-05-24 02:29:22,703 [DEBUG]: parsed config: <lib.config.config.Config instance at 0x2365a28>
+2013-05-24 02:29:22,703 [INFO]: HostGroup: all threshold: 10 parent: network
+members: {
+Member Id: admin Name: Peter Hansen Filters: Filter('Name: sms', 'Command: /usr/bin/warn_the_admin_sms +23345567 @+message', 'Priority: 0')Filter('Name: email', 'Command: /usr/bin/warn_the_admin_mail admin@systemchaos.org @+message', 'Priority: 1')
+}
+hosts: {
+Host('Name: hanez', 'access: www.hanez.org', 'HostServices: {Service('Name: load', 'Command: ssh www.hanez.org uptime, 'Parser: ')warning: 8.0critical: 12.0
+Service('Name: processcountbyname', 'Command: ssh www.hanez.org ps ax | grep java | wc -l, 'Parser: ')warning: 100critical: 200
+Service('Name: htmlcontent', 'Command: wget -qO- @host/test.php, 'Parser: ')
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda1, 'Parser: ')warning: 80%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda2, 'Parser: ')warning: 70%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda3, 'Parser: ')warning: 70GBcritical: 90GB
+Service('Name: processcount', 'Command: ssh www.hanez.org ps ax | wc -l, 'Parser: ')warning: 3000critical: 3800
+Service('Name: fileage', 'Command: ssh www.hanez.org ls -l /var/backup/server_1, 'Parser: ')warning: 2critical: 3
+Service('Name: dirsize', 'Command: ssh www.hanez.org du -chs /var/log, 'Parser: ')warning: 30000000critical: 40000000
+}
+}
+services: {
+HostgroupService { Service('Name: load', 'Command: ssh @host uptime, 'Parser: '), [<lib.config.periods.Period instance at 0x23bc1b8>]}
+HostgroupService { Service('Name: discusage', 'Command: ssh @host df -a @device, 'Parser: df'), [<lib.config.periods.Period instance at 0x23bc1b8>]}
+HostgroupService { Service('Name: ping', 'Command: ping @host, 'Parser: '), [<lib.config.periods.Period instance at 0x23bc1b8>]}
+}
+
+2013-05-24 02:29:41,698 [INFO]: parsed arguments
+2013-05-24 02:29:41,698 [INFO]: reading config...
+2013-05-24 02:29:41,700 [DEBUG]: parsed config: <lib.config.config.Config instance at 0xb2ba28>
+2013-05-24 02:29:41,700 [INFO]: HostGroup: all threshold: 10 parent: network
+members: {
+Member Id: admin Name: Peter Hansen Filters: Filter('Name: sms', 'Command: /usr/bin/warn_the_admin_sms +23345567 @+message', 'Priority: 0')Filter('Name: email', 'Command: /usr/bin/warn_the_admin_mail admin@systemchaos.org @+message', 'Priority: 1')
+}
+hosts: {
+Host('Name: hanez', 'access: www.hanez.org', 'HostServices: {Service('Name: load', 'Command: ssh www.hanez.org uptime, 'Parser: ')warning: 8.0critical: 12.0
+Service('Name: processcountbyname', 'Command: ssh www.hanez.org ps ax | grep java | wc -l, 'Parser: ')warning: 100critical: 200
+Service('Name: htmlcontent', 'Command: wget -qO- @host/test.php, 'Parser: ')
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda1, 'Parser: ')warning: 80%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda2, 'Parser: ')warning: 70%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda3, 'Parser: ')warning: 70GBcritical: 90GB
+Service('Name: processcount', 'Command: ssh www.hanez.org ps ax | wc -l, 'Parser: ')warning: 3000critical: 3800
+Service('Name: fileage', 'Command: ssh www.hanez.org ls -l /var/backup/server_1, 'Parser: ')warning: 2critical: 3
+Service('Name: dirsize', 'Command: ssh www.hanez.org du -chs /var/log, 'Parser: ')warning: 30000000critical: 40000000
+}
+}
+services: {
+HostgroupService { Service('Name: load', 'Command: ssh @host uptime, 'Parser: '), [<lib.config.periods.Period instance at 0xb821b8>]}
+HostgroupService { Service('Name: discusage', 'Command: ssh @host df -a @device, 'Parser: df'), [<lib.config.periods.Period instance at 0xb821b8>]}
+HostgroupService { Service('Name: ping', 'Command: ping @host, 'Parser: '), [<lib.config.periods.Period instance at 0xb821b8>]}
+}
+
+2013-05-24 02:31:20,124 [INFO]: parsed arguments
+2013-05-24 02:31:20,124 [INFO]: reading config...
+2013-05-24 02:31:20,124 [WARNING]: filter: phone is not defined in member Peter Hansen
+2013-05-24 02:31:20,126 [WARNING]: filter: phone is not defined in member Jens Larssen
+2013-05-24 02:31:20,127 [WARNING]: filter: phone is not defined in member Hans-Peter Hansen (CEO)
+2013-05-24 02:31:20,127 [DEBUG]: parsed config: <lib.config.config.Config instance at 0x1d29a70>
+2013-05-24 02:31:20,127 [INFO]: HostGroup: all threshold: 10 parent: network
+members: {
+Member Id: admin Name: Peter Hansen Filters: Filter('Name: sms', 'Command: /usr/bin/warn_the_admin_sms +23345567 @+message', 'Priority: 0')Filter('Name: email', 'Command: /usr/bin/warn_the_admin_mail admin@systemchaos.org @+message', 'Priority: 1')
+}
+hosts: {
+Host('Name: hanez', 'access: www.hanez.org', 'HostServices: {Service('Name: load', 'Command: ssh www.hanez.org uptime, 'Parser: ')warning: 8.0critical: 12.0
+Service('Name: processcountbyname', 'Command: ssh www.hanez.org ps ax | grep java | wc -l, 'Parser: ')warning: 100critical: 200
+Service('Name: htmlcontent', 'Command: wget -qO- @host/test.php, 'Parser: ')
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda1, 'Parser: ')warning: 80%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda2, 'Parser: ')warning: 70%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda3, 'Parser: ')warning: 70GBcritical: 90GB
+Service('Name: processcount', 'Command: ssh www.hanez.org ps ax | wc -l, 'Parser: ')warning: 3000critical: 3800
+Service('Name: fileage', 'Command: ssh www.hanez.org ls -l /var/backup/server_1, 'Parser: ')warning: 2critical: 3
+Service('Name: dirsize', 'Command: ssh www.hanez.org du -chs /var/log, 'Parser: ')warning: 30000000critical: 40000000
+}
+}
+services: {
+HostgroupService { Service('Name: load', 'Command: ssh @host uptime, 'Parser: '), [<lib.config.periods.Period instance at 0x1d35bd8>]}
+HostgroupService { Service('Name: discusage', 'Command: ssh @host df -a @device, 'Parser: df'), [<lib.config.periods.Period instance at 0x1d35bd8>]}
+HostgroupService { Service('Name: ping', 'Command: ping @host, 'Parser: '), [<lib.config.periods.Period instance at 0x1d35bd8>]}
+}
+
+2013-05-24 02:34:58,280 [INFO]: parsed arguments
+2013-05-24 02:34:58,280 [INFO]: reading config...
+2013-05-24 02:34:58,281 [WARNING]: filter: phone is not defined in member Peter Hansen
+2013-05-24 02:34:58,281 [WARNING]: filter: phone is not defined in member Jens Larssen
+2013-05-24 02:34:58,281 [WARNING]: filter: phone is not defined in member Hans-Peter Hansen (CEO)
+2013-05-24 02:34:58,282 [WARNING]: undefined parameter: content in host hanez from service htmlcontent
+2013-05-24 02:34:58,282 [DEBUG]: parsed config: <lib.config.config.Config instance at 0x257ea28>
+2013-05-24 02:34:58,282 [INFO]: HostGroup: all threshold: 10 parent: network
+members: {
+Member Id: admin Name: Peter Hansen Filters: Filter('Name: sms', 'Command: /usr/bin/warn_the_admin_sms +23345567 @+message', 'Priority: 0')Filter('Name: email', 'Command: /usr/bin/warn_the_admin_mail admin@systemchaos.org @+message', 'Priority: 1')
+}
+hosts: {
+Host('Name: hanez', 'access: www.hanez.org', 'HostServices: {Service('Name: load', 'Command: ssh www.hanez.org uptime, 'Parser: ')warning: 8.0critical: 12.0
+Service('Name: processcountbyname', 'Command: ssh www.hanez.org ps ax | grep java | wc -l, 'Parser: ')warning: 100critical: 200
+Service('Name: htmlcontent', 'Command: wget -qO- @host/test.php, 'Parser: ')
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda1, 'Parser: ')warning: 80%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda2, 'Parser: ')warning: 70%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda3, 'Parser: ')warning: 70GBcritical: 90GB
+Service('Name: processcount', 'Command: ssh www.hanez.org ps ax | wc -l, 'Parser: ')warning: 3000critical: 3800
+Service('Name: fileage', 'Command: ssh www.hanez.org ls -l /var/backup/server_1, 'Parser: ')warning: 2critical: 3
+Service('Name: dirsize', 'Command: ssh www.hanez.org du -chs /var/log, 'Parser: ')warning: 30000000critical: 40000000
+}
+}
+services: {
+HostgroupService { Service('Name: load', 'Command: ssh @host uptime, 'Parser: '), [<lib.config.periods.Period instance at 0x258ab90>]}
+HostgroupService { Service('Name: discusage', 'Command: ssh @host df -a @device, 'Parser: df'), [<lib.config.periods.Period instance at 0x258ab90>]}
+HostgroupService { Service('Name: ping', 'Command: ping @host, 'Parser: '), [<lib.config.periods.Period instance at 0x258ab90>]}
+}
+
+2013-05-24 02:44:52,340 [INFO]: parsed arguments
+2013-05-24 02:44:52,340 [INFO]: starting linspector: reading config...
+2013-05-24 02:44:52,341 [WARNING]: filter: phone is not defined in member Peter Hansen
+2013-05-24 02:44:52,341 [WARNING]: filter: phone is not defined in member Jens Larssen
+2013-05-24 02:44:52,341 [WARNING]: filter: phone is not defined in member Hans-Peter Hansen (CEO)
+2013-05-24 02:44:52,342 [WARNING]: undefined parameter: content in host hanez from service htmlcontent
+2013-05-24 02:44:52,342 [DEBUG]: parsed config: <lib.config.config.Config instance at 0x19e6b48>
+2013-05-24 02:44:52,342 [INFO]: HostGroup: all threshold: 10 parent: network
+members: {
+Member Id: admin Name: Peter Hansen Filters: Filter('Name: sms', 'Command: /usr/bin/warn_the_admin_sms +23345567 @+message', 'Priority: 0')Filter('Name: email', 'Command: /usr/bin/warn_the_admin_mail admin@systemchaos.org @+message', 'Priority: 1')
+}
+hosts: {
+Host('Name: hanez', 'access: www.hanez.org', 'HostServices: {Service('Name: load', 'Command: ssh www.hanez.org uptime, 'Parser: ')warning: 8.0critical: 12.0
+Service('Name: processcountbyname', 'Command: ssh www.hanez.org ps ax | grep java | wc -l, 'Parser: ')warning: 100critical: 200
+Service('Name: htmlcontent', 'Command: wget -qO- @host/test.php, 'Parser: ')
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda1, 'Parser: ')warning: 80%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda2, 'Parser: ')warning: 70%critical: 90%
+Service('Name: discusage', 'Command: ssh www.hanez.org df -a /dev/sda3, 'Parser: ')warning: 70GBcritical: 90GB
+Service('Name: processcount', 'Command: ssh www.hanez.org ps ax | wc -l, 'Parser: ')warning: 3000critical: 3800
+Service('Name: fileage', 'Command: ssh www.hanez.org ls -l /var/backup/server_1, 'Parser: ')warning: 2critical: 3
+Service('Name: dirsize', 'Command: ssh www.hanez.org du -chs /var/log, 'Parser: ')warning: 30000000critical: 40000000
+}
+}
+services: {
+HostgroupService { Service('Name: load', 'Command: ssh @host uptime, 'Parser: '), [<lib.config.periods.Period instance at 0x1a11758>]}
+HostgroupService { Service('Name: discusage', 'Command: ssh @host df -a @device, 'Parser: df'), [<lib.config.periods.Period instance at 0x1a11758>]}
+HostgroupService { Service('Name: ping', 'Command: ping @host, 'Parser: '), [<lib.config.periods.Period instance at 0x1a11758>]}
+}
+

@@ -9,7 +9,7 @@ from hostgroups import parseHostGroupList
 
 
 class Config:
-    def __init__(self, configFile):
+    def __init__(self, configFile, log):
         self.configfile = configFile
         f = open(configFile)
         self.config = f.read()
@@ -21,16 +21,16 @@ class Config:
 
         self.filters = parseFilterList(self.dict['filters'])
 
-        self.members = parseMemberList(self.dict['members'], self.filters)
+        self.members = parseMemberList(self.dict['members'], self.filters, log)
 
         self.periods = parsePeriodList(self.dict['periods'])
 
-        self.hosts = parseHostList(self.dict['hosts'], self.services)
+        self.hosts = parseHostList(self.dict['hosts'], self.services, log)
 
         self.hostgroups = parseHostGroupList(self.dict['hostgroups'],
                                              self.hosts,
                                              self.members,
                                              self.periods,
-                                             self.services)
+                                             self.services, log)
 
         #self.layouts = LayoutList(self.dict['layouts'], self.hostgroups)
