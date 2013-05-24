@@ -42,7 +42,9 @@ class HostService:
 
 
 def parseHostList(hosts, services, log):
-    '''parse the HostList and replace any command as nessesary '''
+    """
+    parse the HostList and replace any command as nessesary
+    """
     #precompiled regexPattern which finds replacements in service strings
     pattern = re.compile("@(\w+)")
     #get a List of Host Objects and leave services unparsed for this moment
