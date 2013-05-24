@@ -45,7 +45,7 @@ def main():
     log.i("parsed arguments")
 
     if args.action == "start":
-        log.i("starting linspector: reading config...")
+        log.i("starting linspector: reading config... (" + args.config + ")")
         config = Config(args.config, log)
         log.d("parsed config: " + str(config))
         for hg in config.hostgroups:

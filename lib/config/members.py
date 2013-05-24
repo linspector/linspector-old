@@ -33,7 +33,8 @@ def parseMemberList(members, filters, log):
         for filtername, replacement in member.filters.items():
             found = False
             for filt in filters:
-                if filt.name != filtername: continue
+                if filt.name != filtername:
+                    continue
                 found = True
                 memberFilter = filt.clone()
                 memberFilter.command = re.sub('@member', replacement, filt.command)

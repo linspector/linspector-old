@@ -58,7 +58,8 @@ def parseHostList(hosts, services, log):
             found = False
             #to a real iteration. just pick the right service
             for service in services:
-                if service.name != servicename: continue
+                if service.name != servicename:
+                    continue
                 #indicate we found a service
                 found = True
                 #check to see if we already regexed our service command

@@ -31,6 +31,7 @@ class Config:
                                              self.hosts,
                                              self.members,
                                              self.periods,
-                                             self.services, log)
+                                             self.services,
+                                             log)
 
         #self.layouts = LayoutList(self.dict['layouts'], self.hostgroups)
