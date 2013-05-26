@@ -2,8 +2,12 @@
 .project
 .pydevproject
 
-.log
-
 *.py[cod]
 
 *.so
+
+distfiles
+files
+local
+log
+plugins
