@@ -59,7 +59,7 @@ def main():
         log.d("parsed config: " + str(config))
         for hg in config.hostgroups:
             for hostGroupService in hg.services:
-                job=JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.service, hg.threshold, hg.parent)
+                jobInfo=JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.service, hg.threshold, hg.parent)
                 for period in hostGroupService.periods:
                     jobs.append(period.createJob(scheduler, jobInfo, handleJob))
         for job in jobs:
