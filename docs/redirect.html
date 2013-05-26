@@ -1,0 +1,38 @@
+<html><head><title>Epydoc Redirect Page</title>
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+<!--
+var pages = ["lib.core.linspector_daemon.LinspectorDaemon-c", "lib.config.hostgroups.HostGroupService-c", "lib.config.hostgroups.HostGroup-c", "lib.config.members.MemberFilter-c", "lib.config.layouts.LayoutList-c", "lib.config.hosts.HostService-c", "lib.config.services.Service-c", "lib.core.linspector_daemon-m", "lib.config.filters.Filter-c", "lib.config.layouts.Layout-c", "lib.config.members.Member-c", "lib.config.periods.Period-c", "lib.config.config.Config-c", "lib.core.command.Command-c", "lib.core.daemon.Daemon-c", "lib.core.logger.Logger-c", "lib.config.hostgroups-m", "lib.config.hosts.Host-c", "lib.config.services-m", "lib.config.filters-m", "lib.config.layouts-m", "lib.config.members-m", "lib.config.periods-m", "lib.config.config-m", "lib.config.hosts-m", "lib.core.command-m", "lib.core.job.Job-c", "lib.core.daemon-m", "lib.core.logger-m", "lib.core.job-m", "lib.config-m", "lib.core-m", "lib-m"];
+var dottedName = get_anchor();
+if (dottedName) {
+    var target = redirect_url(dottedName);
+    if (target) window.location.replace(target);
+}
+// -->
+</script>
+
+<h3>Epydoc Auto-redirect page</h3>
+
+<p>When javascript is enabled, this page will redirect URLs of
+the form <tt>redirect.html#<i>dotted.name</i></tt> to the
+documentation for the object with the given fully-qualified
+dotted name.</p>
+<p><a id="message"> &nbsp; </a></p>
+
+<script type="text/javascript">
+<!--
+if (dottedName) {
+    var msg = document.getElementById("message");
+    msg.innerHTML = "No documentation found for <tt>"+
+                    dottedName+"</tt>";
+}
+// -->
+</script>
+
+</body>
+</html>

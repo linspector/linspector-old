@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.config.members</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.config-module.html">Package&nbsp;config</a> ::
+        Module&nbsp;members
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.config.members-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.config.members-module.html">Module lib.config.members</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="Member"></a><div id="Member-def"><a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="Member-toggle" onclick="return toggle('Member');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.config.members.Member-class.html">Member</a><tt class="py-op">:</tt> </tt>
+</div><div id="Member-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Member-expanded"><a name="Member.__init__"></a><div id="Member.__init__-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="Member.__init__-toggle" onclick="return toggle('Member.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.config.members.Member-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nameid</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">phone</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">comment</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">parent</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">filters</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Member.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Member.__init__-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nameid</tt> <tt class="py-op">=</tt> <tt class="py-name">nameid</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">=</tt> <tt class="py-name">name</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phone</tt> <tt class="py-op">=</tt> <tt class="py-name">phone</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module lib.config.filters=lib.config.filters-module.html"><a title="lib.config.filters" class="py-name" href="#" onclick="return doclink('link-0', 'filters', 'link-0');">filters</a></tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name"><a title="lib.config.filters" class="py-name" href="#" onclick="return doclink('link-1', 'filters', 'link-0');">filters</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">comment</tt> <tt class="py-op">=</tt> <tt class="py-name">comment</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">parent</tt> </tt>
+</div><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="Member.__str__"></a><div id="Member.__str__-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="Member.__str__-toggle" onclick="return toggle('Member.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.config.members.Member-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Member.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Member.__str__-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-string">"Member Id: "</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nameid</tt> <tt class="py-op">+</tt> <tt class="py-string">" Name: "</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">+</tt> <tt class="py-string">" Filters: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phone</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">f</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="lib.config.filters" class="py-name" href="#" onclick="return doclink('link-2', 'filters', 'link-0');">filters</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">            <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">f</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ret</tt> </tt>
+</div></div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="MemberFilter"></a><div id="MemberFilter-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="MemberFilter-toggle" onclick="return toggle('MemberFilter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.config.members.MemberFilter-class.html">MemberFilter</a><tt class="py-op">:</tt> </tt>
+</div><div id="MemberFilter-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="MemberFilter-expanded"><a name="MemberFilter.__init__"></a><div id="MemberFilter.__init__-def"><a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="MemberFilter.__init__-toggle" onclick="return toggle('MemberFilter.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.config.members.MemberFilter-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filt</tt><tt class="py-op">,</tt> <tt class="py-param">Value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MemberFilter.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="MemberFilter.__init__-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filt</tt> <tt class="py-op">=</tt> <tt class="py-name">filt</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">Value</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="MemberFilter.__str__"></a><div id="MemberFilter.__str__-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="MemberFilter.__str__-toggle" onclick="return toggle('MemberFilter.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.config.members.MemberFilter-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MemberFilter.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="MemberFilter.__str__-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"Filter:"</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">" Value:"</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> </tt>
+</div></div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="parseMemberList"></a><div id="parseMemberList-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="parseMemberList-toggle" onclick="return toggle('parseMemberList');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.config.members-module.html#parseMemberList">parseMemberList</a><tt class="py-op">(</tt><tt class="py-param">members</tt><tt class="py-op">,</tt> <tt class="py-param">filters</tt><tt class="py-op">,</tt> <tt class="py-param">log</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parseMemberList-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="parseMemberList-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-name">parsedMembers</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-3" class="py-name" targets="Class lib.config.members.Member=lib.config.members.Member-class.html"><a title="lib.config.members.Member" class="py-name" href="#" onclick="return doclink('link-3', 'Member', 'link-3');">Member</a></tt><tt class="py-op">(</tt><tt class="py-name">nameid</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">values</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">nameid</tt><tt class="py-op">,</tt> <tt class="py-name">values</tt> <tt class="py-keyword">in</tt> <tt id="link-4" class="py-name" targets="Module lib.config.members=lib.config.members-module.html"><a title="lib.config.members" class="py-name" href="#" onclick="return doclink('link-4', 'members', 'link-4');">members</a></tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">member</tt> <tt class="py-keyword">in</tt> <tt class="py-name">parsedMembers</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">mFilter</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">filtername</tt><tt class="py-op">,</tt> <tt class="py-name">replacement</tt> <tt class="py-keyword">in</tt> <tt class="py-name">member</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="lib.config.filters" class="py-name" href="#" onclick="return doclink('link-5', 'filters', 'link-0');">filters</a></tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-name">found</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">filt</tt> <tt class="py-keyword">in</tt> <tt id="link-6" class="py-name"><a title="lib.config.filters" class="py-name" href="#" onclick="return doclink('link-6', 'filters', 'link-0');">filters</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">filt</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">!=</tt> <tt class="py-name">filtername</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-name">found</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt class="py-name">memberFilter</tt> <tt class="py-op">=</tt> <tt class="py-name">filt</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method lib.config.filters.Filter.clone()=lib.config.filters.Filter-class.html#clone,Method lib.config.services.Service.clone()=lib.config.services.Service-class.html#clone"><a title="lib.config.filters.Filter.clone
+lib.config.services.Service.clone" class="py-name" href="#" onclick="return doclink('link-7', 'clone', 'link-7');">clone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-name">memberFilter</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.core.command=lib.core.command-module.html"><a title="lib.core.command" class="py-name" href="#" onclick="return doclink('link-8', 'command', 'link-8');">command</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">sub</tt><tt class="py-op">(</tt><tt class="py-string">'@member'</tt><tt class="py-op">,</tt> <tt class="py-name">replacement</tt><tt class="py-op">,</tt> <tt class="py-name">filt</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="lib.core.command" class="py-name" href="#" onclick="return doclink('link-9', 'command', 'link-8');">command</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                <tt class="py-name">mFilter</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">memberFilter</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">found</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                <tt class="py-name">log</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method lib.core.logger.Logger.w()=lib.core.logger.Logger-class.html#w"><a title="lib.core.logger.Logger.w" class="py-name" href="#" onclick="return doclink('link-10', 'w', 'link-10');">w</a></tt><tt class="py-op">(</tt><tt class="py-string">"filter: "</tt> <tt class="py-op">+</tt> <tt class="py-name">filtername</tt> <tt class="py-op">+</tt> <tt class="py-string">" is not defined in member "</tt> <tt class="py-op">+</tt> <tt class="py-name">member</tt><tt class="py-op">.</tt><tt class="py-name">name</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-name">member</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="lib.config.filters" class="py-name" href="#" onclick="return doclink('link-11', 'filters', 'link-0');">filters</a></tt> <tt class="py-op">=</tt> <tt class="py-name">mFilter</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">parsedMembers</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon May 27 01:10:29 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
