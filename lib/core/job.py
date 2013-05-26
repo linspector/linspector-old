@@ -4,9 +4,18 @@ execute.
 """
 
 
-class Job:
-    def __init__(self, command=None, members=None, host=None, service=None):
-        self.command = command
+class JobInfo:
+    def __init__(self, hostgroupname, members, hosts, service, threshold, parent=None):
         self.members = members
-        self.host = host
+        self.hosts = hosts
         self.service = service
+        self.threshold = threshold
+        self.parent = parent
+        self.name = hostgroupname + service.name
+        
+    def __str__(self):
+        return self.name
+        
+        
+    
+        
