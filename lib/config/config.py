@@ -23,7 +23,7 @@ class Config:
 
         self.members = parseMemberList(self.dict['members'], self.filters, log)
 
-        self.periods = parsePeriodList(self.dict['periods'])
+        self.periods = parsePeriodList(self.dict['periods'],log)
 
         self.hosts = parseHostList(self.dict['hosts'], self.services, log)
 

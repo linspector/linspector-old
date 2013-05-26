@@ -2,8 +2,10 @@
 
 VERSION = "0.1.1/TETRIS"
 import argparse
+from lib.core.job import JobInfo
 from lib.core.logger import Logger
 from lib.config.config import Config
+from lib.config.periods import Period
 from apscheduler.scheduler import Scheduler
 import logging
 import subprocess as sp
@@ -38,6 +40,9 @@ def parseArgs():
     return parser.parse_args()
 
 
+def handleJob(jobInfo):
+    print str(jobInfo)
+
 def main():
     args = parseArgs()
     log = Logger(args.logfile, args.loglevel)
@@ -45,11 +50,24 @@ def main():
     log.i("parsed arguments")
 
     if args.action == "start":
+        jobs = []
+        scheduler = Scheduler()
+        scheduler.start()
+        
         log.i("starting linspector: reading config... (" + args.config + ")")
         config = Config(args.config, log)
         log.d("parsed config: " + str(config))
         for hg in config.hostgroups:
-            log.i(str(hg))
+            for hostGroupService in hg.services:
+                job=JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.service, hg.threshold, hg.parent)
+                for period in hostGroupService.periods:
+                    jobs.append(period.createJob(scheduler, jobInfo, handleJob))
+        for job in jobs:
+            log.i(str(job))
+                    
+                
+                
+                
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
     elif args.action == "restart":
