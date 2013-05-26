@@ -5,10 +5,10 @@ clean:
 	find . -type f -name "*.pyc" -exec rm -f {} \;
 
 docs:
-	epydoc --html -o docs ./
+	epydoc --html -o docs .
 	
 docs-pdf:
-	epydoc --pdf -o docs ./
+	epydoc --pdf -o docs .
 
 docs-clean:
 	rm -rf docs

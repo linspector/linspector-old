@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>linspector.lib.config.periods.Period</title>
+  <title>linspector.lib.config.periods.IntervalPeriod</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -41,7 +41,7 @@
         <a href="linspector.lib-module.html">Package&nbsp;lib</a> ::
         <a href="linspector.lib.config-module.html">Package&nbsp;config</a> ::
         <a href="linspector.lib.config.periods-module.html">Module&nbsp;periods</a> ::
-        Class&nbsp;Period
+        Class&nbsp;IntervalPeriod
       </span>
     </td>
     <td>
@@ -51,25 +51,21 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="linspector.lib.config.periods.Period-class.html"
+            >]&nbsp;|&nbsp;<a href="linspector.lib.config.periods.IntervalPeriod-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class Period</h1><p class="nomargin-top"><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#Period">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class IntervalPeriod</h1><p class="nomargin-top"><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#IntervalPeriod">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-object --+
-         |
-        <strong class="uidshort">Period</strong>
+object --+    
+         |    
+    <a href="linspector.lib.config.periods.Period-class.html">Period</a> --+
+             |
+            <strong class="uidshort">IntervalPeriod</strong>
 </pre>
-
-<dl><dt>Known Subclasses:</dt>
-<dd>
-      <ul class="subclass-list">
-<li><a href="linspector.lib.config.periods.CronPeriod-class.html">CronPeriod</a></li><li>, <a href="linspector.lib.config.periods.DatePeriod-class.html">DatePeriod</a></li><li>, <a href="linspector.lib.config.periods.IntervalPeriod-class.html">IntervalPeriod</a></li>  </ul>
-</dd></dl>
 
 <hr />
 <!-- ==================== INSTANCE METHODS ==================== -->
@@ -95,11 +91,18 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="linspector.lib.config.periods.Period-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">name</span>)</span><br />
+          <td><span class="summary-sig"><a href="linspector.lib.config.periods.IntervalPeriod-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">weeks</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">days</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">hours</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">minutes</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">seconds</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">start_date</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">comment</span>=<span class="summary-sig-default">None</span>)</span><br />
       x.__init__(...) initializes x; see help(type(x)) for signature</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#Period.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#IntervalPeriod.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -113,28 +116,29 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="getName"></a><span class="summary-sig-name">getName</span>(<span class="summary-sig-arg">self</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#Period.getName">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="createJob"></a><span class="summary-sig-name">createJob</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="linspector.lib.config.periods.IntervalPeriod-class.html#createJob" class="summary-sig-name">createJob</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">scheduler</span>,
         <span class="summary-sig-arg">jobInfo</span>,
         <span class="summary-sig-arg">func</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#Period.createJob">source&nbsp;code</a></span>
+            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#IntervalPeriod.createJob">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="linspector.lib.config.periods.IntervalPeriod-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#IntervalPeriod.__str__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -144,6 +148,9 @@ object --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="linspector.lib.config.periods.Period-class.html">Period</a></code></b>:
+      <code><a href="linspector.lib.config.periods.Period-class.html#getName">getName</a></code>
+      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
       <code>__format__</code>,
@@ -155,7 +162,6 @@ object --+
       <code>__repr__</code>,
       <code>__setattr__</code>,
       <code>__sizeof__</code>,
-      <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
     </td>
@@ -212,11 +218,18 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">name</span>)</span>
+        <span class="sig-arg">name</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">weeks</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">days</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">hours</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">minutes</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">seconds</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">start_date</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">comment</span>=<span class="sig-default">None</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#Period.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#IntervalPeriod.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -224,6 +237,55 @@ object --+
   <dl class="fields">
     <dt>Overrides:
         object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="createJob"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">createJob</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">scheduler</span>,
+        <span class="sig-arg">jobInfo</span>,
+        <span class="sig-arg">func</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#IntervalPeriod.createJob">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="linspector.lib.config.periods.Period-class.html#createJob">Period.createJob</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#IntervalPeriod.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>

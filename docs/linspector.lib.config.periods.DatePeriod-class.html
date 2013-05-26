@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>linspector.lib.core.logger.Logger</title>
+  <title>linspector.lib.config.periods.DatePeriod</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -39,9 +39,9 @@
       <span class="breadcrumbs">
         <a href="linspector-module.html">Package&nbsp;linspector</a> ::
         <a href="linspector.lib-module.html">Package&nbsp;lib</a> ::
-        <a href="linspector.lib.core-module.html">Package&nbsp;core</a> ::
-        <a href="linspector.lib.core.logger-module.html">Module&nbsp;logger</a> ::
-        Class&nbsp;Logger
+        <a href="linspector.lib.config-module.html">Package&nbsp;config</a> ::
+        <a href="linspector.lib.config.periods-module.html">Module&nbsp;periods</a> ::
+        Class&nbsp;DatePeriod
       </span>
     </td>
     <td>
@@ -51,17 +51,23 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="linspector.lib.core.logger.Logger-class.html"
+            >]&nbsp;|&nbsp;<a href="linspector.lib.config.periods.DatePeriod-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class Logger</h1><p class="nomargin-top"><span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger">source&nbsp;code</a></span></p>
-<p>Logger class that prints its messages and keeps them also inside a 
-  logfile</p>
+<h1 class="epydoc">Class DatePeriod</h1><p class="nomargin-top"><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#DatePeriod">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+    
+         |    
+    <a href="linspector.lib.config.periods.Period-class.html">Period</a> --+
+             |
+            <strong class="uidshort">DatePeriod</strong>
+</pre>
 
+<hr />
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -85,13 +91,13 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="linspector.lib.core.logger.Logger-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">logfile</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">./linspector.log</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">logLevel</span>=<span class="summary-sig-default">10</span>,
-        <span class="summary-sig-arg">logfileLevel</span>=<span class="summary-sig-default">10</span>)</span><br />
-      initializes a new Logger object.</td>
+          <td><span class="summary-sig"><a href="linspector.lib.config.periods.DatePeriod-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">date</span>,
+        <span class="summary-sig-arg">comment</span>=<span class="summary-sig-default">None</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#DatePeriod.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -105,10 +111,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="d"></a><span class="summary-sig-name">d</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">message</span>)</span></td>
+          <td><span class="summary-sig"><a href="linspector.lib.config.periods.DatePeriod-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.d">source&nbsp;code</a></span>
+            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#DatePeriod.__str__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -122,10 +128,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="i"></a><span class="summary-sig-name">i</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">message</span>)</span></td>
+          <td><span class="summary-sig"><a href="linspector.lib.config.periods.DatePeriod-class.html#createJob" class="summary-sig-name">createJob</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">scheduler</span>,
+        <span class="summary-sig-arg">jobInfo</span>,
+        <span class="summary-sig-arg">func</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.i">source&nbsp;code</a></span>
+            <span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#DatePeriod.createJob">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -133,71 +141,49 @@
       
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="w"></a><span class="summary-sig-name">w</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">message</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.w">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="linspector.lib.config.periods.Period-class.html">Period</a></code></b>:
+      <code><a href="linspector.lib.config.periods.Period-class.html#getName">getName</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="e"></a><span class="summary-sig-name">e</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">message</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.e">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="c"></a><span class="summary-sig-name">c</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">message</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.c">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="close"></a><span class="summary-sig-name">close</span>(<span class="summary-sig-arg">self</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.close">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
     </td>
   </tr>
 </table>
@@ -227,22 +213,71 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">logfile</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">./linspector.log</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">logLevel</span>=<span class="sig-default">10</span>,
-        <span class="sig-arg">logfileLevel</span>=<span class="sig-default">10</span>)</span>
+        <span class="sig-arg">name</span>,
+        <span class="sig-arg">date</span>,
+        <span class="sig-arg">comment</span>=<span class="sig-default">None</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="linspector.lib.core.logger-pysrc.html#Logger.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#DatePeriod.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>initializes a new Logger object.</p>
-  <p>:param logLevel: the LoggingLevel from the console output (DEBUG 
-  default) :param logfile: the file where to log. Logs are rotated by 
-  default. :param logfileLevel: the LoggingLevel for the file Logger. 
-  (DEBUG default)</p>
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
   <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#DatePeriod.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="createJob"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">createJob</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">scheduler</span>,
+        <span class="sig-arg">jobInfo</span>,
+        <span class="sig-arg">func</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="linspector.lib.config.periods-pysrc.html#DatePeriod.createJob">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="linspector.lib.config.periods.Period-class.html#createJob">Period.createJob</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
