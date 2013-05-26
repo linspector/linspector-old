@@ -1,6 +1,6 @@
 class Period:
     def __init__(self, name="", year="*", month="*", day="*", week="*",
-                 day_of_week=None, hour="*", minute="*", second="0",
+                 day_of_week=None, hour="*", minute="*", second="0", date=None,
                  comment=None):
         self.name = name
         self.year = year                # 4-digit year number
@@ -12,6 +12,7 @@ class Period:
         self.minute = minute            # minute (0-59)
         self.second = second            # second (0-59)
         self.comment = comment
+        self.date = date
 
     def __str__(self):
         ret = "Period(Name: " + self.name + " Year: " + self.year + " Month: " + self.month + ")"

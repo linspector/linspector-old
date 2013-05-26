@@ -149,7 +149,11 @@
         	"minute": "5",
         	"second": "",
         	"comment": "All day all night... every five minutes!"
+        },
+        "next_christmas" : {
+          "date": "2013-12-24 20:00:00"
         }
+        
     },
     "hosts":
     {
