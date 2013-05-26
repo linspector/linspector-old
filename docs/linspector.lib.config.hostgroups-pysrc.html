@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>linspector.lib.config.hostgroups</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="linspector-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="linspector-module.html">Package&nbsp;linspector</a> ::
+        <a href="linspector.lib-module.html">Package&nbsp;lib</a> ::
+        <a href="linspector.lib.config-module.html">Package&nbsp;config</a> ::
+        Module&nbsp;hostgroups
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="linspector.lib.config.hostgroups-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="linspector.lib.config.hostgroups-module.html">Module linspector.lib.config.hostgroups</a></h1>
+<pre class="py-src">
+<a name="HostGroup"></a><div id="HostGroup-def"><a name="L1"></a><tt class="py-lineno"> 1</tt> <a class="py-toggle" href="#" id="HostGroup-toggle" onclick="return toggle('HostGroup');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="linspector.lib.config.hostgroups.HostGroup-class.html">HostGroup</a><tt class="py-op">:</tt> </tt>
+</div><div id="HostGroup-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="HostGroup-expanded"><a name="HostGroup.__init__"></a><div id="HostGroup.__init__-def"><a name="L2"></a><tt class="py-lineno"> 2</tt> <a class="py-toggle" href="#" id="HostGroup.__init__-toggle" onclick="return toggle('HostGroup.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.config.hostgroups.HostGroup-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">members</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">hosts</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">services</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">threshold</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">parent</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">comment</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HostGroup.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HostGroup.__init__-expanded"><a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">=</tt> <tt class="py-name">name</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">interval</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module linspector.lib.config.members=linspector.lib.config.members-module.html"><a title="linspector.lib.config.members" class="py-name" href="#" onclick="return doclink('link-0', 'members', 'link-0');">members</a></tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name"><a title="linspector.lib.config.members" class="py-name" href="#" onclick="return doclink('link-1', 'members', 'link-0');">members</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module linspector.lib.config.hosts=linspector.lib.config.hosts-module.html"><a title="linspector.lib.config.hosts" class="py-name" href="#" onclick="return doclink('link-2', 'hosts', 'link-2');">hosts</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="linspector.lib.config.hosts" class="py-name" href="#" onclick="return doclink('link-3', 'hosts', 'link-2');">hosts</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module linspector.lib.config.services=linspector.lib.config.services-module.html"><a title="linspector.lib.config.services" class="py-name" href="#" onclick="return doclink('link-4', 'services', 'link-4');">services</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="linspector.lib.config.services" class="py-name" href="#" onclick="return doclink('link-5', 'services', 'link-4');">services</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">threshold</tt> <tt class="py-op">=</tt> <tt class="py-name">threshold</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">parent</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">comment</tt> <tt class="py-op">=</tt> <tt class="py-name">comment</tt> </tt>
+</div><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="HostGroup.__str__"></a><div id="HostGroup.__str__-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="HostGroup.__str__-toggle" onclick="return toggle('HostGroup.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.config.hostgroups.HostGroup-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HostGroup.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HostGroup.__str__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-string">"HostGroup: "</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">+</tt> <tt class="py-string">" threshold: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">threshold</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">" parent: "</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">+</tt> <tt class="py-string">"\n"</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-string">"members: {\n"</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">itm</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="linspector.lib.config.members" class="py-name" href="#" onclick="return doclink('link-6', 'members', 'link-0');">members</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">            <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">itm</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"\n"</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-string">"}\n"</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-string">"hosts: {\n"</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">itm</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="linspector.lib.config.hosts" class="py-name" href="#" onclick="return doclink('link-7', 'hosts', 'link-2');">hosts</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">            <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">itm</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"\n"</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-string">"}\n"</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-string">"services: {\n"</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">itm</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="linspector.lib.config.services" class="py-name" href="#" onclick="return doclink('link-8', 'services', 'link-4');">services</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">            <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">itm</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"\n"</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-string">"}\n"</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ret</tt> </tt>
+</div></div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="HostGroupService"></a><div id="HostGroupService-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="HostGroupService-toggle" onclick="return toggle('HostGroupService');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="linspector.lib.config.hostgroups.HostGroupService-class.html">HostGroupService</a><tt class="py-op">:</tt> </tt>
+</div><div id="HostGroupService-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="HostGroupService-expanded"><a name="HostGroupService.__init__"></a><div id="HostGroupService.__init__-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="HostGroupService.__init__-toggle" onclick="return toggle('HostGroupService.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.config.hostgroups.HostGroupService-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">service</tt><tt class="py-op">,</tt> <tt class="py-param">periods</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HostGroupService.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HostGroupService.__init__-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt class="py-name">service</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Module linspector.lib.config.periods=linspector.lib.config.periods-module.html"><a title="linspector.lib.config.periods" class="py-name" href="#" onclick="return doclink('link-9', 'periods', 'link-9');">periods</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="linspector.lib.config.periods" class="py-name" href="#" onclick="return doclink('link-10', 'periods', 'link-9');">periods</a></tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="HostGroupService.__str__"></a><div id="HostGroupService.__str__-def"><a name="L34"></a><tt class="py-lineno">34</tt> <a class="py-toggle" href="#" id="HostGroupService.__str__-toggle" onclick="return toggle('HostGroupService.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.config.hostgroups.HostGroupService-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HostGroupService.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HostGroupService.__str__-expanded"><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"HostgroupService { "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">service</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">", "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="linspector.lib.config.periods" class="py-name" href="#" onclick="return doclink('link-11', 'periods', 'link-9');">periods</a></tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"}"</tt> </tt>
+</div></div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="parseHostGroupList"></a><div id="parseHostGroupList-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="parseHostGroupList-toggle" onclick="return toggle('parseHostGroupList');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.config.hostgroups-module.html#parseHostGroupList">parseHostGroupList</a><tt class="py-op">(</tt><tt class="py-param">hostgroups</tt><tt class="py-op">,</tt> <tt class="py-param">hosts</tt><tt class="py-op">,</tt> <tt class="py-param">members</tt><tt class="py-op">,</tt> <tt class="py-param">periods</tt><tt class="py-op">,</tt> <tt class="py-param">services</tt><tt class="py-op">,</tt> <tt class="py-param">log</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parseHostGroupList-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="parseHostGroupList-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-name">parsedHostGroups</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">hgname</tt><tt class="py-op">,</tt> <tt class="py-name">hgValues</tt> <tt class="py-keyword">in</tt> <tt id="link-12" class="py-name" targets="Module linspector.lib.config.hostgroups=linspector.lib.config.hostgroups-module.html"><a title="linspector.lib.config.hostgroups" class="py-name" href="#" onclick="return doclink('link-12', 'hostgroups', 'link-12');">hostgroups</a></tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-name">hostGroup</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name" targets="Class linspector.lib.config.hostgroups.HostGroup=linspector.lib.config.hostgroups.HostGroup-class.html"><a title="linspector.lib.config.hostgroups.HostGroup" class="py-name" href="#" onclick="return doclink('link-13', 'HostGroup', 'link-13');">HostGroup</a></tt><tt class="py-op">(</tt><tt class="py-name">hgname</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">hostGroup</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="linspector.lib.config.members" class="py-name" href="#" onclick="return doclink('link-14', 'members', 'link-0');">members</a></tt> <tt class="py-op">=</tt> <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">m</tt><tt class="py-op">:</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt class="py-name">nameid</tt> <tt class="py-keyword">in</tt> <tt class="py-name">hgValues</tt><tt class="py-op">[</tt><tt class="py-string">'members'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name"><a title="linspector.lib.config.members" class="py-name" href="#" onclick="return doclink('link-15', 'members', 'link-0');">members</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-name">hostGroup</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="linspector.lib.config.hosts" class="py-name" href="#" onclick="return doclink('link-16', 'hosts', 'link-2');">hosts</a></tt> <tt class="py-op">=</tt> <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">h</tt><tt class="py-op">:</tt> <tt class="py-name">h</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">hgValues</tt><tt class="py-op">[</tt><tt class="py-string">'hosts'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="linspector.lib.config.hosts" class="py-name" href="#" onclick="return doclink('link-17', 'hosts', 'link-2');">hosts</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-name">hostGroup</tt><tt class="py-op">.</tt><tt class="py-name">threshold</tt> <tt class="py-op">=</tt> <tt class="py-name">hgValues</tt><tt class="py-op">[</tt><tt class="py-string">'threshold'</tt><tt class="py-op">]</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">'parent'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">hgValues</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-name">hostGroup</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">hgValues</tt><tt class="py-op">[</tt><tt class="py-string">'parent'</tt><tt class="py-op">]</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">hostGroup</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="linspector.lib.config.services" class="py-name" href="#" onclick="return doclink('link-18', 'services', 'link-4');">services</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">serviceName</tt><tt class="py-op">,</tt> <tt class="py-name">servicePeriods</tt> <tt class="py-keyword">in</tt> <tt class="py-name">hgValues</tt><tt class="py-op">[</tt><tt class="py-string">'services'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">            <tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">s</tt><tt class="py-op">:</tt> <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">serviceName</tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name"><a title="linspector.lib.config.services" class="py-name" href="#" onclick="return doclink('link-19', 'services', 'link-4');">services</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">service</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-name">log</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method linspector.lib.core.logger.Logger.w()=linspector.lib.core.logger.Logger-class.html#w"><a title="linspector.lib.core.logger.Logger.w" class="py-name" href="#" onclick="return doclink('link-20', 'w', 'link-20');">w</a></tt><tt class="py-op">(</tt><tt class="py-string">"Service "</tt> <tt class="py-op">+</tt> <tt class="py-name">serviceName</tt> <tt class="py-op">+</tt> <tt class="py-string">" is not defined for Hostgroup "</tt> <tt class="py-op">+</tt> <tt class="py-name">hgname</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">            <tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt class="py-name">service</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">            <tt class="py-name">hostGroupPeriods</tt> <tt class="py-op">=</tt> <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">p</tt><tt class="py-op">:</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">servicePeriods</tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name"><a title="linspector.lib.config.periods" class="py-name" href="#" onclick="return doclink('link-21', 'periods', 'link-9');">periods</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">            <tt class="py-name">hostGroup</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="linspector.lib.config.services" class="py-name" href="#" onclick="return doclink('link-22', 'services', 'link-4');">services</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-23" class="py-name" targets="Class linspector.lib.config.hostgroups.HostGroupService=linspector.lib.config.hostgroups.HostGroupService-class.html"><a title="linspector.lib.config.hostgroups.HostGroupService" class="py-name" href="#" onclick="return doclink('link-23', 'HostGroupService', 'link-23');">HostGroupService</a></tt><tt class="py-op">(</tt><tt class="py-name">service</tt><tt class="py-op">,</tt> <tt class="py-name">hostGroupPeriods</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-name">parsedHostGroups</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">hostGroup</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">parsedHostGroups</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="linspector-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon May 27 01:38:32 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
