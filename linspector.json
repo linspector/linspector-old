@@ -141,19 +141,27 @@
     {
         "twentyfourseven":
         {
-        	"year": "*",
-        	"month": "*",
-        	"day": "*",
-        	"week": "*",
-        	"hour": "*",
-        	"minute": "5",
-        	"second": "",
-        	"comment": "All day all night... every five minutes!"
+            "year": "*",
+            "month": "*",
+            "day": "*",
+            "week": "*",
+            "hour": "*",
+            "minute": "5",
+            "second": "",
+            "comment": "Cron Job"
+        },
+        "do_every_x_times" : {
+            "days": "*",
+            "weeks": "*",
+            "hours": "*",
+            "minutes": "5",
+            "seconds": "",
+            "comment": "Interval Job"
         },
         "next_christmas" : {
-          "date": "2013-12-24 20:00:00"
+            "date": "2013-12-24 20:00:00",
+            "comment": "Date Job"
         }
-        
     },
     "hosts":
     {
