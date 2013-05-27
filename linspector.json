@@ -214,7 +214,7 @@
             "services":
             {
             	"load": ["twentyfourseven"],
-            	"discusage":["twentyfourseven"],
+            	"discusage":["do_every_x_times"],
                 "ping": ["twentyfourseven"]
             }
         }
