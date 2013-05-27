@@ -71,9 +71,12 @@ def main():
         
         while True:
             try:
-                time.sleep(1)
-            except error:
-                print str(error)
+                time.sleep(10)
+                for job in jobs:
+                   log.d(str(job))
+                
+            except:
+                print "error"
         
             
         
