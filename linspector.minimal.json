@@ -1,0 +1,43 @@
+{
+    "services": {"ping": {"command": "ping @host"}},
+    "filters":
+    {
+        "email":
+        {
+            "command": "/usr/bin/warn_the_admin_mail @member @+message",
+            "comment": "Sends an E-Mail to the member.",
+            "priority": 1
+        }
+    },
+    "members":
+    {
+        "hanez":
+        {
+            "name": "Johannes Findeisen",
+            "comment": "Just a nerd doing admin stuff...",
+            "filters": {"email": "you@hanez.org"}
+        }
+    },
+    "periods": {"twentyfourseven": {"minute": "*/1", "second": "0", "comment": "Cron Job / Every minute"}},
+    "hosts":
+    {
+        "hanez1": {"host": "www1.hanez.org", "services": {}},
+        "hanez2": {"host": "www2.hanez.org", "services": {}}
+    },
+    "hostgroups":
+    {
+        "all":
+        {
+            "members": ["hanez"],
+            "hosts": ["hanez1", "hanez2"],
+            "threshold": 10,
+            "services": {"ping": ["twentyfourseven"]}
+        }
+    },
+    "layouts": {"production": {"hostgroups": ["all"], "enabled": true}
+    },
+    "core": {
+        "max_logfile_size": 1024000,
+        "max_logfile_count": 4
+    }
+}
