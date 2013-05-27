@@ -146,7 +146,7 @@
             "day": "*",
             "week": "*",
             "hour": "*",
-            "minute": "5",
+            "minute": "*/1",
             "second": "*",
             "comment": "Cron Job"
         },
