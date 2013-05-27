@@ -147,7 +147,7 @@
             "week": "*",
             "hour": "*",
             "minute": "5",
-            "second": "",
+            "second": "*",
             "comment": "Cron Job"
         },
         "do_every_x_times" : {

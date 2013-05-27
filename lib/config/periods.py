@@ -26,7 +26,7 @@ class IntervalPeriod(Period):
         self.comment = comment            # comment
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_interval_job(func, self.weeks, self.hours, self.minutes, self.seconds, self.start_date, jobInfo)
+        return scheduler.add_interval_job(func, self.weeks, self.hours, self.minutes, self.seconds, self.start_date, [jobInfo])
     
         
     def __str__(self):
@@ -36,7 +36,7 @@ class IntervalPeriod(Period):
 
 class CronPeriod(Period):
     def __init__(self, name="", year="*", month="*", day="*", week="*",
-                 day_of_week="*", hour="*", minute="*", second="0",
+                 day_of_week="*", hour="*", minute="*", second="0", start_date=None,
                  comment=None):
         super(CronPeriod, self).__init__(name)
         self.year = year                # 4-digit year number
@@ -47,15 +47,16 @@ class CronPeriod(Period):
         self.hour = hour                # hour (0-23)
         self.minute = minute            # minute (0-59)
         self.second = second            # second (0-59)
+        self.start_date = start_date
         self.comment = comment
-        self.date = date
+
 
     def __str__(self):
         ret = "CronPeriod(Name: " + self.name + ")"
         return ret
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_cron_job(func, self.year, self.month, self.day, self.week, self.day_of_week, self.hour, self.minute, self.second, jobInfo)
+        return scheduler.add_cron_job(func, self.year, self.month, self.day, self.week, self.day_of_week, self.hour, self.minute, self.second,self.start_date, [jobInfo])
             
         
 class DatePeriod(Period):
@@ -69,7 +70,7 @@ class DatePeriod(Period):
         return ret
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_date_job(func, self.date, jobInfo)
+        return scheduler.add_date_job(func, self.date, [jobInfo])
 
 
 
@@ -77,20 +78,21 @@ class DatePeriod(Period):
 
 def parsePeriodList(periodlist,log):
     periods=[]
+    log.i(periodlist)
     for name, values in periodlist.items():
         if "date" in values:
             periods.append(DatePeriod(name, **values))
-            break
+            continue
         
         for i in [ "weeks","days", "hours", "minutes", "seconds", "start_date"]:
             if i in values:
                 periods.append(IntervalPeriod(name, **values))
-                break
+                continue
         
         for i in ["year", "month", "day", "week", "day_of_week", "hour", "minute", "second"]:
             if i in values:
                 periods.append(CronPeriod(name, **values))
-                break
+                continue
         
         log.w("ignoring Period: " +str(name))
         log.w("reason: could not determine PeriodType: " + str(values))

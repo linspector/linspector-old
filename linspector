@@ -61,6 +61,7 @@ def main():
             for hostGroupService in hg.services:
                 jobInfo=JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.service, hg.threshold, hg.parent)
                 for period in hostGroupService.periods:
+                    
                     jobs.append(period.createJob(scheduler, jobInfo, handleJob))
         for job in jobs:
             log.i(str(job))
