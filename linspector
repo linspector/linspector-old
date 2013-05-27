@@ -7,6 +7,7 @@ from lib.core.logger import Logger
 from lib.config.config import Config
 from lib.config.periods import Period
 from apscheduler.scheduler import Scheduler
+import time
 import logging
 import subprocess as sp
 
@@ -58,17 +59,24 @@ def main():
         config = Config(args.config, log)
         log.d("parsed config: " + str(config))
         for hg in config.hostgroups:
+            
             for hostGroupService in hg.services:
+                log.d(hostGroupService)
                 jobInfo=JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.service, hg.threshold, hg.parent)
                 for period in hostGroupService.periods:
-                    
+                    log.d(period)
                     jobs.append(period.createJob(scheduler, jobInfo, handleJob))
+        for job in jobs:
+            log.d(str(job))
         
         while True:
             try:
-                time.sleep(10)
-            except:
-                pass
+                time.sleep(1)
+            except error:
+                print str(error)
+        
+            
+        
                     
                 
                 
