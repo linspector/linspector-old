@@ -73,6 +73,9 @@
 
 * threshold muss in die einzelnden services. raus aus der hostgroup.
 
+* We need an escalation threshold! After this amount of fails the problem will
+  be escaleted.
+
 * Jeder service braucht einen parser um die daten auszuwerten. das heisst, dass
   wenn ein service angelegt wird auch ein parser für diesen verfügbar sein muss.
   generische parser sind bestimmt in vielen fällen möglich aber der alltag wird
