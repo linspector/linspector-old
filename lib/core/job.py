@@ -3,6 +3,8 @@ This is what job_function needs as parameter for each job to succesfully
 execute.
 """
 
+import subprocess
+
 
 class JobInfo:
     def __init__(self, hostgroupname, members, hosts, service, threshold, parent=None):
@@ -11,7 +13,7 @@ class JobInfo:
         self.service = service
         self.threshold = threshold
         self.parent = parent
-        self.name = hostgroupname + "_" + service.name
+        self.name = hostgroupname + "_" + service.name + " " + self.service.command
         
     def __str__(self):
         return self.name
@@ -20,4 +22,7 @@ class JobInfo:
         self.log = log
         
     def handleCall(self):
+        #p = subprocess.Popen("df -h", stdout=subprocess.PIPE, shell=True)
+        #(output, err) = p.communicate()
+        #print output
         pass
