@@ -73,12 +73,10 @@ def main():
             log.d(str(job))
         
         while True:
-            try:
-                time.sleep(10)
-                for job in jobs:
-                    log.d(str(job))
-            except:
-                print "error"
+            time.sleep(10)
+            for job in jobs:
+                log.d(str(job))
+
 
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
