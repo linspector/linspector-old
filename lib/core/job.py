@@ -1,5 +1,5 @@
 """
-This is what job_function needs as parameter for each job to succesfully 
+This is what job_function needs as parameter for each job to successfully
 execute.
 """
 
@@ -13,7 +13,7 @@ class JobInfo:
         self.service = service
         self.threshold = threshold
         self.parent = parent
-        self.name = hostgroupname + "_" + service.name + " " + self.service.command
+        self.name = hostgroupname + "_" + service.name + " " + service.command
         
     def __str__(self):
         return self.name
