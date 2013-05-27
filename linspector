@@ -1,11 +1,10 @@
 #!/usr/bin/python2.7 -tt
 
-VERSION = "0.1.1/TETRIS"
+VERSION = "0.2/TETRIS"
 import argparse
 from lib.core.job import JobInfo
 from lib.core.logger import Logger
 from lib.config.config import Config
-from lib.config.periods import Period
 from apscheduler.scheduler import Scheduler
 import time
 import logging
@@ -45,6 +44,7 @@ def handleJob(jobInfo):
     jobInfo.handleCall()
     print str(jobInfo)
 
+
 def main():
     args = parseArgs()
     log = Logger(args.logfile, args.loglevel)
@@ -75,17 +75,10 @@ def main():
             try:
                 time.sleep(10)
                 for job in jobs:
-                   log.d(str(job))
-                
+                    log.d(str(job))
             except:
                 print "error"
-        
-            
-        
-                    
-                
-                
-                
+
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
     elif args.action == "restart":

@@ -8,7 +8,7 @@ class Command:
         self.error = ""
 
     def __str__(self):
-        return command
+        return self.command
 
     def hasProcessed(self):
         return self.output != "" and self.error != ""

@@ -57,5 +57,3 @@ class Logger():
 
     def close(self):
         logging.shutdown()
-
-

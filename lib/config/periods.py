@@ -1,6 +1,3 @@
-from apscheduler.scheduler import Scheduler
-
-
 class Period(object):
     def __init__(self, name):
         self.name = name
@@ -13,8 +10,7 @@ class Period(object):
         
 
 class IntervalPeriod(Period):
-    def __init__(self, name="", weeks=0,days=0, hours=0, minutes=0, seconds=0, start_date=None,
-                 comment=None):
+    def __init__(self, name="", weeks=0, days=0, hours=0, minutes=0, seconds=0, start_date=None, comment=None):
         super(IntervalPeriod, self).__init__(name)
         
         self.days = days                  # number of days to wait
@@ -26,18 +22,17 @@ class IntervalPeriod(Period):
         self.comment = comment            # comment
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_interval_job(func, weeks=self.weeks, hours=self.hours, minutes=self.minutes, seconds=self.seconds, start_date=self.start_date, args=[jobInfo])
-    
-        
+        return scheduler.add_interval_job(func, weeks=self.weeks, hours=self.hours, minutes=self.minutes,
+                                          seconds=self.seconds, start_date=self.start_date, args=[jobInfo])
+
     def __str__(self):
         ret = "IntervalPeriod(Name: " + self.name + ")"
         return ret    
 
 
 class CronPeriod(Period):
-    def __init__(self, name="", year="*", month="*", day="*", week="*",
-                 day_of_week="*", hour="*", minute="*", second="0", start_date=None,
-                 comment=None):
+    def __init__(self, name="", year="*", month="*", day="*", week="*", day_of_week="*", hour="*", minute="*",
+                 second="0", start_date=None, comment=None):
         super(CronPeriod, self).__init__(name)
         self.year = year                # 4-digit year number
         self.month = month              # month number (1-12)
@@ -50,13 +45,14 @@ class CronPeriod(Period):
         self.start_date = start_date
         self.comment = comment
 
-
     def __str__(self):
         ret = "CronPeriod(Name: " + self.name + ")"
         return ret
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_cron_job(func, year=self.year, month=self.month, day=self.day, week=self.week, day_of_week=self.day_of_week, hour=self.hour, minute=self.minute, second=self.second,start_date=self.start_date, args=[jobInfo])
+        return scheduler.add_cron_job(func, year=self.year, month=self.month, day=self.day, week=self.week,
+                                      day_of_week=self.day_of_week, hour=self.hour, minute=self.minute,
+                                      second=self.second, start_date=self.start_date, args=[jobInfo])
             
         
 class DatePeriod(Period):
@@ -66,25 +62,22 @@ class DatePeriod(Period):
         self.comment = comment
 
     def __str__(self):
-        ret = "DatePeriod(Name: " + self.name + ","+ str(self.date) + ")"
+        ret = "DatePeriod(Name: " + self.name + ", " + str(self.date) + ")"
         return ret
         
     def createJob(self, scheduler, jobInfo, func):
         return scheduler.add_date_job(func, self.date, [jobInfo])
 
 
-
-
-
-def parsePeriodList(periodlist,log):
-    periods=[]
+def parsePeriodList(periodlist, log):
+    periods = []
     log.i(periodlist)
     for name, values in periodlist.items():
         if "date" in values:
             periods.append(DatePeriod(name, **values))
             continue
         
-        for i in [ "weeks","days", "hours", "minutes", "seconds", "start_date"]:
+        for i in ["weeks", "days", "hours", "minutes", "seconds", "start_date"]:
             if i in values:
                 periods.append(IntervalPeriod(name, **values))
                 break
@@ -94,9 +87,7 @@ def parsePeriodList(periodlist,log):
                 periods.append(CronPeriod(name, **values))
                 break
         
-        log.w("ignoring Period: " +str(name))
+        log.w("ignoring Period: " + str(name))
         log.w("reason: could not determine PeriodType: " + str(values))
-        
-        
-    return periods
 
+    return periods

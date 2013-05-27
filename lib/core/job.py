@@ -20,8 +20,4 @@ class JobInfo:
         self.log = log
         
     def handleCall(self):
-       pass
-        
-        
-    
-        
+        pass

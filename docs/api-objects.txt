@@ -115,6 +115,8 @@ linspector.lib.core.daemon.Daemon.__init__	linspector.lib.core.daemon.Daemon-cla
 linspector.lib.core.daemon.Daemon.restart	linspector.lib.core.daemon.Daemon-class.html#restart
 linspector.lib.core.job.JobInfo	linspector.lib.core.job.JobInfo-class.html
 linspector.lib.core.job.JobInfo.__str__	linspector.lib.core.job.JobInfo-class.html#__str__
+linspector.lib.core.job.JobInfo.handleCall	linspector.lib.core.job.JobInfo-class.html#handleCall
+linspector.lib.core.job.JobInfo.setLogger	linspector.lib.core.job.JobInfo-class.html#setLogger
 linspector.lib.core.job.JobInfo.__init__	linspector.lib.core.job.JobInfo-class.html#__init__
 linspector.lib.core.linspector_daemon.LinspectorDaemon	linspector.lib.core.linspector_daemon.LinspectorDaemon-class.html
 linspector.lib.core.daemon.Daemon.delpid	linspector.lib.core.daemon.Daemon-class.html#delpid
