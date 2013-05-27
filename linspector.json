@@ -148,19 +148,19 @@
             "hour": "*",
             "minute": "*/1",
             "second": "0",
-            "comment": "Cron Job"
+            "comment": "Cron Job / Every minute"
         },
         "do_every_x_times" : {
             "days": 0,
             "weeks": 0,
             "hours": 0,
-            "minutes": 5,
-            "seconds": 0,
-            "comment": "Interval Job"
+            "minutes": 0,
+            "seconds": 10,
+            "comment": "Interval Job / Every 10 seconds"
         },
         "next_christmas" : {
             "date": "2013-12-24 20:00:00",
-            "comment": "Date Job"
+            "comment": "Date Job / Just one day"
         }
     },
     "hosts":
@@ -214,8 +214,8 @@
             "services":
             {
             	"load": ["twentyfourseven"],
-            	"discusage":["do_every_x_times"],
-                "ping": ["twentyfourseven"]
+            	"discusage":["twentyfourseven"],
+                "ping": ["do_every_x_times"]
             }
         }
     },

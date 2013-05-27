@@ -10,9 +10,9 @@ class Host:
         self.comment = comment
 
     def __str__(self):
-        ret = "Host('Name: " + self.name + "', 'access: " + self.host + "', "
+        ret = "Host('Name: " + self.name + "', 'Access: " + self.host + "', "
         if self.parent != "":
-            ret += "'parent: " + self.parent + "', "
+            ret += "'Parent: " + self.parent + "', "
         ret += "'HostServices: {"
         for s in self.services:
             ret += str(s) + "\n"

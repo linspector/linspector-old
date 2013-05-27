@@ -18,8 +18,8 @@ class Member:
 
 
 class MemberFilter:
-    def __init__(self, filt, Value):
-        self.filt = filt
+    def __init__(self, filter, Value):
+        self.filter = filter
         self.value = Value
 
     def __str__(self):
