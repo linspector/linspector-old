@@ -56,7 +56,7 @@ class CronPeriod(Period):
         return ret
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_cron_job(func, self.year, self.month, self.day, self.week, self.day_of_week, self.hour, self.minute, self.second,self.start_date, [jobInfo])
+        return scheduler.add_cron_job(func, year=self.year, month=self.month, day=self.day, week=self.week, day_of_week=self.day_of_week, hour=self.hour, minute=self.minute, second=self.second,start_date=self.start_date, args=[jobInfo])
             
         
 class DatePeriod(Period):
@@ -87,12 +87,12 @@ def parsePeriodList(periodlist,log):
         for i in [ "weeks","days", "hours", "minutes", "seconds", "start_date"]:
             if i in values:
                 periods.append(IntervalPeriod(name, **values))
-                continue
+                break
         
         for i in ["year", "month", "day", "week", "day_of_week", "hour", "minute", "second"]:
             if i in values:
                 periods.append(CronPeriod(name, **values))
-                continue
+                break
         
         log.w("ignoring Period: " +str(name))
         log.w("reason: could not determine PeriodType: " + str(values))
