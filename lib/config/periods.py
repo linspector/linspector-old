@@ -26,7 +26,7 @@ class IntervalPeriod(Period):
         self.comment = comment            # comment
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_interval_job(func, self.weeks, self.hours, self.minutes, self.seconds, self.start_date, [jobInfo])
+        return scheduler.add_interval_job(func, weeks=self.weeks, hours=self.hours, minutes=self.minutes, seconds=self.seconds, start_date=self.start_date, args=[jobInfo])
     
         
     def __str__(self):

@@ -16,6 +16,12 @@ class JobInfo:
     def __str__(self):
         return self.name
         
+    def setLogger(self, log):
+        self.log = log
+        
+    def handleCall(self):
+       pass
+        
         
     
         

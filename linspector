@@ -42,6 +42,7 @@ def parseArgs():
 
 
 def handleJob(jobInfo):
+    jobInfo.handleCall()
     print str(jobInfo)
 
 def main():
@@ -63,6 +64,7 @@ def main():
             for hostGroupService in hg.services:
                 log.d(hostGroupService)
                 jobInfo=JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.service, hg.threshold, hg.parent)
+                jobInfo.setLogger(log)
                 for period in hostGroupService.periods:
                     log.d(period)
                     jobs.append(period.createJob(scheduler, jobInfo, handleJob))
