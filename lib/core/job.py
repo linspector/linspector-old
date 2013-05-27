@@ -11,7 +11,7 @@ class JobInfo:
         self.service = service
         self.threshold = threshold
         self.parent = parent
-        self.name = hostgroupname + service.name
+        self.name = hostgroupname + "_" + service.name
         
     def __str__(self):
         return self.name

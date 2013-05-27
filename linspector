@@ -63,8 +63,12 @@ def main():
                 for period in hostGroupService.periods:
                     
                     jobs.append(period.createJob(scheduler, jobInfo, handleJob))
-        for job in jobs:
-            log.i(str(job))
+        
+        while True:
+            try:
+                time.sleep(10)
+            except:
+                pass
                     
                 
                 
