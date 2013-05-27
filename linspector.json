@@ -147,15 +147,15 @@
             "week": "*",
             "hour": "*",
             "minute": "*/1",
-            "second": "*",
+            "second": "0",
             "comment": "Cron Job"
         },
         "do_every_x_times" : {
-            "days": "*",
-            "weeks": "*",
-            "hours": "*",
-            "minutes": "5",
-            "seconds": "",
+            "days": 0,
+            "weeks": 0,
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 0,
             "comment": "Interval Job"
         },
         "next_christmas" : {
