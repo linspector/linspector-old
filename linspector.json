@@ -213,9 +213,7 @@
             "threshold": 10,
             "services":
             {
-            	"load": ["twentyfourseven"],
-            	"discusage":["twentyfourseven"],
-                "ping": ["do_every_x_times"]
+            	"ping": ["do_every_x_times"]
             }
         }
     },

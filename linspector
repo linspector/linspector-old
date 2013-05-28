@@ -42,8 +42,11 @@ def parseArgs():
 
 
 def handleJob(jobInfo):
-    jobInfo.handleCall()
+    print "handlejobInfo"
     print str(jobInfo)
+    print "executing: " + str(jobInfo.service.command)
+    jobInfo.handleCall()
+    
 
 
 def main():

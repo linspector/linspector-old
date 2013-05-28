@@ -71,23 +71,24 @@ class DatePeriod(Period):
 
 def parsePeriodList(periodlist, log):
     periods = []
-    log.i(periodlist)
+    #log.d("values of periodslist: " + str(periodlist.items()))
     for name, values in periodlist.items():
+        
         if "date" in values:
             periods.append(DatePeriod(name, **values))
             continue
         
-        for i in ["weeks", "days", "hours", "minutes", "seconds", "start_date"]:
-            if i in values:
-                periods.append(IntervalPeriod(name, **values))
-                break
-        
-        for i in ["year", "month", "day", "week", "day_of_week", "hour", "minute", "second"]:
-            if i in values:
-                periods.append(CronPeriod(name, **values))
-                break
-        
-        log.w("ignoring Period: " + str(name))
-        log.w("reason: could not determine PeriodType: " + str(values))
+        comp = ["weeks", "days", "hours", "minutes", "seconds", "start_date"]
+        if len([i for i in comp if i in values]) > 0 :
+            periods.append(IntervalPeriod(name, **values))
+            break
+            
+        comp = ["year", "month", "day", "week", "day_of_week", "hour", "minute", "second"]
+        if len([i for i in comp if i in values]) > 0 :
+            periods.append(CronPeriod(name, **values))
+            break
+        else:
+            log.w("ignoring Period: " + str(name))
+            log.w("reason: could not determine PeriodType: " + str(values))
 
     return periods
