@@ -224,6 +224,7 @@
     },
     "core": {
         "max_logfile_size": 1024000,
-        "max_logfile_count": 4
+        "max_logfile_count": 4,
+        "max_worker_threads": 8
     }
 }
