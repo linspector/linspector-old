@@ -34,9 +34,12 @@ class JobInfo:
         return nextExecution
         
     def handleCall(self):
-        print "calling command " + str(service.command) 
-        cmd = Command(service.command)
-        self.log.d("executing command: " + str(command))
-        cmd.call()
-        return cmd
+        print "about to call command " + str(self.service.command) 
+        #must find real service command stored in hosts...
+        #but because of error, mentioned in NOTES,ruff, there is no ping i.e.
+
+        #cmd = Command(service.command)
+        #self.log.d("executing command: " + str(command))
+        #cmd.call()
+        #return cmd
         
