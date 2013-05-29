@@ -66,7 +66,7 @@ class DatePeriod(Period):
         return ret
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_date_job(func, self.date, [jobInfo])
+        return scheduler.add_date_job(func, self.date, jobInfo)
 
 
 def parsePeriodList(periodlist, log):

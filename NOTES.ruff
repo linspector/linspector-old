@@ -1,1 +1,4 @@
 take "~" as expander to make a ./linspector dir
+
+(using linspector.minimal)
+a host which doesn't define a service (seen in linspector.minimal), is at this point useless. It was intended that the host defines allowed services there. The warning that a hostgroup was defined for a host which has not such a service is supressed because host.services has no items to iterate over(hosts.py l64).Also a service like ping isn't defined anywhere... Not shure if this should be considered as config error or parsing error
