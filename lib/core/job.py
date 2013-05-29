@@ -48,7 +48,7 @@ class JobInfo:
                 self.log.d(str(hs))
                 cmd=Command(hs.service.command, self.log)
                 cmd.call()
-                log.d(cmd.getOutputOrError())
+                self.log.d(cmd.getAllOutput())
         except Error:
                 self.log.d(Error)
         
