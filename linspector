@@ -11,6 +11,7 @@ from lib.core.logger import Logger
 from lib.config.config import Config
 from apscheduler.scheduler import Scheduler
 
+DEFAULT_CONFIG = "./linspector.minimal.json"
 
 def parseArgs():
     parser = argparse.ArgumentParser(
@@ -21,7 +22,7 @@ def parseArgs():
     parser.add_argument("action", choices=["start", "stop", "restart", "attach"],
                         help="defines if linspector should beeing attached, started, stopped or restarted.")
     parser.add_argument("--version", action="version", version="%(prog)s " + str(__version__))
-    parser.add_argument("-c", "--config", default="./linspector.json",
+    parser.add_argument("-c", "--config", default=DEFAULT_CONFIG,
                         help="select configfile to use")
     parser.add_argument("-l", "--logfile", default="./log/linspector.log", metavar="FILE",
                         help="set logfile to use")
@@ -42,13 +43,8 @@ def parseArgs():
 
 
 def handleJob(jobInfo):
-    print "handlejobInfo"
-    print str(jobInfo)
-    print "executing: " + str(jobInfo.service.command)
     jobInfo.handleCall()
     
-
-
 def main():
     args = parseArgs()
     log = Logger(args.logfile, args.loglevel)
@@ -67,7 +63,7 @@ def main():
             
             for hostGroupService in hg.services:
                 log.d(hostGroupService)
-                jobInfo = JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.service, hg.threshold, hg.parent)
+                jobInfo = JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.services, hg.threshold, hg.parent)
                 jobInfo.setLogger(log)
                 for period in hostGroupService.periods:
                     log.d(period)

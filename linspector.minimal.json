@@ -18,7 +18,7 @@
             "filters": {"email": "you@hanez.org"}
         }
     },
-    "periods": {"every10Secs": {"seconds": "10", "comment": "Interval job; every 10 seconds"}},
+    "periods": {"shortPeriod": {"seconds": 5, "comment": "Interval job; every 10 seconds"}},
     "hosts":
     {
         "hanez1": {"host": "www1.hanez.org", "services": {"ping":[{}]}},
@@ -31,7 +31,7 @@
             "members": ["hanez"],
             "hosts": ["hanez1"],
             "threshold": 10,
-            "services": {"ping": ["every10Secs"]}
+            "services": {"ping": ["shortPeriod"]}
         }
     },
     "layouts": {"production": {"hostgroups": ["all"], "enabled": true}

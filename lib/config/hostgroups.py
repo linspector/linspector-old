@@ -27,31 +27,33 @@ class HostGroup:
 
 
 class HostGroupService:
-    def __init__(self, service, periods):
-        self.service = service
+    def __init__(self, services, periods):
+        self.services = services
         self.periods = periods
 
     def __str__(self):
-        return "HostgroupService { " + str(self.service) + ", " + str(self.periods) + "}"
+        return "HostgroupService { " + str([str(s) for s in self.services]) + ", " + str([p.name for p in self.periods]) + "}"
 
 
 def parseHostGroupList(hostgroups, hosts, members, periods, services, log):
     parsedHostGroups = []
     for hgname, hgValues in hostgroups.items():
         hostGroup = HostGroup(hgname)
-        hostGroup.members = filter(lambda m: m.nameid in hgValues['members'], members)
-        hostGroup.hosts = filter(lambda h: h.name in hgValues['hosts'], hosts)
+        hostGroup.members = [m for m in members if m.nameid in hgValues['members']]
+        hostGroup.hosts = [h for h in hosts if h.name in hgValues['hosts']]
         hostGroup.threshold = hgValues['threshold']
         if 'parent' in hgValues:
             hostGroup.parent = hgValues['parent']
         hostGroup.services = []
         for serviceName, servicePeriods in hgValues['services'].items():
-            service = filter(lambda s: s.name in serviceName, services)
-            if len(service) == 0:
-                log.w("Service " + serviceName + " is not defined for Hostgroup " + hgname)
-                continue
-            service = service[0]
-            hostGroupPeriods = filter(lambda p: p.name in servicePeriods, periods)
-            hostGroup.services.append(HostGroupService(service, hostGroupPeriods))
+            services = []
+            for host in hosts:
+                service = host.getHostServiceByName(serviceName)
+                if service is not None: 
+                    services.append(service)
+                else:
+                    log.w("could not find HostService(" +str(serviceName) + ") for host " + host.name)
+            hostGroupPeriods = [p for p in periods if p.name in servicePeriods]
+            hostGroup.services.append(HostGroupService(services, hostGroupPeriods))
         parsedHostGroups.append(hostGroup)
     return parsedHostGroups

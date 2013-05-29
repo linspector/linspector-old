@@ -8,6 +8,12 @@ class Host:
         self.parent = parent
         self.services = services
         self.comment = comment
+        
+    def getHostServiceByName(self, serviceName):
+        for hostService in self.services:
+            if serviceName == hostService.service.name:
+                return hostService.service
+        return None
 
     def __str__(self):
         ret = "Host('Name: " + self.name + "', 'Access: " + self.host + "', "
@@ -89,7 +95,11 @@ def parseHostList(hosts, services, log):
                         replacements.remove(parm)
                         #host will not be inside ServiceParameters, so check this also
                     if 'host' in replacements:
-                        hostService.setCommand(re.sub('@host', host.host, hostService.getCommand()))
+                        log.d("replacing host in " + hostService.getCommand())
+                        comm= re.sub('@host', host.host, hostService.getCommand())
+                        hostService.setCommand(comm)
+                        log.d("new Command: " +comm)
+                        log.d("set in hostService: " + str(hostService))
                         replacements.remove('host')
                         #replacements should be empty now.
                     #If not we cannot use this command as some values are missing
