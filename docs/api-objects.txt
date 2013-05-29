@@ -38,6 +38,7 @@ linspector.lib.core.command.__package__	linspector.lib.core.command-module.html#
 linspector.lib.core.daemon	linspector.lib.core.daemon-module.html
 linspector.lib.core.daemon.__package__	linspector.lib.core.daemon-module.html#__package__
 linspector.lib.core.job	linspector.lib.core.job-module.html
+linspector.lib.core.job.generateId	linspector.lib.core.job-module.html#generateId
 linspector.lib.core.job.__package__	linspector.lib.core.job-module.html#__package__
 linspector.lib.core.linspector_daemon	linspector.lib.core.linspector_daemon-module.html
 linspector.lib.core.linspector_daemon.__package__	linspector.lib.core.linspector_daemon-module.html#__package__
@@ -56,6 +57,7 @@ linspector.lib.config.hostgroups.HostGroupService	linspector.lib.config.hostgrou
 linspector.lib.config.hostgroups.HostGroupService.__str__	linspector.lib.config.hostgroups.HostGroupService-class.html#__str__
 linspector.lib.config.hostgroups.HostGroupService.__init__	linspector.lib.config.hostgroups.HostGroupService-class.html#__init__
 linspector.lib.config.hosts.Host	linspector.lib.config.hosts.Host-class.html
+linspector.lib.config.hosts.Host.getHostServiceByName	linspector.lib.config.hosts.Host-class.html#getHostServiceByName
 linspector.lib.config.hosts.Host.__str__	linspector.lib.config.hosts.Host-class.html#__str__
 linspector.lib.config.hosts.Host.__init__	linspector.lib.config.hosts.Host-class.html#__init__
 linspector.lib.config.hosts.HostService	linspector.lib.config.hosts.HostService-class.html
@@ -101,6 +103,7 @@ linspector.lib.config.services.Service.__init__	linspector.lib.config.services.S
 linspector.lib.core.command.Command	linspector.lib.core.command.Command-class.html
 linspector.lib.core.command.Command.getError	linspector.lib.core.command.Command-class.html#getError
 linspector.lib.core.command.Command.__str__	linspector.lib.core.command.Command-class.html#__str__
+linspector.lib.core.command.Command.getAllOutput	linspector.lib.core.command.Command-class.html#getAllOutput
 linspector.lib.core.command.Command.getOutput	linspector.lib.core.command.Command-class.html#getOutput
 linspector.lib.core.command.Command.call	linspector.lib.core.command.Command-class.html#call
 linspector.lib.core.command.Command.getReturnCode	linspector.lib.core.command.Command-class.html#getReturnCode
