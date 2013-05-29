@@ -29,9 +29,9 @@
         "all":
         {
             "members": ["hanez"],
-            "hosts": ["hanez1", "hanez2"],
+            "hosts": ["hanez1"],
             "threshold": 10,
-            "services": {"ping": ["twentyfourseven"]}
+            "services": {"ping": ["every10Secs"]}
         }
     },
     "layouts": {"production": {"hostgroups": ["all"], "enabled": true}
