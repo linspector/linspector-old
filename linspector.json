@@ -199,6 +199,10 @@
                 "htmlcontent":
                 [
                     { "url": "@host/test.php", "content": "<h1>Server up!</h1>" }
+                ],
+                "ping":
+                [
+                    {}
                 ]
             }
         }

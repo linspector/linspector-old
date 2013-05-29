@@ -18,10 +18,10 @@
             "filters": {"email": "you@hanez.org"}
         }
     },
-    "periods": {"twentyfourseven": {"minute": "*/1", "second": "0", "comment": "Cron Job / Every minute"}},
+    "periods": {"every10Secs": {"seconds": "10", "comment": "Interval job; every 10 seconds"}},
     "hosts":
     {
-        "hanez1": {"host": "www1.hanez.org", "services": {}},
+        "hanez1": {"host": "www1.hanez.org", "services": {"ping":[{}]}},
         "hanez2": {"host": "www2.hanez.org", "services": {}}
     },
     "hostgroups":
