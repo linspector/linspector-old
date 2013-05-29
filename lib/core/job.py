@@ -23,7 +23,7 @@ class JobInfo:
         self.jobs = []
         
     def __str__(self):
-        return self.name
+        return "JobInfo " + str(self.name)
         
     def setLogger(self, log):
         self.log = log
@@ -49,8 +49,8 @@ class JobInfo:
                 cmd=Command(hs.service.command, self.log)
                 cmd.call()
                 self.log.d(cmd.getAllOutput())
-        except Error:
-                self.log.d(Error)
+        except Exception:
+                self.log.d(Exception)
         
         
         #must find real service command stored in hosts...
