@@ -12,7 +12,7 @@ class Host:
     def getHostServiceByName(self, serviceName):
         for hostService in self.services:
             if serviceName == hostService.service.name:
-                return hostService.service
+                return hostService
         return None
 
     def __str__(self):
@@ -39,7 +39,8 @@ class HostService:
         return self.service.command
 
     def __str__(self):
-        ret = str(self.service)
+        
+        ret = "HostService : " + str(self.service)
         if self.warning:
             ret += "warning: " + str(self.warning)
         if self.critical:
@@ -103,7 +104,7 @@ def parseHostList(hosts, services, log):
                         replacements.remove('host')
                         #replacements should be empty now.
                     #If not we cannot use this command as some values are missing
-                    if replacements:
+                    if len(replacements) > 0:
                         log.w("Hostservice " + servicename + " from host " + host.name + " is ignored because of missing replacements: " + str(
                             replacements))
                     else:
