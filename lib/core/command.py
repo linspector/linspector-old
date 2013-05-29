@@ -27,15 +27,15 @@ class Command:
             self.commandStart = dt.now()
             self.log.d("calling command " + str(self.command) + " at " + str(self.commandStart)) 
             #self.output=sp.check_output(self.command.split())
-            process = Popen(stdout=PIPE, *self.command.split())
+            process = Popen(self.command, stdout=sp.PIPE, stderr=sp.PIPE, shell=True)
             self.output, self.error = process.communicate()
-            self.log.d(str(self.output) + str(self.error))
+            self.log.d(str(self.output))
+            self.log.d(str(self.error))
             self.retcode = process.poll()
         except CalledProcessError:
             self.error=CalledProcessError.output
             self.retcode = CalledProcessError.returncode
-        except Error:
-            self.log.d("error: " + str(Error))
+        
         
     def getOutput(self):
         return self.output
