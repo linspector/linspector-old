@@ -22,14 +22,15 @@
     "hosts":
     {
         "a.systemchaos.org": {"host": "a.systemchaos.org", "services": {"ping":[{}]}},
-        "b.systemchaos.org": {"host": "b.systemchaos.org", "services": {"ping":[{}]}}
+        "b.systemchaos.org": {"host": "b.systemchaos.org", "services": {"ping":[{}]}},
+        "google.de": {"host": "google.de", "services": {"ping":[{}]}}
     },
     "hostgroups":
     {
         "all":
         {
             "members": ["hanez"],
-            "hosts": ["a.systemchaos.org", "b.systemchaos.org"],
+            "hosts": ["a.systemchaos.org", "b.systemchaos.org", "google.de"],
             "threshold": 10,
             "services": {"ping": ["shortPeriod"]}
         }
