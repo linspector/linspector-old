@@ -102,8 +102,8 @@ linspector.lib.core.command.Command	linspector.lib.core.command.Command-class.ht
 linspector.lib.core.command.Command.getError	linspector.lib.core.command.Command-class.html#getError
 linspector.lib.core.command.Command.__str__	linspector.lib.core.command.Command-class.html#__str__
 linspector.lib.core.command.Command.getOutput	linspector.lib.core.command.Command-class.html#getOutput
-linspector.lib.core.command.Command.hasProcessed	linspector.lib.core.command.Command-class.html#hasProcessed
-linspector.lib.core.command.Command.doProcess	linspector.lib.core.command.Command-class.html#doProcess
+linspector.lib.core.command.Command.call	linspector.lib.core.command.Command-class.html#call
+linspector.lib.core.command.Command.getReturnCode	linspector.lib.core.command.Command-class.html#getReturnCode
 linspector.lib.core.command.Command.__init__	linspector.lib.core.command.Command-class.html#__init__
 linspector.lib.core.daemon.Daemon	linspector.lib.core.daemon.Daemon-class.html
 linspector.lib.core.daemon.Daemon.delpid	linspector.lib.core.daemon.Daemon-class.html#delpid
@@ -114,7 +114,9 @@ linspector.lib.core.daemon.Daemon.daemonize	linspector.lib.core.daemon.Daemon-cl
 linspector.lib.core.daemon.Daemon.__init__	linspector.lib.core.daemon.Daemon-class.html#__init__
 linspector.lib.core.daemon.Daemon.restart	linspector.lib.core.daemon.Daemon-class.html#restart
 linspector.lib.core.job.JobInfo	linspector.lib.core.job.JobInfo-class.html
+linspector.lib.core.job.JobInfo.getNextExecutionTime	linspector.lib.core.job.JobInfo-class.html#getNextExecutionTime
 linspector.lib.core.job.JobInfo.__str__	linspector.lib.core.job.JobInfo-class.html#__str__
+linspector.lib.core.job.JobInfo.appendJob	linspector.lib.core.job.JobInfo-class.html#appendJob
 linspector.lib.core.job.JobInfo.handleCall	linspector.lib.core.job.JobInfo-class.html#handleCall
 linspector.lib.core.job.JobInfo.setLogger	linspector.lib.core.job.JobInfo-class.html#setLogger
 linspector.lib.core.job.JobInfo.__init__	linspector.lib.core.job.JobInfo-class.html#__init__
