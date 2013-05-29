@@ -1,5 +1,5 @@
 {
-    "services": {"ping": {"command": "ping @host"}},
+    "services": {"ping": {"command": "ping -c 1 @host"}},
     "filters":
     {
         "email":
@@ -21,15 +21,15 @@
     "periods": {"shortPeriod": {"seconds": 5, "comment": "Interval job; every 10 seconds"}},
     "hosts":
     {
-        "hanez1": {"host": "www1.hanez.org", "services": {"ping":[{}]}},
-        "hanez2": {"host": "www2.hanez.org", "services": {}}
+        "a.systemchaos.org": {"host": "a.systemchaos.org", "services": {"ping":[{}]}},
+        "b.systemchaos.org": {"host": "b.systemchaos.org", "services": {"ping":[{}]}}
     },
     "hostgroups":
     {
         "all":
         {
             "members": ["hanez"],
-            "hosts": ["hanez1"],
+            "hosts": ["a.systemchaos.org", "b.systemchaos.org"],
             "threshold": 10,
             "services": {"ping": ["shortPeriod"]}
         }
