@@ -5,15 +5,21 @@ execute.
 
 from command import Command
 
+def generateId():
+    i=0
+    while True:
+      yield i
+      i+=1
 
 class JobInfo:
-    def __init__(self, hostgroupname, members, hosts, service, threshold, parent=None):
+    def __init__(self, hostgroupname, members, hosts, hostServices, threshold, parent=None):
         self.members = members
         self.hosts = hosts
-        self.service = service
+        self.hostServices = hostServices
         self.threshold = threshold
         self.parent = parent
-        self.name = hostgroupname + "_" + service.name
+        self.name = generateId()
+        #self.name = hostgroupname +  str([str("_" + s.service.name ) for s in hostServices])
         self.jobs = []
         
     def __str__(self):
@@ -34,7 +40,10 @@ class JobInfo:
         return nextExecution
         
     def handleCall(self):
-        print "about to call command " + str(self.service.command) 
+        self.log.d("handle call")
+        self.log.d([str(s) for s in self.hostServices])
+        
+        
         #must find real service command stored in hosts...
         #but because of error, mentioned in NOTES,ruff, there is no ping i.e.
 
