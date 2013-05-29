@@ -1,12 +1,14 @@
 import subprocess as sp
+from subprocess import Popen
 from subprocess import CalledProcessError
 from datetime import datetime as dt
 
 class Command:
-    def __init__(self, command):
+    def __init__(self, command, log):
         self.command = command
-        self.output = ""
-        self.error = ""
+        self.log = log
+        self.output = None
+        self.error = None
         self.retcode = 0
         self.commandStart=0
 
@@ -22,18 +24,26 @@ class Command:
         self.retcode = process.poll()
         '''
         try:
-            print self.command
-            self.output=sp.check_output(self.command.split(),stderr=sp.STDOUT)
-            
+            self.commandStart = dt.now()
+            self.log.d("calling command " + str(self.command) + " at " + str(self.commandStart)) 
+            self.output=sp.check_output(self.command.split())
+            #process = Popen(stdout=PIPE, *popenargs, **kwargs)
+            #self.output, self.error = process.communicate()
+            #self.retcode = process.poll()
         except CalledProcessError:
             self.error=CalledProcessError.output
             self.retcode = CalledProcessError.returncode
+        except Error:
+            self.log.d("error: " + str(Error))
         
     def getOutput(self):
         return self.output
 
     def getError(self):
         return self.error
+    
+    def getOutputAll(self):
+        return str(self.output) + str(self.error) + str(self.retcode)
         
     def getReturnCode(self):
         return self.retcode

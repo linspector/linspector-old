@@ -42,8 +42,15 @@ class JobInfo:
     def handleCall(self):
         self.log.d("handle call")
         self.log.d(self.hostServices)
-        for hs in self.hostServices:
-            log.d(str(hs))
+        try:
+            
+            for hs in self.hostServices:
+                self.log.d(str(hs))
+                cmd=Command(hs.service.command, self.log)
+                cmd.call()
+                log.d(cmd.getOutputOrError())
+        except Error:
+                self.log.d(Error)
         
         
         #must find real service command stored in hosts...
