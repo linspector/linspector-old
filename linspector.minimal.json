@@ -24,40 +24,36 @@
     {
         "a.systemchaos.org": {"host": "a.systemchaos.org",
                               "services": {
-                                  "ping":[{ "args":
-                                            { "device": "/dev/sda1" },
-                                              "fails": { "warning": "80%", "critical": "90%" },
-                                              "parser": { "name": "ping", "line": 2, "col": 5 }}]
+                                  "ping":[{ "args": { "device": "/dev/sda1" },
+                                            "fails": { "warning": "100ms", "critical": "150ms" },
+                                            "parser": { "name": "ping", "line": 2, "col": 5 }}]
                               }
         },
         "b.systemchaos.org": {"host": "b.systemchaos.org", "services": {"ping":[{}]}},
         "google.de": {"host": "google.de", "services": {"ping":[{}]}},
         "foobar.systemchaos.org": {"host": "foobar.systemchaos.org",
                               "services": {
-                                  "tcpconnect":[{ "args":
-                                            { "port": 80 },
-                                              "fails": { },
-                                              "threshold": 2,
-                                              "parser": { "name": "none" }}]
+                                  "tcpconnect":[{ "args": { "port": 80 },
+                                                  "fails": { },
+                                                  "threshold": 2,
+                                                  "parser": { "name": "none" }}]
                               }
         },
         "snmp.systemchaos.org": {"host": "snmp.systemchaos.org",
                               "services": {
-                                  "snmpget":[{ "args":
-                                            { "port": 5555, "oid": "1.3.6.1.4.1.2681.1.2.102." },
-                                              "fails": { "warning": "8", "critical": "16" },
-                                              "parser": { "name": "snmpget" },
-                                              "comment": "Value X from Y"}]
+                                  "snmpget":[{ "args": { "port": 5555, "oid": "1.3.6.1.4.1.2681.1.2.102." },
+                                               "fails": { "warning": "8", "critical": "16" },
+                                               "parser": { "name": "snmpget" },
+                                               "comment": "Value X from Y"}]
                               }
         },
         "web.systemchaos.org": {"host": "web.systemchaos.org",
                               "services": {
-                                  "htmlcontent":[{ "args":
-                                            { "port": 80, "string": "<h1>I am up!</h1>" },
-                                              "fails": { },
-                                              "threshold": 2,
-                                              "parser": { "name": "none" },
-                                              "comment": "Just a string grep"}]
+                                  "htmlcontent":[{ "args": { "port": 80, "string": "<h1>I am up!</h1>" },
+                                                   "fails": { },
+                                                   "threshold": 2,
+                                                   "parser": { "name": "none" },
+                                                   "comment": "Just a string grep"}]
                               }
         }
     },
