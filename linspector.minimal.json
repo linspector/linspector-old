@@ -5,7 +5,7 @@
     {
         "email":
         {
-            "command": "/usr/bin/warn_the_admin_mail @member @+message",
+            "command": "email @member @+message",
             "comment": "Sends an E-Mail to the member.",
             "priority": 1
         }
@@ -37,7 +37,27 @@
                                   "tcpconnect":[{ "args":
                                             { "port": 80 },
                                               "fails": { },
+                                              "threshold": 2,
                                               "parser": { "name": "none" }}]
+                              }
+        },
+        "snmp.systemchaos.org": {"host": "snmp.systemchaos.org",
+                              "services": {
+                                  "snmpget":[{ "args":
+                                            { "port": 5555, "oid": "1.3.6.1.4.1.2681.1.2.102." },
+                                              "fails": { "warning": "8", "critical": "16" },
+                                              "parser": { "name": "snmpget" },
+                                              "comment": "Value X from Y"}]
+                              }
+        },
+        "web.systemchaos.org": {"host": "web.systemchaos.org",
+                              "services": {
+                                  "htmlcontent":[{ "args":
+                                            { "port": 80, "string": "<h1>I am up!</h1>" },
+                                              "fails": { },
+                                              "threshold": 2,
+                                              "parser": { "name": "none" },
+                                              "comment": "Just a string grep"}]
                               }
         }
     },
