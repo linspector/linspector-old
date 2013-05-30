@@ -6,3 +6,5 @@ The htmlcontent service in pure Python. STUPID NAME!!!
 # http://www.angryobjects.com/2011/10/15/http-with-python-pycurl-by-example/
 #
 # maybe better: http://docs.python.org/2/library/urllib.html
+#
+# or look at tcpconnect.py! could be useful to.
