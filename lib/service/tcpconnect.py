@@ -31,5 +31,3 @@ while len(data):
 sock.close()
 
 print string
-
-sys.exit(0)
