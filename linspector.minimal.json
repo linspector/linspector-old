@@ -1,5 +1,6 @@
 {
-    "services": {"ping": {"command": "ping -c 1 @host"}},
+    "services": {"ping": {"command": "ping -c 1 @host"},
+                 "tcpconnect": {"command": "tcpconnect @host @port"}},
     "filters":
     {
         "email":
@@ -21,9 +22,24 @@
     "periods": {"shortPeriod": {"seconds": 5, "comment": "Interval job; every 10 seconds"}},
     "hosts":
     {
-        "a.systemchaos.org": {"host": "a.systemchaos.org", "services": {"ping":[{ "parser": { "name": "df", "line": 2, "col": 5 }}]}},
+        "a.systemchaos.org": {"host": "a.systemchaos.org",
+                              "services": {
+                                  "ping":[{ "args":
+                                            { "device": "/dev/sda1" },
+                                              "fails": { "warning": "80%", "critical": "90%" },
+                                              "parser": { "name": "ping", "line": 2, "col": 5 }}]
+                              }
+        },
         "b.systemchaos.org": {"host": "b.systemchaos.org", "services": {"ping":[{}]}},
-        "google.de": {"host": "google.de", "services": {"ping":[{}]}}
+        "google.de": {"host": "google.de", "services": {"ping":[{}]}},
+        "foobar.systemchaos.org": {"host": "foobar.systemchaos.org",
+                              "services": {
+                                  "tcpconnect":[{ "args":
+                                            { "port": 80 },
+                                              "fails": { },
+                                              "parser": { "name": "none" }}]
+                              }
+        }
     },
     "hostgroups":
     {
