@@ -44,7 +44,8 @@ def parseArgs():
 
 def handleJob(jobInfo):
     jobInfo.handleCall()
-    
+
+
 def main():
     args = parseArgs()
     log = Logger(args.logfile, args.loglevel)
