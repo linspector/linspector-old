@@ -52,7 +52,7 @@ def parseHostGroupList(hostgroups, hosts, members, periods, services, log):
                 if service is not None: 
                     services.append(service)
                 else:
-                    log.w("could not find HostService(" +str(serviceName) + ") for host " + host.name)
+                    log.w("could not find HostService(" + str(serviceName) + ") for host " + host.name)
             hostGroupPeriods = [p for p in periods if p.name in servicePeriods]
             hostGroup.services.append(HostGroupService(services, hostGroupPeriods))
         parsedHostGroups.append(hostGroup)

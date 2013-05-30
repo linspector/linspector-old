@@ -45,12 +45,12 @@ class HostService:
             ret += "warning: " + str(self.warning)
         if self.critical:
             ret += "critical: " + str(self.critical)
-        return ret;
+        return ret
 
 
 def parseHostList(hosts, services, log):
     """
-    parse the HostList and replace any command as nessesary
+    parse the HostList and replace any command as necessary
     """
     #precompiled regexPattern which finds replacements in service strings
     pattern = re.compile("@(\w+)")
@@ -97,7 +97,7 @@ def parseHostList(hosts, services, log):
                         #host will not be inside ServiceParameters, so check this also
                     if 'host' in replacements:
                         log.d("replacing host in " + hostService.getCommand())
-                        comm= re.sub('@host', host.host, hostService.getCommand())
+                        comm = re.sub('@host', host.host, hostService.getCommand())
                         hostService.setCommand(comm)
                         log.d("new Command: " +comm)
                         log.d("set in hostService: " + str(hostService))

@@ -10,19 +10,19 @@ class Command:
         self.output = None
         self.error = None
         self.retcode = 0
-        self.commandStart=0
+        self.commandStart = 0
 
     def __str__(self):
         return self.command
 
     def call(self):
-        '''
-        self.commandStart = dt.now()
-        "called at: "
-        process = sp.Popen(stdout=PIPE, *popenargs, **kwargs)
-        self.output, self.error = process.communicate()
-        self.retcode = process.poll()
-        '''
+
+        # self.commandStart = dt.now()
+        # "called at: "
+        # process = sp.Popen(stdout=PIPE, *popenargs, **kwargs)
+        # self.output, self.error = process.communicate()
+        # self.retcode = process.poll()
+
         try:
             self.commandStart = dt.now()
             self.log.i("calling command " + str(self.command) + " at " + str(self.commandStart)) 
@@ -33,10 +33,9 @@ class Command:
             self.log.d(str(self.error))
             self.retcode = process.poll()
         except CalledProcessError:
-            self.error=CalledProcessError.output
+            self.error = CalledProcessError.output
             self.retcode = CalledProcessError.returncode
-        
-        
+
     def getOutput(self):
         return self.output
 
@@ -48,4 +47,3 @@ class Command:
         
     def getReturnCode(self):
         return self.retcode
-        
