@@ -5,11 +5,13 @@ execute.
 
 from command import Command
 
+
 def generateId():
-    i=0
+    i = 0
     while True:
-      yield i
-      i+=1
+        yield i
+        i += 1
+
 
 class JobInfo:
     def __init__(self, hostgroupname, members, hosts, hostServices, threshold, parent=None):
@@ -46,18 +48,8 @@ class JobInfo:
             
             for hs in self.hostServices:
                 self.log.d(str(hs))
-                cmd=Command(hs.service.command, self.log)
+                cmd = Command(hs.service.command, self.log)
                 cmd.call()
                 self.log.d(cmd.getAllOutput())
         except Exception:
                 self.log.d(Exception)
-        
-        
-        #must find real service command stored in hosts...
-        #but because of error, mentioned in NOTES,ruff, there is no ping i.e.
-
-        #cmd = Command(service.command)
-        #self.log.d("executing command: " + str(command))
-        #cmd.call()
-        #return cmd
-        
