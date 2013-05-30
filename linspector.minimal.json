@@ -21,7 +21,7 @@
     "periods": {"shortPeriod": {"seconds": 5, "comment": "Interval job; every 10 seconds"}},
     "hosts":
     {
-        "a.systemchaos.org": {"host": "a.systemchaos.org", "services": {"ping":[{}]}},
+        "a.systemchaos.org": {"host": "a.systemchaos.org", "services": {"ping":[{ "parser": { "name": "df", "line": 2, "col": 5 }}]}},
         "b.systemchaos.org": {"host": "b.systemchaos.org", "services": {"ping":[{}]}},
         "google.de": {"host": "google.de", "services": {"ping":[{}]}}
     },
