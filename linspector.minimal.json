@@ -49,7 +49,7 @@
         },
         "web.systemchaos.org": {"host": "web.systemchaos.org",
                               "services": {
-                                  "htmlcontent":[{ "args": { "port": 80, "string": "<h1>I am up!</h1>" },
+                                  "htmlcontent":[{ "args": { "port": 80, "path": "/status.cgi", "string": "<h1>I am up!</h1>" },
                                                    "fails": { },
                                                    "threshold": 2,
                                                    "parser": { "name": "none" },
