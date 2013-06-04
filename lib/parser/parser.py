@@ -4,8 +4,8 @@ class Parser:
         pass
 
     def parse_data(self, data):
-      self.pre_parse(data)
-      return self.generate_parse_result(data)
+        self.pre_parse(data)
+        return self.generate_parse_result(data)
   
     def pre_parse(self, data):
         pass
