@@ -1,14 +1,13 @@
-
 class Service:
-    def __init__(self):
-        pass
+    def __init__(self, parser):
+        self.parser = parser
 
     def _execute(self):
         self.pre_execute()
         self.execute()
         self.parse_result()
         self.handle_result()
-        
+
     def execute(self):
         pass
 
@@ -16,7 +15,7 @@ class Service:
         pass
 
     def parse_result(self):
-        pass
+        self.parser._parse()
 
     def handle_result(self):
         pass
