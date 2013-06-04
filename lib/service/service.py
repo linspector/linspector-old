@@ -1,9 +1,14 @@
 
 class Service:
-    def __init__(self, args):
-        self.args = args
+    def __init__(self):
         pass
 
+    def _execute(self):
+        self.pre_execute()
+        self.execute()
+        self.parse_result()
+        self.handle_result()
+        
     def execute(self):
         pass
 
