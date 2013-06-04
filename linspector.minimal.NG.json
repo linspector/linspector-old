@@ -48,19 +48,19 @@
           "class":"tcpconnect",
           "args":{ "port":80 },
           "periods": ["middle"],
-          "threshold":2,
+          "threshold":2
         },
         {
           "class":"tcpconnect",
           "args":{ "port":25 },
           "periods":["long"],
-          "threshold":2,
+          "threshold":2
         },
         {
           "class":"tcpconnect",
           "args":{ "port":110 },
           "periods": ["long"],
-          "threshold":2,
+          "threshold":2
         },
         {
           "class":"httpget",
