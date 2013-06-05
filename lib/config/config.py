@@ -1,5 +1,5 @@
 import json
-from filters import parseFilterList
+from tasks import parseTaskList
 from members import parseMemberList
 from periods import parsePeriodList
 #from hostgroups import parseHostGroupList
@@ -15,8 +15,8 @@ class Config:
 
         self.dict = json.loads(self.config)
 
-        self.filters = parseFilterList(self.dict['filters'])
-        self.members = parseMemberList(self.dict['members'], self.filters, log)
+        self.tasks = parseTaskList(self.dict['tasks'])
+        self.members = parseMemberList(self.dict['members'], self.tasks, log)
         self.periods = parsePeriodList(self.dict['periods'], log)
         #self.hostgroups = parseHostGroupList(self.dict['hostgroups'],
         #                                     self.members,

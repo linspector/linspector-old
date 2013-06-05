@@ -1,42 +1,50 @@
 {
-    "filters":{
+    "tasks":{
         "email":{
-            "command":"email @member @+message",
-            "comment":"Sends an E-Mail to the member.",
-            "priority":1
+            "command": "email @member @+message",
+            "comment": "Sends an E-Mail to a member.",
+            "priority": 2
+        },
+        "sms":{
+            "command": "sms @member @+message",
+            "comment": "Sends a SMS to a member.",
+            "priority": 1
+        },
+        "mongodb":{
+            "command": "mongodb @host @user @password @+rawdata",
+            "comment": "Stores the rawdata in a MongoDB database.",
+            "priority": 1000
         }
     },
     "members":{
         "hanez":{
-            "name":"Johannes Findeisen",
-            "comment":"Just a nerd doing admin stuff...",
+            "name": "Johannes Findeisen",
+            "comment": "Just a nerd doing admin stuff.",
             "parent": "darth",
-            "filters":{ "email":"you@hanez.org" }
+            "tasks":[{ "class": "email", "args": { "rcpt": "you@hanez.org" }},
+                     { "class": "sms","args": { "rcpt": "+49110"}}]
         },
         "darth":{
-            "name":"Darth Vader",
-            "comment":"The father",
-            "filters":{ "email":"darth.vader@hanez.org" }
+            "name": "Darth Vader",
+            "comment": "The father",
+            "tasks":{ "class": "email", "args": { "rcpt": "darth.vader@hanez.org" }}
+        },
+        "mongodb":{
+            "name": "MongoDB",
+            "comment": "The writer to a MongoDB",
+            "tasks":{ "class": "mongodb", "args": { "host": "localhost", "user": "root", "password": "root" }}
         }
     },
     "periods":{
-        "short":{
-            "seconds":5,
-            "comment":"Interval job; every 10 seconds"
-        },
-        "middle":{
-            "seconds":60,
-            "comment":"Interval job; every 60 seconds"
-        },
-        "long":{
-            "minutes":2,
-            "comment":"Interval job; every 2 minutes"
-        }
+        "short":{ "seconds": 5, "comment": "Interval job; every 10 seconds" },
+        "middle":{ "seconds": 60,"comment": "Interval job; every 60 seconds" },
+        "long":{ "minutes": 2,"comment": "Interval job; every 2 minutes" },
+        "christmas2013":{ "date": "2013-12-24 20:00:00", "comment": "Date Job; just one day at 8PM" }
     },
     "hostgroups":{
         "group1":{
-            "members":[ "hanez" ],
-            "hosts":[ "a.systemchaos.org", "b.systemchaos.org" ],
+            "members": [ "hanez", "mongodb" ],
+            "hosts": [ "a.systemchaos.org", "b.systemchaos.org" ],
             "parents": [ "network" ],
             "services":[
                 {
