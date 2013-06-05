@@ -65,8 +65,8 @@
                     "threshold":2
                 },
                 {
-                    "class":"htmlcontent",
-                    "args":{ "port":80, "path":"/status.cgi" },
+                    "class":"http",
+                    "args":{ "port": 80, "path": "/status.cgi", "method": "get", "params": { "foo": 1, "bar": 2 }, "protocol": "https"},
                     "periods": ["long"],
                     "threshold":2,
                     "parser":{ "class":"grep", "string": "<h1>I am up!</h1>" },
