@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7 -tt
 
 __version__ = "0.4/TETRIS"
+__default_config__ = "./linspector.json"
 
 import argparse
 import time
@@ -10,8 +11,6 @@ from lib.core.job import JobInfo
 from lib.core.logger import Logger
 from lib.config.config import Config
 from apscheduler.scheduler import Scheduler
-
-DEFAULT_CONFIG = "./linspector.minimal.json"
 
 
 def parseArgs():
@@ -23,7 +22,7 @@ def parseArgs():
     parser.add_argument("action", choices=["start", "stop", "restart", "attach"],
                         help="defines if linspector should beeing attached, started, stopped or restarted.")
     parser.add_argument("--version", action="version", version="%(prog)s " + str(__version__))
-    parser.add_argument("-c", "--config", default=DEFAULT_CONFIG,
+    parser.add_argument("-c", "--config", default=__default_config__,
                         help="select configfile to use")
     parser.add_argument("-l", "--logfile", default="./log/linspector.log", metavar="FILE",
                         help="set logfile to use")
