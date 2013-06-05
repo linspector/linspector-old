@@ -1,33 +1,35 @@
 """
-The tcpconnect service in pure Python.
+The tcpconnect service. This is to check if a service on a specific port is reachable.
+
+This should just return 0 on success and NOT 0 on error. Just to make internals generic to just report this code and
+not use a parser.
 """
 
 import socket
-import sys
+from service import Service
 
-HOST = 'linspector.org'
-GET = '/index.html'
-PORT = 80
 
-try:
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-except socket.error, msg:
-    sys.stderr.write("[ERROR] %s\n" % msg[1])
-    sys.exit(1)
+class TcpconnectService(Service):
+    def __init__(self, parser, log, **kwargs):
+        super(Service, self).__init__(parser)
 
-try:
-    sock.connect((HOST, PORT))
-except socket.error, msg:
-    sys.stderr.write("[ERROR] %s\n" % msg[1])
-    sys.exit(2)
+        if "port" in kwargs:
+            self.port = kwargs["port"]
+        else:
+            log.w("There is no port set")
 
-sock.send("GET %s HTTP/1.0\r\nHost: %s\r\n\r\n" % (GET, HOST))
+    def execute(self, log):
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        except socket.error, msg:
+            log.w("%s\n" % msg[1])
+            self.errorcode = 1
 
-data = sock.recv(1024)
-string = ""
-while len(data):
-    string = string + data
-    data = sock.recv(1024)
-sock.close()
+        try:
+            sock.connect((self.host, self.port))
+        except socket.error, msg:
+            log.w("%s\n" % msg[1])
+            self.errorcode = 2
 
-print string
+        sock.close()
+        return

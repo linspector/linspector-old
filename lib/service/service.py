@@ -1,6 +1,8 @@
 class Service:
-    def __init__(self, parser):
+    def __init__(self, host, parser):
+        self.host = host
         self.parser = parser
+        self.errorcode = 0
 
     def _execute(self):
         self.pre_execute()
