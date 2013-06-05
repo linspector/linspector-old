@@ -3,6 +3,7 @@ class Service:
         self.host = host
         self.parser = parser
         self.errorcode = 0
+        self.errormessage = "No Error!"
 
     def _execute(self):
         self.pre_execute()
