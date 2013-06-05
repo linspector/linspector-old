@@ -64,11 +64,11 @@
         },
         {
           "class":"httpget",
-          "args":{ "port":80, "path":"/status.cgi", "string":"<h1>I am up!</h1>" },
+          "args":{ "port":80, "path":"/status.cgi" },
           "periods": ["long"],
           "threshold":2,
-          "parser":{ "class":"grep", "args": { "string":"<h1>I am up!</h1>" } },
-          "comment":"Just a string grep"
+          "parser":{ "class":"grep", "string": "<h1>I am up!</h1>" },
+          "comment": "Just a string grep"
         }
       ]
     }
