@@ -31,7 +31,7 @@ class HttpService(Service):
 
         if "path" in kwargs:
             self.path = kwargs["path"]
-        elif:
+        else:
             self.path = "/"
 
         if "port" in kwargs:
