@@ -1,129 +1,144 @@
 {
-  "filters":{
-    "email":{
-      "command":"email @member @+message",
-      "comment":"Sends an E-Mail to the member.",
-      "priority":1
-    }
-  },
-  "members":{
-    "hanez":{
-      "name":"Johannes Findeisen",
-      "comment":"Just a nerd doing admin stuff...",
-      "filters":{ "email":"you@hanez.org" }
-    }
-  },
-  "periods":{
-    "short":{
-      "seconds":5,
-      "comment":"Interval job; every 10 seconds"
-    },
-    "middle":{
-      "seconds":60,
-      "comment":"Interval job; every 60 seconds"
-    },
-    "long":{
-      "minutes":2,
-      "comment":"Interval job; every 2 minutes"
-    }
-  },
-  "hostgroups":{
-    "group1":{
-      "members":[
-        "hanez"
-      ],
-      "hosts":[
-        "a.systemchaos.org",
-        "b.systemchaos.org"
-      ],
-      "services":[
-        {
-          "class":"ping",
-          "fails":{ "warning":"100ms", "critical":"150ms" },
-          "periods": ["short"],
-          "threshold":10,
-          "parser":{ "class":"shell", "line":2, "col":5 }
-        },
-        {
-          "class":"tcpconnect",
-          "args":{ "port":80 },
-          "periods": ["middle"],
-          "threshold":2
-        },
-        {
-          "class":"tcpconnect",
-          "args":{ "port":25 },
-          "periods":["long"],
-          "threshold":2
-        },
-        {
-          "class":"tcpconnect",
-          "args":{ "port":110 },
-          "periods": ["long"],
-          "threshold":2
-        },
-        {
-          "class":"httpget",
-          "args":{ "port":80, "path":"/status.cgi" },
-          "periods": ["long"],
-          "threshold":2,
-          "parser":{ "class":"grep", "string": "<h1>I am up!</h1>" },
-          "comment": "Just a string grep"
+    "filters":{
+        "email":{
+            "command":"email @member @+message",
+            "comment":"Sends an E-Mail to the member.",
+            "priority":1
         }
-      ]
-    }
-  },
-  "group2":{
-    "members":["hanez"],
-    "hosts":["x.systemchaos.org", "y.systemchaos.org"],
-    "services":[
-      {
-        "class":"ping",
-        "fails":{ "warning":"100ms", "critical":"150ms" },
-        "periods":["short"],
-        "threshold":10,
-        "parser":{ "class":"shell", "line":2, "col":5 }
-      },
-      {
-        "class":"tcpconnect",
-        "args":{ "port":2342 },
-        "periods":["long"],
-        "threshold":2
-      }
-    ]
-  },
-  "group3":{
-    "members":[ "hanez" ],
-    "hosts":[ "master.systemchaos.org" ],
-    "services":[
-      {
-        "class":"ssh",
-        "args":{ "port":23, "command":"df" },
-        "fails":{ "warning":"80%", "critical":"90%" },
-        "periods":[ "long" ],
-        "threshold":10,
-        "parser": [{ "class":"grep", "line": "/dev/sda1", "col":5 },
-                   { "class":"grep", "line": "/dev/sda2", "col":5 } ]
-      }
-    ]
-  },
-  "layouts":{
-    "production":{ 
-      "hostgroups":[ "group1" ],
-      "enabled":true
     },
-    "critical":{
-      "hostgroups":[ "group3" ],
-      "enabled":false
+    "members":{
+        "hanez":{
+            "name":"Johannes Findeisen",
+            "comment":"Just a nerd doing admin stuff...",
+            "parent": "darth",
+            "filters":{ "email":"you@hanez.org" }
+        },
+        "darth":{
+            "name":"Darth Vader",
+            "comment":"The father",
+            "filters":{ "email":"darth.vader@hanez.org" }
+        }
     },
-    "all":{
-      "hostgroups":[ "group1", "group2", "group3" ],
-      "enabled":false
+    "periods":{
+        "short":{
+            "seconds":5,
+            "comment":"Interval job; every 10 seconds"
+        },
+        "middle":{
+            "seconds":60,
+            "comment":"Interval job; every 60 seconds"
+        },
+        "long":{
+            "minutes":2,
+            "comment":"Interval job; every 2 minutes"
+        }
+    },
+    "hostgroups":{
+        "group1":{
+            "members":[ "hanez" ],
+            "hosts":[ "a.systemchaos.org", "b.systemchaos.org" ],
+            "parents": [ "network" ],
+            "services":[
+                {
+                    "class":"ping",
+                    "fails":{ "warning":"100ms", "critical":"150ms" },
+                    "periods": ["short"],
+                    "threshold":10,
+                    "parser":{ "class":"shell", "line":2, "col":5 }
+                },
+                {
+                    "class":"tcpconnect",
+                    "args":{ "port":80 },
+                    "periods": ["middle"],
+                    "threshold":2
+                },
+                {
+                    "class":"tcpconnect",
+                    "args":{ "port":25 },
+                    "periods":["long"],
+                    "threshold":2
+                },
+                {
+                    "class":"tcpconnect",
+                    "args":{ "port":110 },
+                    "periods": ["long"],
+                    "threshold":2
+                },
+                {
+                    "class":"htmlcontent",
+                    "args":{ "port":80, "path":"/status.cgi" },
+                    "periods": ["long"],
+                    "threshold":2,
+                    "parser":{ "class":"grep", "string": "<h1>I am up!</h1>" },
+                    "comment": "Just a string grep"
+                }
+            ]
+        },
+        "group2":{
+            "members":["hanez"],
+            "hosts":["x.systemchaos.org", "y.systemchaos.org"],
+            "services":[
+                {
+                    "class":"ping",
+                    "fails":{ "warning":"100ms", "critical":"150ms" },
+                    "periods":["short"],
+                    "threshold":10,
+                    "parser":{ "class":"shell", "line":2, "col":5 }
+                },
+                {
+                    "class":"tcpconnect",
+                    "args":{ "port":2342 },
+                    "periods":["long"],
+                    "threshold":2
+                }
+            ]
+        },
+        "group3":{
+            "members":[ "hanez" ],
+            "hosts":[ "master.systemchaos.org" ],
+            "services":[
+                {
+                    "class":"ssh",
+                    "args":{ "port": 23, "command": "df", "username": "hanez", "password": "secret", "key": "~/.ssh/id_rsa" },
+                    "fails":{ "warning":"80%", "critical":"90%" },
+                    "periods":[ "long" ],
+                    "threshold":10,
+                    "parser": [{ "class":"grep", "line": "/dev/sda1", "col":5 },
+                              [{ "class":"grep", "line": "/dev/sda2", "col":5 }, { "class":"grep", "line": "/dev/sda2", "col":5 }]]
+                }
+            ]
+        },
+        "network":{
+            "members":[ "hanez" ],
+            "hosts":[ "router.systemchaos.org" ],
+            "services":[
+                {
+                    "class":"ping",
+                    "fails":{ "warning":"100ms", "critical":"150ms" },
+                    "periods": ["short"],
+                    "threshold":10,
+                    "parser":{ "class":"shell", "line":2, "col":5 }
+                }
+            ]
+        }
+    },
+    "layouts":{
+        "production":{ 
+            "hostgroups": [ "group1" ],
+            "enabled": true
+        },
+        "critical":{
+            "hostgroups": [ "group3" ],
+            "enabled": false
+        },
+        "all":{
+            "hostgroups": [ "group1", "group2", "group3" ],
+            "enabled": false
+        }
+    },
+    "core":{
+        "max_logfile_size": 1024000,
+        "max_logfile_count": 4,
+        "max_worker_threads": 8
     }
-  },
-  "core":{
-    "max_logfile_size":1024000,
-    "max_logfile_count":4,
-    "max_worker_threads":8
-  }
 }
