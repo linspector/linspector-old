@@ -1,5 +1,5 @@
 from config import *
 from core import *
-from filters import *
+from tasks import *
 from parser import *
 from service import *
