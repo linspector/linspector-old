@@ -13,6 +13,7 @@ from apscheduler.scheduler import Scheduler
 
 DEFAULT_CONFIG = "./linspector.minimal.json"
 
+
 def parseArgs():
     parser = argparse.ArgumentParser(
         description="Linspector is for monitoring the vital information of hosts, services and devices in a network.",
