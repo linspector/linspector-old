@@ -67,7 +67,7 @@
           "args":{ "port":80, "path":"/status.cgi", "string":"<h1>I am up!</h1>" },
           "periods": ["long"],
           "threshold":2,
-          "parser":{ "class":"StringCompare", "args": { "string":"<h1>I am up!</h1>" } },
+          "parser":{ "class":"grep", "args": { "string":"<h1>I am up!</h1>" } },
           "comment":"Just a string grep"
         }
       ]
@@ -93,63 +93,37 @@
     ]
   },
   "group3":{
-    "members":[
-      "hanez"
-    ],
-    "hosts":[
-      "master.systemchaos.org"
-    ],
+    "members":[ "hanez" ],
+    "hosts":[ "master.systemchaos.org" ],
     "services":[
       {
-        "class":"ping",
-        "fails":{
-          "warning":"60ms",
-          "critical":"10ms"
-        },
-        "periods":[
-          "short"
-        ],
+        "class":"ssh",
+        "args":{ "port":23, "command":"df" },
+        "fails":{ "warning":"80%", "critical":"90%" },
+        "periods":[ "long" ],
         "threshold":10,
-        "parser":{
-          "class":"shell",
-          "line":2,
-          "col":5
-        }
+        "parser": [{ "class":"grep", "line": "/dev/sda1", "col":5 },
+                   { "class":"grep", "line": "/dev/sda2", "col":5 } ]
       }
     ]
   },
   "layouts":{
     "production":{ 
-      "hostgroups":[
-        "group1"
-      ],
+      "hostgroups":[ "group1" ],
       "enabled":true
     },
     "critical":{
-      "hostgroups":[
-        "group3"
-      ],
+      "hostgroups":[ "group3" ],
       "enabled":false
     },
     "all":{
-      "hostgroups":[
-        "group1",
-        "group2",
-        "group3"
-      ],
+      "hostgroups":[ "group1", "group2", "group3" ],
       "enabled":false
     }
   },
   "core":{
     "max_logfile_size":1024000,
     "max_logfile_count":4,
-    "max_worker_threads":8,
-    "enabled_services":[
-      "ping",
-      "tcpconnect",
-      "httpget",
-      "shell",
-      "ssh"
-    ]
+    "max_worker_threads":8
   }
 }
