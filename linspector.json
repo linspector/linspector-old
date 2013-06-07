@@ -1,51 +1,41 @@
 {
-    "tasks":{
-        "email":{
-            "command": "email @member @+message",
-            "comment": "Sends an E-Mail to a member.",
-            "priority": 2
-        },
-        "sms":{
-            "command": "sms @member @+message",
-            "comment": "Sends a SMS to a member.",
-            "priority": 1
-        },
-        "mongodb":{
-            "command": "mongodb @host @user @password @+rawdata",
-            "comment": "Stores the rawdata in a MongoDB database.",
-            "priority": 1000
-        }
-    },
     "members":{
+        "root":{
+            "name": "Admin",
+            "comment": "The Linspector Admin",
+            "tasks":[{ "class": "email", "args": { "rcpt": "admin@systems.hanez.org" }},
+                     { "class": "sms","args": { "rcpt": "+49112" }}]
+        },
         "hanez":{
             "name": "Johannes Findeisen",
             "comment": "Just a nerd doing admin stuff.",
             "parent": "darth",
             "tasks":[{ "class": "email", "args": { "rcpt": "you@hanez.org" }},
-                     { "class": "sms","args": { "rcpt": "+49110"}}]
+                     { "class": "sms","args": { "rcpt": "+49110" }}]
         },
         "darth":{
             "name": "Darth Vader",
             "comment": "The father",
             "tasks":{ "class": "email", "args": { "rcpt": "darth.vader@hanez.org" }}
-        },
-        "mongodb":{
-            "name": "MongoDB",
-            "comment": "The writer to a MongoDB",
-            "tasks":{ "class": "mongodb", "args": { "host": "localhost", "user": "root", "password": "root" }}
         }
     },
     "periods":{
         "short":{ "seconds": 5, "comment": "Interval job; every 10 seconds" },
-        "middle":{ "seconds": 60,"comment": "Interval job; every 60 seconds" },
-        "long":{ "minutes": 2,"comment": "Interval job; every 2 minutes" },
+        "middle":{ "seconds": 60, "comment": "Interval job; every 60 seconds" },
+        "long":{ "minutes": 2, "comment": "Interval job; every 2 minutes" },
         "christmas2013":{ "date": "2013-12-24 20:00:00", "comment": "Date Job; just one day at 8PM" }
     },
     "hostgroups":{
         "group1":{
-            "members": [ "hanez", "mongodb" ],
-            "hosts": [ "a.systemchaos.org", "b.systemchaos.org" ],
-            "parents": [ "network" ],
+            "members":[ "hanez", "mongodb" ],
+            "hosts":[ "a.systemchaos.org", "b.systemchaos.org" ],
+            "parents":[ "network" ],
+            "processors":[
+                {
+                     "class": "mongodb",
+                     "args": { "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default"}
+                }
+            ],
             "services":[
                 {
                     "class":"ping",
@@ -140,13 +130,14 @@
             "enabled": false
         },
         "all":{
-            "hostgroups": [ "group1", "group2", "group3" ],
+            "hostgroups": [ "group1", "group2", "group3", "network" ],
             "enabled": false
         }
     },
     "core":{
         "max_logfile_size": 1024000,
         "max_logfile_count": 4,
-        "max_worker_threads": 8
+        "max_worker_threads": 8,
+        "members": [ "root" ]
     }
 }
