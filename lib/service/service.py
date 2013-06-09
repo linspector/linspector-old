@@ -7,9 +7,9 @@ class Service:
 
     def _execute(self):
         self.pre_execute()
-        self.execute()
-        self.parse_result()
-        self.handle_result()
+        executionResult = self.execute()
+        parseResult = self.parse_result(executionResult)
+        self.handle_result(parseResult)
 
     def execute(self):
         pass
@@ -17,8 +17,8 @@ class Service:
     def pre_execute(self):
         pass
 
-    def parse_result(self):
-        self.parser._parse()
+    def parse_result(self, executionResult):
+        return self.parser._parse(executionResult)
 
-    def handle_result(self):
+    def handle_result(self, parseResult):
         pass
