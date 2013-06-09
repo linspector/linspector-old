@@ -1,6 +1,7 @@
 .idea
 .project
 .pydevproject
+nbproject
 
 *.py[cod]
 
