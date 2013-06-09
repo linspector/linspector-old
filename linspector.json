@@ -23,6 +23,7 @@
         "short":{ "seconds": 5, "comment": "Interval job; every 10 seconds" },
         "middle":{ "seconds": 60, "comment": "Interval job; every 60 seconds" },
         "long":{ "minutes": 2, "comment": "Interval job; every 2 minutes" },
+        "cron":{ "minute" : "0", "hour": "2", "comment": "cron job at 2"},
         "christmas2013":{ "date": "2013-12-24 20:00:00", "comment": "Date Job; just one day at 8PM" }
     },
     "hostgroups":{
