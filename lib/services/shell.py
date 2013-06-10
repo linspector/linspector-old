@@ -12,6 +12,7 @@ class ShellService(Service):
             self.command = kwargs["command"]
         else:
             log.w("There is no command")
+            raise
 
     def execute(self):
         self.command.call()

@@ -17,6 +17,7 @@ class TcpconnectService(Service):
             self.port = kwargs["port"]
         else:
             log.w("There is no port set")
+            raise
 
     def execute(self, log):
         try:

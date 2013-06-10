@@ -17,6 +17,7 @@ class SshService(Service):
             self.command = kwargs["command"]
         else:
             log.w("There is no command")
+            raise
 
     def execute(self):
         path = os.path.join(os.environ['HOME'], '.ssh', 'id_rsa')
