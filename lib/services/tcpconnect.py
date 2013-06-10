@@ -12,7 +12,6 @@ from service import Service
 class TcpconnectService(Service):
     def __init__(self, parser, log, **kwargs):
         super(Service, self).__init__(parser)
-
         if "port" in kwargs:
             self.port = kwargs["port"]
         else:
