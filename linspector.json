@@ -3,28 +3,28 @@
         "root":{
             "name": "Admin",
             "comment": "The Linspector Admin",
-            "tasks":[{ "class": "email", "type": "warning", "args": { "rcpt": "admin@systems.hanez.org" }},
-                     { "class": "sms", "type": "critical", "args": { "rcpt": "+49112" }},
-                     { "class": "xmpp", "type": "critical", "args": { "rcpt": "admin@jabber.hanez.org" }}]
+            "tasks":[{ "class": "email", "type": "warning", "args":{ "rcpt": "admin@systems.hanez.org" }},
+                     { "class": "sms", "type": "critical", "args":{ "rcpt": "+49112" }},
+                     { "class": "xmpp", "type": "critical", "args":{ "rcpt": "admin@jabber.hanez.org" }}]
         },
         "hanez":{
             "name": "Johannes Findeisen",
             "comment": "Just a nerd doing admin stuff.",
             "parent": "darth",
-            "tasks":[{ "class": "email", "type": "warning", "args": { "rcpt": "you@hanez.org" }},
-                     { "class": "sms", "type": "critical", "args": { "rcpt": "+49110" }}]
+            "tasks":[{ "class": "email", "type": "warning", "args":{ "rcpt": "you@hanez.org" }},
+                     { "class": "sms", "type": "critical", "args":{ "rcpt": "+49110" }}]
         },
         "darth":{
             "name": "Darth Vader",
             "comment": "The father",
-            "tasks":{ "class": "email", "type": "warning", "args": { "rcpt": "darth.vader@hanez.org" }}
+            "tasks":{ "class": "email", "type": "warning", "args":{ "rcpt": "darth.vader@hanez.org" }}
         }
     },
     "periods":{
         "short":{ "seconds": 5, "comment": "Interval job; every 10 seconds" },
         "middle":{ "seconds": 60, "comment": "Interval job; every 60 seconds" },
         "long":{ "minutes": 2, "comment": "Interval job; every 2 minutes" },
-        "cron":{ "minute" : "0", "hour": "2", "comment": "cron job at 2"},
+        "cron":{ "minute" : "0", "hour": "2", "comment": "Cron job; at 2 o'clock" },
         "christmas2013":{ "date": "2013-12-24 20:00:00", "comment": "Date Job; just one day at 8PM" }
     },
     "hostgroups":{
@@ -35,61 +35,61 @@
             "processors":[
                 {
                      "class": "mongodb",
-                     "args": { "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default"}
+                     "args":{ "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default" }
                 }
             ],
             "services":[
                 {
-                    "class":"ping",
+                    "class": "ping",
                     "fails":{ "warning":"100ms", "critical":"150ms" },
-                    "periods": ["short"],
-                    "threshold":10,
-                    "parser":{ "class":"shell", "line":2, "col":5 }
+                    "periods":[ "short" ],
+                    "threshold": 10,
+                    "parser":{ "class": "shell", "line": 2, "col": 5 }
                 },
                 {
-                    "class":"tcpconnect",
-                    "args":{ "port":80 },
-                    "periods": ["middle"],
-                    "threshold":2
+                    "class": "tcpconnect",
+                    "args":{ "port": 80 },
+                    "periods":[ "middle" ],
+                    "threshold": 2
                 },
                 {
-                    "class":"tcpconnect",
-                    "args":{ "port":25 },
-                    "periods":["long"],
-                    "threshold":2
+                    "class": "tcpconnect",
+                    "args":{ "port": 25 },
+                    "periods":["long" ],
+                    "threshold": 2
                 },
                 {
-                    "class":"tcpconnect",
-                    "args":{ "port":110 },
-                    "periods": ["long"],
-                    "threshold":2
+                    "class": "tcpconnect",
+                    "args":{ "port": 110 },
+                    "periods":[ "long" ],
+                    "threshold": 2
                 },
                 {
-                    "class":"http",
-                    "args":{ "port": 80, "path": "/status.cgi", "method": "get", "params": { "foo": 1, "bar": 2 }, "protocol": "https"},
-                    "periods": ["long"],
-                    "threshold":2,
+                    "class": "http",
+                    "args":{ "port": 80, "path": "/status.cgi", "method": "get", "params":{ "foo": 1, "bar": 2 }, "protocol": "https" },
+                    "periods":[ "long" ],
+                    "threshold": 2,
                     "parser":{ "class":"grep", "string": "<h1>I am up!</h1>" },
                     "comment": "Just a string grep"
                 }
             ]
         },
         "group2":{
-            "members":["hanez"],
-            "hosts":["x.systemchaos.org", "y.systemchaos.org"],
+            "members":["hanez" ],
+            "hosts":["x.systemchaos.org", "y.systemchaos.org" ],
             "services":[
                 {
-                    "class":"ping",
-                    "fails":{ "warning":"100ms", "critical":"150ms" },
-                    "periods":["short"],
-                    "threshold":10,
-                    "parser":{ "class":"shell", "line":2, "col":5 }
+                    "class": "ping",
+                    "fails":{ "warning": "100ms", "critical": "150ms" },
+                    "periods":[ "short" ],
+                    "threshold": 10,
+                    "parser":{ "class": "shell", "line": 2, "col": 5 }
                 },
                 {
-                    "class":"tcpconnect",
-                    "args":{ "port":2342 },
-                    "periods":["long"],
-                    "threshold":2
+                    "class": "tcpconnect",
+                    "args":{ "port": 2342 },
+                    "periods":[ "long" ],
+                    "threshold": 2
                 }
             ]
         },
@@ -98,13 +98,14 @@
             "hosts":[ "master.systemchaos.org" ],
             "services":[
                 {
-                    "class":"ssh",
+                    "class": "ssh",
                     "args":{ "port": 23, "command": "df", "username": "hanez", "password": "secret", "key": "~/.ssh/id_rsa" },
-                    "fails":{ "warning":"80%", "critical":"90%" },
+                    "fails":{ "warning": "80%", "critical": "90%" },
                     "periods":[ "long" ],
-                    "threshold":10,
-                    "parser": [{ "class":"grep", "line": "/dev/sda1", "col":5 },
-                              [{ "class":"grep", "line": "/dev/sda2", "col":5 }, { "class":"grep", "line": "/dev/sda2", "col":5 }]]
+                    "threshold": 10,
+                    "parser":[{ "class":"grep", "line": "/dev/sda1", "col": 5 },
+                              [{ "class":"grep", "line": "/dev/sda2", "col": 5 },
+                               { "class":"grep", "line": "/dev/sda2", "col": 5 }]]
                 },
                 {
                     "class": "shell",
@@ -123,7 +124,7 @@
             "processors":[
                 {
                      "class": "mongodb",
-                     "args":{ "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default"}
+                     "args":{ "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default" }
                 }
             ],
             "services":[
@@ -140,7 +141,7 @@
                     "class": "snmpget",
                     "comment": "The Linux system load",
                     "args":{ "port": 161, "community": "linspector", "oid": ".1.3.6.1.4.1.2021.10.1.3.1" },
-                    "fails":{ "warning":"4.00", "critical":"8.00" },
+                    "fails":{ "warning": "4.00", "critical": "8.00" },
                     "periods":[ "middle" ],
                     "threshold": 10
                 },
@@ -156,15 +157,15 @@
     },
     "layouts":{
         "production":{ 
-            "hostgroups": [ "group1" ],
+            "hostgroups":[ "group1" ],
             "enabled": true
         },
         "critical":{
-            "hostgroups": [ "group3" ],
+            "hostgroups":[ "group3" ],
             "enabled": false
         },
         "all":{
-            "hostgroups": [ "group1", "group2", "group3", "network" ],
+            "hostgroups":[ "group1", "group2", "group3", "network" ],
             "enabled": false
         }
     },
@@ -172,6 +173,6 @@
         "max_logfile_size": 1024000,
         "max_logfile_count": 4,
         "max_worker_threads": 8,
-        "members": [ "root" ]
+        "members":[ "root" ]
     }
 }
