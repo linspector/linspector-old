@@ -20,6 +20,7 @@ class HttpService(Service):
             self.string = kwargs["string"]
         else:
             log.w("There is no string set to match")
+            raise
 
         if "method" in kwargs:
             self.method = kwargs["method"]
