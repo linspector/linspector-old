@@ -7,20 +7,18 @@ from service import Service
 
 
 class SnmpgetService(Service):
-    def __init__(self, **kwargs):
-
+    def __init__(self, parser, log, **kwargs):
+        super(Service, self).__init__(parser)
         if "community" in kwargs:
             self.community = kwargs["community"]
         else:
-            #log.w("There is no community")
+            log.w("There is no community")
             raise
-
         if "oid" in kwargs:
             self.oid = kwargs["oid"]
         else:
-            #log.w("There is no oid")
+            log.w("There is no oid")
             raise
-
         if "port" in kwargs:
             self.port = kwargs["port"]
         else:
