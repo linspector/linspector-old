@@ -9,7 +9,7 @@ import logging
 import subprocess as sp
 from lib.core.job import JobInfo
 from lib.core.logger import Logger
-from lib.config.config import Config
+from lib.config.parser import ConfigParser
 from apscheduler.scheduler import Scheduler
 
 
@@ -58,19 +58,9 @@ def main():
         scheduler.start()
         
         log.i("starting linspector: reading config... (" + args.config + ")")
-        config = Config(args.config, log)
+        config_parser = ConfigParser(log)
+        config = config_parser.parse_config(args.config)
         log.d("parsed config: " + str(config))
-        for hg in config.hostgroups:
-            
-            for hostGroupService in hg.services:
-                log.d(hostGroupService)
-                jobInfo = JobInfo(hg.name, hg.members, hg.hosts, hostGroupService.services, hg.threshold, hg.parent)
-                jobInfo.setLogger(log)
-                for period in hostGroupService.periods:
-                    log.d(period)
-                    jobs.append(period.createJob(scheduler, jobInfo, handleJob))
-        for job in jobs:
-            log.d(str(job))
         
         while True:
             time.sleep(10)

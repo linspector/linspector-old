@@ -1,13 +1,37 @@
+class HostGroupException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+        
+    def __str__(self):
+        return repr(self.msg)
+    
+class HostGroupMissingArgumentException(HostGroupException):
+    def __init__(self, missingArgument, hostgroupName):
+        super(HostGroupMissingArgumentException, self).__init__("no " + missingArgument + " defined for Hostgroup " + hostgroupName)
+
 class HostGroup:
-    def __init__(self, name, members="", hosts="", services="", threshold="", parent="", comment=""):
+    def __init__(self, name, **kwargs):
         self.name = name
-        self.interval = 0
-        self.members = members
-        self.hosts = hosts
-        self.services = services
-        self.threshold = threshold
-        self.parent = parent
-        self.comment = comment
+        
+        tmp = "members"
+        if not tmp in kwargs:
+            raise HostGroupMissingArgumentException(tmp, name)
+        self.members = kwargs[tmp]
+        
+        tmp = "hosts"
+        if not tmp in kwargs:
+            raise HostGroupMissingArgumentException(tmp, name)
+        self.hosts = kwargs[tmp]
+        
+        tmp = "services"
+        if not tmp in kwargs:
+            raise HostGroupMissingArgumentException(tmp, name)
+        self.services = kwargs[tmp]
+        
+        
+    def get_members(self):
+        return self.members  
+        
 
     def __str__(self):
         ret = "HostGroup: " + self.name + " threshold: " + str(self.threshold) + " parent: " + self.parent + "\n"
