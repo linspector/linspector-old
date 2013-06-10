@@ -32,7 +32,7 @@ class SnmpgetService(Service):
         errorIndication, errorStatus, errorIndex, varBinds = cmdGen.getCmd(
             cmdgen.CommunityData(self.community),
             cmdgen.UdpTransportTarget((self.host, self.port)),
-            cmdgen.MibVariable('.1.3.6.1.4.1.2021.10.1.3.1')  # linux system load
+            cmdgen.MibVariable(self.oid)
         )
 
         if errorIndication:
