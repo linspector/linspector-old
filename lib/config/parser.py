@@ -1,9 +1,3 @@
-'''
-Created on Jun 9, 2013
-
-@author: Rafael Timmerberg(raffn1+linspector@gmail.com)
-'''
-
 from os.path import isfile
 import json
 from layouts import Layout
