@@ -4,10 +4,11 @@ Created on Jun 9, 2013
 @author: Rafael Timmerberg(raffn1+linspector@gmail.com)
 '''
 
-import os, os.path as path
+from os.path import isfile
 import json
 from layouts import Layout
 from hostgroups import HostGroup
+
 
 class ConfigurationException(Exception):
     def __init__(self, msg, log):
@@ -25,7 +26,6 @@ KEY_PERIODS      = "periods"
 KEY_CORE         = "core"
 
 
-
 class ConfigParser:
     def __init__(self, log):
         '''
@@ -38,8 +38,7 @@ class ConfigParser:
         self.hostgroups = {}
         self.members = {}
         self.periods = {}
-        
-    
+
     def _read_json_config(self, configFilename):
         '''
         reads the config File and returns a dictionary, while lowering the first keys
@@ -47,7 +46,7 @@ class ConfigParser:
         params:
             configFilename: the path under which the configuration file should be found
         '''
-        if not path.isfile(configFilename):
+        if not isfile(configFilename):
             msg = "config file not found at " + str(configFilename)
             raise ConfigurationException(msg, self.log)
         
@@ -59,8 +58,6 @@ class ConfigParser:
         self.log.i("reading Config: " + configFilename)
         return json.loads(config)
 
-    
-    
     def _get_as_list(self, configValue):
         '''
         In some cases the config permits to define a list or a single value.
@@ -68,7 +65,6 @@ class ConfigParser:
         returns the value as list
         '''
         return configValue if isinstance(configValue, list) else [configValue]
-        
 
     def create_layouts_from_json(self, jsonLayouts):
         layouts = []
@@ -76,11 +72,10 @@ class ConfigParser:
             try:
                 layout = Layout(lName, **lValues)
                 layouts.append(layout)
-            except Exception:
+            except ConfigurationException:
                 self.log.w("ignoring Layout " + lName + "! reason:")
                 self.log.w(str(Exception))
         return layouts
-    
 
     def create_hostgroups_from_json(self, jsonHostGroups):
         '''
@@ -91,14 +86,25 @@ class ConfigParser:
             try:
                 hostgroup = HostGroup(hgName, **hgValues)
                 hostgroups.append(hostgroup)
-            except Exception:
+            except ConfigurationException:
                 self.log.w("ignoring hostgroup: " + hgName + "!")
                 self.log.w("reason: " + str(Exception))
         return hostgroups
-                
-                
-    
-    
+
+    def create_members_from_json(self, jsonMembers):
+        '''
+        creates Members from the jsonConfig
+        '''
+        members = []
+        for memberName, memberValues in jsonMembers.items():
+            try:
+                member = memberName(memberName, **memberValues)
+                members.append(member)
+            except ConfigurationException:
+                self.log.w("ignoring member: " + memberName + "!")
+                self.log.w("reason: " + str(Exception))
+        return members
+
     def parse_config(self, configFilename):
         '''
         parses the json configuration and returns a list of layouts, 
@@ -135,19 +141,18 @@ class ConfigParser:
         self.hostgroups = self.create_hostgroups_from_json(jsonHostgroups)
         
         memberNames = set()
-        for hostgroup in self.hostgroups:
-            for memberName in layout.get_mebers():
+        for layout in layouts:
+            for memberName in layout.get_members():
                 memberNames.add(memberName)
-                
-                
-        jsonMembernames = {}
-        for memberName in hostgroupNames:
+
+        jsonMembers = {}
+        for memberName in memberNames:
             if not memberName in self.jsonDict[KEY_MEMBERS]:
                 self.log.w("Member " + memberName + " not found!")
                 for hostgroup in self.hostgroups:
                     if memberName in hostgroup.members:
-                        del hostgroup.members[hostgroup.members.index(hgName)]
-            jsonHostgroups[hgName] = self.jsonDict[KEY_HOSTGROUPS][hgName]
+                        del hostgroup.members[hostgroup.members.index(memberName)]
+            jsonMembers[memberName] = self.jsonDict[KEY_HOSTGROUPS][memberName]
         
-        self.hostgroups = self.create_hostgroups_from_json(jsonHostgroups)
+        self.members = self.create_members_from_json(jsonMembers)
         

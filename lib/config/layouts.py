@@ -1,19 +1,25 @@
-class LayouException(Exception):
+class LayoutException(Exception):
     def __init__(self, msg):
         self.msg = msg
         
     def __str__(self):
         return repr(self.msg)
 
+
 class Layout:
-    def __init__(self, name, enabled = False , hostgroups=None):
+    def __init__(self, name, enabled=False, hostgroups=None, members=None):
         self._name = name
         self._enabled = enabled
 
         if hostgroups is None or len(hostgroups) <= 0:
-            raise Exception("Layout: " + name + " without hostgroups is useless")
+            raise LayoutException("Layout: " + self._name + " without hostgroups is useless")
         else:
             self._hostgroups = hostgroups
+
+        if members is None or len(members) <= 0:
+            raise LayoutException("Layout: " + self._name + " without members is useless")
+        else:
+            self._members = members
             
     def get_name(self):
         return self._name
@@ -23,6 +29,9 @@ class Layout:
 
     def get_hostgroups(self):
         return self._hostgroups
+
+    def get_members(self):
+        return self._members
 
     def __str__(self):
         ret = "Layout: 'Name:" + str(self.name) + "', 'Enabled: " + str(self.enabled) + " "
