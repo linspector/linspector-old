@@ -21,6 +21,15 @@ class Layout:
         else:
             self._members = members
             
+    def _to_config_dict(self, configDict):
+        me = {}
+        me["hostgroups"] = [hg.name for hg in self.get_hostgroups()]
+        me["enabled"] = self.is_enabled()
+        configDict["layouts"][self.get_name()] = me
+        for hostgroup in self.get_hostgroups():
+            hostgroup._to_config_dict(configDict)
+        
+            
     def get_name(self):
         return self._name
     

@@ -13,37 +13,43 @@ from service import Service
 
 
 class HttpService(Service):
-    def __init__(self, parser, log, **kwargs):
-        super(Service, self).__init__(parser)
-        if "string" in kwargs:
-            self.string = kwargs["string"]
-        else:
-            log.w("There is no string set to match")
-            raise
-        if "method" in kwargs:
-            self.method = kwargs["method"]
-        else:
-            self.method = "get"
-        if "params" in kwargs:
+    def __init__(self, **kwargs):
+        super(HttpService, self).__init__(**kwargs)
+        
+        args = self.get_arguments()
+        
+        self.method = "get"
+        if "method" in args:
+            self.method = args["method"]
+        
+        self.params = None
+        if "params" in args:
             self.params = kwargs["params"]
-        if "path" in kwargs:
+        
+        self.path = "/"
+        if "path" in args:
             self.path = kwargs["path"]
-        else:
-            self.path = "/"
-        if "port" in kwargs:
+        
+        self.port = "80"
+        if "port" in args:
             self.port = kwargs["port"]
-        else:
-            self.port = "80"
-        if "protocol" in kwargs:
+            
+        self.protocol = "http"
+        if "protocol" in args:
             self.protocol = kwargs["protocol"]
-        else:
-            self.protocol = "http"
+        
+    def needs_arguments(self):
+        return True
+            
 
     def execute(self):
         params = urllib.urlencode(self.params)
         if self.method is "get":
-            f = urllib.urlopen(self.protocol + "://" + self.host + ":" + self.port + self.path + "?%s" % params)
+            f = urllib.urlopen(self.protocol + "://" + self._host + ":" + self.port + self.path + "?%s" % params)
         elif self.method is "post":
-            f = urllib.urlopen(self.protocol + "://" + self.host + ":" + self.port + self.path, params)
+            f = urllib.urlopen(self.protocol + "://" + self._host + ":" + self.port + self.path, params)
 
         #print f.read()
+        
+def create(**kwargs):
+    return HttpService(**kwargs)

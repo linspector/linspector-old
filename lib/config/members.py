@@ -2,19 +2,33 @@ import re
 
 
 class Member:
-    def __init__(self, nameid, name="", phone="", comment="", parent="", filters=None):
-        self.nameid = nameid
+    def __init__(self, nameid, name="", phone="", comment="", parent="", tasks=None):
+        self.id = id
         self.name = name
         self.phone = phone
-        self.filters = filters
+        self.tasks = []
+        self.add_task(tasks)
         self.comment = comment
         self.parent = parent
+        
+    def add_task(self, task):
+        if task is None:
+            return
+        if isinstance(task, list):
+            self.tasks.extend(task)
+        else:
+            self.tasks.append(task)
+    
+    def get_tasks(self):
+        return self.tasks
 
     def __str__(self):
         ret = "Member Id: " + self.nameid + " Name: " + self.name + " Filters: " + str(self.phone)
         for f in self.filters:
             ret += str(f)
         return ret
+    
+    
 
 
 class MemberFilter:

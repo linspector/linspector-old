@@ -1,3 +1,4 @@
+
 class HostGroupException(Exception):
     def __init__(self, msg):
         self.msg = msg
@@ -12,25 +13,80 @@ class HostGroupMissingArgumentException(HostGroupException):
 class HostGroup:
     def __init__(self, name, **kwargs):
         self.name = name
-        
         tmp = "members"
+        self.members = []
         if not tmp in kwargs:
             raise HostGroupMissingArgumentException(tmp, name)
-        self.members = kwargs[tmp]
+        self.add_members(kwargs[tmp])
         
         tmp = "hosts"
+        self.hosts = []
         if not tmp in kwargs:
             raise HostGroupMissingArgumentException(tmp, name)
-        self.hosts = kwargs[tmp]
+        self.add_hosts(kwargs[tmp])
         
         tmp = "services"
         if not tmp in kwargs:
             raise HostGroupMissingArgumentException(tmp, name)
-        self.services = kwargs[tmp]
+        self.add_services(kwargs[tmp])
         
+        self.parents = []
+        tmp = "parents"
+        if tmp in kwargs:
+            self.add_parent(kwargs[tmp])
         
+        tmp = "processors"
+        self.processors = []
+        if tmp in kwargs:
+            self.add_processor(kwargs[tmp])
+        
+    def _to_config_dict(self, configDict):
+        me = {}
+        me["members"] = [member.nameid for member in self.get_members()]
+        me["hosts"]   = self.hosts
+        me["parents"] = [hg.get_name() for hg in self.get_parents()]
+        #TODO implement delegation
+        #me["services"] = [service._to_config_dict(configDict) for service in self.get_services()]
+        #me["processors"] = [processor._to_config_dict(configDict) for processor in self.get_processors()]
+        configDict["hostgroups"][self.get_name()] = me
+    
+    
+    
+    def __add_internal(self,l,item):
+        if isinstance(item, list):
+            l.extend(item)
+        else:
+            l.append(item)
+    
+    def add_members(self, member):
+        self.__add_internal(self.get_members(), member)
+            
+    def add_hosts(self, host):
+        self.__add_internal(self.get_hosts(), host)
+    
+    def add_processors(self, processor):
+        self.__add_internal(self.get_processors(), processor)
+         
+    def add_parents(self, parent):
+        self.__add_internal(self.get_parents(), parent)
+    
+    def get_parents(self):
+        return self.parents
+         
+    def get_processors(self):
+        return self.processors
+    
+    def get_services(self):
+        return self.services
+    
+    def get_hosts(self):
+        return self.hosts
+    
+    def get_name(self):
+        return self.name
+    
     def get_members(self):
-        return self.members  
+        return self.members 
         
 
     def __str__(self):
