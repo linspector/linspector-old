@@ -1,4 +1,5 @@
 #!/usr/bin/python2.7 -tt
+from zenmapCore.UmitConf import config_parser
 
 __version__ = "0.4/TETRIS"
 __default_config__ = "./linspector.json"
@@ -9,7 +10,7 @@ import logging
 import subprocess as sp
 from lib.core.job import JobInfo
 from lib.core.logger import Logger
-from lib.config.parser import ConfigParser
+from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
 
 
@@ -53,19 +54,22 @@ def main():
     log.i("parsed arguments")
 
     if args.action == "start":
-        jobs = []
-        scheduler = Scheduler()
-        scheduler.start()
+        configParser = FullConfigParser(log)
+        config = configParser.parse_config(args.config)
+
+        #jobs = []
+        #scheduler = Scheduler()
+        #scheduler.start()
         
-        log.i("starting linspector: reading config... (" + args.config + ")")
-        config_parser = ConfigParser(log)
-        config = config_parser.parse_config(args.config)
-        log.d("parsed config: " + str(config))
+        #log.i("starting linspector: reading config... (" + args.config + ")")
+        #config_parser = ConfigParser(log)
+        #config = config_parser.parse_config(args.config)
+        #log.d("parsed config: " + str(config))
         
-        while True:
-            time.sleep(10)
-            for job in jobs:
-                log.d(str(job))
+        #while True:
+        #    time.sleep(10)
+        #    for job in jobs:
+        #        log.d(str(job))
 
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
