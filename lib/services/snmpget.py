@@ -4,8 +4,6 @@ The snmpget service in pure Python.
 
 #from pysnmp.entity.rfc3413.oneliner import cmdgen
 from service import Service
-from Cython.Compiler.Naming import kwds_cname
-from wx.lib.pubsub.core import kwargs
 
 
 class SnmpgetService(Service):

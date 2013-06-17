@@ -41,9 +41,6 @@ class ConfigurationException(Exception):
 
 
 
-
-
-
 class ConfigParser:
     def __init__(self, log):
         '''
@@ -152,7 +149,6 @@ class ConfigParser:
             return __import__(clazz)
     
     def replace_with_import(self, objList, modPart, items_func, class_check):
-        loadedModules = {}
         for obj in objList:
             repl = []
             items = items_func(obj)
@@ -175,8 +171,22 @@ class ConfigParser:
             del items[:]
             items.extend(repl)
     
-            
-        
+
+    def replace_pointer(self, objectList, replObjectList, id_list_func, id_get_func):
+        for obj in objectList:
+            replacements = []
+            idList = id_list_func(obj)
+            for id in idList:
+                repl = [o for o in replObjectList if  id == id_get_func(o)]
+                if len(repl) == 1:
+                    replacements.append(repl[0])
+
+            del idList[:]
+            idList.extend(replacements)
+
+
+
+
 
     def parse_config(self, configFilename):
         '''
@@ -230,6 +240,8 @@ class ConfigParser:
             jsonMembers[memberName] = self.jsonDict[KEY_HOSTGROUPS][memberName]
         
         self.members = self.create_members_from_json(jsonMembers)
+
+
 
 
 def parsePeriodList(name, values):
@@ -297,26 +309,25 @@ class FullConfigParser(ConfigParser):
         items_func = lambda member: member.get_tasks()
         class_check = lambda task: isinstance(task, Task)
         self.replace_with_import(members, MOD_TASKS, items_func, class_check)
-        
+
+        #replace object pointer
+        id_list_func = lambda hostgroup: hostgroup.get_members()
+        id_get_func = lambda member: member.id
+        self.replace_pointer(hostgroups, members, id_list_func, id_get_func)
+
+        services = []
         for hg in hostgroups:
-            replmembers = []
-            memberNames = hg.get_members()
-            for membername in memberNames:
-                member = [m for m in members if m.id == membername]
-                if len(member) == 1:
-                    replmembers.append(member[0])
-            
-            del hg.get_members()[:]
-            hg.add_members(replmembers)
-            
-            replParents = []
-            parentNames = hg.get_parents()
-            for parentname in parentNames:
-                parent = [p for p in hostgroups if p.get_name() == parentname]
-                if len(parent) == 1:
-                    replParents.append(parent[0])
-                
-        
+            services.extend(hg.get_services())
+        id_list_func = lambda  service: service.get_periods()
+        id_get_func = lambda period: period.get_name()
+        self.replace_pointer(services, periods, id_list_func, id_get_func)
+
+        id_list_func = lambda layout: layout.get_hostgroups()
+        id_get_func = lambda  hostgroup: hostgroup.get_name()
+        self.replace_pointer(layouts, hostgroups, id_list_func, id_get_func)
+
+        return layouts
+
         
         
          
