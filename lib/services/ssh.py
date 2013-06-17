@@ -11,14 +11,18 @@ from service import Service
 
 
 class SshService(Service):
-    def __init__(self, parser, log, **kwargs):
-        super(Service, self).__init__(parser)
-        if "command" in kwargs:
-            self.command = kwargs["command"]
+    def __init__(self, **kwargs):
+        super(SshService, self).__init__(**kwargs)
+        
+        args = self.get_arguments()
+        if "command" in args:
+            self.command = args["command"]
         else:
-            log.w("There is no command")
-            raise
-
+            raise Exception("There is no command argument")
+    
+    def needs_arguments(self):
+        return True
+    
     def execute(self):
         path = os.path.join(os.environ['HOME'], '.ssh', 'id_rsa')
         key = paramiko.RSAKey.from_private_key_file(path)
@@ -35,7 +39,9 @@ class SshService(Service):
             print '... ' + line.strip('\n')
         client.close()
 
-
+def create(**kwargs):
+    return SshService(**kwargs)
+    
 # def main():
 #     # service = SshService(parser, log, command='uptime')
 #     return

@@ -10,13 +10,18 @@ from service import Service
 
 
 class TcpconnectService(Service):
-    def __init__(self, parser, log, **kwargs):
-        super(Service, self).__init__(parser)
-        if "port" in kwargs:
-            self.port = kwargs["port"]
+    def __init__(self, **kwargs):
+        super(TcpconnectService, self).__init__(**kwargs)
+        
+        args = self.get_arguments()
+        if "port" in args:
+            self.port = args["port"]
         else:
-            log.w("There is no port set")
-            raise
+            raise Exception("There is no port set")
+            
+
+    def needs_arguments(self):
+        return True
 
     def execute(self, log):
         try:
@@ -33,3 +38,6 @@ class TcpconnectService(Service):
 
         sock.close()
         return
+    
+def create(**kwargs):
+    return TcpconnectService(**kwargs)
