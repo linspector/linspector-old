@@ -5,7 +5,7 @@
             "comment": "The Linspector Admin",
             "tasks":[{ "class": "email", "type": "warning", "args":{ "rcpt": "admin@systems.hanez.org" }},
                      { "class": "sms", "type": "critical", "args":{ "rcpt": "+49112" }},
-                     { "class": "xmpp", "type": "critical", "args":{ "rcpt": "admin@jabber.hanez.org" }}]
+                     { "class": "xmpp", "type": "critical", "arfixed parsing, replaced non_workin instance_check with gs":{ "rcpt": "admin@jabber.hanez.org" }}]
         },
         "hanez":{
             "name": "Johannes Findeisen",
