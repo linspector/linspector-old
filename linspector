@@ -1,5 +1,4 @@
 #!/usr/bin/python2.7 -tt
-from zenmapCore.UmitConf import config_parser
 
 __version__ = "0.4/TETRIS"
 __default_config__ = "./linspector.json"

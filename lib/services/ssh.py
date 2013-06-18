@@ -39,6 +39,7 @@ class SshService(Service):
             print '... ' + line.strip('\n')
         client.close()
 
+
 def create(**kwargs):
     return SshService(**kwargs)
     

@@ -18,7 +18,6 @@ class TcpconnectService(Service):
             self.port = args["port"]
         else:
             raise Exception("There is no port set")
-            
 
     def needs_arguments(self):
         return True
@@ -38,6 +37,7 @@ class TcpconnectService(Service):
 
         sock.close()
         return
-    
+
+
 def create(**kwargs):
     return TcpconnectService(**kwargs)

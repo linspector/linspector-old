@@ -17,10 +17,10 @@ class ShellService(Service):
         
     def needs_arguments(self):
         return True 
-    
 
     def execute(self):
         self.command.call()
-        
+
+
 def create(**kwargs):
     return ShellService(**kwargs)
