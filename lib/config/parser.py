@@ -20,10 +20,10 @@ MOD_PROCESSORS   = "processors"
 MOD_PARSERS      = "parsers"
 MOD_TASKS        = "tasks"
 
-sys.path.append("../" + MOD_SERVICES)
-sys.path.append("../" + MOD_PROCESSORS)
-sys.path.append("../" + MOD_PARSERS)
-sys.path.append("../" + MOD_TASKS)
+sys.path.append("lib/" + MOD_SERVICES)
+sys.path.append("lib/" + MOD_PROCESSORS)
+sys.path.append("lib/" + MOD_PARSERS)
+sys.path.append("lib/" + MOD_TASKS)
 
 KEY_LAYOUTS      = "layouts"
 KEY_HOSTGROUPS   = "hostgroups"
