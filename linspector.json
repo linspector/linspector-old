@@ -36,6 +36,10 @@
                 {
                      "class": "mongodb",
                      "args":{ "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default" }
+                },
+                {
+                     "class": "syslog",
+                     "args":{ "host": "syslog.linspector.org", "user": "syslog", "password": "secret" }
                 }
             ],
             "services":[
