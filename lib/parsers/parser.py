@@ -11,3 +11,4 @@ class Parser:
     
     def generate_parse_result(self, result):
         pass
+

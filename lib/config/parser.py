@@ -1,13 +1,17 @@
 from os.path import isfile
 import json
 import sys
-
+from os.path import join
+from os import getcwd
+import imp
 from layouts import Layout
 from hostgroups import HostGroup
+import lib.services.ping
 from members import Member
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
 from lib.services.service import Service
+print id(Service)
 from lib.processors.processor import Processor
 from lib.parsers.parser import Parser
 from lib.tasks.task import  Task
@@ -17,10 +21,7 @@ MOD_PROCESSORS   = "processors"
 MOD_PARSERS      = "parsers"
 MOD_TASKS        = "tasks"
 
-sys.path.append("lib/" + MOD_SERVICES)
-sys.path.append("lib/" + MOD_PROCESSORS)
-sys.path.append("lib/" + MOD_PARSERS)
-sys.path.append("lib/" + MOD_TASKS)
+
 
 KEY_LAYOUTS      = "layouts"
 KEY_HOSTGROUPS   = "hostgroups"
@@ -143,6 +144,8 @@ class ConfigParser:
             return mods["class"]
         else:
             mod = __import__(clazz)
+            #path = join("lib", modPart, clazz + ".py")
+            #mod = imp.load_source(clazz, path)
             mods[clazz] = mod
             return mod
     
@@ -153,19 +156,28 @@ class ConfigParser:
             for clazzItem in items:
                 try:
                     clazz = clazzItem["class"]
+                    path = "lib/" + modPart
+                    sys.path.append(path)
                     mod = self._load_module(clazz, modPart)
-                    item = mod.create(**clazzItem)
-                    if class_check(item):
-                        repl.append(item)
-                    else:
-                        self.log.w(" ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
+                    item = mod.create(clazzItem)
+                    repl.append(item)
+                    #TODO: activate the crappy classcheck if answer is provided
+                    #http://stackoverflow.com/questions/17179440/
+                    self.log.d("warning: instance_check isn't working yet! TRUST_ALL = TRUE")
+                    #if class_check(item):
+                    #    repl.append(item)
+                    #else:
+                    #    self.log.w(" ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
                 except ImportError, err:
                     self.log.w("could not import " + clazz + ": " + str(clazzItem) + "! reason")
                     self.log.w(str(err))
-                except KeyError:
-                    self.log.w("Key 'class' not in classItem " + str(clazzItem))
-                except Exception:
-                    self.log.w("Error while replace: " + str(Exception))
+                except KeyError, k:
+                    self.log.w("Key '" + str(k) + "' not in classItem " + str(clazzItem))
+                except Exception, e:
+                    self.log.w("Error while replace: " + str(e))
+                finally:
+                    if path in sys.path:
+                        del sys.path[sys.path.index(path)]
             del items[:]
             items.extend(repl)
 
@@ -277,7 +289,8 @@ class FullConfigParser(ConfigParser):
         
         creator = parsePeriodList
         periods = self._create_raw_Object(self.jsonDict[KEY_PERIODS], "Period", creator)
-        
+
+
         #2. import and replace
         items_func = lambda hostgroup: hostgroup.get_services()
         class_check = lambda service: isinstance(service, Service)
@@ -286,10 +299,15 @@ class FullConfigParser(ConfigParser):
         items_func = lambda hostgroup: hostgroup.get_processors()
         class_check = lambda processor: isinstance(processor, Processor)
         self.replace_with_import(hostgroups, MOD_PROCESSORS, items_func, class_check)
-        
+
+        services = []
+        for hg in hostgroups:
+            services.extend(hg.get_services())
+
+
         items_func = lambda service: service.get_parser()
         class_check = lambda parser: isinstance(parser, Parser)
-        self.replace_with_import(hostgroups.services, MOD_PARSERS, items_func, class_check)
+        self.replace_with_import(services, MOD_PARSERS, items_func, class_check)
         
         items_func = lambda member: member.get_tasks()
         class_check = lambda task: isinstance(task, Task)
@@ -300,9 +318,7 @@ class FullConfigParser(ConfigParser):
         id_get_func = lambda member: member.id
         self.replace_pointer(hostgroups, members, id_list_func, id_get_func)
 
-        services = []
-        for hg in hostgroups:
-            services.extend(hg.get_services())
+
         id_list_func = lambda  service: service.get_periods()
         id_get_func = lambda period: period.get_name()
         self.replace_pointer(services, periods, id_list_func, id_get_func)

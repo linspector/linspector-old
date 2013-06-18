@@ -40,7 +40,7 @@ class SshService(Service):
         client.close()
 
 
-def create(**kwargs):
+def create(kwargs):
     return SshService(**kwargs)
     
 # def main():

@@ -8,8 +8,8 @@ from service import Service
 
 class PingService(Service):
     def __init__(self, **kwargs):
-        super(PingService, self).__init__(**kwargs)
+        Service.__init__(self, **kwargs)
 
 
-def create(self, **kwargs):
+def create(kwargs):
     return PingService(**kwargs)
