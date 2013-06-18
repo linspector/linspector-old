@@ -26,6 +26,7 @@ class HostGroup:
         self.add_hosts(kwargs[tmp])
         
         tmp = "services"
+        self.services = []
         if not tmp in kwargs:
             raise HostGroupMissingArgumentException(tmp, name)
         self.add_services(kwargs[tmp])
@@ -33,12 +34,12 @@ class HostGroup:
         self.parents = []
         tmp = "parents"
         if tmp in kwargs:
-            self.add_parent(kwargs[tmp])
+            self.add_parents(kwargs[tmp])
         
         tmp = "processors"
         self.processors = []
         if tmp in kwargs:
-            self.add_processor(kwargs[tmp])
+            self.add_processors(kwargs[tmp])
         
     def _to_config_dict(self, configDict):
         me = {}
@@ -69,6 +70,9 @@ class HostGroup:
          
     def add_parents(self, parent):
         self.__add_internal(self.get_parents(), parent)
+
+    def add_services(self, services):
+        self.__add_internal(self.get_services(), services)
     
     def get_parents(self):
         return self.parents
