@@ -7,7 +7,7 @@ class LayoutException(Exception):
 
 
 class Layout:
-    def __init__(self, name, enabled=False, hostgroups=None, members=None):
+    def __init__(self, name, enabled=False, hostgroups=None):
         self._name = name
         self._enabled = enabled
 
@@ -16,10 +16,6 @@ class Layout:
         else:
             self._hostgroups = hostgroups
 
-        if members is None or len(members) <= 0:
-            raise LayoutException("Layout: " + self._name + " without members is useless")
-        else:
-            self._members = members
             
     def _to_config_dict(self, configDict):
         me = {}
@@ -39,8 +35,6 @@ class Layout:
     def get_hostgroups(self):
         return self._hostgroups
 
-    def get_members(self):
-        return self._members
 
     def __str__(self):
         ret = "Layout: 'Name:" + str(self.name) + "', 'Enabled: " + str(self.enabled) + " "
