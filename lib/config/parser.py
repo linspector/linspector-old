@@ -146,7 +146,8 @@ class ConfigParser:
         if clazz in mods:
             return mods["class"]
         else:
-            mod[clazz] = __import__(clazz)
+            mod = __import__(clazz)
+            mods[clazz] = mod
             return mod
     
     def replace_with_import(self, objList, modPart, items_func, class_check):
