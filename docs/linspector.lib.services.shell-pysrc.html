@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>linspector.lib.services.shell</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="linspector-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="linspector-module.html">Package&nbsp;linspector</a> ::
+        <a href="linspector.lib-module.html">Package&nbsp;lib</a> ::
+        <a href="linspector.lib.services-module.html">Package&nbsp;services</a> ::
+        Module&nbsp;shell
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="linspector.lib.services.shell-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="linspector.lib.services.shell-module.html">Module linspector.lib.services.shell</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">The shell service. This is for executing local shell commands and retrieve the output.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module linspector.lib.services.service=linspector.lib.services.service-module.html"><a title="linspector.lib.services.service" class="py-name" href="#" onclick="return doclink('link-0', 'service', 'link-0');">service</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class linspector.lib.config.services.Service=linspector.lib.config.services.Service-class.html,Class linspector.lib.services.service.Service=linspector.lib.services.service.Service-class.html"><a title="linspector.lib.config.services.Service
+linspector.lib.services.service.Service" class="py-name" href="#" onclick="return doclink('link-1', 'Service', 'link-1');">Service</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="ShellService"></a><div id="ShellService-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="ShellService-toggle" onclick="return toggle('ShellService');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="linspector.lib.services.shell.ShellService-class.html">ShellService</a><tt class="py-op">(</tt><tt class="py-base-class">Service</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ShellService-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ShellService-expanded"><a name="ShellService.__init__"></a><div id="ShellService.__init__-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="ShellService.__init__-toggle" onclick="return toggle('ShellService.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.services.shell.ShellService-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ShellService.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ShellService.__init__-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name" targets="Class linspector.lib.services.shell.ShellService=linspector.lib.services.shell.ShellService-class.html"><a title="linspector.lib.services.shell.ShellService" class="py-name" href="#" onclick="return doclink('link-2', 'ShellService', 'link-2');">ShellService</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method linspector.lib.config.config.Config.__init__()=linspector.lib.config.config.Config-class.html#__init__,Method linspector.lib.config.hostgroups.HostGroup.__init__()=linspector.lib.config.hostgroups.HostGroup-class.html#__init__,Method linspector.lib.config.hostgroups.HostGroupException.__init__()=linspector.lib.config.hostgroups.HostGroupException-class.html#__init__,Method linspector.lib.config.hostgroups.HostGroupMissingArgumentException.__init__()=linspector.lib.config.hostgroups.HostGroupMissingArgumentException-class.html#__init__,Method linspector.lib.config.hostgroups.HostGroupService.__init__()=linspector.lib.config.hostgroups.HostGroupService-class.html#__init__,Method linspector.lib.config.hosts.Host.__init__()=linspector.lib.config.hosts.Host-class.html#__init__,Method linspector.lib.config.hosts.HostService.__init__()=linspector.lib.config.hosts.HostService-class.html#__init__,Method linspector.lib.config.layouts.Layout.__init__()=linspector.lib.config.layouts.Layout-class.html#__init__,Method linspector.lib.config.layouts.LayoutException.__init__()=linspector.lib.config.layouts.LayoutException-class.html#__init__,Method linspector.lib.config.layouts.LayoutList.__init__()=linspector.lib.config.layouts.LayoutList-class.html#__init__,Method linspector.lib.config.members.Member.__init__()=linspector.lib.config.members.Member-class.html#__init__,Method linspector.lib.config.members.MemberFilter.__init__()=linspector.lib.config.members.MemberFilter-class.html#__init__,Method linspector.lib.config.parser.ConfigParser.__init__()=linspector.lib.config.parser.ConfigParser-class.html#__init__,Method linspector.lib.config.parser.ConfigurationException.__init__()=linspector.lib.config.parser.ConfigurationException-class.html#__init__,Method linspector.lib.config.periods.CronPeriod.__init__()=linspector.lib.config.periods.CronPeriod-class.html#__init__,Method linspector.lib.config.periods.DatePeriod.__init__()=linspector.lib.config.periods.DatePeriod-class.html#__init__,Method linspector.lib.config.periods.IntervalPeriod.__init__()=linspector.lib.config.periods.IntervalPeriod-class.html#__init__,Method linspector.lib.config.periods.Period.__init__()=linspector.lib.config.periods.Period-class.html#__init__,Method linspector.lib.config.services.Service.__init__()=linspector.lib.config.services.Service-class.html#__init__,Method linspector.lib.config.tasks.Task.__init__()=linspector.lib.config.tasks.Task-class.html#__init__,Method linspector.lib.core.command.Command.__init__()=linspector.lib.core.command.Command-class.html#__init__,Method linspector.lib.core.daemon.Daemon.__init__()=linspector.lib.core.daemon.Daemon-class.html#__init__,Method linspector.lib.core.job.JobInfo.__init__()=linspector.lib.core.job.JobInfo-class.html#__init__,Method linspector.lib.core.logger.Logger.__init__()=linspector.lib.core.logger.Logger-class.html#__init__,Method linspector.lib.parsers.parser.Parser.__init__()=linspector.lib.parsers.parser.Parser-class.html#__init__,Method linspector.lib.processors.mongodb.Mongodb.__init__()=linspector.lib.processors.mongodb.Mongodb-class.html#__init__,Method linspector.lib.processors.processor.Processor.__init__()=linspector.lib.processors.processor.Processor-class.html#__init__,Method linspector.lib.services.http.HttpService.__init__()=linspector.lib.services.http.HttpService-class.html#__init__,Method linspector.lib.services.ping.PingService.__init__()=linspector.lib.services.ping.PingService-class.html#__init__,Method linspector.lib.services.service.Service.__init__()=linspector.lib.services.service.Service-class.html#__init__,Method linspector.lib.services.shell.ShellService.__init__()=linspector.lib.services.shell.ShellService-class.html#__init__,Method linspector.lib.services.snmpget.SnmpgetService.__init__()=linspector.lib.services.snmpget.SnmpgetService-class.html#__init__,Method linspector.lib.services.ssh.SshService.__init__()=linspector.lib.services.ssh.SshService-class.html#__init__,Method linspector.lib.services.tcpconnect.TcpconnectService.__init__()=linspector.lib.services.tcpconnect.TcpconnectService-class.html#__init__,Method linspector.lib.tasks.email.EmailTask.__init__()=linspector.lib.tasks.email.EmailTask-class.html#__init__,Method linspector.lib.tasks.sms.SmsTask.__init__()=linspector.lib.tasks.sms.SmsTask-class.html#__init__,Method linspector.lib.tasks.xmpp.XmppTask.__init__()=linspector.lib.tasks.xmpp.XmppTask-class.html#__init__"><a title="linspector.lib.config.config.Config.__init__
+linspector.lib.config.hostgroups.HostGroup.__init__
+linspector.lib.config.hostgroups.HostGroupException.__init__
+linspector.lib.config.hostgroups.HostGroupMissingArgumentException.__init__
+linspector.lib.config.hostgroups.HostGroupService.__init__
+linspector.lib.config.hosts.Host.__init__
+linspector.lib.config.hosts.HostService.__init__
+linspector.lib.config.layouts.Layout.__init__
+linspector.lib.config.layouts.LayoutException.__init__
+linspector.lib.config.layouts.LayoutList.__init__
+linspector.lib.config.members.Member.__init__
+linspector.lib.config.members.MemberFilter.__init__
+linspector.lib.config.parser.ConfigParser.__init__
+linspector.lib.config.parser.ConfigurationException.__init__
+linspector.lib.config.periods.CronPeriod.__init__
+linspector.lib.config.periods.DatePeriod.__init__
+linspector.lib.config.periods.IntervalPeriod.__init__
+linspector.lib.config.periods.Period.__init__
+linspector.lib.config.services.Service.__init__
+linspector.lib.config.tasks.Task.__init__
+linspector.lib.core.command.Command.__init__
+linspector.lib.core.daemon.Daemon.__init__
+linspector.lib.core.job.JobInfo.__init__
+linspector.lib.core.logger.Logger.__init__
+linspector.lib.parsers.parser.Parser.__init__
+linspector.lib.processors.mongodb.Mongodb.__init__
+linspector.lib.processors.processor.Processor.__init__
+linspector.lib.services.http.HttpService.__init__
+linspector.lib.services.ping.PingService.__init__
+linspector.lib.services.service.Service.__init__
+linspector.lib.services.shell.ShellService.__init__
+linspector.lib.services.snmpget.SnmpgetService.__init__
+linspector.lib.services.ssh.SshService.__init__
+linspector.lib.services.tcpconnect.TcpconnectService.__init__
+linspector.lib.tasks.email.EmailTask.__init__
+linspector.lib.tasks.sms.SmsTask.__init__
+linspector.lib.tasks.xmpp.XmppTask.__init__" class="py-name" href="#" onclick="return doclink('link-3', '__init__', 'link-3');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">         </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method linspector.lib.services.service.Service.get_arguments()=linspector.lib.services.service.Service-class.html#get_arguments"><a title="linspector.lib.services.service.Service.get_arguments" class="py-name" href="#" onclick="return doclink('link-4', 'get_arguments', 'link-4');">get_arguments</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">"command"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">args</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module linspector.lib.core.command=linspector.lib.core.command-module.html"><a title="linspector.lib.core.command" class="py-name" href="#" onclick="return doclink('link-5', 'command', 'link-5');">command</a></tt> <tt class="py-op">=</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">"command"</tt><tt class="py-op">]</tt>  </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"There is no command argument"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">         </tt>
+<a name="ShellService.needs_arguments"></a><div id="ShellService.needs_arguments-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="ShellService.needs_arguments-toggle" onclick="return toggle('ShellService.needs_arguments');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.services.shell.ShellService-class.html#needs_arguments">needs_arguments</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ShellService.needs_arguments-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ShellService.needs_arguments-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt>  </tt>
+</div><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="ShellService.execute"></a><div id="ShellService.execute-def"><a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="ShellService.execute-toggle" onclick="return toggle('ShellService.execute');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.services.shell.ShellService-class.html#execute">execute</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ShellService.execute-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ShellService.execute-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="linspector.lib.core.command" class="py-name" href="#" onclick="return doclink('link-6', 'command', 'link-5');">command</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method linspector.lib.core.command.Command.call()=linspector.lib.core.command.Command-class.html#call"><a title="linspector.lib.core.command.Command.call" class="py-name" href="#" onclick="return doclink('link-7', 'call', 'link-7');">call</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="create"></a><div id="create-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="create-toggle" onclick="return toggle('create');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="linspector.lib.services.shell-module.html#create">create</a><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="create-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-8" class="py-name"><a title="linspector.lib.services.shell.ShellService" class="py-name" href="#" onclick="return doclink('link-8', 'ShellService', 'link-2');">ShellService</a></tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="linspector-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jun 18 03:07:34 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
