@@ -40,7 +40,6 @@ class HttpService(Service):
         
     def needs_arguments(self):
         return True
-            
 
     def execute(self):
         params = urllib.urlencode(self.params)
@@ -50,6 +49,7 @@ class HttpService(Service):
             f = urllib.urlopen(self.protocol + "://" + self._host + ":" + self.port + self.path, params)
 
         #print f.read()
-        
+
+
 def create(**kwargs):
     return HttpService(**kwargs)

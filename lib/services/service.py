@@ -6,6 +6,7 @@ KEY_FAILS     = "fails"
 KEY_PERIODS   = "periods"
 KEY_ARGS      = "args"
 
+
 class Service:
     def __init__(self, **kwargs):
 
@@ -87,8 +88,7 @@ class Service:
     
     def get_parser(self):
         return self._parser
-    
-    
+
     def add_parser(self, parser):
         if parser is not None:
             if isinstance(parser, list):
@@ -115,7 +115,6 @@ class Service:
         result = []
         for parser in self.get_parser():
             result.append(self._parser._parse(executionResult))
-    
 
     def handle_result(self, parseResult):
         pass

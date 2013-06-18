@@ -1,6 +1,5 @@
 from os.path import isfile
 import json
-import imp
 import sys
 
 from layouts import Layout
@@ -8,12 +7,10 @@ from hostgroups import HostGroup
 from members import Member
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
-
 from lib.services.service import Service
 from lib.processors.processor import Processor
 from lib.parsers.parser import Parser
 from lib.tasks.task import  Task
-
 
 MOD_SERVICES     = "services"
 MOD_PROCESSORS   = "processors"
@@ -40,15 +37,14 @@ class ConfigurationException(Exception):
         return repr(self.msg)
 
 
-
 class ConfigParser:
     def __init__(self, log):
-        '''
+        """
         initializes a new ConfigParser Object
         
         params: 
             log: pre configured logger Object to post messages while parsing"
-        '''
+        """
         self.log = log
         self.hostgroups = {}
         self.members = {}
@@ -65,12 +61,12 @@ class ConfigParser:
             layout._to_config_dict(configDict)
 
     def _read_json_config(self, configFilename):
-        '''
+        """
         reads the config File and returns a dictionary, while lowering the first keys
         
         params:
             configFilename: the path under which the configuration file should be found
-        '''
+        """
         if not isfile(configFilename):
             msg = "config file not found at " + str(configFilename)
             raise ConfigurationException(msg, self.log)
@@ -84,11 +80,11 @@ class ConfigParser:
         return json.loads(config)
 
     def _get_as_list(self, configValue):
-        '''
+        """
         In some cases the config permits to define a list or a single value.
         
         returns the value as list
-        '''
+        """
         return configValue if isinstance(configValue, list) else [configValue]
     
     def _create_raw_Object(self, jsonDict, msgName, creator):
@@ -114,9 +110,9 @@ class ConfigParser:
         return layouts
 
     def create_hostgroups_from_json(self, jsonHostGroups):
-        '''
+        """
         creates Hostgroups from the jsonConfig
-        '''
+        """
         hostgroups = []
         for hgName, hgValues in jsonHostGroups.items():
             try:
@@ -128,9 +124,9 @@ class ConfigParser:
         return hostgroups
 
     def create_members_from_json(self, jsonMembers):
-        '''
+        """
         creates Members from the jsonConfig
-        '''
+        """
         members = []
         for memberName, memberValues in jsonMembers.items():
             try:
@@ -172,7 +168,6 @@ class ConfigParser:
                     self.log.w("Error while replace: " + str(Exception))
             del items[:]
             items.extend(repl)
-    
 
     def replace_pointer(self, objectList, replObjectList, id_list_func, id_get_func):
         for obj in objectList:
@@ -186,12 +181,8 @@ class ConfigParser:
             del idList[:]
             idList.extend(replacements)
 
-
-
-
-
     def parse_config(self, configFilename):
-        '''
+        """
         parses the json configuration and returns a list of layouts, 
         which contains all nessesary information of the config file.
         It will only parse nessesary Objects.
@@ -202,7 +193,7 @@ class ConfigParser:
         
         params:
             configFilename: indicates which configuration file to parse
-        '''
+        """
         
         self.jsonDict = self._read_json_config(configFilename)
         
@@ -214,8 +205,7 @@ class ConfigParser:
         for layout in layouts:
             for hgName in layout.get_hostgroups():
                 hostgroupNames.add(hgName)
-                
-        
+
         jsonHostgroups = {}
         for hgName in hostgroupNames:
             if not hgName in self.jsonDict[KEY_HOSTGROUPS]:
@@ -244,8 +234,6 @@ class ConfigParser:
         self.members = self.create_members_from_json(jsonMembers)
 
 
-
-
 def parsePeriodList(name, values):
     if "date" in values:
         return DatePeriod(name, **values)
@@ -257,18 +245,13 @@ def parsePeriodList(name, values):
     comp = ["year", "month", "day", "week", "day_of_week", "hour", "minute", "second"]
     if len([i for i in comp if i in values]) > 0 :
         return CronPeriod(name, **values)
-            
     else:
         raise ConfigurationException("could not determine correct Period(" + repr(values)+").")
-    
-            
+
 
 class FullConfigParser(ConfigParser):
-    
-   
-    
     def parse_config(self, configFilename):
-        '''
+        """
         parses the json configuration and returns a list of layouts, 
         which contains all nessesary information of the config file.
         parses the full config
@@ -279,7 +262,7 @@ class FullConfigParser(ConfigParser):
         
         params:
             configFilename: indicates which configuration file to parse
-        '''
+        """
         self.jsonDict = self._read_json_config(configFilename)
         
         # first step
@@ -329,7 +312,3 @@ class FullConfigParser(ConfigParser):
         self.replace_pointer(layouts, hostgroups, id_list_func, id_get_func)
 
         return layouts
-
-        
-        
-         

@@ -44,16 +44,14 @@ class HostGroup:
     def _to_config_dict(self, configDict):
         me = {}
         me["members"] = [member.nameid for member in self.get_members()]
-        me["hosts"]   = self.hosts
+        me["hosts"] = self.hosts
         me["parents"] = [hg.get_name() for hg in self.get_parents()]
         #TODO implement delegation
         #me["services"] = [service._to_config_dict(configDict) for service in self.get_services()]
         #me["processors"] = [processor._to_config_dict(configDict) for processor in self.get_processors()]
         configDict["hostgroups"][self.get_name()] = me
-    
-    
-    
-    def __add_internal(self,l,item):
+
+    def __add_internal(self, l, item):
         if isinstance(item, list):
             l.extend(item)
         else:
@@ -91,7 +89,6 @@ class HostGroup:
     
     def get_members(self):
         return self.members 
-        
 
     def __str__(self):
         ret = "HostGroup: " + self.name + " threshold: " + str(self.threshold) + " parent: " + self.parent + "\n"

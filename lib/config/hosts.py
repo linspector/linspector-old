@@ -116,4 +116,3 @@ def parseHostList(hosts, services, log):
             #replace host.service member by parsed HostService Objects
         host.services = hostServices
     return parsedHosts
-

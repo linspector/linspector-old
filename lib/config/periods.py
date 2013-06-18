@@ -67,7 +67,3 @@ class DatePeriod(Period):
         
     def createJob(self, scheduler, jobInfo, func):
         return scheduler.add_date_job(func, self.date, jobInfo)
-
-
-
-            

@@ -27,8 +27,6 @@ class Member:
         for f in self.filters:
             ret += str(f)
         return ret
-    
-    
 
 
 class MemberFilter:
