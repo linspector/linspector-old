@@ -22,5 +22,5 @@ class ShellService(Service):
         self.command.call()
 
 
-def create(**kwargs):
+def create(kwargs):
     return ShellService(**kwargs)

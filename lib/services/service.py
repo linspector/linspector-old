@@ -7,7 +7,7 @@ KEY_PERIODS   = "periods"
 KEY_ARGS      = "args"
 
 
-class Service:
+class Service(object):
     def __init__(self, **kwargs):
 
         self._args = {}
@@ -36,10 +36,10 @@ class Service:
         
         self._periods = []
         if KEY_PERIODS in kwargs:
-            self.addPeriods(kwargs[KEY_PERIODS])
+            self.add_periods(kwargs[KEY_PERIODS])
         
         self.errorcode = 0
-        self.errormessage = "No Error!"
+        self.errormessage = None
         
     def add_arguments(self, args):
         for key, val in args.items():
@@ -51,7 +51,7 @@ class Service:
     def get_arguments(self):
         return self._args
 
-    def add_period(self, period):
+    def add_periods(self, period):
         if period is not None:
             if isinstance(period, list):
                 self._periods.extend(period)

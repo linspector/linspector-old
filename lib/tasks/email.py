@@ -18,5 +18,5 @@ class EmailTask(Task):
         pass
 
 
-def creator(**taskDict):
+def creator(taskDict):
     return EmailTask(**taskDict)

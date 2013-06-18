@@ -2,7 +2,7 @@ class Period(object):
     def __init__(self, name):
         self.name = name
     
-    def getName(self):
+    def get_name(self):
         return self.name
         
     def createJob(self, scheduler, jobInfo, func):

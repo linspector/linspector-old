@@ -6,11 +6,13 @@ not use a parser.
 """
 
 import socket
+from lib.config.services import Service
 from service import Service
 
 
 class TcpconnectService(Service):
     def __init__(self, **kwargs):
+        #Service.__init__(self, **kwargs)
         super(TcpconnectService, self).__init__(**kwargs)
         
         args = self.get_arguments()
@@ -39,5 +41,5 @@ class TcpconnectService(Service):
         return
 
 
-def create(**kwargs):
+def create(kwargs):
     return TcpconnectService(**kwargs)

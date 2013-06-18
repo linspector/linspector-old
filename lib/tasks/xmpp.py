@@ -18,5 +18,6 @@ class XmppTask(Task):
         pass
 
 
-def creator(**taskDict):
+
+def creator(taskDict):
     return XmppTask(taskDict)

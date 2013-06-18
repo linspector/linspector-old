@@ -52,5 +52,5 @@ class SnmpgetService(Service):
         #            print('%s = %s' % (name.prettyPrint(), val.prettyPrint()))
 
 
-def create(**kargs):
+def create(kargs):
     return SnmpgetService(**kwargs)
