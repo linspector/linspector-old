@@ -18,5 +18,5 @@ class SmsTask(Task):
         pass
 
 
-def creator(taskDict):
+def create(taskDict):
     return SmsTask(**taskDict)

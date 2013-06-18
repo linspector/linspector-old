@@ -174,7 +174,7 @@ class ConfigParser:
                 except KeyError, k:
                     self.log.w("Key '" + str(k) + "' not in classItem " + str(clazzItem))
                 except Exception, e:
-                    self.log.w("Error while replace: " + str(e))
+                    self.log.w("Error while replace: " + clazz + str(e))
                 finally:
                     if path in sys.path:
                         del sys.path[sys.path.index(path)]
