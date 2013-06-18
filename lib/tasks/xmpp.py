@@ -19,5 +19,5 @@ class XmppTask(Task):
 
 
 
-def creator(taskDict):
+def create(taskDict):
     return XmppTask(taskDict)
