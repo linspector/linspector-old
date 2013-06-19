@@ -9,7 +9,7 @@ to just report this code and not use a parser.
 """
 
 import urllib
-from service import Service
+from lib.services.service import Service
 
 
 class HttpService(Service):

@@ -108,10 +108,9 @@ class ConfigParser:
         if clazz in mods:
             return mods["class"]
         else:
-            mod = __import__(clazz)
-            #path = join(getcwd(), "lib", modPart, clazz + ".py")
-            #self.log.w(path)
-            #mod = imp.load_source(clazz, path)
+            #mod = __import__(clazz)
+            path = join("lib", modPart, clazz + ".py")
+            mod = imp.load_source(clazz, path)
             mods[clazz] = mod
             return mod
     
@@ -123,6 +122,7 @@ class ConfigParser:
         :param objList: the list of objects which is iterated on
         :param modPart: the folder from the module (i.e tasks, parsers)
         :param items_func: function to get a pointer on the list of json-config-objects to replace. Takes one argument and
+        should return a list of
         :param class_check: currently unsupported
         """
         for obj in objList:
@@ -130,25 +130,15 @@ class ConfigParser:
             items = items_func(obj)
             for clazzItem in items:
                 try:
-                    if "class" not in clazzItem:
-                        self.log.w("python says class is not in class item!")
-                        self.log.w(modPart)
-                        self.log.w(clazzItem)
-                        self.log.w(clazzItem["class"])
 
                     clazz = clazzItem["class"]
-                    path = "lib/" + modPart
-                    sys.path.append(path)
                     mod = self._load_module(clazz, modPart)
                     item = mod.create(clazzItem)
-                    repl.append(item)
-                    #TODO: activate the crappy classcheck if answer is provided
-                    #http://stackoverflow.com/questions/17179440/
-                    self.log.d("warning: instance_check isn't working yet! TRUST_ALL = TRUE")
-                    #if class_check(item):
-                    #    repl.append(item)
-                    #else:
-                    #    self.log.w(" ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
+                    if class_check(item):
+                        repl.append(item)
+                    else:
+                        self.log.w(" ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
+
                 except ImportError, err:
                     self.log.w("could not import " + clazz + ": " + str(clazzItem) + "! reason")
                     self.log.w(str(err))
@@ -156,9 +146,7 @@ class ConfigParser:
                     self.log.w("Key " + str(k) + " not in classItem " + str(clazzItem))
                 except Exception, e:
                     self.log.w("Error while replacing class ( " + clazz + " ):" + str(e))
-                finally:
-                    if path in sys.path:
-                        del sys.path[sys.path.index(path)]
+
             del items[:]
             items.extend(repl)
 
@@ -191,7 +179,7 @@ def parsePeriodList(name, values):
         return DatePeriod(name, **values)
         
     comp = ["weeks", "days", "hours", "minutes", "seconds", "start_date"]
-    if len([i for i in comp if i in values]) > 0 :
+    if len([i for i in comp if i in values]) > 0:
         return IntervalPeriod(name, **values)
             
     comp = ["year", "month", "day", "week", "day_of_week", "hour", "minute", "second"]

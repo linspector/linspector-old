@@ -3,7 +3,7 @@ The snmpget service in pure Python.
 """
 
 #from pysnmp.entity.rfc3413.oneliner import cmdgen
-from service import Service
+from lib.services.service import Service
 
 
 class SnmpgetService(Service):

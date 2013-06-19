@@ -2,7 +2,7 @@
 The shell service. This is for executing local shell commands and retrieve the output.
 """
 
-from service import Service
+from lib.services.service import Service
 
 
 class ShellService(Service):
