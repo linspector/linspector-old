@@ -64,10 +64,12 @@ def main():
         for layout in layouts:
             if layout.is_enabled():
                 for hg in layout.get_hostgroups():
-                    for services in hg.get_services():
-                        for service in services:
-                            for period in service.get_periods():
-                                jobs.append(period.createJob(scheduler, service, handleJob))
+                    for sr in hg.get_services():
+                        if not isinstance(sr, list):
+                            sr = sr.get_hostgroup().get_services()
+                        for s in sr:
+                            for period in s.get_periods():
+                                jobs.append(period.createJob(scheduler, s, handleJob))
         scheduler.start()
         
         #log.i("starting linspector: reading config... (" + args.config + ")")

@@ -27,7 +27,7 @@ class HostGroup:
         self.add_hosts(kwargs[tmp])
         
         tmp = "services"
-        self.services = []
+        self._services = []
         if not tmp in kwargs:
             raise HostGroupMissingArgumentException(tmp, name)
         self.add_services(kwargs[tmp])
@@ -80,7 +80,7 @@ class HostGroup:
         return self.processors
     
     def get_services(self):
-        return self.services
+        return self._services
     
     def get_hosts(self):
         return self.hosts
