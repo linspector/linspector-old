@@ -2,7 +2,7 @@
 The email task.
 """
 
-from task import Task
+from lib.tasks.task import Task
 
 
 class EmailTask(Task):

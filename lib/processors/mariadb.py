@@ -2,7 +2,7 @@
 The MariaDB processor
 """
 
-from processor import Processor
+from lib.processors.processor import Processor
 
 
 class MariadbProcessor(Processor):
