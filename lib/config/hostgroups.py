@@ -80,7 +80,10 @@ class HostGroup(object):
         return self.processors
     
     def get_services(self):
-        return self.__services
+        s = self.__services
+        if not isinstance(s, list):
+            s = self.__dict__["_HostGroup__services"]
+        return s
     
     def get_hosts(self):
         return self.hosts
