@@ -6,7 +6,7 @@ not use a parser.
 """
 
 import socket
-from service import Service
+from lib.services.service import Service
 
 
 class TcpconnectService(Service):

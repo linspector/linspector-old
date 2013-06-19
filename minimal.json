@@ -1,0 +1,42 @@
+{
+    "members":{
+        "homer":{
+            "name": "Homer Simpson",
+            "comment": "Security Inspector",
+            "tasks": [{"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}]
+        }
+    },
+    "periods": {
+        "doh": {"seconds": 10, "comment": "OMG, this means work"},
+        "moes_time": {"minute":"0", "hour": "12", "day_of_week": "4", "comment": "much better"},
+        "marges_birthday": { "date": "1965-2-24 04:00:00"}
+    },
+    "hostgroups":{
+        "power_plant":{
+            "members": ["homer"],
+            "hosts": ["powerplant.springfield.com"],
+            "processors":[
+                {"class": "mongodb", "args":{ "host": "mongodb.burnscorp.org", "user": "homer", "password": "useless", "database": "default" }}
+            ],
+            "services":[
+                {
+                    "class": "ping",
+                    "fails": {"donut": 2000},
+                    "periods":["doh"],
+                    "threshold": 500
+                },
+                {
+                    "class": "tcpconnect",
+                    "args": {"port": 23232},
+                    "periods": ["moes_time", "marges_birthday"],
+                    "threshold": 0,
+                    "comment": "my personal reminder, hehe"
+                }
+            ]
+        }
+    },
+    "layouts":{
+        "main":{"hostgroups": ["power_plant"], "enabled": true}
+    }
+
+}

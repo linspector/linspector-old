@@ -7,7 +7,7 @@ This service is using paramiko (http://www.lag.net/paramiko/).
 import paramiko
 import pprint
 import os
-from service import Service
+from lib.services.service import Service
 
 
 class SshService(Service):
