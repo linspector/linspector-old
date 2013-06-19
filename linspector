@@ -62,9 +62,16 @@ def main():
 
         jobs = []
         for layout in layouts:
+            for i in range(len(layout.get_hostgroups())):
+                hg = layout.get_hostgroups()[i]
+                for serv in hg.get_services():
+                    for service in serv:
+                        for period in service.get_periods():
+                            pass
+
             if layout.is_enabled():
-                for hg in layout.get_hostgroups():
-                    for sr in hg.get_services():
+                for hostgroup in layout.get_hostgroups():
+                    for sr in hostgroup.get_services():
                         if not isinstance(sr, list):
                             sr = sr.get_hostgroup().get_services()
                         for s in sr:
