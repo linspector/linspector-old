@@ -62,16 +62,24 @@ def main():
 
         jobs = []
         for layout in layouts:
-            for i in range(len(layout.get_hostgroups())):
-                hg = layout.get_hostgroups()[i]
-                for serv in hg.get_services():
-                    for service in serv:
-                        for period in service.get_periods():
-                            pass
+            #for i in range(len(layout._hostgroups)):
+            #    for y in range(len(layout._hostgroups[i])._services):
+            #        for period in layout.get_hostgroups()[i]._services[y]:
+            #            log.i("wtf")
+            #    for serv in layout.get_hostgroups()[i].get_services():
+            #        for service in serv:
+            #            for period in service.get_periods():
+            #                pass
 
             if layout.is_enabled():
                 for hostgroup in layout.get_hostgroups():
                     for sr in hostgroup.get_services():
+                        if not isinstance(sr, list):
+
+                            log.i("check from          hostgroup: id(" + str(id(hostgroup)) + ") " + str(hostgroup))
+                            log.i("check from sr.get_hostgroup(): id(" + str(id(sr.get_hostgroup)) + ") " + str(sr.get_hostgroup()))
+                            sr = hostgroup.__dict__["_services"]
+
                         if not isinstance(sr, list):
                             sr = sr.get_hostgroup().get_services()
                         for s in sr:

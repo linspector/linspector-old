@@ -11,7 +11,7 @@ class HostGroupMissingArgumentException(HostGroupException):
         super(HostGroupMissingArgumentException, self).__init__("no " + missingArgument + " defined for Hostgroup " + hostgroupName)
 
 
-class HostGroup:
+class HostGroup(object):
     def __init__(self, name, **kwargs):
         self.name = name
         tmp = "members"
@@ -92,7 +92,9 @@ class HostGroup:
         return self.members 
 
     def __str__(self):
-        ret = "HostGroup: " + self.name + " threshold: " + str(self.threshold) + " parent: " + self.parent + "\n"
+        if True:
+            return str(self.__dict__)
+        ret = "HostGroup: " + self.name + "\n"
         ret += "members: {\n"
         for itm in self.members:
             ret += str(itm) + "\n"
@@ -102,7 +104,7 @@ class HostGroup:
             ret += str(itm) + "\n"
         ret += "}\n"
         ret += "services: {\n"
-        for itm in self.services:
+        for itm in self._services:
             ret += str(itm) + "\n"
         ret += "}\n"
         return ret
