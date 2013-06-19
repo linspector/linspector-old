@@ -2,7 +2,7 @@
 The syslog processor
 """
 
-from processor import Processor
+from lib.processors.processor import Processor
 
 
 class SyslogProcessor(Processor):

@@ -1,4 +1,4 @@
-from parser import Parser
+from lib.parsers.parser import Parser
 
 
 class ShellParser(Parser):

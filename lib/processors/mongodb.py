@@ -2,7 +2,7 @@
 The MongoDB processor
 """
 
-from processor import Processor
+from lib.processors.processor import Processor
 
 
 class MongodbProcessor(Processor):

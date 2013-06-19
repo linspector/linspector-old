@@ -2,7 +2,7 @@
 The xmpp task.
 """
 
-from task import Task
+from lib.tasks.task import Task
 
 
 class XmppTask(Task):
