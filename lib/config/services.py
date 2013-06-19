@@ -4,6 +4,10 @@ class Service:
         self.command = command
         self.comment = comment
         self.parser = parser
+        self.hostgroup = None
+
+    def set_hostgroup(self, hostgroup):
+        self.hostgroup = hostgroup
 
     def __str__(self):
         return "Service('Name: " + self.name + "', 'Command: " + self.command + ", 'Parser: " + self.parser + "')"

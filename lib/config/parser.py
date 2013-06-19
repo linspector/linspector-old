@@ -251,4 +251,8 @@ class FullConfigParser(ConfigParser):
         id_get_func = lambda  hostgroup: hostgroup.get_name()
         self.replace_pointer(layouts, hostgroups, id_list_func, id_get_func)
 
+        for hg in hostgroups:
+            for service in hg.get_services():
+                service.set_hostgroup(hg)
+
         return layouts

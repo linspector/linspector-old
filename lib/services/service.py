@@ -57,6 +57,12 @@ class Service(object):
                 self._periods.extend(period)
             else:
                 self._periods.append(period)
+
+    def set_hostgroup(self, hostgroup):
+        self.hostgroup = hostgroup
+
+    def get_hostgroup(self):
+        return self.hostgroup
     
     def get_periods(self):
         return self._periods
