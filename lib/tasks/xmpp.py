@@ -20,4 +20,4 @@ class XmppTask(Task):
 
 
 def create(taskDict):
-    return XmppTask(taskDict)
+    return XmppTask(**taskDict)

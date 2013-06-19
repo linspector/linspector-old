@@ -1,4 +1,6 @@
 from os.path import isfile
+from os.path import join
+from os import getcwd
 import json
 import sys
 import imp
@@ -109,7 +111,8 @@ class ConfigParser:
             return mods["class"]
         else:
             mod = __import__(clazz)
-            #path = join("lib", modPart, clazz + ".py")
+            #path = join(getcwd(), "lib", modPart, clazz + ".py")
+            #self.log.w(path)
             #mod = imp.load_source(clazz, path)
             mods[clazz] = mod
             return mod
@@ -128,6 +131,12 @@ class ConfigParser:
             items = items_func(obj)
             for clazzItem in items:
                 try:
+                    if "class" not in clazzItem:
+                        self.log.w("python says class is not in class item!")
+                        self.log.w(modPart)
+                        self.log.w(clazzItem)
+                        self.log.w(clazzItem["class"])
+
                     clazz = clazzItem["class"]
                     path = "lib/" + modPart
                     sys.path.append(path)
@@ -145,7 +154,7 @@ class ConfigParser:
                     self.log.w("could not import " + clazz + ": " + str(clazzItem) + "! reason")
                     self.log.w(str(err))
                 except KeyError, k:
-                    self.log.w("Key '" + str(k) + "' not in classItem " + str(clazzItem))
+                    self.log.w("Key " + str(k) + " not in classItem " + str(clazzItem))
                 except Exception, e:
                     self.log.w("Error while replacing class ( " + clazz + " ):" + str(e))
                 finally:
