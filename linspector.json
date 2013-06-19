@@ -5,7 +5,7 @@
             "comment": "The Linspector Admin",
             "tasks":[{ "class": "email", "type": "warning", "args":{ "rcpt": "admin@systems.hanez.org" }},
                      { "class": "sms", "type": "critical", "args":{ "rcpt": "+49112" }},
-                     { "class": "xmpp", "type": "critical", "arfixed parsing, replaced non_workin instance_check with gs":{ "rcpt": "admin@jabber.hanez.org" }}]
+                     { "class": "xmpp", "type": "critical", "args":{ "rcpt": "admin@jabber.hanez.org" }}]
         },
         "hanez":{
             "name": "Johannes Findeisen",
@@ -48,7 +48,8 @@
                     "fails":{ "warning": "100ms", "critical": "150ms" },
                     "periods":[ "short" ],
                     "threshold": 10,
-                    "parser":{ "class": "shell", "line": 2, "col": 5 }
+                    "parser":{ "class": "shell",
+                               "args":{ "line": 2, "col": 5 }}
                 },
                 {
                     "class": "tcpconnect",
@@ -75,7 +76,8 @@
                              "protocol": "https" },
                     "periods":[ "long" ],
                     "threshold": 2,
-                    "parser":{ "class": "grep", "string": "<h1>I am up!</h1>" },
+                    "parser":{ "class": "grep",
+                               "args":{ "string": "<h1>I am up!</h1>" }},
                     "comment": "Just a string grep"
                 }
             ]
@@ -89,7 +91,8 @@
                     "fails":{ "warning": "100ms", "critical": "150ms" },
                     "periods":[ "short" ],
                     "threshold": 10,
-                    "parser":{ "class": "shell", "line": 2, "col": 5 }
+                    "parser":{ "class": "shell",
+                               "args":{ "line": 2, "col": 5 }}
                 },
                 {
                     "class": "tcpconnect",
@@ -109,9 +112,12 @@
                     "fails":{ "warning": "80%", "critical": "90%" },
                     "periods":[ "long" ],
                     "threshold": 10,
-                    "parser":[{ "class": "grep", "line": "/dev/sda1", "col": 5 },
-                              [{ "class": "grep", "line": "/dev/sda2", "col": 5 },
-                               { "class": "grep", "line": "/dev/sda2", "col": 5 }]]
+                    "parser":[{ "class": "grep",
+                                "args":{ "line": "/dev/sda1", "col": 5 }},
+                              [{ "class": "grep",
+                                 "args":{ "line": "/dev/sda2", "col": 5 }},
+                               { "class": "grep",
+                                 "args":{ "line": "/dev/sda2", "col": 5 }}]]
                 },
                 {
                     "class": "shell",
@@ -120,7 +126,8 @@
                     "fails":{ "warning": 4.00, "critical": 8.00 },
                     "periods":[ "middle" ],
                     "threshold": 10,
-                    "parser":{ "class": "shell", "line": 1, "col": 4 }
+                    "parser":{ "class": "shell",
+                               "args":{ "line": 1, "col": 4 }}
                 }
             ]
         },
@@ -141,7 +148,8 @@
                     "fails":{ "warning": "100ms", "critical": "150ms", "notes": "HeyHo! A ping failed, wake up! (@response)" },
                     "periods":[ "short" ],
                     "threshold": 10,
-                    "parser":{ "class": "shell", "line": 2, "col": 8 }
+                    "parser":{ "class": "shell",
+                               "args":{ "line": 2, "col": 8 }}
                 },
                 {
                     "class": "snmpget",
