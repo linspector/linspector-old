@@ -51,5 +51,5 @@ class HttpService(Service):
         #print f.read()
 
 
-def create(**kwargs):
+def create(kwargs):
     return HttpService(**kwargs)

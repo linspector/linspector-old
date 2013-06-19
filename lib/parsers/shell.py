@@ -2,7 +2,7 @@ from lib.parsers.parser import Parser
 
 
 class ShellParser(Parser):
-    def __init__(self):
+    def __init__(self, **kwargs):
         pass
 
 

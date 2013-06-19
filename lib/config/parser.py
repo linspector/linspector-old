@@ -240,7 +240,7 @@ class FullConfigParser(ConfigParser):
 
         #replace object pointer
         id_list_func = lambda hostgroup: hostgroup.get_members()
-        id_get_func = lambda member: member.id
+        id_get_func = lambda member: member.get_id()
         self.replace_pointer(hostgroups, members, id_list_func, id_get_func)
 
         id_list_func = lambda  service: service.get_periods()
