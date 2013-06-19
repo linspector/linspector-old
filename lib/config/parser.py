@@ -77,8 +77,16 @@ class ConfigParser:
         self.log.i("reading Config: " + configFilename)
         return json.loads(config)
 
-    
     def _create_raw_Object(self, jsonDict, msgName, creator):
+        """
+        creates an Main object from the configuration, but just parses raw data and hands it to the object
+
+        :param jsonDict: the configuration file part as dict
+        :param msgName: name of object for error message
+        :param creator: function pointer which is taking two arguments: identifier of the object and arguments.
+        :should return an object
+        :return: a list of objects returned by creator
+        """
         items = []
         for key, val in jsonDict.items():
             try:
@@ -89,8 +97,13 @@ class ConfigParser:
                 self.log.w(str(Exception))
         return items
 
-    
     def _load_module(self, clazz, modPart):
+        """
+        imports and caches a module.
+        :param clazz: the filename of the module (i.e email, ping...)
+        :param modPart: the folder of the module. (i.e services, parsers...)
+        :return: the imported/cached module, or throws an error if it couldn't find it
+        """
         mods = self._loadedMods[modPart]
         if clazz in mods:
             return mods["class"]
@@ -102,6 +115,14 @@ class ConfigParser:
             return mod
     
     def replace_with_import(self, objList, modPart, items_func, class_check):
+        """
+        replaces configuration dicts with their objects by importing and creating it in the first step.
+        In the second step the original list of json config dicts gets replaced by the loaded objects
+        :param objList: the list of objects which is iterated on
+        :param modPart: the folder from the module (i.e tasks, parsers)
+        :param items_func: function to get a pointer on the list of json-config-objects to replace. Takes one argument and
+        :param class_check: currently unsupported
+        """
         for obj in objList:
             repl = []
             items = items_func(obj)
@@ -134,6 +155,13 @@ class ConfigParser:
             items.extend(repl)
 
     def replace_pointer(self, objectList, replObjectList, id_list_func, id_get_func):
+        """
+        replaces objects from the config by ids.
+        :param objectList: the list of objects to be iterated on
+        :param replObjectList: the list of objects to replace
+        :param id_list_func: function taking one argument as object and should return a list of config ids to replace
+        :param id_get_func: function taking one config-object as argument and should return the config id to compare
+        """
         for obj in objectList:
             replacements = []
             idList = id_list_func(obj)
