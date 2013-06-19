@@ -10,7 +10,7 @@ from members import Member
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
 from lib.services.service import Service
-print id(Service)
+#print id(Service)
 from lib.processors.processor import Processor
 from lib.parsers.parser import Parser
 from lib.tasks.task import  Task
@@ -20,13 +20,12 @@ MOD_PROCESSORS   = "processors"
 MOD_PARSERS      = "parsers"
 MOD_TASKS        = "tasks"
 
-
-
 KEY_LAYOUTS      = "layouts"
 KEY_HOSTGROUPS   = "hostgroups"
 KEY_MEMBERS      = "members"
 KEY_PERIODS      = "periods"
 KEY_CORE         = "core"
+
 
 class ConfigurationException(Exception):
     def __init__(self, msg, log):
@@ -42,15 +41,14 @@ class ConfigParser:
         """
         initializes a new ConfigParser Object
         
-        params: 
-            log: pre configured logger Object to post messages while parsing"
+        :param log: pre configured logger Object to post messages while parsing"
         """
         self.log = log
         self.hostgroups = {}
         self.members = {}
         self.periods = {}
         self.layouts = {}
-        self._loadedMods={MOD_SERVICES: {}, MOD_PROCESSORS: {}, MOD_TASKS: {}, MOD_PARSERS: {}}
+        self._loadedMods = {MOD_SERVICES: {}, MOD_PROCESSORS: {}, MOD_TASKS: {}, MOD_PARSERS: {}}
         
     def _create_new_config_dict(self):
         return {"members": {}, "periods": {}, "hostgroups": {}, "layouts": {}, "core": {}}
@@ -64,14 +62,13 @@ class ConfigParser:
         """
         reads the config File and returns a dictionary, while lowering the first keys
         
-        params:
-            configFilename: the path under which the configuration file should be found
+        :param configFilename: the path under which the configuration file should be found
         """
         if not isfile(configFilename):
             msg = "config file not found at " + str(configFilename)
             raise ConfigurationException(msg, self.log)
         
-        self.configfilename = configFilename
+        self.configFilename = configFilename
         
         with open(configFilename) as cfgFile:
             config = cfgFile.read()
@@ -102,6 +99,7 @@ class ConfigParser:
     def _load_module(self, clazz, modPart):
         """
         imports and caches a module.
+
         :param clazz: the filename of the module (i.e email, ping...)
         :param modPart: the folder of the module. (i.e services, parsers...)
         :return: the imported/cached module, or throws an error if it couldn't find it
@@ -121,6 +119,7 @@ class ConfigParser:
         """
         replaces configuration dicts with their objects by importing and creating it in the first step.
         In the second step the original list of json config dicts gets replaced by the loaded objects
+
         :param objList: the list of objects which is iterated on
         :param modPart: the folder from the module (i.e tasks, parsers)
         :param items_func: function to get a pointer on the list of json-config-objects to replace. Takes one argument and
@@ -166,6 +165,7 @@ class ConfigParser:
     def replace_pointer(self, objectList, replObjectList, id_list_func, id_get_func):
         """
         replaces objects from the config by ids.
+
         :param objectList: the list of objects to be iterated on
         :param replObjectList: the list of objects to replace
         :param id_list_func: function taking one argument as object and should return a list of config ids to replace
@@ -205,15 +205,14 @@ class FullConfigParser(ConfigParser):
     def parse_config(self, configFilename):
         """
         parses the json configuration and returns a list of layouts, 
-        which contains all nessesary information of the config file.
+        which contains all necessary information of the config file.
         parses the full config
         Parsing will be done in 3 steps:
         1. get raw Config Objects by just passing the values defined inside the config
         2. replace references by objects, import services, tasks, parsers and processors
         3. do sanity checks
         
-        params:
-            configFilename: indicates which configuration file to parse
+        :param configFilename: the configuration file to parse
         """
         self.jsonDict = self._read_json_config(configFilename)
         
@@ -230,7 +229,6 @@ class FullConfigParser(ConfigParser):
         creator = parsePeriodList
         periods = self._create_raw_Object(self.jsonDict[KEY_PERIODS], "Period", creator)
 
-
         #2. import and replace
         items_func = lambda hostgroup: hostgroup.get_services()
         class_check = lambda service: isinstance(service, Service)
@@ -244,7 +242,6 @@ class FullConfigParser(ConfigParser):
         for hg in hostgroups:
             services.extend(hg.get_services())
 
-
         items_func = lambda service: service.get_parser()
         class_check = lambda parser: isinstance(parser, Parser)
         self.replace_with_import(services, MOD_PARSERS, items_func, class_check)
@@ -257,7 +254,6 @@ class FullConfigParser(ConfigParser):
         id_list_func = lambda hostgroup: hostgroup.get_members()
         id_get_func = lambda member: member.id
         self.replace_pointer(hostgroups, members, id_list_func, id_get_func)
-
 
         id_list_func = lambda  service: service.get_periods()
         id_get_func = lambda period: period.get_name()

@@ -1,7 +1,5 @@
 """
-Created on Jun 16, 2013
-
-@author: rafael
+The processor class for postprocessing polled data.
 """
 
 

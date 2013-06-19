@@ -17,7 +17,6 @@ class Logger():
         :param logfile: the file where to log. Logs are rotated by default.
         :param logfileLevel: the LoggingLevel for the file Logger. (DEBUG default)
         """
-
         logfile = path.expanduser(logfile)
         if not path.exists(path.dirname(logfile)):
             os.makedirs(path.dirname(logfile))
