@@ -1,14 +1,14 @@
 """
-The syslog processor
+The MariaDB processor
 """
 
 from processor import Processor
 
 
-class SyslogProcessor(Processor):
+class MariadbProcessor(Processor):
     def __init__(self):
         pass
 
 
 def create(kwargs):
-    return SyslogProcessor(**kwargs)
+    return MariadbProcessor(**kwargs)
