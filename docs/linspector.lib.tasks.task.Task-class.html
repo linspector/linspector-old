@@ -62,7 +62,7 @@
 <dl><dt>Known Subclasses:</dt>
 <dd>
       <ul class="subclass-list">
-<li><a href="linspector.lib.tasks.sms.SmsTask-class.html">sms.SmsTask</a></li><li>, <a href="linspector.lib.tasks.xmpp.XmppTask-class.html">xmpp.XmppTask</a></li>  </ul>
+<li><a href="linspector.lib.tasks.sms.SmsTask-class.html">sms.SmsTask</a></li><li>, <a href="linspector.lib.tasks.xmpp.XmppTask-class.html">xmpp.XmppTask</a></li><li>, <a href="linspector.lib.tasks.email.EmailTask-class.html">email.EmailTask</a></li>  </ul>
 </dd></dl>
 
 <hr />
@@ -85,34 +85,18 @@
     </table>
   </td>
 </tr>
-<tr>
+<tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="linspector.lib.tasks.task.Task-class.html#set_task_type" class="summary-sig-name">set_task_type</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">taskType</span>)</span><br />
-      sets the type of this task.</td>
+          <td><span class="summary-sig"><a href="linspector.lib.tasks.task.Task-class.html#_execute" class="summary-sig-name" onclick="show_private();">_execute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">taskType</span>,
+        <span class="summary-sig-arg">msg</span>)</span><br />
+      internal method which gets called for any member in a hostgroup.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task.set_task_type">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="get_task_type"></a><span class="summary-sig-name">get_task_type</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      returns the type set by set_type_task</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task.get_task_type">source&nbsp;code</a></span>
+            <span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task._execute">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -138,18 +122,34 @@
       
     </td>
   </tr>
-<tr class="private">
+<tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="linspector.lib.tasks.task.Task-class.html#_execute" class="summary-sig-name" onclick="show_private();">_execute</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">taskType</span>,
-        <span class="summary-sig-arg">msg</span>)</span><br />
-      internal method which gets called for any member in a hostgroup.</td>
+          <td><span class="summary-sig"><a name="get_task_type"></a><span class="summary-sig-name">get_task_type</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      :return: the type set by set_type_task</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task._execute">source&nbsp;code</a></span>
+            <span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task.get_task_type">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="linspector.lib.tasks.task.Task-class.html#set_task_type" class="summary-sig-name">set_task_type</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">taskType</span>)</span><br />
+      sets the type of this task.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task.set_task_type">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -176,31 +176,28 @@
   </td>
 </tr>
 </table>
-<a name="set_task_type"></a>
-<div>
+<a name="_execute"></a>
+<div class="private">
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_task_type</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">taskType</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_execute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">taskType</span>,
+        <span class="sig-arg">msg</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task.set_task_type">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task._execute">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-sets the type of this task.
-
-Be aware! this method can only get called once!
-
-params:
-    taskType: the type of this task
-
-</pre>
+  <p>internal method which gets called for any member in a hostgroup. It 
+  determines if it has an appropriate type by comparing taskType with 
+  get_task_type(). Calls execute_task() if the type matches</p>
+  <p>:param taskType: the type of the fail which is compared with 
+  get_task_type() :param msg: the error message</p>
+  <p>:return: True if execute_task() is called succesfully, else False</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -220,51 +217,32 @@ params:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-this is the method tasks usually override. 
-It gets called anytime the task should get executed
-
-default does nothing
-
-params:
-    msg: the msg for this task
-
-</pre>
+  <p>this is the method tasks usually override. It gets called anytime the 
+  task should get executed</p>
+  <p>default does nothing</p>
+  <p>:param msg: the msg for this task</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
-<a name="_execute"></a>
-<div class="private">
+<a name="set_task_type"></a>
+<div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">_execute</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">taskType</span>,
-        <span class="sig-arg">msg</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_task_type</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">taskType</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task._execute">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="linspector.lib.tasks.task-pysrc.html#Task.set_task_type">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-internal method which gets called for any member in a hostgroup.
-It determines if it has an appropriate type by comparing taskType with get_task_type().
-Calls execute_task() if the type matches
-
-params: 
-    taskType: the type of the fail which is compared with get_task_type()
-    msg: the error message
-    
-return: 
-    True if execute_task() is called succesfully, else False
-
-</pre>
+  <p>sets the type of this task.</p>
+  <p>Be aware! this method can only get called once!</p>
+  <p>:param taskType: the type of this task</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -296,7 +274,7 @@ return:
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Tue Jun 18 03:07:34 2013
+    Generated by Epydoc 3.0.1 on Wed Jun 19 03:26:57 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

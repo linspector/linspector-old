@@ -142,7 +142,8 @@
         <tr>
           <td><span class="summary-sig"><a href="linspector.lib.config.parser.ConfigParser-class.html#_read_json_config" class="summary-sig-name" onclick="show_private();">_read_json_config</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">configFilename</span>)</span><br />
-      reads the config File and returns a dictionary, while lowering the first keys</td>
+      reads the config File and returns a dictionary, while lowering the 
+      first keys</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser._read_json_config">source&nbsp;code</a></span>
             
@@ -158,28 +159,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="linspector.lib.config.parser.ConfigParser-class.html#_get_as_list" class="summary-sig-name" onclick="show_private();">_get_as_list</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">configValue</span>)</span><br />
-      In some cases the config permits to define a list or a single value.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser._get_as_list">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr class="private">
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="_create_raw_Object"></a><span class="summary-sig-name">_create_raw_Object</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="linspector.lib.config.parser.ConfigParser-class.html#_create_raw_Object" class="summary-sig-name" onclick="show_private();">_create_raw_Object</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">jsonDict</span>,
         <span class="summary-sig-arg">msgName</span>,
-        <span class="summary-sig-arg">creator</span>)</span></td>
+        <span class="summary-sig-arg">creator</span>)</span><br />
+      creates an Main object from the configuration, but just parses raw 
+      data and hands it to the object</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser._create_raw_Object">source&nbsp;code</a></span>
             
@@ -189,68 +174,16 @@
       
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="create_layouts_from_json"></a><span class="summary-sig-name">create_layouts_from_json</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">jsonLayouts</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.create_layouts_from_json">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="create_hostgroups_from_json"></a><span class="summary-sig-name">create_hostgroups_from_json</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">jsonHostGroups</span>)</span><br />
-      creates Hostgroups from the jsonConfig</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.create_hostgroups_from_json">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="create_members_from_json"></a><span class="summary-sig-name">create_members_from_json</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">jsonMembers</span>)</span><br />
-      creates Members from the jsonConfig</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.create_members_from_json">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="_load_module"></a><span class="summary-sig-name">_load_module</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="linspector.lib.config.parser.ConfigParser-class.html#_load_module" class="summary-sig-name" onclick="show_private();">_load_module</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">clazz</span>,
-        <span class="summary-sig-arg">modPart</span>)</span></td>
+        <span class="summary-sig-arg">modPart</span>)</span><br />
+      imports and caches a module.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser._load_module">source&nbsp;code</a></span>
             
@@ -266,11 +199,13 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="replace_with_import"></a><span class="summary-sig-name">replace_with_import</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="linspector.lib.config.parser.ConfigParser-class.html#replace_with_import" class="summary-sig-name">replace_with_import</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">objList</span>,
         <span class="summary-sig-arg">modPart</span>,
         <span class="summary-sig-arg">items_func</span>,
-        <span class="summary-sig-arg">class_check</span>)</span></td>
+        <span class="summary-sig-arg">class_check</span>)</span><br />
+      replaces configuration dicts with their objects by importing and 
+      creating it in the first step.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.replace_with_import">source&nbsp;code</a></span>
             
@@ -286,11 +221,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="replace_pointer"></a><span class="summary-sig-name">replace_pointer</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="linspector.lib.config.parser.ConfigParser-class.html#replace_pointer" class="summary-sig-name">replace_pointer</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">objectList</span>,
         <span class="summary-sig-arg">replObjectList</span>,
         <span class="summary-sig-arg">id_list_func</span>,
-        <span class="summary-sig-arg">id_get_func</span>)</span></td>
+        <span class="summary-sig-arg">id_get_func</span>)</span><br />
+      replaces objects from the config by ids.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.replace_pointer">source&nbsp;code</a></span>
             
@@ -306,10 +242,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="linspector.lib.config.parser.ConfigParser-class.html#parse_config" class="summary-sig-name">parse_config</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">configFilename</span>)</span><br />
-      parses the json configuration and returns a list of layouts, 
-which contains all nessesary information of the config file.</td>
+          <td><span class="summary-sig"><a name="parse_config"></a><span class="summary-sig-name">parse_config</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">configFilename</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.parse_config">source&nbsp;code</a></span>
             
@@ -354,14 +288,9 @@ which contains all nessesary information of the config file.</td>
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-initializes a new ConfigParser Object
-
-params: 
-    log: pre configured logger Object to post messages while parsing&quot;
-
-</pre>
+  <p>initializes a new ConfigParser Object</p>
+  <p>:param log: pre configured logger Object to post messages while 
+  parsing&quot;</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -381,69 +310,119 @@ params:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-reads the config File and returns a dictionary, while lowering the first keys
-
-params:
-    configFilename: the path under which the configuration file should be found
-
-</pre>
+  <p>reads the config File and returns a dictionary, while lowering the 
+  first keys</p>
+  <p>:param configFilename: the path under which the configuration file 
+  should be found</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
-<a name="_get_as_list"></a>
+<a name="_create_raw_Object"></a>
 <div class="private">
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">_get_as_list</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">configValue</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_create_raw_Object</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">jsonDict</span>,
+        <span class="sig-arg">msgName</span>,
+        <span class="sig-arg">creator</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser._get_as_list">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser._create_raw_Object">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>In some cases the config permits to define a list or a single 
-  value.</p>
-  <p>returns the value as list</p>
+  <p>creates an Main object from the configuration, but just parses raw 
+  data and hands it to the object</p>
+  <p>:param jsonDict: the configuration file part as dict :param msgName: 
+  name of object for error message :param creator: function pointer which 
+  is taking two arguments: identifier of the object and arguments. :should 
+  return an object :return: a list of objects returned by creator</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
-<a name="parse_config"></a>
+<a name="_load_module"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_load_module</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">clazz</span>,
+        <span class="sig-arg">modPart</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser._load_module">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>imports and caches a module.</p>
+  <p>:param clazz: the filename of the module (i.e email, ping...) :param 
+  modPart: the folder of the module. (i.e services, parsers...) :return: 
+  the imported/cached module, or throws an error if it couldn't find it</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="replace_with_import"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_config</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">configFilename</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">replace_with_import</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">objList</span>,
+        <span class="sig-arg">modPart</span>,
+        <span class="sig-arg">items_func</span>,
+        <span class="sig-arg">class_check</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.parse_config">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.replace_with_import">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-parses the json configuration and returns a list of layouts, 
-which contains all nessesary information of the config file.
-It will only parse nessesary Objects.
-Parsing will be done in 3 steps:
-1. get raw Config Objects by just passing the values defined inside the config
-2. replace references by objects
-3. do sanity checks
-
-params:
-    configFilename: indicates which configuration file to parse
-
-</pre>
+  <p>replaces configuration dicts with their objects by importing and 
+  creating it in the first step. In the second step the original list of 
+  json config dicts gets replaced by the loaded objects</p>
+  <p>:param objList: the list of objects which is iterated on :param 
+  modPart: the folder from the module (i.e tasks, parsers) :param 
+  items_func: function to get a pointer on the list of json-config-objects 
+  to replace. Takes one argument and :param class_check: currently 
+  unsupported</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="replace_pointer"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">replace_pointer</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">objectList</span>,
+        <span class="sig-arg">replObjectList</span>,
+        <span class="sig-arg">id_list_func</span>,
+        <span class="sig-arg">id_get_func</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="linspector.lib.config.parser-pysrc.html#ConfigParser.replace_pointer">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>replaces objects from the config by ids.</p>
+  <p>:param objectList: the list of objects to be iterated on :param 
+  replObjectList: the list of objects to replace :param id_list_func: 
+  function taking one argument as object and should return a list of config
+  ids to replace :param id_get_func: function taking one config-object as 
+  argument and should return the config id to compare</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -475,7 +454,7 @@ params:
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Tue Jun 18 03:07:33 2013
+    Generated by Epydoc 3.0.1 on Wed Jun 19 03:26:56 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
