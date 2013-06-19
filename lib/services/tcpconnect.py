@@ -6,7 +6,6 @@ not use a parser.
 """
 
 import socket
-from lib.config.services import Service
 from service import Service
 
 
