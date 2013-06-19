@@ -12,6 +12,7 @@ from lib.core.logger import Logger
 from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
 
+log = None
 
 def parseArgs():
     parser = argparse.ArgumentParser(
@@ -43,7 +44,7 @@ def parseArgs():
 
 
 def handleJob(jobInfo):
-    jobInfo.handleCall()
+    log.w(jobInfo)
 
 
 def main():
@@ -54,11 +55,20 @@ def main():
 
     if args.action == "start":
         configParser = FullConfigParser(log)
-        config = configParser.parse_config(args.config)
+        layouts, core = configParser.parse_config(args.config)
 
-        #jobs = []
-        #scheduler = Scheduler()
-        #scheduler.start()
+        scheduler = Scheduler()
+
+
+        jobs = []
+        for layout in layouts:
+            if layout.is_enabled():
+                for hg in layout.get_hostgroups():
+                    for services in hg.get_services():
+                        for service in services:
+                            for period in service.get_periods():
+                                jobs.append(period.createJob(scheduler, service, handleJob))
+        scheduler.start()
         
         #log.i("starting linspector: reading config... (" + args.config + ")")
         #config_parser = ConfigParser(log)

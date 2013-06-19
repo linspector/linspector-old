@@ -254,5 +254,8 @@ class FullConfigParser(ConfigParser):
         for hg in hostgroups:
             for service in hg.get_services():
                 service.set_hostgroup(hg)
+        core = None
+        if "core" in self.jsonDict:
+            core = self.jsonDict["core"]
 
-        return layouts
+        return (layouts, core)
