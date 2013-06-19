@@ -40,6 +40,10 @@
                 {
                      "class": "syslog",
                      "args":{ "host": "syslog.linspector.org", "user": "syslog", "password": "secret" }
+                },
+                {
+                     "class": "mariadb",
+                     "args":{ "host": "mariadb.linspector.org", "port": "3306", "user": "maria", "password": "secret", "database": "linspector" }
                 }
             ],
             "services":[
