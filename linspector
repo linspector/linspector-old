@@ -78,7 +78,7 @@ def main():
 
                             log.i("check from          hostgroup: id(" + str(id(hostgroup)) + ") " + str(hostgroup))
                             log.i("check from sr.get_hostgroup(): id(" + str(id(sr.get_hostgroup)) + ") " + str(sr.get_hostgroup()))
-                            sr = hostgroup.__dict__["_services"]
+                            sr = hostgroup.__dict__["_HostGroup__services"]
 
                         if not isinstance(sr, list):
                             sr = sr.get_hostgroup().get_services()
