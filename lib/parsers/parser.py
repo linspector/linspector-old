@@ -1,5 +1,5 @@
 class Parser:
-    def __init__(self):
+    def __init__(self, **kwargs):
         pass
 
     def parse_data(self, data):

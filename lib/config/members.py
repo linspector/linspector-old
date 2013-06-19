@@ -3,14 +3,17 @@ import re
 
 class Member:
     def __init__(self, nameid, name="", phone="", comment="", parent="", tasks=None):
-        self.id = id
+        self.id = nameid
         self.name = name
         self.phone = phone
         self.tasks = []
         self.add_task(tasks)
         self.comment = comment
         self.parent = parent
-        
+
+    def get_id(self):
+        return self.id
+
     def add_task(self, task):
         if task is None:
             return
