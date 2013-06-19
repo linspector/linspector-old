@@ -3,6 +3,7 @@ from subprocess import Popen
 from subprocess import CalledProcessError
 from datetime import datetime as dt
 
+
 class Command:
     def __init__(self, command, log):
         self.command = command

@@ -1,14 +1,15 @@
-
 class HostGroupException(Exception):
     def __init__(self, msg):
         self.msg = msg
         
     def __str__(self):
         return repr(self.msg)
-    
+
+
 class HostGroupMissingArgumentException(HostGroupException):
     def __init__(self, missingArgument, hostgroupName):
         super(HostGroupMissingArgumentException, self).__init__("no " + missingArgument + " defined for Hostgroup " + hostgroupName)
+
 
 class HostGroup:
     def __init__(self, name, **kwargs):

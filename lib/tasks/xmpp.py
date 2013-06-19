@@ -18,6 +18,5 @@ class XmppTask(Task):
         pass
 
 
-
 def create(taskDict):
     return XmppTask(**taskDict)
