@@ -212,7 +212,7 @@ class FullConfigParser(ConfigParser):
         members = self._create_raw_Object(self.jsonDict[KEY_MEMBERS], "Member", creator)
         
         creator = lambda name, values: HostGroup(name, **values)
-        hostgroups = self._create_raw_Object(self.jsonDict[KEY_HOSTGROUPS], "Hostgroup", creator)
+        self.hostgroups = self._create_raw_Object(self.jsonDict[KEY_HOSTGROUPS], "Hostgroup", creator)
         
         creator = parsePeriodList
         periods = self._create_raw_Object(self.jsonDict[KEY_PERIODS], "Period", creator)
@@ -220,14 +220,14 @@ class FullConfigParser(ConfigParser):
         #2. import and replace
         items_func = lambda hostgroup: hostgroup.get_services()
         class_check = lambda service: isinstance(service, Service)
-        self.replace_with_import(hostgroups, MOD_SERVICES, items_func, class_check)
+        self.replace_with_import(self.hostgroups, MOD_SERVICES, items_func, class_check)
         
         items_func = lambda hostgroup: hostgroup.get_processors()
         class_check = lambda processor: isinstance(processor, Processor)
-        self.replace_with_import(hostgroups, MOD_PROCESSORS, items_func, class_check)
+        self.replace_with_import(self.hostgroups, MOD_PROCESSORS, items_func, class_check)
 
         services = []
-        for hg in hostgroups:
+        for hg in self.hostgroups:
             services.extend(hg.get_services())
 
         items_func = lambda service: service.get_parser()
@@ -241,7 +241,7 @@ class FullConfigParser(ConfigParser):
         #replace object pointer
         id_list_func = lambda hostgroup: hostgroup.get_members()
         id_get_func = lambda member: member.get_id()
-        self.replace_pointer(hostgroups, members, id_list_func, id_get_func)
+        self.replace_pointer(self.hostgroups, members, id_list_func, id_get_func)
 
         id_list_func = lambda  service: service.get_periods()
         id_get_func = lambda period: period.get_name()
@@ -249,9 +249,9 @@ class FullConfigParser(ConfigParser):
 
         id_list_func = lambda layout: layout.get_hostgroups()
         id_get_func = lambda  hostgroup: hostgroup.get_name()
-        self.replace_pointer(layouts, hostgroups, id_list_func, id_get_func)
+        self.replace_pointer(layouts, self.hostgroups, id_list_func, id_get_func)
 
-        for hg in hostgroups:
+        for hg in self.hostgroups:
             for service in hg.get_services():
                 service.set_hostgroup(hg)
         core = None
