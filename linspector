@@ -64,7 +64,7 @@ def main():
         for layout in layouts:
             if layout.is_enabled():
                 for hostgroup in layout.get_hostgroups():
-                    for service in hostgroup.s:
+                    for service in hostgroup.get_services():
                         for period in service.get_periods():
                             jobs.append(period.createJob(scheduler, service, handleJob))
         scheduler.start()
