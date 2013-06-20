@@ -9,7 +9,7 @@
     "periods": {
         "doh": {"seconds": 10, "comment": "OMG, this means work"},
         "moes_time": {"minute":"0", "hour": "12", "day_of_week": "4", "comment": "much better"},
-        "marges_birthday": { "date": "1965-2-24 04:00:00"}
+        "marges_birthday": { "date": "2017-2-24 04:00:00"}
     },
     "hostgroups":{
         "power_plant":{
