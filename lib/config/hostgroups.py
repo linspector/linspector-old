@@ -57,7 +57,7 @@ class HostGroup(object):
             l.extend(item)
         else:
             l.append(item)
-    
+
     def add_members(self, member):
         self.__add_internal(self.get_members(), member)
             
@@ -80,11 +80,8 @@ class HostGroup(object):
         return self.processors
     
     def get_services(self):
-        s = self.__services
-        if not isinstance(s, list):
-            s = self.__dict__["_HostGroup__services"]
-        return s
-    
+        return self.__services
+
     def get_hosts(self):
         return self.hosts
     

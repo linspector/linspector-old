@@ -10,7 +10,6 @@ from members import Member
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
 from lib.services.service import Service
-#print id(Service)
 from lib.processors.processor import Processor
 from lib.parsers.parser import Parser
 from lib.tasks.task import  Task
