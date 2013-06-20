@@ -59,7 +59,7 @@ def main():
 
         scheduler = Scheduler()
 
-
+        scheduler.start()
         jobs = []
         for layout in layouts:
             if layout.is_enabled():
@@ -67,7 +67,7 @@ def main():
                     for service in hostgroup.get_services():
                         for period in service.get_periods():
                             jobs.append(period.createJob(scheduler, service, handleJob))
-        scheduler.start()
+
         
         #log.i("starting linspector: reading config... (" + args.config + ")")
         #config_parser = ConfigParser(log)

@@ -66,4 +66,7 @@ class DatePeriod(Period):
         return ret
         
     def createJob(self, scheduler, jobInfo, func):
-        return scheduler.add_date_job(func, self.date, jobInfo)
+        try:
+            return scheduler.add_date_job(func=func, date=self.date, args=[jobInfo])
+        except Exception, e:
+            return None
