@@ -6,7 +6,7 @@ class LayoutException(Exception):
         return repr(self.msg)
 
 
-class Layout:
+class Layout(object):
     def __init__(self, name, enabled=False, hostgroups=None):
         self._name = name
         self._enabled = enabled

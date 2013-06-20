@@ -3,7 +3,7 @@ This is what job_function needs as parameter for each job to successfully
 execute.
 """
 
-from command import Command
+from lib.core.command import Command
 
 
 def generateId():
