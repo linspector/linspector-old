@@ -7,7 +7,7 @@ from lib.processors.processor import Processor
 
 class SyslogProcessor(Processor):
     def __init__(self, **kwargs):
-        pass
+        Processor.__init__(self, **kwargs)
 
 
 def create(kwargs):
