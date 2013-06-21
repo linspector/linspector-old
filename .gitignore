@@ -8,6 +8,7 @@ nbproject
 *.so
 
 distfiles
+docs
 files
 local
 log
