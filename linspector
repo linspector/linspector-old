@@ -11,6 +11,7 @@ from lib.core.job import JobInfo
 from lib.core.logger import Logger
 from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
+from lib.core.job import JobInfo
 
 log = None
 
@@ -44,7 +45,7 @@ def parseArgs():
 
 
 def handleJob(jobInfo):
-    log.w(jobInfo)
+    jobInfo.handle_call()
 
 
 def main():
@@ -66,7 +67,16 @@ def main():
                 for hostgroup in layout.get_hostgroups():
                     for service in hostgroup.get_services():
                         for period in service.get_periods():
-                            jobs.append(period.createJob(scheduler, service, handleJob))
+                            jobInfo = JobInfo(service)
+                            job = period.createJob(scheduler, jobInfo, handleJob)
+                            if job is not None:
+                                jobInfo.set_job(job)
+                                jobInfo.set_logger(log)
+                                jobs.append(jobInfo)
+
+        while True:
+            #Todo: implement user handle
+            time.sleep(10)
 
         
         #log.i("starting linspector: reading config... (" + args.config + ")")
