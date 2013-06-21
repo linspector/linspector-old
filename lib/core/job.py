@@ -14,42 +14,24 @@ def generateId():
 
 
 class JobInfo:
-    def __init__(self, hostgroupname, members, hosts, hostServices, threshold, parent=None):
-        self.members = members
-        self.hosts = hosts
-        self.hostServices = hostServices
-        self.threshold = threshold
-        self.parent = parent
+    def __init__(self, service):
+        self.service = service
         self.name = generateId()
-        #self.name = hostgroupname +  str([str("_" + s.service.name ) for s in hostServices])
-        self.jobs = []
+        self.job = None
         
     def __str__(self):
         return "JobInfo " + str(self.name)
         
-    def setLogger(self, log):
+    def set_logger(self, log):
         self.log = log
-        
-    def appendJob(self, job):
-        self.jobs.append(job)
-        
-    def getNextExecutionTime(self):
-        nextExecution = None
-        for job in self.jobs:
-            jobExec = job.trigger.get_next_fire_time()
-            if nextExecution is None or nextExecution > jobExec:
-                nextExecution = jobExec
-        return nextExecution
-        
-    def handleCall(self):
+
+    def set_job(self, job):
+        self.job = job
+
+    def handle_call(self):
         self.log.d("handle call")
-        self.log.d(self.hostServices)
+        self.log.d(self.service)
         try:
-            
-            for hs in self.hostServices:
-                self.log.d(str(hs))
-                cmd = Command(hs.service.command, self.log)
-                cmd.call()
-                self.log.d(cmd.getAllOutput())
-        except Exception:
-                self.log.d(Exception)
+            self.service._execute()
+        except Exception, e:
+                self.log.d(e)
