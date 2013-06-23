@@ -32,8 +32,8 @@ class Service(object):
         
         self._fails = {}        
         if KEY_FAILS in kwargs:
-            self.put_fails(kwargs[KEY_FAILS])     
-        
+            self.put_fails(kwargs[KEY_FAILS])
+
         self._periods = []
         if KEY_PERIODS in kwargs:
             self.add_periods(kwargs[KEY_PERIODS])
@@ -107,11 +107,14 @@ class Service(object):
 
     def _execute(self):
         self.pre_execute()
-        executionResult = self.execute()
-        parseResult = self.parse_result(executionResult)
+        result = {}
+        for host in self.get_hostgroup().get_hosts():
+            result[host] = self.execute(host)
+
+        parseResult = self.parse_result(result)
         self.handle_result(parseResult)
 
-    def execute(self):
+    def execute(self, host):
         pass
 
     def pre_execute(self):
@@ -120,7 +123,7 @@ class Service(object):
     def parse_result(self, executionResult):
         result = []
         for parser in self.get_parser():
-            result.append(self._parser._parse(executionResult))
+            result.append(parser.parse(executionResult))
 
     def handle_result(self, parseResult):
         pass
