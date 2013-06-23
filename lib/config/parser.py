@@ -242,12 +242,12 @@ class FullConfigParser(ConfigParser):
         id_get_func = lambda member: member.get_id()
         self.replace_pointer(self.hostgroups, members, id_list_func, id_get_func)
 
-        id_list_func = lambda  service: service.get_periods()
+        id_list_func = lambda service: service.get_periods()
         id_get_func = lambda period: period.get_name()
         self.replace_pointer(services, periods, id_list_func, id_get_func)
 
         id_list_func = lambda layout: layout.get_hostgroups()
-        id_get_func = lambda  hostgroup: hostgroup.get_name()
+        id_get_func = lambda hostgroup: hostgroup.get_name()
         self.replace_pointer(layouts, self.hostgroups, id_list_func, id_get_func)
 
         for hg in self.hostgroups:
@@ -257,4 +257,4 @@ class FullConfigParser(ConfigParser):
         if "core" in self.jsonDict:
             core = self.jsonDict["core"]
 
-        return (layouts, core)
+        return layouts, core

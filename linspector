@@ -13,7 +13,6 @@ from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
 from lib.core.job import JobInfo
 
-log = None
 
 def parseArgs():
     parser = argparse.ArgumentParser(
@@ -78,7 +77,6 @@ def main():
             #Todo: implement user handle
             time.sleep(10)
 
-        
         #log.i("starting linspector: reading config... (" + args.config + ")")
         #config_parser = ConfigParser(log)
         #config = config_parser.parse_config(args.config)
