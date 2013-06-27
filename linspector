@@ -13,6 +13,9 @@ from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
 from lib.core.job import JobInfo
 
+import tornado.ioloop
+import tornado.web
+
 
 def parseArgs():
     parser = argparse.ArgumentParser(
@@ -47,6 +50,21 @@ def handleJob(jobInfo):
     jobInfo.handle_call()
 
 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Linspector: (<a href='/jobs'>jobs</a>)")
+
+
+class JoblistHandler(tornado.web.RequestHandler):
+    def initialize(self, jobs):
+        self.jobs = jobs
+
+    def get(self):
+        self.write("Linspector Job List:<br/>")
+        for job in self.jobs:
+            self.write("JOB<br/>")
+
+
 def main():
     args = parseArgs()
     log = Logger(args.logfile, args.loglevel)
@@ -72,6 +90,14 @@ def main():
                                 jobInfo.set_job(job)
                                 jobInfo.set_logger(log)
                                 jobs.append(jobInfo)
+
+        application = tornado.web.Application([
+            (r"/", MainHandler),
+            (r"/jobs", JoblistHandler, dict(jobs=scheduler.get_jobs()))
+        ])
+
+        application.listen(8888)
+        tornado.ioloop.IOLoop.instance().start()
 
         while True:
             #Todo: implement user handle
