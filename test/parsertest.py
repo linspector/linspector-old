@@ -11,6 +11,27 @@ class DummyParent(object):
         return self.argsToReplace
 
 
+def _create_raw_Object(jsonDict, msgName, creator):
+        """
+        creates an Main object from the configuration, but just parses raw data and hands it to the object
+
+        :param jsonDict: the configuration file part as dict
+        :param msgName: name of object for error message
+        :param creator: function pointer which is taking two arguments: identifier of the object and arguments.
+        :should return an object
+        :return: a list of objects returned by creator
+        """
+        items = []
+        for key, val in jsonDict.items():
+            try:
+                item = creator(key, val)
+                items.append(item)
+            except Exception, e:
+                print "ignoring " + msgName + ": " + key + "! reason:"
+                print e
+        return items
+
+
 def replace_with_import(objList, items_func):
         """
         replaces configuration dicts with their objects by importing and creating it in the first step.
@@ -46,24 +67,27 @@ def replace_with_import(objList, items_func):
 
 jsonFile = '''
 {
-    "someDummy": {
-        "argsToReplace":
-        [
-            {"class": "dummy", "args": {"someargs":"ok"}},
-            {"class": "dummy", "args": {"someother":"blah"}}
-        ]
+    "tests": {
+        "someDummy": {
+            "argsToReplace":
+            [
+                {"class": "dummy", "args": {"someargs":"ok"}},
+                {"class": "dummy", "args": {"someargs":"blah"}}
+            ]
+        }
     }
 }
 '''
 
 jsonDict = json.loads(jsonFile)
 
-dummys=[]
-for key, val in jsonDict.items():
-    dummys.append(DummyParent(key, **val))
+
+creator = lambda name, values: DummyParent(name, **values)
+dummys = _create_raw_Object(jsonDict["tests"], "DummyParent", creator)
 
 items_func = lambda dummy: dummy.get_args_to_replace()
 replace_with_import(dummys, items_func)
 
-
+for d in dummys:
+    print d.__dict__
 
