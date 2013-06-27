@@ -8,7 +8,6 @@ import struct
 
 
 class Packet(object):
-
     """Creates ICMPv4 and v6 packets.
 
     header
@@ -101,7 +100,6 @@ class Packet(object):
         self.type = None
         self.code = None
 
-
     def __repr__(self):
         return "<ICMPv%s packet: type = %s, code = %s, data length = %s>" % \
                 (self.version, self.type, self.code, len(self.data))
@@ -182,6 +180,7 @@ class PingResponse(object):
         return "%d bytes from %s: id=%s, seq=%u, rtt=%.3f ms" % \
                (self.bufferLength, self.address, self.ident, self.seq, self.rtt)
 
+
 class PingService(Service):
     def __init__(self, **kwargs):
         super(PingService, self).__init__(**kwargs)
@@ -204,7 +203,6 @@ class PingService(Service):
         os.setuid(processId)
 
         base_packet = Packet((8, 0))
-
 
         seqNum = 0
         ## create ping packet
@@ -244,7 +242,6 @@ class PingService(Service):
                 for task in member.get_tasks():
                     if failKey == task.get_task_type():
                         task._execute()
-
 
 
 def create(kwargs):
