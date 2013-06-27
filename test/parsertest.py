@@ -32,7 +32,7 @@ def replace_with_import(objList, items_func):
                     p = path.join("lib", clazz + ".py")
                     mod = imp.load_source(clazz, p)
                     item = mod.create(clazzItem)
-                    items.append(item)
+                    repl.append(item)
                 except ImportError, err:
                     print "could not import " + clazz + ": " + str(clazzItem) + "! reason"
                     print str(err)
