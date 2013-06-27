@@ -3,7 +3,8 @@
         "homer":{
             "name": "Homer Simpson",
             "comment": "Security Inspector",
-            "tasks": [{"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}]
+            "tasks": [{"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}},
+            {"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}]
         }
     },
     "periods": {
@@ -22,14 +23,14 @@
                 {
                     "class": "ping",
                     "fails": {"donut": 2000},
-                    "periods":["doh"],
+                    "periods": ["doh"],
                     "threshold": 500
                 },
                 {
-                    "class": "ping",
-                    "fails": {"donut": 2000},
-                    "periods":["doh"],
-                    "threshold": 500
+                  "class": "ping",
+                  "fails": {"donut": 2000},
+                  "periods": ["doh"],
+                  "threshold": 500
                 },
                 {
                     "class": "tcpconnect",
