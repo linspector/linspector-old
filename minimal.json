@@ -26,6 +26,12 @@
                     "threshold": 500
                 },
                 {
+                    "class": "ping",
+                    "fails": {"donut": 2000},
+                    "periods":["doh"],
+                    "threshold": 500
+                },
+                {
                     "class": "tcpconnect",
                     "args": {"port": 23232},
                     "periods": ["moes_time", "marges_birthday"],
