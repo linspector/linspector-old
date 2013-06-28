@@ -62,7 +62,7 @@ class JoblistHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Linspector Job List:<br/>")
         for job in self.jobs:
-            self.write("JOB<br/>")
+            self.write("Job: " + str(job) + "<br/>")
 
 
 def main():
