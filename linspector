@@ -90,7 +90,6 @@ def main():
                                 jobInfo.set_job(job)
                                 jobInfo.set_logger(log)
                                 jobs.append(jobInfo)
-
         application = tornado.web.Application([
             (r"/", MainHandler),
             (r"/jobs", JoblistHandler, dict(jobs=scheduler.get_jobs()))

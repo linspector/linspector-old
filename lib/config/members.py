@@ -2,14 +2,12 @@ import re
 
 
 class Member:
-    def __init__(self, nameid, name="", phone="", comment="", parent="", tasks=None):
-        self.id = nameid
+    def __init__(self, id, name="",  comment="", tasks=None):
+        self.id = id
         self.name = name
-        self.phone = phone
         self.tasks = []
         self.add_task(tasks)
         self.comment = comment
-        self.parent = parent
 
     def get_id(self):
         return self.id
