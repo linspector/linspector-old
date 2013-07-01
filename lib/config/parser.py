@@ -105,11 +105,11 @@ class ConfigParser:
         """
         mods = self._loadedMods[modPart]
         if clazz in mods:
-            return mods["class"]
+            return mods[clazz]
         else:
             #mod = __import__(clazz)
-            path = join("lib", modPart, clazz + ".py")
-            mod = imp.load_source(clazz, path)
+            p = join("lib", modPart, clazz + ".py")
+            mod = imp.load_source(clazz, p)
             mods[clazz] = mod
             return mod
     
