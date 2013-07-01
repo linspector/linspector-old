@@ -32,6 +32,7 @@ class JobInfo:
         self.log.d("handle call")
         self.log.d(self.service)
         try:
+
             self.service._execute()
         except Exception, e:
                 self.log.d(e)

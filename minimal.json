@@ -3,8 +3,10 @@
         "homer":{
             "name": "Homer Simpson",
             "comment": "Security Inspector",
-            "tasks": [{"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}},
-            {"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}]
+            "tasks": [
+                {"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}},
+                {"class":"email", "type": "do", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}
+            ]
         }
     },
     "periods": {
