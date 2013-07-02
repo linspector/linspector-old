@@ -5,7 +5,7 @@
             "comment": "Security Inspector",
             "tasks": [
                 {"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}},
-                {"class":"email", "type": "do", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}
+                {"class":"email", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}
             ]
         }
     },
@@ -26,18 +26,19 @@
                     "class": "ping",
                     "fails": {"donut": 2000},
                     "periods": ["doh"],
-                    "threshold": 500
+                    "threshold": 50
                 },
                 {
                   "class": "ping",
-                  "fails": {"donut": 2000},
+                  "fails": {"donut": 1000},
                   "periods": ["doh"],
-                  "threshold": 500
+                  "threshold": 100
                 },
                 {
                     "class": "tcpconnect",
                     "args": {"port": 23232},
                     "periods": ["moes_time", "marges_birthday"],
+                    "fails": {"donut": 0},
                     "threshold": 0,
                     "comment": "my personal reminder, hehe"
                 }

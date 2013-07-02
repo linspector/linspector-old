@@ -7,11 +7,10 @@ import argparse
 import time
 import logging
 import subprocess as sp
-from lib.core.job import JobInfo
 from lib.core.logger import Logger
 from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
-from lib.core.job import JobInfo
+from lib.core.job import Job
 
 import tornado.ioloop
 import tornado.web
@@ -84,12 +83,12 @@ def main():
                 for hostgroup in layout.get_hostgroups():
                     for service in hostgroup.get_services():
                         for period in service.get_periods():
-                            jobInfo = JobInfo(service)
-                            job = period.createJob(scheduler, jobInfo, handleJob)
-                            if job is not None:
-                                jobInfo.set_job(job)
-                                jobInfo.set_logger(log)
-                                jobs.append(jobInfo)
+                            job = Job(service)
+                            schedulerJob = period.createJob(scheduler, job, handleJob)
+                            if schedulerJob is not None:
+                                job.set_job(schedulerJob)
+                                job.set_logger(log)
+                                jobs.append(job)
         application = tornado.web.Application([
             (r"/", MainHandler),
             (r"/jobs", JoblistHandler, dict(jobs=scheduler.get_jobs()))
