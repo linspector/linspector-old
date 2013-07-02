@@ -12,7 +12,8 @@ from periods import CronPeriod, DatePeriod, IntervalPeriod
 from lib.services.service import Service
 from lib.processors.processor import Processor
 from lib.parsers.parser import Parser
-from lib.tasks.task import  Task
+from lib.tasks.task import Task
+from argparse import Namespace
 
 MOD_SERVICES     = "services"
 MOD_PROCESSORS   = "processors"

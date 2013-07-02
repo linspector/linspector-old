@@ -105,25 +105,40 @@ class Service(object):
     def needs_arguments(self):
         return False
 
-    def _execute(self):
-        self.pre_execute()
-        result = {}
-        for host in self.get_hostgroup().get_hosts():
-            result[host] = self.execute(host)
+    def set_execution_successful(self, successful):
+        self.executionSuccessful = successful
 
-        parseResult = self.parse_result(result)
-        self.handle_result(parseResult)
+    def was_execution_successful(self):
+        return self.executionSuccessful
+
+    def _execute(self, host):
+        try:
+
+            self.set_execution_successful(True)
+            self.pre_execute(host)
+
+            result = self.execute(host)
+            parseResult = self.parse_result(result)
+            self.post_execute(parseResult)
+            return parseResult
+        except Exception, e:
+            self.set_execution_successful(False)
+            self._threshold -= 1
+            raise e
 
     def execute(self, host):
         pass
 
-    def pre_execute(self):
+    def pre_execute(self, host):
         pass
 
     def parse_result(self, executionResult):
+
         result = []
         for parser in self.get_parser():
             result.append(parser.parse(executionResult))
 
-    def handle_result(self, parseResult):
+        return result
+
+    def post_execute(self, parseResult):
         pass
