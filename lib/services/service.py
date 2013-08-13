@@ -15,8 +15,7 @@ class Service(object):
             self.add_arguments(kwargs[KEY_ARGS])
         elif self.needs_arguments():
             raise Exception("Error: needs arguments but none provided!")
-        
-        self._host = None
+
         
         self._parser = []
         if KEY_PARSER in kwargs:
@@ -85,12 +84,6 @@ class Service(object):
     
     def get_comment(self):
         return self._comment
-    
-    def set_host(self, host):
-        self._host = host
-        
-    def get_host(self):
-        return self._host
     
     def get_parser(self):
         return self._parser

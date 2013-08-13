@@ -12,8 +12,6 @@ from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
 from lib.core.job import Job
 
-import tornado.ioloop
-import tornado.web
 
 
 def parseArgs():
@@ -49,20 +47,6 @@ def handleJob(jobInfo):
     jobInfo.handle_call()
 
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Linspector: (<a href='/jobs'>jobs</a>)")
-
-
-class JoblistHandler(tornado.web.RequestHandler):
-    def initialize(self, jobs):
-        self.jobs = jobs
-
-    def get(self):
-        self.write("Linspector Job List:<br/>")
-        for job in self.jobs:
-            self.write("Job: " + str(job) + "<br/>")
-
 
 def main():
     args = parseArgs()
@@ -82,20 +66,15 @@ def main():
             if layout.is_enabled():
                 for hostgroup in layout.get_hostgroups():
                     for service in hostgroup.get_services():
-                        for period in service.get_periods():
-                            job = Job(service)
-                            schedulerJob = period.createJob(scheduler, job, handleJob)
-                            if schedulerJob is not None:
-                                job.set_job(schedulerJob)
-                                job.set_logger(log)
-                                jobs.append(job)
-        application = tornado.web.Application([
-            (r"/", MainHandler),
-            (r"/jobs", JoblistHandler, dict(jobs=scheduler.get_jobs()))
-        ])
+                        for host in hostgroup.get_hosts():
+                            for period in service.get_periods():
+                                job = Job(service, host)
+                                schedulerJob = period.createJob(scheduler, job, handleJob)
+                                if schedulerJob is not None:
+                                    job.set_job(schedulerJob)
+                                    job.set_logger(log)
+                                    jobs.append(job)
 
-        application.listen(8888)
-        tornado.ioloop.IOLoop.instance().start()
 
         while True:
             #Todo: implement user handle

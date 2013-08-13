@@ -23,17 +23,18 @@ class TcpconnectService(Service):
     def needs_arguments(self):
         return True
 
-    def execute(self, log):
+    def execute(self, host):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         except socket.error, msg:
-            log.w("%s\n" % msg[1])
+
+            #log.w("%s\n" % msg[1])
             self.errorcode = 1
 
         try:
             sock.connect((self.host, self.port))
         except socket.error, msg:
-            log.w("%s\n" % msg[1])
+            #log.w("%s\n" % msg[1])
             self.errorcode = 2
 
         sock.close()

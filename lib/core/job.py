@@ -11,14 +11,12 @@ def generateId():
         yield i
         i += 1
 
-
 class Job:
-    def __init__(self, service):
+    def __init__(self, service, host):
         self.service = service
+        self.host = host
         self.jobInfos = []
-        self.hostThreshold = {}
-        for host in service.get_hostgroup().get_hosts():
-            self.hostThreshold[host] = service.get_threshold()
+        self.jobThreshold = 0
 
     def __str__(self):
         return str(self.__dict__)
@@ -29,21 +27,36 @@ class Job:
     def set_job(self, job):
         self.job = job
 
+    def handle_threshold(self, serviceThreshold, executionSucessful):
+        if executionSucessful:
+            pass
+        else:
+            self.jobThreshold += 1
+
+        if self.jobThreshold >= serviceThreshold:
+            self.handle_alarm(self.jobThreshold-serviceThreshold)
+
+    def handle_alarm(self, threholdOffset):
+        pass
+
     def handle_call(self):
         self.log.d("handle call")
         self.log.d(self.service)
+        try:
+            jobInfo = JobInfo(self.host, self.service)
+            result = self.service._execute(self.host)
+            jobInfo.set_result(result)
+            jobInfo.set_successfull(self.service.was_execution_successful())
+            jobInfo.set_execution_end()
 
-        for host in self.service.get_hostgroup().get_hosts():
-            try:
-                jobInfo = JobInfo(host, self.service)
-                result = self.service._execute(host)
-                jobInfo.set_result(result)
-                jobInfo.set_successfull(self.service.was_execution_successful())
-                jobInfo.set_execution_end()
+            self.handle_threshold(self.service.get_threshold(), self.service.was_execution_successful())
 
-            except Exception, e:
-                self.log.d(e)
 
+            self.jobInfos.append(jobInfo)
+
+
+        except Exception, e:
+            self.log.d(e)
 
 class JobInfo:
     def __init__(self, host, service):
@@ -60,3 +73,5 @@ class JobInfo:
 
     def set_execution_successful(self, successful):
         self.executionSuccess = successful
+
+
