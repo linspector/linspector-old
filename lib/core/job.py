@@ -4,11 +4,13 @@ execute.
 """
 from datetime import datetime
 
+
 def generateId():
     i = 0
     while True:
         yield i
         i += 1
+
 
 class Job:
     def __init__(self, service):
@@ -17,7 +19,6 @@ class Job:
         self.hostThreshold = {}
         for host in service.get_hostgroup().get_hosts():
             self.hostThreshold[host] = service.get_threshold()
-        
 
     def __str__(self):
         return str(self.__dict__)
@@ -59,5 +60,3 @@ class JobInfo:
 
     def set_execution_successful(self, successful):
         self.executionSuccess = successful
-
-
