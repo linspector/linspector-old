@@ -37,8 +37,7 @@ class Service(object):
         if KEY_PERIODS in kwargs:
             self.add_periods(kwargs[KEY_PERIODS])
         
-        self.errorcode = 0
-        self.errormessage = None
+
         
     def add_arguments(self, args):
         for key, val in args.items():
@@ -98,42 +97,31 @@ class Service(object):
     def needs_arguments(self):
         return False
 
-    def set_execution_successful(self, successful):
-        self.executionSuccessful = successful
-
-    def was_execution_successful(self):
-        return self.executionSuccessful
-
-    def _execute(self, host):
+    def _execute(self, jobInfo):
         try:
+            self.pre_execute(jobInfo)
 
-            self.set_execution_successful(True)
-            self.pre_execute(host)
-
-            result = self.execute(host)
-            parseResult = self.parse_result(result)
-            self.post_execute(parseResult)
-            return parseResult
+            self.execute(jobInfo)
+            self.parse_result(jobInfo)
+            self.post_execute(jobInfo)
         except Exception, e:
             self.set_execution_successful(False)
             self._threshold -= 1
             raise e
 
-    def execute(self, host):
+    def execute(self, jobInfo):
         pass
 
-    def pre_execute(self, host):
-        self.errorcode = 0
-        self.errormessage = None
+    def pre_execute(self, jobInfo):
         pass
 
-    def parse_result(self, executionResult):
+    def parse_result(self, jobInfo):
 
         result = []
         for parser in self.get_parser():
-            result.append(parser.parse(executionResult))
+            result.append(parser.parse(jobInfo))
 
         return result
 
-    def post_execute(self, parseResult):
+    def post_execute(self, jobInfo):
         pass

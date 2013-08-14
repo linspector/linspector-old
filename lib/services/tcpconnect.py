@@ -23,25 +23,25 @@ class TcpconnectService(Service):
     def needs_arguments(self):
         return True
 
-    def execute(self, host):
+    def execute(self, jobInfo):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         except socket.error, msg:
             #log.w("%s\n" % msg[1])
-            self.errorcode = 1
-            self.errormessage = "Could not create socket."
+            jobInfo.set_errorcode(1)
+            jobInfo.set_message("Could not create socket.")
 
         try:
-            sock.connect((host, self.port))
+            sock.connect((jobInfo.get_host(), self.port))
         except socket.error, msg:
             #log.w("%s\n" % msg[1])
-            self.errorcode = 2
-            self.errormessage = "Could not establish connection."
+            jobInfo.set_errorcode(2)
+            jobInfo.set_message("Could not establish connection.")
 
-        print(self.errorcode)
-        print(self.errormessage)
+        if jobInfo.get_errorcode() == -1:
+            jobInfo.set_execution_successful(True)
         sock.close()
-        return
+
 
 
 def create(kwargs):
