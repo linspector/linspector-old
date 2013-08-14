@@ -29,14 +29,17 @@ class TcpconnectService(Service):
         except socket.error, msg:
             #log.w("%s\n" % msg[1])
             self.errorcode = 1
+            self.errormessage = "Could not create socket."
 
         try:
             sock.connect((host, self.port))
         except socket.error, msg:
             #log.w("%s\n" % msg[1])
             self.errorcode = 2
+            self.errormessage = "Could not establish connection."
 
         print(self.errorcode)
+        print(self.errormessage)
         sock.close()
         return
 

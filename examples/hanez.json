@@ -8,24 +8,26 @@
         }
     },
     "periods": {
-        "always": { "seconds": 5, "comment": "Yes, yes, yes!" }
+        "always": { "seconds": 5 }
     },
     "hostgroups":{
-        "hanez":{
+        "servers":{
             "members": ["hanez"],
-            "hosts": ["a.systemchaos.org"],
+            "hosts": [ "a.systemchaos.org", "b.systemchaos.org" ],
             "services":[
                 {
                     "class": "tcpconnect",
                     "args": { "port": 80 },
                     "periods": ["always"],
-                    "fails": { "email": 0 },
                     "threshold": 10
                 }
             ]
         }
     },
     "layouts":{
-        "main":{ "hostgroups": ["hanez"], "enabled": true }
+        "main":{
+            "hostgroups": ["servers"],
+            "enabled": true
+        }
     }
 }
