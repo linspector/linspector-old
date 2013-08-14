@@ -37,7 +37,7 @@
                 {
                     "class": "tcpconnect",
                     "args": {"port": 23232},
-                    "periods": ["moes_time", "marges_birthday"],
+                    "periods": ["doh"],
                     "fails": {"donut": 0},
                     "threshold": 0,
                     "comment": "my personal reminder, hehe"
