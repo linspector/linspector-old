@@ -123,6 +123,8 @@ class Service(object):
         pass
 
     def pre_execute(self, host):
+        self.errorcode = 0
+        self.errormessage = None
         pass
 
     def parse_result(self, executionResult):
