@@ -51,6 +51,9 @@ class Job:
 
             self.handle_threshold(self.service.get_threshold(), jobInfo.was_execution_successful())
 
+            self.log.d("Error Code: " + str(jobInfo.get_errorcode()))
+            self.log.d("Error Message: " + str(jobInfo.get_message()))
+
             self.jobInfos.append(jobInfo)
 
         except Exception, e:

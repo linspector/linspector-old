@@ -40,6 +40,8 @@ class TcpconnectService(Service):
 
         if jobInfo.get_errorcode() == -1:
             jobInfo.set_execution_successful(True)
+            jobInfo.set_errorcode(0)
+            jobInfo.set_message("Connection successful established.")
         sock.close()
 
 
