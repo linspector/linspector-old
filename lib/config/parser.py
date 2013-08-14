@@ -1,8 +1,6 @@
 from os.path import isfile
 from os.path import join
-from os import getcwd
 import json
-import sys
 import imp
 from layouts import Layout
 from hostgroups import HostGroup
@@ -13,7 +11,6 @@ from lib.services.service import Service
 from lib.processors.processor import Processor
 from lib.parsers.parser import Parser
 from lib.tasks.task import Task
-from argparse import Namespace
 
 MOD_SERVICES     = "services"
 MOD_PROCESSORS   = "processors"
@@ -145,7 +142,7 @@ class ConfigParser:
                 except KeyError, k:
                     self.log.w("Key " + str(k) + " not in classItem " + str(clazzItem))
                 except Exception, e:
-                    self.log.w("Error while replacing class ( " + clazz + " ):" + str(e))
+                    self.log.w("Error while replacing class ( " + clazz + " ): " + str(e))
 
             del items[:]
             items.extend(repl)
@@ -237,8 +234,6 @@ class FullConfigParser(ConfigParser):
         items_func = lambda service: service.get_parser()
         class_check = lambda parser: isinstance(parser, Parser)
         self.replace_with_import(services, MOD_PARSERS, items_func, class_check)
-        
-
 
         #replace object pointer
         id_list_func = lambda hostgroup: hostgroup.get_members()
