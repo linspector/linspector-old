@@ -46,12 +46,10 @@ class Job:
         self.log.d(self.service)
         try:
             jobInfo = JobInfo(self.host, self.service)
-            result = self.service._execute(self.host)
-            jobInfo.set_result(result)
-            jobInfo.set_execution_successful(self.service.was_execution_successful())
+            self.service._execute(jobInfo)
             jobInfo.set_execution_end()
 
-            self.handle_threshold(self.service.get_threshold(), self.service.was_execution_successful())
+            self.handle_threshold(self.service.get_threshold(), jobInfo.was_execution_successful())
 
             self.jobInfos.append(jobInfo)
 
@@ -59,12 +57,18 @@ class Job:
             self.log.d(e)
 
 
-class JobInfo:
+class JobInfo(object):
     def __init__(self, host, service):
         self.id = generateId()
         self.host = host
         self.service = service
         self.executionBegin = datetime.now()
+        self._errorcode = -1
+        self._message = None
+        self._executionSuccess = False
+
+    def get_host(self):
+        return self.host
 
     def set_result(self, result):
         self.result = result
@@ -73,4 +77,19 @@ class JobInfo:
         self.executionEnd = datetime.now()
 
     def set_execution_successful(self, successful):
-        self.executionSuccess = successful
+        self._executionSuccess = successful
+
+    def was_execution_successful(self):
+        return self._executionSuccess
+
+    def set_message(self, msg):
+        self._message = msg
+
+    def get_message(self):
+        return self._message
+
+    def set_errorcode(self, errcode):
+        self._errorcode = errcode
+
+    def get_errorcode(self):
+        return self._errorcode
