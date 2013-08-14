@@ -14,9 +14,11 @@ def generateId():
 
 
 class Job:
-    def __init__(self, service, host):
+    def __init__(self, service, host, members, processors):
         self.service = service
         self.host = host
+        self.members = members
+        self.processors = processors
         self.jobInfos = []
         self.jobThreshold = 0
 
