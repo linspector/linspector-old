@@ -1,37 +1,31 @@
 {
     "members":{
-        "homer":{
-            "name": "hanez",
-            "comment": "Security Inspector",
+        "hanez":{
+            "name": "Johannes Findeisen",
             "tasks": [
-                {"class":"email", "type": "donut", "args": {"rcpt": "you@hanez.org"}}
+                { "class":"email", "type": "email", "args": { "rcpt": "you@hanez.org" }}
             ]
         }
     },
     "periods": {
-        "always": {"seconds": 10, "comment": "OMG, this means work"}
+        "always": { "seconds": 5, "comment": "Yes, yes, yes!" }
     },
     "hostgroups":{
-        "power_plant":{
-            "members": ["homer"],
+        "hanez":{
+            "members": ["hanez"],
             "hosts": ["a.systemchaos.org"],
-            "processors":[
-                {"class": "mongodb", "args":{ "host": "mongodb.hanez.org", "user": "homer", "password": "useless", "database": "default" }}
-            ],
             "services":[
                 {
                     "class": "tcpconnect",
-                    "args": {"port": 80},
+                    "args": { "port": 80 },
                     "periods": ["always"],
-                    "fails": {"donut": 0},
-                    "threshold": 0,
-                    "comment": "my personal reminder, hehe"
+                    "fails": { "email": 0 },
+                    "threshold": 10
                 }
             ]
         }
     },
     "layouts":{
-        "main":{"hostgroups": ["power_plant"], "enabled": true}
+        "main":{ "hostgroups": ["hanez"], "enabled": true }
     }
-
 }
