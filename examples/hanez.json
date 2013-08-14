@@ -1,0 +1,37 @@
+{
+    "members":{
+        "homer":{
+            "name": "hanez",
+            "comment": "Security Inspector",
+            "tasks": [
+                {"class":"email", "type": "donut", "args": {"rcpt": "you@hanez.org"}}
+            ]
+        }
+    },
+    "periods": {
+        "always": {"seconds": 10, "comment": "OMG, this means work"}
+    },
+    "hostgroups":{
+        "power_plant":{
+            "members": ["homer"],
+            "hosts": ["a.systemchaos.org"],
+            "processors":[
+                {"class": "mongodb", "args":{ "host": "mongodb.hanez.org", "user": "homer", "password": "useless", "database": "default" }}
+            ],
+            "services":[
+                {
+                    "class": "tcpconnect",
+                    "args": {"port": 80},
+                    "periods": ["always"],
+                    "fails": {"donut": 0},
+                    "threshold": 0,
+                    "comment": "my personal reminder, hehe"
+                }
+            ]
+        }
+    },
+    "layouts":{
+        "main":{"hostgroups": ["power_plant"], "enabled": true}
+    }
+
+}
