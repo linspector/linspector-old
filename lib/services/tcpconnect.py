@@ -42,6 +42,5 @@ class TcpconnectService(Service):
             jobInfo.set_message("Connection successful established to host: " + jobInfo.get_host() + " to port: " + str(self.port))
         sock.close()
 
-
 def create(kwargs):
     return TcpconnectService(**kwargs)
