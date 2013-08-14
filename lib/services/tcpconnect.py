@@ -27,12 +27,11 @@ class TcpconnectService(Service):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         except socket.error, msg:
-
             #log.w("%s\n" % msg[1])
             self.errorcode = 1
 
         try:
-            sock.connect((self.host, self.port))
+            sock.connect((host, self.port))
         except socket.error, msg:
             #log.w("%s\n" % msg[1])
             self.errorcode = 2

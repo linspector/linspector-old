@@ -2,6 +2,7 @@
 This is what job_function needs as parameter for each job to successfully
 execute.
 """
+
 from datetime import datetime
 
 
@@ -10,6 +11,7 @@ def generateId():
     while True:
         yield i
         i += 1
+
 
 class Job:
     def __init__(self, service, host):
@@ -46,17 +48,16 @@ class Job:
             jobInfo = JobInfo(self.host, self.service)
             result = self.service._execute(self.host)
             jobInfo.set_result(result)
-            jobInfo.set_successfull(self.service.was_execution_successful())
+            jobInfo.set_execution_successful(self.service.was_execution_successful())
             jobInfo.set_execution_end()
 
             self.handle_threshold(self.service.get_threshold(), self.service.was_execution_successful())
 
-
             self.jobInfos.append(jobInfo)
-
 
         except Exception, e:
             self.log.d(e)
+
 
 class JobInfo:
     def __init__(self, host, service):
@@ -73,5 +74,3 @@ class JobInfo:
 
     def set_execution_successful(self, successful):
         self.executionSuccess = successful
-
-
