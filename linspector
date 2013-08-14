@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7 -tt
 
 __version__ = "0.4/TETRIS"
-__default_config__ = "./minimal.json"
+__default_config__ = "./examples/minimal.json"
 
 import argparse
 import time
