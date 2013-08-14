@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7 -tt
 
-__version__ = "0.4/TETRIS"
+__version__ = "0.5/TEKKEN"
 __default_config__ = "./examples/minimal.json"
 
 import argparse
@@ -11,7 +11,6 @@ from lib.core.logger import Logger
 from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
 from lib.core.job import Job
-
 
 
 def parseArgs():
@@ -47,7 +46,6 @@ def handleJob(jobInfo):
     jobInfo.handle_call()
 
 
-
 def main():
     args = parseArgs()
     log = Logger(args.logfile, args.loglevel)
@@ -75,20 +73,9 @@ def main():
                                     job.set_logger(log)
                                     jobs.append(job)
 
-
         while True:
             #Todo: implement user handle
             time.sleep(10)
-
-        #log.i("starting linspector: reading config... (" + args.config + ")")
-        #config_parser = ConfigParser(log)
-        #config = config_parser.parse_config(args.config)
-        #log.d("parsed config: " + str(config))
-        
-        #while True:
-        #    time.sleep(10)
-        #    for job in jobs:
-        #        log.d(str(job))
 
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
