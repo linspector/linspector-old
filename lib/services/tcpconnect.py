@@ -28,18 +28,18 @@ class TcpconnectService(Service):
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         except socket.error, msg:
             jobInfo.set_errorcode(1)
-            jobInfo.set_message("Could not create socket. (" + str(msg) + ")")
+            jobInfo.set_message("Could not create socket to host: " + jobInfo.get_host() + " to port: " + str(self.port) + " (" + str(msg) + ")")
 
         try:
             sock.connect((jobInfo.get_host(), self.port))
         except socket.error, msg:
             jobInfo.set_errorcode(2)
-            jobInfo.set_message("Could not establish connection to host : " + jobInfo.get_host() + " (" + str(msg) + ")")
+            jobInfo.set_message("Could not establish connection to host: " + jobInfo.get_host() + " to port: " + str(self.port) + " (" + str(msg) + ")")
 
         if jobInfo.get_errorcode() == -1:
             jobInfo.set_execution_successful(True)
             jobInfo.set_errorcode(0)
-            jobInfo.set_message("Connection successful established.")
+            jobInfo.set_message("Connection successful established to host: " + jobInfo.get_host() + " to port: " + str(self.port))
         sock.close()
 
 
