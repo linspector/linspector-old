@@ -8,6 +8,7 @@ import time
 import logging
 import subprocess as sp
 from lib.core.logger import Logger
+from lib.frontends.lish import LishFrontend
 from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
 from lib.core.job import Job
@@ -75,7 +76,7 @@ def main():
 
         while True:
             #Todo: implement user handle
-            time.sleep(10)
+            LishFrontend(jobs= jobs, scheduler=scheduler)
 
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
