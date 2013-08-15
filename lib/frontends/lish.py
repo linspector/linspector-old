@@ -15,6 +15,8 @@ class LishFrontend(Frontend):
         print("linspector interactive shell: Enter h or help for commands")
         parser = argparse.ArgumentParser()
         jobs = kwargs["jobs"]
+
+        parser.add_argument("action", choices=["start", "stop"])
         parser.add_argument("-l", "--list", help="list current jobs")
         while True:
 
@@ -23,7 +25,7 @@ class LishFrontend(Frontend):
             print(rawInput)
             args = None
             try:
-                args = parser.parse_args(rawInput)
+                args = parser.parse_args(rawInput.split(" "))
             except:
                 pass
 
