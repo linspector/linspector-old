@@ -8,8 +8,24 @@ screen session perfectly.
 """
 
 from lib.frontends.frontend import Frontend
-
+import argparse
 
 class LishFrontend(Frontend):
     def __init__(self, **kwargs):
-        return
+        print("linspector interactive shell: Enter h or help for commands")
+        parser = argparse.ArgumentParser()
+        jobs = kwargs["jobs"]
+        parser.add_argument("-l", "--list", help="list current jobs")
+        while True:
+
+
+            rawInput = raw_input()
+            print(rawInput)
+            args = None
+            try:
+                args = parser.parse_args(rawInput)
+            except:
+                pass
+
+            print(str(args))
+
