@@ -1,5 +1,7 @@
 """
 The email task.
+
+http://docs.python.org/2/library/email-examples.html
 """
 
 import smtplib
