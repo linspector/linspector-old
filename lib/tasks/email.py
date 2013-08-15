@@ -2,6 +2,8 @@
 The email task.
 """
 
+import smtplib
+from email.mime.text import MIMEText
 from lib.tasks.task import Task
 
 
@@ -15,7 +17,13 @@ class EmailTask(Task):
         self.recipient = kwargs["args"]["rcpt"]
 
     def execute_task(self, msg):
-        pass
+        message = MIMEText(msg)
+        message['Subject'] = 'Warning from Linspector'
+        message['From'] = "warning@linspector.org"
+        message['To'] = "foo@linspector.org"
+        s = smtplib.SMTP('localhost')
+        s.sendmail("warning@linspector.org", "foo@linspector.org", message.as_string())
+        s.quit()
 
 
 def create(taskDict):
