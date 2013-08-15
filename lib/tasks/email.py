@@ -20,9 +20,9 @@ class EmailTask(Task):
         message = MIMEText(msg)
         message['Subject'] = 'Warning from Linspector'
         message['From'] = "warning@linspector.org"
-        message['To'] = "foo@linspector.org"
+        message['To'] = self.recipient
         s = smtplib.SMTP('localhost')
-        s.sendmail("warning@linspector.org", "foo@linspector.org", message.as_string())
+        s.sendmail("warning@linspector.org", self.recipient, message.as_string())
         s.quit()
 
 
