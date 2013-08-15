@@ -33,11 +33,13 @@ class Job:
 
     def handle_threshold(self, serviceThreshold, executionSucessful):
         if executionSucessful:
-            pass
+            if self.jobThreshold > 0:
+                self.jobThreshold -= 1
         else:
             self.jobThreshold += 1
 
         if self.jobThreshold >= serviceThreshold:
+            self.log.d("ARGGHHH!!")
             self.handle_alarm(self.jobThreshold-serviceThreshold)
 
     def handle_alarm(self, threholdOffset):
