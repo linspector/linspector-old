@@ -74,9 +74,8 @@ def main():
                                     job.set_logger(log)
                                     jobs.append(job)
 
-        while True:
-            #Todo: implement user handle
-            LishFrontend(jobs= jobs, scheduler=scheduler)
+        frontend = LishFrontend(jobs=jobs, scheduler=scheduler, layouts=layouts)
+
 
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
