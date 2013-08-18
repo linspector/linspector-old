@@ -65,8 +65,6 @@ class LayoutList:
                             if h is not None:
                                 l.hostgroups.append(h)
                             else:
-                                # TODO: replace next line with new logging
-                                #logger.logWarningConfig(file="hostgroups", missing=group)
                                 pass
                 self.layouts.append(l)
 
