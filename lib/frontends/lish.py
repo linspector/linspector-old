@@ -1,12 +1,14 @@
 """
-The Linspector Interactive Shell...
+Lish is the Linspector Interactive Shell...
 
 This  will become an interface to Linspector at "start" time. Think about MidnightCommander... and then run
 Linspector in a screen session and not as daemon, why not? BTW.: Daemonization is at this point of development
 cancelled, because it makes no sense to daemonize everything. Linspector is a user software which will run in any
 screen session perfectly.
 """
-from requests.status_codes import title
+
+# what is this?
+#from requests.status_codes import title
 
 '''
      #see http://docs.python.org/dev/library/argparse.html
@@ -45,11 +47,13 @@ from requests.status_codes import title
 '''
 
 from lib.frontends.frontend import Frontend
-import argparse, os
+import argparse
+import os
 from shlex import split as shsplit
 from cmd import Cmd
 
 VERSION = "0.1"
+
 
 class LishFrontend(Frontend):
     def __init__(self, **kwargs):
@@ -116,8 +120,6 @@ class HostgroupCommander(Exit, object):
         print("gives you control over a member of the hostgroup")
 
 
-
-
 class LishCommander(Exit, ShellCommander):
 
     def __init__(self, kwargs):
@@ -157,8 +159,6 @@ class LishCommander(Exit, ShellCommander):
                         except KeyboardInterrupt, ke:
                             pass
 
-
-
     def help_hostgroup(self):
         print '''
             help for Hostgroup
@@ -168,9 +168,3 @@ class LishCommander(Exit, ShellCommander):
         "hostgroup + ' '"
         if begidx == 10:
             return [x for x in self._hostgroupArgs if x.startswith(text)] if len(text) > 0 else self._hostgroupArgs
-
-
-
-
-
-
