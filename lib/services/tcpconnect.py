@@ -26,14 +26,14 @@ class TcpconnectService(Service):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         except socket.error, msg:
-            jobInfo.set_errorcode(1)
+            jobInfo.set_errorcode(2)
             jobInfo.set_message("Could not create socket to host: " + jobInfo.get_host() + " on port: " +
                                 str(self.port) + " (" + str(msg) + ")")
 
         try:
             sock.connect((jobInfo.get_host(), self.port))
         except socket.error, msg:
-            jobInfo.set_errorcode(2)
+            jobInfo.set_errorcode(1)
             jobInfo.set_message("Could not establish connection to host: " + jobInfo.get_host() + " on port: " +
                                 str(self.port) + " (" + str(msg) + ")")
 
