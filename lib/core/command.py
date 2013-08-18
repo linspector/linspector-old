@@ -3,6 +3,7 @@ from subprocess import Popen
 from subprocess import CalledProcessError
 from datetime import datetime as dt
 
+#TODO: Move this to shell.py service file. this definitely is shell execution. (hanez)
 
 class Command:
     def __init__(self, command, log):

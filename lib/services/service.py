@@ -16,7 +16,6 @@ class Service(object):
         elif self.needs_arguments():
             raise Exception("Error: needs arguments but none provided!")
 
-        
         self._parser = []
         if KEY_PARSER in kwargs:
             self.add_parser(kwargs[KEY_PARSER])
@@ -36,9 +35,7 @@ class Service(object):
         self._periods = []
         if KEY_PERIODS in kwargs:
             self.add_periods(kwargs[KEY_PERIODS])
-        
 
-        
     def add_arguments(self, args):
         for key, val in args.items():
             self._args[key] = val
