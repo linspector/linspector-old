@@ -5,6 +5,7 @@ import imp
 from layouts import Layout
 from hostgroups import HostGroup
 from members import Member
+from config import LinspectorConfig
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
 from lib.services.service import Service
@@ -200,14 +201,17 @@ class FullConfigParser(ConfigParser):
         :param configFilename: the configuration file to parse
         """
         self.jsonDict = self._read_json_config(configFilename)
+
+
         
         # first step
         creator = lambda name, values: Layout(name,**values)
         layouts = self._create_raw_Object(self.jsonDict[KEY_LAYOUTS], "Layout", creator)
-        
+
         creator = lambda name, values: Member(name, **values)
         members = self._create_raw_Object(self.jsonDict[KEY_MEMBERS], "Member", creator)
-        
+
+
         creator = lambda name, values: HostGroup(name, **values)
         self.hostgroups = self._create_raw_Object(self.jsonDict[KEY_HOSTGROUPS], "Hostgroup", creator)
         
@@ -248,6 +252,12 @@ class FullConfigParser(ConfigParser):
         id_get_func = lambda hostgroup: hostgroup.get_name()
         self.replace_pointer(layouts, self.hostgroups, id_list_func, id_get_func)
 
+        linConf = LinspectorConfig()
+        linConf.set_layouts(layouts)
+        linConf.set_hostgroups(self.hostgroups)
+        linConf.set_members(members)
+        linConf.set_periods(periods)
+
         for hg in self.hostgroups:
             for service in hg.get_services():
                 service.set_hostgroup(hg)
@@ -255,4 +265,4 @@ class FullConfigParser(ConfigParser):
         if "core" in self.jsonDict:
             core = self.jsonDict["core"]
 
-        return layouts, core
+        return linConf, core

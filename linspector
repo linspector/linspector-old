@@ -55,26 +55,32 @@ def main():
 
     if args.action == "start":
         configParser = FullConfigParser(log)
-        layouts, core = configParser.parse_config(args.config)
+        linConf, core = configParser.parse_config(args.config)
 
         scheduler = Scheduler()
 
         scheduler.start()
         jobs = []
-        for layout in layouts:
-            if layout.is_enabled():
-                for hostgroup in layout.get_hostgroups():
-                    for service in hostgroup.get_services():
-                        for host in hostgroup.get_hosts():
-                            for period in service.get_periods():
-                                job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors())
-                                schedulerJob = period.createJob(scheduler, job, handleJob)
-                                if schedulerJob is not None:
-                                    job.set_job(schedulerJob)
-                                    job.set_logger(log)
-                                    jobs.append(job)
 
-        frontend = LishFrontend(jobs=jobs, scheduler=scheduler, layouts=layouts)
+
+
+        for layout in linConf.get_enabled_layouts():
+            for hostgroup in layout.get_hostgroups():
+                for service in hostgroup.get_services():
+                    for host in hostgroup.get_hosts():
+                        for period in service.get_periods():
+                            job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors())
+                            schedulerJob = period.createJob(scheduler, job, handleJob)
+                            if schedulerJob is not None:
+                                job.set_job(schedulerJob)
+                                job.set_logger(log)
+                                jobs.append(job)
+
+        frontend = LishFrontend(jobs=jobs, scheduler=scheduler, linspectorConfig=linConf)
+
+        log.d("shutting down scheduler")
+        scheduler.shutdown(wait=False)
+
 
 
     elif args.action == "stop":
