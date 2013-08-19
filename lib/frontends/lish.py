@@ -4,47 +4,8 @@ Lish is the Linspector Interactive Shell...
 This  will become a commandline interface to Linspector. Think of a network switch or router like those from Cisco.
 """
 
-# what is this?
-#from requests.status_codes import title
-
-'''
-     #see http://docs.python.org/dev/library/argparse.html
-
-     Cheat Sheet:
-
-    ++++++++++++ Argument Parser creation +++++++++++++++++
-    prog - The name of the program (default: sys.argv[0])
-    usage - The string describing the program usage (default: generated from arguments added to parser)
-    description - Text to display before the argument help (default: none)
-    epilog - Text to display after the argument help (default: none)
-    parents - A list of ArgumentParser objects whose arguments should also be included
-    formatter_class - A class for customizing the help output
-    prefix_chars - The set of characters that prefix optional arguments (default: -)
-    fromfile_prefix_chars - The set of characters that prefix files from which additional arguments should be read (default: None)
-    argument_default - The global default value for arguments (default: None)
-    conflict_handler - The strategy for resolving conflicting optionals (usually unnecessary)
-
-
-    ++++++++++++++++++ add_argument() +++++++++++++++++++++
-    name or flags - Either a name or a list of option strings, e.g. foo or -f, --foo.
-    action - The basic type of action to be taken when this argument is encountered at the command line.
-    nargs - The number of command-line arguments that should be consumed.
-    const - A constant value required by some action and nargs selections.
-    default - The value produced if the argument is absent from the command line.
-    type - The type to which the command-line argument should be converted.
-    choices - A container of the allowable values for the argument.
-    required - Whether or not the command-line option may be omitted (optionals only).
-    help - A brief description of what the argument does.
-    metavar - A name for the argument in usage messages.
-    dest - The name of the attribute to be added to the object returned by parse_args().
-
-    +++++++ add_subparsers()-> obj with one method -> add_parser() +++++++++
-
-
-'''
 
 from lib.frontends.frontend import Frontend
-import argparse
 import os
 from shlex import split as shsplit
 from cmd import Cmd
@@ -57,8 +18,6 @@ class LishFrontend(Frontend):
 
         print(kwargs)
         #self.jobs = kwargs["jobs"]
-
-        ns = argparse.Namespace()
 
         commander = LishCommander(kwargs)
         run = True
@@ -74,10 +33,25 @@ class LishFrontend(Frontend):
                 run = False
 
 
-class Exit(Cmd, object):
+class CommandBase(Cmd, object):
+    def __init__(self):
+        super(CommandBase, self).__init__()
+        self._needs_update = False
+
+    def get_completion(self, args, text, showOnZeroText=True):
+        if len(text) == 0 and showOnZeroText:
+            return args
+        else:
+            return [x for x in args if x.startswith(text)]
+
+
+class Exit(CommandBase, object):
     def __init__(self):
         super(Exit, self).__init__()
-        self._canExit = False
+        self.set_can_exit(False)
+
+    def set_can_exit(self, canExit=True):
+        self._canExit = canExit
 
     def can_exit(self):
         return self._canExit
@@ -101,12 +75,23 @@ class LogCommander(Cmd, object):
         print("manage logging")
 
 
-class ShellCommander(Cmd, object):
+class ShellCommander(CommandBase, object):
     def do_shell(self, text):
         os.system(text)
 
     def help_shell(self):
         print("execute any shell command. Can also be achieved by a '!' postfix")
+
+    def complete_shell(self, text, line, begidx, endidx):
+        try:
+            PATH = os.environ['PATH'].split(os.pathsep)
+            bins = []
+            for p in PATH:
+                bins.extend(os.listdir(p))
+
+            return self.get_completion(bins, text, False)
+        except:
+            pass
 
 
 class HostgroupCommander(Exit, object):
@@ -133,7 +118,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
         self.prompt = "<Lish>: "
 
-        self._layouts = kwargs["layouts"]
+        self._linConf = kwargs["linspectorConfig"]
         self._jobs = kwargs["jobs"]
         self._scheduler = kwargs["scheduler"]
 
@@ -144,32 +129,37 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
         if args[0] == "list":
             print("current active Hostgroups:\n")
-            for l in self._layouts:
-                if l.is_enabled():
-                    print l.get_name()
-                    space = 4 * " "
-                    for hg in l.get_hostgroups():
-                        print space + hg.get_name()
+            for l in self._linConf.get_enabled_layouts():
+                print l.get_name()
+                space = 4 * " "
+                for hg in l.get_hostgroups():
+                    print space + hg.get_name()
             print 3 * "\n"
         elif args[0] == "select":
-            hostgroupName = args[1]
-            if len(hostgroupName) == 0:
-                print "must select an hostgroup"
-            for layout in self._layouts:
-                for lhg in layout.get_hostgroups():
-                    if lhg.get_name() == hostgroupName:
-                        try:
-                            hgCommander = HostgroupCommander(lhg)
-                            hgCommander.cmdloop("Entering Hostmode of " + hostgroupName)
-                        except KeyboardInterrupt, ke:
-                            pass
+            if len(args) < 2 or len(args[1]) == 0:
+                print("must select an hostgroup")
+            else:
+                hgName = args[1]
+                hg = self._linConf.get_hostgroup_by_name(hgName)
+                if hg is None:
+                    print("unknown hostgroup %s! type hostgroup list to get a list of hostgroups" % hgName)
+                else:
+                    try:
+                        hgCommander = HostgroupCommander(hg)
+                        hgCommander.cmdloop("Entering Hostmode of " + hgName + ":\n")
+                    except KeyboardInterrupt, ke:
+                        pass
+
 
     def help_hostgroup(self):
         print '''
-            help for Hostgroup
+            usage:
+                hostgroup list
+                                prints a list of all hostgroups
+                hostgroup select HOSTGROUPNAME
+                                select a hostgroup to make changes on it
             '''
 
     def complete_hostgroup(self, text, line, begidx, endidx):
-        "hostgroup + ' '"
         if begidx == 10:
             return [x for x in self._hostgroupArgs if x.startswith(text)] if len(text) > 0 else self._hostgroupArgs
