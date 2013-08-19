@@ -93,12 +93,20 @@ class Exit(Cmd, object):
     help_EOF = help_exit
 
 
+class LogCommander(Cmd, object):
+    def do_log(self, text):
+        print("executed %s" % text)
+
+    def help_log(self):
+        print("manage logging")
+
+
 class ShellCommander(Cmd, object):
     def do_shell(self, text):
         os.system(text)
 
     def help_shell(self):
-        print("execute any shell command. Can also be archieved by a '!' postfix")
+        print("execute any shell command. Can also be achieved by a '!' postfix")
 
 
 class HostgroupCommander(Exit, object):
@@ -117,7 +125,7 @@ class HostgroupCommander(Exit, object):
         print("gives you control over a member of the hostgroup")
 
 
-class LishCommander(Exit, ShellCommander):
+class LishCommander(Exit, ShellCommander, LogCommander):
 
     def __init__(self, kwargs):
 
