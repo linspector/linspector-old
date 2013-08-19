@@ -57,7 +57,7 @@ class Exit(CommandBase, object):
         return self._canExit
 
     def do_exit(self, text):
-        self.exit = True
+        self.set_can_exit()
         return self.can_exit()
 
     def help_exit(self):
