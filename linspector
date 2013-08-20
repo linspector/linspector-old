@@ -62,8 +62,6 @@ def main():
         scheduler.start()
         jobs = []
 
-
-
         for layout in linConf.get_enabled_layouts():
             for hostgroup in layout.get_hostgroups():
                 for service in hostgroup.get_services():
@@ -80,8 +78,6 @@ def main():
 
         log.d("shutting down scheduler")
         scheduler.shutdown(wait=False)
-
-
 
     elif args.action == "stop":
         log.i("stopping linspector is currently unsupported")
