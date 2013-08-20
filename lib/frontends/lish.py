@@ -16,7 +16,7 @@ VERSION = "0.1"
 class LishFrontend(Frontend):
     def __init__(self, **kwargs):
 
-        print(kwargs)
+        #print(kwargs)
         #self.jobs = kwargs["jobs"]
 
         commander = LishCommander(kwargs)
@@ -149,6 +149,16 @@ class LishCommander(Exit, ShellCommander, LogCommander):
                         hgCommander.cmdloop("Entering Hostmode of " + hgName + ":\n")
                     except KeyboardInterrupt, ke:
                         pass
+
+    def do_python(self, text):
+        exec text
+
+    def help_python(self):
+        print '''
+            executes python using 'exec'.
+            '''
+
+
 
 
     def help_hostgroup(self):
