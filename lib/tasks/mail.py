@@ -19,14 +19,14 @@ class MailTask(Task):
         self.set_task_type(kwargs["type"])
         self.recipient = kwargs["args"]["rcpt"]
 
-    def execute(self, msg):
+    def execute(self, msg, core):
         message = MIMEText(msg)
-        message['Subject'] = 'Warning from Linspector'
+        message['Subject'] = msg
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
-        message['From'] = "warning@linspector.org"
+        message['From'] = core["tasks"]["mail"]["from"]
         message['To'] = self.recipient
-        s = smtplib.SMTP('localhost')
+        s = smtplib.SMTP(core["tasks"]["mail"]["host"], core["tasks"]["mail"]["port"])
         s.sendmail("warning@linspector.org", self.recipient, message.as_string())
         s.quit()
 

@@ -14,11 +14,12 @@ def generateId():
 
 
 class Job:
-    def __init__(self, service, host, members, processors):
+    def __init__(self, service, host, members, processors, core):
         self.service = service
         self.host = host
         self.members = members
         self.processors = processors
+        self.core = core
         self.jobInfos = []
         self.jobThreshold = 0
 
@@ -31,7 +32,7 @@ class Job:
     def set_job(self, job):
         self.job = job
 
-    def handle_threshold(self, serviceThreshold, executionSucessful):
+    def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
         if executionSucessful:
             if self.jobThreshold > 0:
                 self.jobThreshold -= 1
@@ -40,12 +41,12 @@ class Job:
 
         if self.jobThreshold >= serviceThreshold:
             self.log.d("Threshold reached!")
-            self.handle_alarm(self.jobThreshold - serviceThreshold)
+            self.handle_alarm(jobInfo, self.jobThreshold - serviceThreshold)
 
-    def handle_alarm(self, thresholdOffset):
+    def handle_alarm(self, jobInfo, thresholdOffset):
         for member in self.service.get_hostgroup().get_members():
             for task in member.get_tasks():
-                task.execute("Task executed for host: " + self.host)
+                task.execute(jobInfo.get_message(), self.core)
 
     def handle_call(self):
         self.log.d("handle call")
@@ -55,7 +56,7 @@ class Job:
             self.service._execute(jobInfo)
             jobInfo.set_execution_end()
 
-            self.handle_threshold(self.service.get_threshold(), jobInfo.was_execution_successful())
+            self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
 
             self.log.d("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
 
