@@ -1,4 +1,7 @@
-__author__ = 'rafael'
+"""
+The LinspectorConfig class.
+"""
+
 
 class LinspectorConfig(object):
     def __init__(self):
@@ -51,8 +54,3 @@ class LinspectorConfig(object):
 
     def get_period_by_name(self, name):
         return self._get_by_name(self.get_periods(), name)
-
-
-
-
-

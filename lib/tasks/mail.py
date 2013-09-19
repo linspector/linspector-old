@@ -1,5 +1,5 @@
 """
-The email task.
+The mail task.
 
 http://docs.python.org/2/library/email-examples.html
 """
