@@ -4,6 +4,7 @@ The mail task.
 http://docs.python.org/2/library/email-examples.html
 """
 
+import datetime
 import smtplib
 from email.mime.text import MIMEText
 from lib.tasks.task import Task
@@ -21,6 +22,8 @@ class MailTask(Task):
     def execute(self, msg):
         message = MIMEText(msg)
         message['Subject'] = 'Warning from Linspector'
+        now = datetime.datetime.now()
+        message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
         message['From'] = "warning@linspector.org"
         message['To'] = self.recipient
         s = smtplib.SMTP('localhost')
