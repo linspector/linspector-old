@@ -14,3 +14,5 @@ local
 log
 plugins
 .metadata
+
+examples/private.json
