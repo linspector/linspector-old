@@ -14,7 +14,7 @@ class SmsTask(Task):
         self.set_task_type(kwargs["type"])
         self.recipient = kwargs["args"]["rcpt"]
 
-    def execute_task(self, msg):
+    def execute(self, msg):
         pass
 
 
