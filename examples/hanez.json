@@ -3,7 +3,7 @@
         "hanez":{
             "name": "Johannes Findeisen",
             "tasks": [
-                { "class":"jabber", "type": "jabber", "args": { "rcpt": "hanez@systemchaos.org" }}
+                { "class":"jabber", "type": "jabber", "args": { "rcpt": "jabber@example.org" }}
             ]
         }
     },
@@ -44,7 +44,8 @@
             },
             "mail":{
                 "host": "localhost",
-                "port": 25
+                "port": 25,
+                "from": "linspector@systemchaos.org"
             }
         }
     }
