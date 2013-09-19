@@ -3,7 +3,8 @@
         "hanez":{
             "name": "Johannes Findeisen",
             "tasks": [
-                { "class":"email", "type": "email", "args": { "rcpt": "you@hanez.org" }}
+                { "class":"mail", "type": "mail", "args": { "rcpt": "you@hanez.org" }},
+                { "class":"mail", "type": "mail", "args": { "rcpt": "johannes.findeisen@com.puting.de" }}
             ]
         }
     },
@@ -19,7 +20,7 @@
                     "class": "tcpconnect",
                     "args": { "port": 80 },
                     "periods": ["always"],
-                    "threshold": 5
+                    "threshold": 1
                 }
             ]
         }

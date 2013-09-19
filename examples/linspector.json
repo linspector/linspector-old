@@ -3,7 +3,7 @@
         "root":{
             "name": "Admin",
             "comment": "The Linspector Admin",
-            "tasks":[{ "class": "email", "type": "warning", "args":{ "rcpt": "admin@systems.hanez.org" }},
+            "tasks":[{ "class": "mail", "type": "warning", "args":{ "rcpt": "admin@systems.hanez.org" }},
                      { "class": "sms", "type": "critical", "args":{ "rcpt": "+49112" }},
                      { "class": "xmpp", "type": "critical", "args":{ "rcpt": "admin@jabber.hanez.org" }}]
         },
@@ -11,13 +11,13 @@
             "name": "Johannes Findeisen",
             "comment": "Just a nerd doing admin stuff.",
             "parent": "darth",
-            "tasks":[{ "class": "email", "type": "warning", "args":{ "rcpt": "you@hanez.org" }},
+            "tasks":[{ "class": "mail", "type": "warning", "args":{ "rcpt": "you@hanez.org" }},
                      { "class": "sms", "type": "critical", "args":{ "rcpt": "+49110" }}]
         },
         "darth":{
             "name": "Darth Vader",
             "comment": "The father",
-            "tasks":{ "class": "email", "type": "warning", "args":{ "rcpt": "darth.vader@hanez.org" }}
+            "tasks":{ "class": "mail", "type": "warning", "args":{ "rcpt": "darth.vader@hanez.org" }}
         }
     },
     "periods":{

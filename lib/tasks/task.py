@@ -19,3 +19,6 @@ class Task:
 
     def some_other_irrelevant_methods(self):
         pass
+
+    def execute(self, msg):
+        pass
