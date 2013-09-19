@@ -8,7 +8,7 @@
         }
     },
     "periods": {
-        "always": { "seconds": 60 }
+        "always": { "seconds": 2 }
     },
     "hostgroups":{
         "servers":{
@@ -19,7 +19,7 @@
                     "class": "tcpconnect",
                     "args": { "port": 80 },
                     "periods": ["always"],
-                    "threshold": 5
+                    "threshold": 2
                 }
             ]
         }
@@ -37,10 +37,14 @@
         "members":[ "root" ],
         "tasks": {
             "jabber":{
-                "server": "systemchaos.org",
+                "host": "systemchaos.org",
                 "port": 5222,
-                "user": "linspector",
-                "password": "hallo_welt"
+                "username": "USERNAME",
+                "password": "PASSWORD"
+            },
+            "mail":{
+                "host": "localhost",
+                "port": 25
             }
         }
     }
