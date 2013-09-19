@@ -3,8 +3,7 @@
         "hanez":{
             "name": "Johannes Findeisen",
             "tasks": [
-                { "class":"mail", "type": "mail", "args": { "rcpt": "you@hanez.org" }},
-                { "class":"mail", "type": "mail", "args": { "rcpt": "johannes.findeisen@com.puting.de" }}
+                { "class":"jabber", "type": "jabber", "args": { "rcpt": "hanez@systemchaos.org" }}
             ]
         }
     },
@@ -20,7 +19,7 @@
                     "class": "tcpconnect",
                     "args": { "port": 80 },
                     "periods": ["always"],
-                    "threshold": 1
+                    "threshold": 10
                 }
             ]
         }
@@ -30,5 +29,11 @@
             "hostgroups": ["servers"],
             "enabled": true
         }
+    },
+    "core":{
+        "max_logfile_size": 1024000,
+        "max_logfile_count": 4,
+        "max_worker_threads": 8,
+        "members":[ "root" ]
     }
 }

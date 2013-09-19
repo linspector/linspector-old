@@ -46,7 +46,7 @@ class Job:
         for member in self.service.get_hostgroup().get_members():
             for task in member.get_tasks():
                 print(task)
-                task.execute("Task executed!")
+                task.execute("Task executed for host: " + self.host)
         pass
 
     def handle_call(self):
