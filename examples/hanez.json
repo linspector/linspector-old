@@ -8,7 +8,7 @@
         }
     },
     "periods": {
-        "always": { "seconds": 2 }
+        "always": { "seconds": 60 }
     },
     "hostgroups":{
         "servers":{
@@ -19,7 +19,7 @@
                     "class": "tcpconnect",
                     "args": { "port": 80 },
                     "periods": ["always"],
-                    "threshold": 2
+                    "threshold": 5
                 }
             ]
         }

@@ -1,5 +1,5 @@
 """
-The Jabber task.
+The Jabber (XMPP) task.
 
 Uses: http://xmpppy.sourceforge.net/
 """
