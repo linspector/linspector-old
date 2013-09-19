@@ -17,10 +17,11 @@ class JabberTask(Task):
         self.set_task_type(kwargs["type"])
         self.recipient = kwargs["args"]["rcpt"]
 
-    def execute(self, msg):
-        client = xmpp.Client('systemchaos.org')
-        client.connect(server=('systemchaos.org', 5222))
-        client.auth('linspector', 'PASSWORD', 'alert')
+    def execute(self, msg, core):
+        #TODO: totally unstable just to use values from core. make checks before...!
+        client = xmpp.Client(core["tasks"]["jabber"]["host"])
+        client.connect(server=(core["tasks"]["jabber"]["host"], core["tasks"]["jabber"]["port"]))
+        client.auth(core["tasks"]["jabber"]["username"], core["tasks"]["jabber"]["password"], 'alert')
         client.sendInitPresence()
         message = xmpp.Message(self.recipient, msg)
         message.setAttr('type', 'chat')
