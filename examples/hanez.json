@@ -19,7 +19,7 @@
                     "class": "tcpconnect",
                     "args": { "port": 80 },
                     "periods": ["always"],
-                    "threshold": 10
+                    "threshold": 2
                 }
             ]
         }
@@ -34,6 +34,14 @@
         "max_logfile_size": 1024000,
         "max_logfile_count": 4,
         "max_worker_threads": 8,
-        "members":[ "root" ]
+        "members":[ "root" ],
+        "tasks": {
+            "jabber":{
+                "server": "systemchaos.org",
+                "port": 5222,
+                "user": "linspector",
+                "password": "hallo_welt"
+            }
+        }
     }
 }

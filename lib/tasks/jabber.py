@@ -22,7 +22,7 @@ class JabberTask(Task):
         client.connect(server=('systemchaos.org', 5222))
         client.auth('linspector', 'PASSWORD', 'alert')
         client.sendInitPresence()
-        message = xmpp.Message('hanez@systemchaos.org', msg)
+        message = xmpp.Message(self.recipient, msg)
         message.setAttr('type', 'chat')
         client.send(message)
 
