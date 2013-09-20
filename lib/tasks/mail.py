@@ -15,7 +15,7 @@ class MailTask(Task):
         if not "type" in kwargs:
             raise Exception("'type' not in typeDict " + str(kwargs))
         if not "args" in kwargs:
-            raise Exception("typeDict " + str(kwargs) + " has nor arguments!")
+            raise Exception("typeDict " + str(kwargs) + " has no arguments!")
         self.set_task_type(kwargs["type"])
         self.recipient = kwargs["args"]["rcpt"]
 
@@ -27,7 +27,7 @@ class MailTask(Task):
         message['From'] = core["tasks"]["mail"]["from"]
         message['To'] = self.recipient
         s = smtplib.SMTP(core["tasks"]["mail"]["host"], core["tasks"]["mail"]["port"])
-        s.sendmail("warning@linspector.org", self.recipient, message.as_string())
+        s.sendmail(core["tasks"]["mail"]["from"], self.recipient, message.as_string())
         s.quit()
 
 
