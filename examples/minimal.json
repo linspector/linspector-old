@@ -47,6 +47,24 @@
     },
     "layouts":{
         "main":{"hostgroups": ["power_plant"], "enabled": true}
+    },
+    "core":{
+        "max_logfile_size": 1024000,
+        "max_logfile_count": 4,
+        "max_worker_threads": 8,
+        "members":[ "root" ],
+        "tasks":{
+            "jabber":{
+                "host": "systemchaos.org",
+                "port": 5222,
+                "username": "USERNAME",
+                "password": "PASSWORD"
+            },
+            "mail":{
+                "host": "localhost",
+                "port": 25,
+                "from": "linspector@systemchaos.org"
+            }
+        }
     }
-
 }
