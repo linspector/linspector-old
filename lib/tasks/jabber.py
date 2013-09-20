@@ -19,7 +19,7 @@ class JabberTask(Task):
 
     def execute(self, msg, core):
         #TODO: totally unstable just to use values from core. make checks before...!
-        client = xmpp.Client(core["tasks"]["jabber"]["host"])
+        client = xmpp.Client(core["tasks"]["jabber"]["host"], core["tasks"]["jabber"]["port"], None)
         client.connect(server=(core["tasks"]["jabber"]["host"], core["tasks"]["jabber"]["port"]))
         client.auth(core["tasks"]["jabber"]["username"], core["tasks"]["jabber"]["password"], 'alert')
         client.sendInitPresence()
