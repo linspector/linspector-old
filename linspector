@@ -1,12 +1,10 @@
 #!/usr/bin/python2.7 -tt
 
-__version__ = "0.5/TEKKEN"
+__version__ = "0.6/TCPCONNECT"
 __default_config__ = "./examples/minimal.json"
 
 import argparse
-import time
 import logging
-import subprocess as sp
 from lib.core.logger import Logger
 from lib.frontends.lish import LishFrontend
 from lib.config.parser import FullConfigParser
@@ -17,18 +15,15 @@ from lib.core.job import Job
 def parseArgs():
     parser = argparse.ArgumentParser(
         description="Linspector is for monitoring the vital information of hosts, services and devices in a network.",
-        epilog="linspector is not some program expecting computers to run!",
+        epilog="linspector is not some program expecting computers to run! Visit http://linspector.org for more "
+               "information.",
         prog="linspector")
 
-    parser.add_argument("action", choices=["start", "stop", "restart", "attach"],
-                        help="defines if linspector should beeing attached, started, stopped or restarted.")
     parser.add_argument("--version", action="version", version="%(prog)s " + str(__version__))
     parser.add_argument("-c", "--config", default=__default_config__,
                         help="select configfile to use")
     parser.add_argument("-l", "--logfile", default="./log/linspector.log", metavar="FILE",
                         help="set logfile to use")
-    parser.add_argument("-p", "--pidfile", default="./tmp/linspector.pid", metavar="FILE",
-                        help="set the pidfile to use (default: /tmp/linspector.pid)")
 
     output = parser.add_mutually_exclusive_group()
     output.add_argument("-q", "--quiet", action="store_const", dest="loglevel", const=logging.ERROR,
@@ -36,9 +31,9 @@ def parseArgs():
     output.add_argument("-w", "--warning", action="store_const", dest="loglevel", const=logging.WARNING,
                         help="output warnings")
     output.add_argument("-v", "--verbose", action="store_const", dest="loglevel", const=logging.INFO,
-                        help="output infos")
+                        help="output info messages")
     output.add_argument("-d", "--debug", action="store_const", dest="loglevel", const=logging.DEBUG,
-                        help="output debug infos")
+                        help="output debug messages")
     output.set_defaults(loglevel=logging.INFO)
     return parser.parse_args()
 
@@ -53,40 +48,30 @@ def main():
 
     log.i("parsed arguments")
 
-    if args.action == "start":
-        configParser = FullConfigParser(log)
-        linConf, core = configParser.parse_config(args.config)
+    configParser = FullConfigParser(log)
+    linConf, core = configParser.parse_config(args.config)
 
-        scheduler = Scheduler()
+    scheduler = Scheduler()
 
-        scheduler.start()
-        jobs = []
+    scheduler.start()
+    jobs = []
 
-        for layout in linConf.get_enabled_layouts():
-            for hostgroup in layout.get_hostgroups():
-                for service in hostgroup.get_services():
-                    for host in hostgroup.get_hosts():
-                        for period in service.get_periods():
-                            job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors(), core)
-                            schedulerJob = period.createJob(scheduler, job, handleJob)
-                            if schedulerJob is not None:
-                                job.set_job(schedulerJob)
-                                job.set_logger(log)
-                                jobs.append(job)
+    for layout in linConf.get_enabled_layouts():
+        for hostgroup in layout.get_hostgroups():
+            for service in hostgroup.get_services():
+                for host in hostgroup.get_hosts():
+                    for period in service.get_periods():
+                        job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors(), core)
+                        schedulerJob = period.createJob(scheduler, job, handleJob)
+                        if schedulerJob is not None:
+                            job.set_job(schedulerJob)
+                            job.set_logger(log)
+                            jobs.append(job)
 
-        frontend = LishFrontend(jobs=jobs, scheduler=scheduler, linspectorConfig=linConf)
+    frontend = LishFrontend(jobs=jobs, scheduler=scheduler, linspectorConfig=linConf)
 
-        log.d("shutting down scheduler")
-        scheduler.shutdown(wait=False)
-
-    elif args.action == "stop":
-        log.i("stopping linspector is currently unsupported")
-    elif args.action == "restart":
-        sp.call("./linspector stop")
-        sp.call(
-            "./linspector start --config " + args.config + " --logfile " + args.logfile + " --pidfile " + args.pidfile)
-    elif args.action == "attach":
-        log.i("attaching linspector is currently unsupported")
+    log.d("shutting down scheduler")
+    scheduler.shutdown(wait=False)
 
     log.close()
 

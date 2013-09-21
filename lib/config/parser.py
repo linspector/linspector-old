@@ -13,16 +13,16 @@ from lib.processors.processor import Processor
 from lib.parsers.parser import Parser
 from lib.tasks.task import Task
 
-MOD_SERVICES     = "services"
-MOD_PROCESSORS   = "processors"
-MOD_PARSERS      = "parsers"
-MOD_TASKS        = "tasks"
+MOD_SERVICES   = "services"
+MOD_PROCESSORS = "processors"
+MOD_PARSERS    = "parsers"
+MOD_TASKS      = "tasks"
 
-KEY_LAYOUTS      = "layouts"
-KEY_HOSTGROUPS   = "hostgroups"
-KEY_MEMBERS      = "members"
-KEY_PERIODS      = "periods"
-KEY_CORE         = "core"
+KEY_LAYOUTS    = "layouts"
+KEY_HOSTGROUPS = "hostgroups"
+KEY_MEMBERS    = "members"
+KEY_PERIODS    = "periods"
+KEY_CORE       = "core"
 
 
 class ConfigurationException(Exception):
@@ -135,10 +135,10 @@ class ConfigParser:
                     if class_check(item):
                         repl.append(item)
                     else:
-                        self.log.w(" ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
+                        self.log.w("Ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
 
                 except ImportError, err:
-                    self.log.w("could not import " + clazz + ": " + str(clazzItem) + "! reason")
+                    self.log.w("Could not import " + clazz + ": " + str(clazzItem) + "! reason")
                     self.log.w(str(err))
                 except KeyError, k:
                     self.log.w("Key " + str(k) + " not in classItem " + str(clazzItem))
@@ -202,8 +202,6 @@ class FullConfigParser(ConfigParser):
         """
         self.jsonDict = self._read_json_config(configFilename)
 
-
-        
         # first step
         creator = lambda name, values: Layout(name,**values)
         layouts = self._create_raw_Object(self.jsonDict[KEY_LAYOUTS], "Layout", creator)
