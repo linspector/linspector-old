@@ -10,7 +10,7 @@ import os
 from shlex import split as shsplit
 from cmd import Cmd
 
-VERSION = "0.1"
+__version__ = "0.1"
 
 
 class LishFrontend(Frontend):
@@ -23,7 +23,7 @@ class LishFrontend(Frontend):
         run = True
         while run:
             try:
-                commander.cmdloop("LISH - Linspector interactive shell")
+                commander.cmdloop("Lish - Linspector interactive shell (" + __version__ + ")")
             except KeyboardInterrupt, ki:
                 run = False
             except Exception, err:
@@ -80,7 +80,7 @@ class ShellCommander(CommandBase, object):
         os.system(text)
 
     def help_shell(self):
-        print("execute any shell command. Can also be achieved by a '!' postfix")
+        print("execute any shell command. Can also be achieved by a '!' prefix")
 
     def complete_shell(self, text, line, begidx, endidx):
         try:
@@ -157,9 +157,6 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         print '''
             executes python using 'exec'.
             '''
-
-
-
 
     def help_hostgroup(self):
         print '''

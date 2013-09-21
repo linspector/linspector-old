@@ -24,6 +24,7 @@ class MailTask(Task):
         message['Subject'] = msg
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
+        #TODO: totally unstable just to use values from core. make checks before...!
         message['From'] = core["tasks"]["mail"]["from"]
         message['To'] = self.recipient
         s = smtplib.SMTP(core["tasks"]["mail"]["host"], core["tasks"]["mail"]["port"])
