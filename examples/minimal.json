@@ -4,8 +4,8 @@
             "name": "Homer Simpson",
             "comment": "Security Inspector",
             "tasks": [
-                {"class":"mail", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}},
-                {"class":"mail", "type": "donut", "args": {"rcpt": "homer_j_simpson@burnscorp.sp"}}
+                {"class":"mail", "type": "donut", "args": {"rcpt": "homer_j_simpson@example.sp"}},
+                {"class":"mail", "type": "donut", "args": {"rcpt": "homer_j_simpson@example.sp"}}
             ]
         }
     },
@@ -17,9 +17,9 @@
     "hostgroups":{
         "power_plant":{
             "members": ["homer"],
-            "hosts": ["powerplant.springfield.com"],
+            "hosts": ["powerplant.example.com"],
             "processors":[
-                {"class": "mongodb", "args":{ "host": "mongodb.burnscorp.org", "user": "homer", "password": "useless", "database": "default" }}
+                {"class": "mongodb", "args":{ "host": "mongodb.example.org", "user": "homer", "password": "useless", "database": "default" }}
             ],
             "services":[
                 {
@@ -55,7 +55,7 @@
         "members":[ "root" ],
         "tasks":{
             "jabber":{
-                "host": "systemchaos.org",
+                "host": "example.org",
                 "port": 5222,
                 "username": "USERNAME",
                 "password": "PASSWORD"
@@ -63,7 +63,7 @@
             "mail":{
                 "host": "localhost",
                 "port": 25,
-                "from": "linspector@systemchaos.org"
+                "from": "linspector@example.org"
             }
         }
     }

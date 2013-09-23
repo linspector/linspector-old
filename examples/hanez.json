@@ -13,7 +13,7 @@
     "hostgroups":{
         "servers":{
             "members": ["hanez"],
-            "hosts": [ "a.systemchaos.org", "b.systemchaos.org" ],
+            "hosts": [ "a.example.org", "b.example.org" ],
             "services":[
                 {
                     "class": "tcpconnect",
@@ -37,7 +37,7 @@
         "members":[ "root" ],
         "tasks": {
             "jabber":{
-                "host": "systemchaos.org",
+                "host": "example.org",
                 "port": 5222,
                 "username": "USERNAME",
                 "password": "PASSWORD"
@@ -45,7 +45,7 @@
             "mail":{
                 "host": "localhost",
                 "port": 25,
-                "from": "linspector@systemchaos.org"
+                "from": "linspector@example.org"
             }
         }
     }

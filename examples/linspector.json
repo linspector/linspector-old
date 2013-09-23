@@ -3,21 +3,21 @@
         "root":{
             "name": "Admin",
             "comment": "The Linspector Admin",
-            "tasks":[{ "class": "mail", "type": "warning", "args":{ "rcpt": "admin@systems.hanez.org" }},
-                     { "class": "sms", "type": "critical", "args":{ "rcpt": "+49112" }},
-                     { "class": "jabber", "type": "critical", "args":{ "rcpt": "admin@jabber.hanez.org" }}]
+            "tasks":[{ "class": "mail", "type": "warning", "args":{ "rcpt": "admin@example.org" }},
+                     { "class": "sms", "type": "critical", "args":{ "rcpt": "+491120000000000" }},
+                     { "class": "jabber", "type": "critical", "args":{ "rcpt": "admin@example.org" }}]
         },
         "hanez":{
-            "name": "Johannes Findeisen",
+            "name": "Hanez",
             "comment": "Just a nerd doing admin stuff.",
             "parent": "darth",
-            "tasks":[{ "class": "mail", "type": "warning", "args":{ "rcpt": "you@hanez.org" }},
-                     { "class": "sms", "type": "critical", "args":{ "rcpt": "+49110" }}]
+            "tasks":[{ "class": "mail", "type": "warning", "args":{ "rcpt": "you@example.org" }},
+                     { "class": "sms", "type": "critical", "args":{ "rcpt": "+491100000000000" }}]
         },
         "darth":{
             "name": "Darth Vader",
             "comment": "The father",
-            "tasks":{ "class": "mail", "type": "warning", "args":{ "rcpt": "darth.vader@hanez.org" }}
+            "tasks":{ "class": "mail", "type": "warning", "args":{ "rcpt": "darth.vader@example.org" }}
         }
     },
     "periods":{
@@ -30,20 +30,20 @@
     "hostgroups":{
         "group1":{
             "members":[ "hanez" ],
-            "hosts":[ "a.systemchaos.org", "b.systemchaos.org" ],
+            "hosts":[ "a.example.org", "b.example.org" ],
             "parents":[ "network" ],
             "processors":[
                 {
                      "class": "mongodb",
-                     "args":{ "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default" }
+                     "args":{ "host": "mongodb.example.org", "user": "mongo", "password": "secret", "database": "default" }
                 },
                 {
                      "class": "syslog",
-                     "args":{ "host": "syslog.linspector.org", "user": "syslog", "password": "secret" }
+                     "args":{ "host": "syslog.example.org", "user": "syslog", "password": "secret" }
                 },
                 {
                      "class": "mariadb",
-                     "args":{ "host": "mariadb.linspector.org", "port": "3306", "user": "maria", "password": "secret", "database": "linspector" }
+                     "args":{ "host": "mariadb.example.org", "port": "3306", "user": "maria", "password": "secret", "database": "linspector" }
                 }
             ],
             "services":[
@@ -88,7 +88,7 @@
         },
         "group2":{
             "members":[ "hanez" ],
-            "hosts":["x.systemchaos.org", "y.systemchaos.org" ],
+            "hosts":["x.example.org", "y.example.org" ],
             "services":[
                 {
                     "class": "ping",
@@ -108,7 +108,7 @@
         },
         "group3":{
             "members":[ "hanez" ],
-            "hosts":[ "master.systemchaos.org" ],
+            "hosts":[ "master.example.org" ],
             "services":[
                 {
                     "class": "ssh",
@@ -137,11 +137,11 @@
         },
         "network":{
             "members":[ "hanez" ],
-            "hosts":[ "router.systemchaos.org" ],
+            "hosts":[ "router.example.org" ],
             "processors":[
                 {
                      "class": "mongodb",
-                     "args":{ "host": "mongodb.hanez.org", "user": "mongo", "password": "secret", "database": "default" }
+                     "args":{ "host": "mongodb.example.org", "user": "mongo", "password": "secret", "database": "default" }
                 }
             ],
             "services":[
