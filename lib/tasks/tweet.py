@@ -1,8 +1,10 @@
 """
 The tweet/twitter task.
+
+Uses: tweepy
 """
 
-import twitter
+import tweepy
 from lib.tasks.task import Task
 
 
@@ -15,13 +17,11 @@ class TweetTask(Task):
         self.set_task_type(kwargs["type"])
         self.recipient = kwargs["args"]["rcpt"]
 
-    def execute(self, msg):
-        api = twitter.Api(consumer_key='consumer_key',
-                          consumer_secret='consumer_secret',
-                          access_token_key='access_token',
-                          access_token_secret='access_token_secret')
-        status = api.PostUpdate(msg)
-        pass
+    def execute(self, msg, core):
+        auth = tweepy.BasicAuthHandler("user", "pass")
+        api = tweepy.API(auth)
+        api.update_status(self.recipient)
+        print(self.get_task_type())
 
 
 def create(taskDict):
