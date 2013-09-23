@@ -15,8 +15,12 @@ Parsing the configuration file wasn't easy since Linspector objects are being cr
 
 Scheduling of jobs is also done. It works!
 
+Alerting of jobs is partly done but: It works!
+
 We need to fix some bugs but when this is done we will start adding features to make Linspector usable in the wild.
 
 Next step will be business logic to manage an admins everyday monitoring tasks. SNMP will be added when the "tcpconnect" service works perfectly; Then some more services will be added too. We need the framework running first and then we will go on... ;)
+
+Since we are redesigning a lot off stuff from day to day it makes no sense to publish documentation. We are working on a small set of documents to make readers understand Linspector but for now there is no time for that.
 
 Linspector is licensed under the terms of the AGPL license.
