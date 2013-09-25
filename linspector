@@ -22,6 +22,7 @@ def parseArgs():
         prog="linspector")
 
     parser.add_argument("--version", action="version", version="%(prog)s " + str(__version__))
+    #TODO: make the config file a required field without -c or --config at the end eg: linspector config.json
     parser.add_argument("-c", "--config", default=__default_config__,
                         help="select configfile to use")
     parser.add_argument("-l", "--logfile", default="./log/linspector.log", metavar="FILE",
