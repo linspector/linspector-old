@@ -71,7 +71,7 @@ class ConfigParser:
         with open(configFilename) as cfgFile:
             config = cfgFile.read()
         
-        self.log.i("reading Config: " + configFilename)
+        self.log.info("reading Config: " + configFilename)
         return json.loads(config)
 
     def _create_raw_Object(self, jsonDict, msgName, creator):
@@ -90,8 +90,8 @@ class ConfigParser:
                 item = creator(key, val)
                 items.append(item)
             except Exception:
-                self.log.w("ignoring " + msgName + ": " + key + "! reason:")
-                self.log.w(str(Exception))
+                self.log.warning("ignoring " + msgName + ": " + key + "! reason:")
+                self.log.warning(str(Exception))
         return items
 
     def _load_module(self, clazz, modPart):
@@ -135,15 +135,15 @@ class ConfigParser:
                     if class_check(item):
                         repl.append(item)
                     else:
-                        self.log.w("Ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
+                        self.log.warning("Ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
 
                 except ImportError, err:
-                    self.log.w("Could not import " + clazz + ": " + str(clazzItem) + "! reason")
-                    self.log.w(str(err))
+                    self.log.warning("Could not import " + clazz + ": " + str(clazzItem) + "! reason")
+                    self.log.warning(str(err))
                 except KeyError, k:
-                    self.log.w("Key " + str(k) + " not in classItem " + str(clazzItem))
+                    self.log.warning("Key " + str(k) + " not in classItem " + str(clazzItem))
                 except Exception, e:
-                    self.log.w("Error while replacing class ( " + clazz + " ): " + str(e))
+                    self.log.warning("Error while replacing class ( " + clazz + " ): " + str(e))
 
             del items[:]
             items.extend(repl)

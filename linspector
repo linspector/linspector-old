@@ -5,7 +5,10 @@ __default_config__ = "./examples/minimal.json"
 
 import argparse
 import logging
-from lib.core.logger import Logger
+import logging.handlers
+import os
+import os.path as path
+
 from lib.frontends.lish import LishFrontend
 from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
@@ -38,15 +41,42 @@ def parseArgs():
     return parser.parse_args()
 
 
+def setup_logging(logfile="./log/linspector.log", logLevel=logging.DEBUG, logfileLevel=logging.DEBUG):
+    logfile = path.expanduser(logfile)
+    if not path.exists(path.dirname(logfile)):
+        os.makedirs(path.dirname(logfile))
+
+    log = logging.getLogger("LinspectorLogger")
+    log.setLevel(logging.DEBUG)
+
+    consoleHandler = logging.StreamHandler()
+    consoleHandler.setLevel(logLevel)
+
+    fileHandler = logging.handlers.RotatingFileHandler(logfile, maxBytes=1024000, backupCount=4)
+    fileHandler.setLevel(logfileLevel)
+
+    consoleFormatter = logging.Formatter('[%(levelname)s]: %(message)s')
+    #TODO: if debug with file and function else without that
+    fileFormatter = logging.Formatter('%(asctime)s %(pathname)s %(module)s %(funcName)s %(lineno)d [%(levelname)s]: %(message)s')
+
+    consoleHandler.setFormatter(consoleFormatter)
+    fileHandler.setFormatter(fileFormatter)
+
+    log.addHandler(consoleHandler)
+    log.addHandler(fileHandler)
+    return log
+
+
 def handleJob(jobInfo):
     jobInfo.handle_call()
 
 
 def main():
     args = parseArgs()
-    log = Logger(args.logfile, args.loglevel)
+    print args.logfile
+    log = setup_logging(args.logfile, args.loglevel)
 
-    log.i("parsed arguments")
+    log.info("parsed arguments")
 
     configParser = FullConfigParser(log)
     linConf, core = configParser.parse_config(args.config)
@@ -70,10 +100,9 @@ def main():
 
     frontend = LishFrontend(jobs=jobs, scheduler=scheduler, linspectorConfig=linConf)
 
-    log.d("shutting down scheduler")
+    log.debug("shutting down scheduler")
+    logging.shutdown()
     scheduler.shutdown(wait=False)
-
-    log.close()
 
 
 if __name__ == "__main__":

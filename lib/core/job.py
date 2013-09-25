@@ -40,7 +40,7 @@ class Job:
             self.jobThreshold += 1
 
         if self.jobThreshold >= serviceThreshold:
-            self.log.d("Threshold reached!")
+            self.log.debug("Threshold reached!")
             self.handle_alarm(jobInfo, self.jobThreshold - serviceThreshold)
 
     def handle_alarm(self, jobInfo, thresholdOffset):
@@ -49,8 +49,8 @@ class Job:
                 task.execute(jobInfo.get_message(), self.core)
 
     def handle_call(self):
-        self.log.d("handle call")
-        self.log.d(self.service)
+        self.log.debug("handle call")
+        self.log.debug(self.service)
         try:
             jobInfo = JobInfo(self.host, self.service)
             self.service._execute(jobInfo)
@@ -58,12 +58,12 @@ class Job:
 
             self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
 
-            self.log.d("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
+            self.log.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
 
             self.jobInfos.append(jobInfo)
 
         except Exception, e:
-            self.log.d(e)
+            self.log.debug(e)
 
 
 class JobInfo(object):
