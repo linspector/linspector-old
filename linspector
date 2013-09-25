@@ -8,11 +8,10 @@ import logging
 import logging.handlers
 import os
 import os.path as path
-
-from lib.frontends.lish import LishFrontend
-from lib.config.parser import FullConfigParser
 from apscheduler.scheduler import Scheduler
+from lib.config.parser import FullConfigParser
 from lib.core.job import Job
+from lib.frontends.lish import LishFrontend
 
 
 def parseArgs():
@@ -41,7 +40,7 @@ def parseArgs():
     return parser.parse_args()
 
 
-def setup_logging(logfile="./log/linspector.log", logLevel=logging.DEBUG, logfileLevel=logging.DEBUG):
+def setupLogging(logfile="./log/linspector.log", logLevel=logging.DEBUG, logfileLevel=logging.DEBUG):
     logfile = path.expanduser(logfile)
     if not path.exists(path.dirname(logfile)):
         os.makedirs(path.dirname(logfile))
@@ -73,8 +72,8 @@ def handleJob(jobInfo):
 
 def main():
     args = parseArgs()
-    print args.logfile
-    log = setup_logging(args.logfile, args.loglevel)
+
+    log = setupLogging(args.logfile, args.loglevel)
 
     log.info("parsed arguments")
 
