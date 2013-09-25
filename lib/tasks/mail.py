@@ -28,6 +28,7 @@ class MailTask(Task):
         message['From'] = core["tasks"]["mail"]["from"]
         message['To'] = self.recipient
         s = smtplib.SMTP(core["tasks"]["mail"]["host"], core["tasks"]["mail"]["port"])
+        s.login(core["tasks"]["mail"]["username"], core["tasks"]["mail"]["password"])
         s.sendmail(core["tasks"]["mail"]["from"], self.recipient, message.as_string())
         s.quit()
 
