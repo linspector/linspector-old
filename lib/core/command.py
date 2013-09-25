@@ -27,12 +27,12 @@ class Command:
 
         try:
             self.commandStart = dt.now()
-            self.log.i("calling command " + str(self.command) + " at " + str(self.commandStart)) 
+            self.log.info("calling command " + str(self.command) + " at " + str(self.commandStart))
             #self.output=sp.check_output(self.command.split())
             process = Popen(self.command, stdout=sp.PIPE, stderr=sp.PIPE, shell=True)
             self.output, self.error = process.communicate()
-            self.log.d(str(self.output))
-            self.log.d(str(self.error))
+            self.log.debug(str(self.output))
+            self.log.debug(str(self.error))
             self.retcode = process.poll()
         except CalledProcessError:
             self.error = CalledProcessError.output
