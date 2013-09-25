@@ -72,7 +72,7 @@ def handleJob(jobInfo):
 
 def main():
     args = parseArgs()
-
+    #TODO: catch all log messages (apscheduler etc.); make logging more generic to support libraries logging
     log = setupLogging(args.logfile, args.loglevel)
 
     log.info("parsed arguments")
@@ -101,7 +101,7 @@ def main():
 
     log.debug("shutting down scheduler")
     logging.shutdown()
-    scheduler.shutdown(wait=False)
+    scheduler.shutdown(wait=True)
 
 
 if __name__ == "__main__":
