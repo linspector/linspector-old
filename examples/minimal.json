@@ -29,10 +29,10 @@
                     "threshold": 50
                 },
                 {
-                  "class": "ping",
-                  "fails": {"donut": 1000},
-                  "periods": ["doh"],
-                  "threshold": 100
+                    "class": "ping",
+                    "fails": {"donut": 1000},
+                    "periods": ["doh"],
+                    "threshold": 100
                 },
                 {
                     "class": "tcpconnect",
@@ -41,6 +41,11 @@
                     "fails": {"donut": 0},
                     "threshold": 0,
                     "comment": "my personal reminder, hehe"
+                },
+                {
+                    "template": "tcpconnect_80",
+                    "threshold": 10,
+                    "periods": ["moes_time"],
                 }
             ]
         }

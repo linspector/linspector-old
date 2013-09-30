@@ -1,0 +1,6 @@
+{
+    "class": "tcpconnect",
+    "args": { "port": 80 },
+    "periods": ["normal"],
+    "threshold": 10
+}
