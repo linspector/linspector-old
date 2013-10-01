@@ -11,6 +11,7 @@ import os.path as path
 from apscheduler.scheduler import Scheduler
 from lib.config.parser import FullConfigParser
 from lib.core.job import Job
+from lib.backends.https import HttpsBackend
 from lib.frontends.lish import LishFrontend
 
 
@@ -98,6 +99,13 @@ def main():
                             job.set_logger(log)
                             jobs.append(job)
 
+    #TODO: Load Backend Threads here before initializing the frontend.
+    '''
+    for backend in backends.enabled
+        backend.start
+
+    take care of signals etc. to sthutdown the threads when stopping linspector.
+    '''
     frontend = LishFrontend(jobs=jobs, scheduler=scheduler, linspectorConfig=linConf)
 
     log.debug("shutting down scheduler")

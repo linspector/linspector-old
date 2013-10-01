@@ -1,9 +1,8 @@
 """
-Just the frontends.py stub... ;)
+Frontends are GUI interfaces to Linspector. This could be a shell or other terminal based GUI.
 
-If linspector is being started without a frontend "enabled" it just is doing stuff like: polling, alerting, logging etc.
-
-Frontends are absolutely no requirement for running Linspector.
+Frontends are absolutely no requirement for running Linspector. If no frontend is selected Linspector will just log
+stuff to stdout.
 """
 
 
