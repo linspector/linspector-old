@@ -45,6 +45,7 @@ class Job:
 
     def handle_alarm(self, jobInfo, thresholdOffset):
         for member in self.service.get_hostgroup().get_members():
+            #TODO: Put Tasks in a run queue and execute them in a background thread. FIFO! Reduces delay in core.
             for task in member.get_tasks():
                 task.execute(jobInfo.get_message(), self.core)
 
