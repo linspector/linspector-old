@@ -1,13 +1,13 @@
 """
-A HTTPS frontend to the current Linspector instance.
+A HTTPS backend to the current Linspector instance.
 
 A Webserver listening for requests to give information about the internal state of linspector.
 (maybe providing a JSON API to the instance too...)
 """
 
-from lib.frontends.frontend import Frontend
+from lib.backends.backend import Backend
 
 
-class HttpsFrontend(Frontend):
+class HttpsBackend(Backend):
     def __init__(self, **kwargs):
         return

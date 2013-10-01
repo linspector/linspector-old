@@ -5,9 +5,9 @@ Just for the fun in it... Linspector connects to a XMPP Server and are accepting
 give back information. The Linspector admin client will then be any Jabber Client... ;)
 """
 
-from lib.frontends.frontend import Frontend
+from lib.backends.backend import Backend
 
 
-class XmmpFrontend(Frontend):
+class XmmpBackend(Backend):
     def __init__(self, **kwargs):
         pass
