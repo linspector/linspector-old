@@ -153,6 +153,14 @@ class LishCommander(Exit, ShellCommander, LogCommander):
     def do_python(self, text):
         exec text
 
+    def do_jobs(self, text):
+        if text == "list":
+            for job in self._scheduler.get_jobs():
+                print job
+
+    def help_jobs(self):
+        print "Job helper functions"
+
     def help_python(self):
         print '''
             executes python using 'exec'.
