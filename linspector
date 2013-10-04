@@ -8,9 +8,10 @@ import logging
 import logging.handlers
 import os
 import os.path as path
-from apscheduler.scheduler import Scheduler
+
 from lib.config.parser import FullConfigParser
 from lib.core.job import Job
+from lib.core.scheduler import Scheduler
 from lib.backends.https import HttpsBackend
 from lib.frontends.lish import LishFrontend
 
