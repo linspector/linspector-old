@@ -1,4 +1,4 @@
-linspector
+Linspector
 ==========
 
 A simple, Python based, system & network vital information monitoring solution.
