@@ -28,10 +28,10 @@ from members import Member
 from config import LinspectorConfig
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
-from lib.services.service import Service
-from lib.processors.processor import Processor
-from lib.parsers.parser import Parser
-from lib.tasks.task import Task
+from linspector.services.service import Service
+from linspector.processors.processor import Processor
+from linspector.parsers.parser import Parser
+from linspector.tasks.task import Task
 
 MOD_SERVICES   = "services"
 MOD_PROCESSORS = "processors"
@@ -127,7 +127,7 @@ class ConfigParser:
             return mods[clazz]
         else:
             #mod = __import__(clazz)
-            p = join("lib", modPart, clazz + ".py")
+            p = join("linspector", modPart, clazz + ".py")
             mod = imp.load_source(clazz, p)
             mods[clazz] = mod
             return mod

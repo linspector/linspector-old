@@ -1,5 +1,5 @@
 """
-The shell service. This is for executing local shell commands and retrieve the output.
+The syslog processor
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -19,25 +19,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from lib.services.service import Service
+from linspector.processors.processor import Processor
 
 
-class ShellService(Service):
+class SyslogProcessor(Processor):
     def __init__(self, **kwargs):
-        super(ShellService, self).__init__(**kwargs)
-        
-        args = self.get_arguments()
-        if "command" in args:
-            self.command = args["command"] 
-        else:
-            raise Exception("There is no command argument")
-        
-    def needs_arguments(self):
-        return True 
-
-    def execute(self):
-        self.command.call()
+        Processor.__init__(self, **kwargs)
 
 
 def create(kwargs):
-    return ShellService(**kwargs)
+    return SyslogProcessor(**kwargs)

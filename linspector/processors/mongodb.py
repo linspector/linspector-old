@@ -1,4 +1,6 @@
 """
+The MongoDB processor
+
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
 This file is part of Linspector (http://linspector.org).
@@ -17,13 +19,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from lib.parsers.parser import Parser
+from linspector.processors.processor import Processor
 
 
-class ShellParser(Parser):
+class MongodbProcessor(Processor):
     def __init__(self, **kwargs):
-        pass
+        Processor.__init__(self, **kwargs)
 
 
 def create(kwargs):
-    return ShellParser(**kwargs)
+    return MongodbProcessor(**kwargs)

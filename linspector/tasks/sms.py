@@ -1,8 +1,5 @@
 """
-The Linspector XMPP Frontend...
-
-Just for the fun in it... Linspector connects to a XMPP Server and are accepting commands from special users and can
-give back information. The Linspector admin client will then be any Jabber Client... ;)
+The sms task.
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -22,9 +19,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from lib.backends.backend import Backend
+from linspector.tasks.task import Task
 
 
-class XmmpBackend(Backend):
+class SmsTask(Task):
     def __init__(self, **kwargs):
+        if not "type" in kwargs:
+            raise Exception("'type' not in typeDict " + str(kwargs))
+        if not "args" in kwargs:
+            raise Exception("typeDict " + str(kwargs) + " has no arguments!")
+        self.set_task_type(kwargs["type"])
+        self.recipient = kwargs["args"]["rcpt"]
+
+    def execute(self, msg):
         pass
+
+
+def create(taskDict):
+    return SmsTask(**taskDict)

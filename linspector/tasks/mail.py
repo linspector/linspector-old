@@ -1,7 +1,7 @@
 """
-The Jabber (XMPP) task.
+The mail task.
 
-Uses: http://xmpppy.sourceforge.net/
+http://docs.python.org/2/library/email-examples.html#
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -21,29 +21,34 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import xmpp
-from lib.tasks.task import Task
+import datetime
+import smtplib
+from email.mime.text import MIMEText
+from linspector.tasks.task import Task
 
 
-class JabberTask(Task):
+class MailTask(Task):
     def __init__(self, **kwargs):
         if not "type" in kwargs:
             raise Exception("'type' not in typeDict " + str(kwargs))
         if not "args" in kwargs:
-            raise Exception("typeDict " + str(kwargs) + " has nor arguments!")
+            raise Exception("typeDict " + str(kwargs) + " has no arguments!")
         self.set_task_type(kwargs["type"])
         self.recipient = kwargs["args"]["rcpt"]
 
     def execute(self, msg, core):
+        message = MIMEText(msg)
+        message['Subject'] = msg
+        now = datetime.datetime.now()
+        message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
         #TODO: totally unstable just to use values from core. make checks before...!
-        client = xmpp.Client(core["tasks"]["jabber"]["host"], core["tasks"]["jabber"]["port"], None)
-        client.connect(server=(core["tasks"]["jabber"]["host"], core["tasks"]["jabber"]["port"]))
-        client.auth(core["tasks"]["jabber"]["username"], core["tasks"]["jabber"]["password"], 'alert')
-        client.sendInitPresence()
-        message = xmpp.Message(self.recipient, msg)
-        message.setAttr('type', 'chat')
-        client.send(message)
+        message['From'] = core["tasks"]["mail"]["from"]
+        message['To'] = self.recipient
+        s = smtplib.SMTP(core["tasks"]["mail"]["host"], core["tasks"]["mail"]["port"])
+        s.login(core["tasks"]["mail"]["username"], core["tasks"]["mail"]["password"])
+        s.sendmail(core["tasks"]["mail"]["from"], self.recipient, message.as_string())
+        s.quit()
 
 
 def create(taskDict):
-    return JabberTask(**taskDict)
+    return MailTask(**taskDict)

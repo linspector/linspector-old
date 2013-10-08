@@ -1,8 +1,4 @@
 """
-The tweet/twitter task.
-
-Uses: tweepy
-
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
 This file is part of Linspector (http://linspector.org).
@@ -21,25 +17,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import tweepy
-from lib.tasks.task import Task
+from linspector.parsers.parser import Parser
 
 
-class TweetTask(Task):
+class ShellParser(Parser):
     def __init__(self, **kwargs):
-        if not "type" in kwargs:
-            raise Exception("'type' not in typeDict " + str(kwargs))
-        if not "args" in kwargs:
-            raise Exception("typeDict " + str(kwargs) + " has no arguments!")
-        self.set_task_type(kwargs["type"])
-        self.recipient = kwargs["args"]["rcpt"]
-
-    def execute(self, msg, core):
-        auth = tweepy.BasicAuthHandler("user", "pass")
-        api = tweepy.API(auth)
-        api.update_status(self.recipient)
-        print(self.get_task_type())
+        pass
 
 
-def create(taskDict):
-    return TweetTask(**taskDict)
+def create(kwargs):
+    return ShellParser(**kwargs)

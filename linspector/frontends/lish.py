@@ -22,7 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-from lib.frontends.frontend import Frontend
+from linspector.frontends.frontend import Frontend
 import os
 from shlex import split as shsplit
 from cmd import Cmd

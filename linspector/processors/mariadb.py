@@ -1,5 +1,5 @@
 """
-The sms task.
+The MariaDB processor
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -19,21 +19,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from lib.tasks.task import Task
+from linspector.processors.processor import Processor
 
 
-class SmsTask(Task):
+class MariadbProcessor(Processor):
     def __init__(self, **kwargs):
-        if not "type" in kwargs:
-            raise Exception("'type' not in typeDict " + str(kwargs))
-        if not "args" in kwargs:
-            raise Exception("typeDict " + str(kwargs) + " has no arguments!")
-        self.set_task_type(kwargs["type"])
-        self.recipient = kwargs["args"]["rcpt"]
-
-    def execute(self, msg):
-        pass
+        Processor.__init__(self, **kwargs)
 
 
-def create(taskDict):
-    return SmsTask(**taskDict)
+def create(kwargs):
+    return MariadbProcessor(**kwargs)

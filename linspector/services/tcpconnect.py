@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import socket
-from lib.services.service import Service
+from linspector.services.service import Service
 
 
 class TcpconnectService(Service):

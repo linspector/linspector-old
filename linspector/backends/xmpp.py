@@ -1,8 +1,8 @@
 """
-A HTTPS backend to the current Linspector instance.
+The Linspector XMPP Frontend...
 
-A Webserver listening for requests to give information about the internal state of linspector.
-(maybe providing a JSON API to the instance too...)
+Just for the fun in it... Linspector connects to a XMPP Server and are accepting commands from special users and can
+give back information. The Linspector admin client will then be any Jabber Client... ;)
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -22,9 +22,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from lib.backends.backend import Backend
+from linspector.backends.backend import Backend
 
 
-class HttpsBackend(Backend):
+class XmmpBackend(Backend):
     def __init__(self, **kwargs):
-        return
+        pass

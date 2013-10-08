@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 # http://code.activestate.com/recipes/409689-icmplib-library-for-creating-and-reading-icmp-pack/
-from lib.services.service import Service
+from linspector.services.service import Service
 import struct
 
 
