@@ -191,7 +191,7 @@
         "members":[ "root" ],
         "backends": {
             "jsonrpc": {
-                "listen": "127.0.0.1",
+                "host": "127.0.0.1",
                 "port": "2323",
                 "username": "linspector",
                 "password": "linspector"
