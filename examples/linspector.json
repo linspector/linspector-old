@@ -191,7 +191,10 @@
         "members":[ "root" ],
         "backends": {
             "jsonrpc": {
-                "port": "2323"
+                "listen": "127.0.0.1",
+                "port": "2323",
+                "username": "linspector",
+                "password": "linspector"
             }
         },
         "tasks":{
