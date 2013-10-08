@@ -189,6 +189,11 @@
         "max_logfile_count": 4,
         "max_worker_threads": 8,
         "members":[ "root" ],
+        "backends": {
+            "jsonrpc": {
+                "port": "2323"
+            }
+        },
         "tasks":{
             "jabber":{
                 "host": "example.org",
