@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 #from pysnmp.entity.rfc3413.oneliner import cmdgen
-from lib.services.service import Service
+from linspector.services.service import Service
 
 
 class SnmpgetService(Service):

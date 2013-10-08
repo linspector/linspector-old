@@ -1,5 +1,5 @@
 """
-The syslog processor
+A JSON-RPC backend using HTTP.
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -19,13 +19,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from lib.processors.processor import Processor
+from linspector.backends.backend import Backend
 
 
-class SyslogProcessor(Processor):
+class JsonrpcBackend(Backend):
     def __init__(self, **kwargs):
-        Processor.__init__(self, **kwargs)
-
-
-def create(kwargs):
-    return SyslogProcessor(**kwargs)
+        return

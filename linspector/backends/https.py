@@ -1,5 +1,8 @@
 """
-A JSON-RPC backend using HTTP.
+A HTTPS backend to the current Linspector instance.
+
+A Webserver listening for requests to give information about the internal state of linspector.
+(maybe providing a JSON API to the instance too...)
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -19,9 +22,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from lib.backends.backend import Backend
+from linspector.backends.backend import Backend
 
 
-class JsonrpcBackend(Backend):
+class HttpsBackend(Backend):
     def __init__(self, **kwargs):
         return

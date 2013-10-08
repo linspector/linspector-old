@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import paramiko
 import pprint
 import os
-from lib.services.service import Service
+from linspector.services.service import Service
 
 
 class SshService(Service):
