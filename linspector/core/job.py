@@ -104,6 +104,8 @@ class Job:
 
             except Exception, e:
                 self.log.debug(e)
+        else:
+            self.log.debug("Job " + self.hex_string() + " disabled")
 
     def enable(self):
         self._enabled = True
