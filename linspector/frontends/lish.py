@@ -164,7 +164,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
                     try:
                         hgCommander = HostgroupCommander(hg)
                         hgCommander.cmdloop("Entering Hostmode of " + hgName + ":\n")
-                    except KeyboardInterrupt, ke:
+                    except KeyboardInterrupt, key:
                         pass
 
     def do_python(self, text):
@@ -172,8 +172,8 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
     def do_jobs(self, text):
         if text == "list":
-            for job in self._scheduler.get_jobs():
-                print job
+            for job in self._jobs:
+                print job.pretty_string()
 
     def help_jobs(self):
         print "Job helper functions"
