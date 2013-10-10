@@ -41,6 +41,7 @@ class Job:
         self.hostgroup = hostgroup
         self.jobInfos = []
         self.jobThreshold = 0
+        self._enabled = True
 
     def __str__(self):
         return str(self.__dict__)
@@ -89,19 +90,26 @@ class Job:
     def handle_call(self):
         self.log.debug("handle call")
         self.log.debug(self.service)
-        try:
-            jobInfo = JobInfo(self.hex_string(), self.host, self.service)
-            self.service._execute(jobInfo)
-            jobInfo.set_execution_end()
+        if self._enabled:
+            try:
+                jobInfo = JobInfo(self.hex_string(), self.host, self.service)
+                self.service._execute(jobInfo)
+                jobInfo.set_execution_end()
 
-            self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
+                self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
 
-            self.log.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
+                self.log.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
 
-            self.jobInfos.append(jobInfo)
+                self.jobInfos.append(jobInfo)
 
-        except Exception, e:
-            self.log.debug(e)
+            except Exception, e:
+                self.log.debug(e)
+
+    def enable(self):
+        self._enabled = True
+
+    def disable(self):
+        self._enabled = False
 
 
 class JobInfo(object):
