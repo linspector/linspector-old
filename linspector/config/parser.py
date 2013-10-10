@@ -47,7 +47,7 @@ KEY_CORE       = "core"
 
 class ConfigurationException(Exception):
     def __init__(self, msg, log):
-        log.e(msg)
+        log.error(msg)
         self.msg = msg
         
     def __str__(self):

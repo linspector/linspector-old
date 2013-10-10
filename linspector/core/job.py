@@ -21,6 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from datetime import datetime
+from binascii import crc32
 
 
 def generateId():
@@ -43,8 +44,21 @@ class Job:
     def __str__(self):
         return str(self.__dict__)
 
+
+    def __hex__(self):
+        return hex(crc32(str(self.service) + str(self.host) + str(self.members)))
+
     def set_logger(self, log):
         self.log = log
+
+
+
+    def pretty_string(self):
+        ret = self.__hex__()
+        if ret[0] == "-":
+            ret = ret[1:]
+        ret += ": (" + str(self.host) + str(self.service) + str(self.job) + ")"
+        return ret[2:]
 
     def set_job(self, job):
         self.job = job
