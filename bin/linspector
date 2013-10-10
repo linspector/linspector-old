@@ -114,7 +114,7 @@ def main():
             for service in hostgroup.get_services():
                 for host in hostgroup.get_hosts():
                     for period in service.get_periods():
-                        job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors(), core)
+                        job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors(), core, hostgroup)
                         schedulerJob = period.createJob(scheduler, job, handleJob)
                         if schedulerJob is not None:
                             job.set_job(schedulerJob)

@@ -32,21 +32,21 @@ def generateId():
 
 
 class Job:
-    def __init__(self, service, host, members, processors, core):
+    def __init__(self, service, host, members, processors, core, hostgroup):
         self.service = service
         self.host = host
         self.members = members
         self.processors = processors
         self.core = core
+        self.hostgroup = hostgroup
         self.jobInfos = []
         self.jobThreshold = 0
 
     def __str__(self):
         return str(self.__dict__)
 
-
     def __hex__(self):
-        return hex(crc32(str(self.service) + str(self.host) + str(self.members)))
+        return hex(crc32(str(self.hostgroup) + str(self.host) + str(self.service) + str(self.members)))
 
     def hex_string(self):
         ret = self.__hex__()
@@ -62,7 +62,9 @@ class Job:
         self.log = log
 
     def pretty_string(self):
-        return self.hex_string() + ": (" + str(self.host) + str(self.service) + str(self.job) + ")"
+        ret = (self.hex_string() + ": (Hostgroup: " + str(self.hostgroup.get_name()) +
+               " Host: " + str(self.host) + " Service: " + str(self.service) + str(self.job) + ")")
+        return ret
 
     def set_job(self, job):
         self.job = job
@@ -103,7 +105,7 @@ class Job:
 
 
 class JobInfo(object):
-    def __init__(self,jobHex, host, service):
+    def __init__(self, jobHex, host, service):
         self.id = generateId()
         self.jobHex = jobHex
         self.host = host
