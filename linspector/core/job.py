@@ -54,9 +54,11 @@ class Job:
     def pretty_string(self):
         ret = self.__hex__()
         if ret[0] == "-":
-            ret = "0" + ret[1:]
+            ret = ret[3:]
+        else:
+            ret = ret[2:]
         ret += ": (" + str(self.host) + str(self.service) + str(self.job) + ")"
-        return ret[2:]
+        return ret
 
     def set_job(self, job):
         self.job = job
