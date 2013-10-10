@@ -44,7 +44,7 @@ class TcpconnectService(Service):
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         except socket.error, msg:
             jobInfo.set_errorcode(2)
-            jobInfo.set_message("[tcpconnect] Could not create socket to host: " + jobInfo.get_host() +
+            jobInfo.set_message("[tcpconnect: " + jobInfo.jobHex + "] Could not create socket to host: " + jobInfo.get_host() +
                                 " on port: " + str(self.port) + " (" + str(msg) + ")")
 
         try:

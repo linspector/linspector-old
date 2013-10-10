@@ -51,12 +51,10 @@ class Job:
     def set_logger(self, log):
         self.log = log
 
-
-
     def pretty_string(self):
         ret = self.__hex__()
         if ret[0] == "-":
-            ret = ret[1:]
+            ret = "0" + ret[1:]
         ret += ": (" + str(self.host) + str(self.service) + str(self.job) + ")"
         return ret[2:]
 
@@ -84,7 +82,7 @@ class Job:
         self.log.debug("handle call")
         self.log.debug(self.service)
         try:
-            jobInfo = JobInfo(self.host, self.service)
+            jobInfo = JobInfo(self.__hex__(), self.host, self.service)
             self.service._execute(jobInfo)
             jobInfo.set_execution_end()
 
@@ -99,8 +97,9 @@ class Job:
 
 
 class JobInfo(object):
-    def __init__(self, host, service):
+    def __init__(self,jobHex, host, service):
         self.id = generateId()
+        self.jobHex = jobHex
         self.host = host
         self.service = service
         self.executionBegin = datetime.now()
