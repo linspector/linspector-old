@@ -90,7 +90,7 @@ class Job:
         self.log.debug("handle call")
         self.log.debug(self.service)
         try:
-            jobInfo = JobInfo(self.__hex__(), self.host, self.service)
+            jobInfo = JobInfo(self.hex_string(), self.host, self.service)
             self.service._execute(jobInfo)
             jobInfo.set_execution_end()
 
