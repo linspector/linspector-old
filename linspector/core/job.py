@@ -48,17 +48,21 @@ class Job:
     def __hex__(self):
         return hex(crc32(str(self.service) + str(self.host) + str(self.members)))
 
-    def set_logger(self, log):
-        self.log = log
-
-    def pretty_string(self):
+    def hex_string(self):
         ret = self.__hex__()
         if ret[0] == "-":
             ret = ret[3:]
         else:
             ret = ret[2:]
-        ret += ": (" + str(self.host) + str(self.service) + str(self.job) + ")"
+        while len(ret) < 8:
+            ret = "0" + ret
         return ret
+
+    def set_logger(self, log):
+        self.log = log
+
+    def pretty_string(self):
+        return self.hex_string() + ": (" + str(self.host) + str(self.service) + str(self.job) + ")"
 
     def set_job(self, job):
         self.job = job
