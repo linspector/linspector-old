@@ -35,7 +35,7 @@ from linspector.backends.https import HttpsBackend
 from linspector.frontends.lish import LishFrontend
 
 
-def parseArgs():
+def parse_args():
     parser = argparse.ArgumentParser(
         description="Linspector is for monitoring the vital information of hosts, services and devices in a network.",
         epilog="linspector is not some program expecting computers to run! Visit http://linspector.org for more "
@@ -62,7 +62,7 @@ def parseArgs():
     return parser.parse_args()
 
 
-def setupLogging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfileLevel=logging.DEBUG):
+def setup_logging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfileLevel=logging.DEBUG):
     logfile = path.expanduser(logfile)
     if not path.exists(path.dirname(logfile)):
         os.makedirs(path.dirname(logfile))
@@ -90,14 +90,14 @@ def setupLogging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfile
     return log
 
 
-def handleJob(jobInfo):
+def handle_job(jobInfo):
     jobInfo.handle_call()
 
 
 def main():
-    args = parseArgs()
+    args = parse_args()
     #TODO: catch all log messages (apscheduler etc.); make logging more generic to support libraries logging
-    log = setupLogging(args.logfile, args.loglevel)
+    log = setup_logging(args.logfile, args.loglevel)
 
     log.info("parsed arguments")
 
@@ -115,7 +115,7 @@ def main():
                 for host in hostgroup.get_hosts():
                     for period in service.get_periods():
                         job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors(), core, hostgroup)
-                        schedulerJob = period.createJob(scheduler, job, handleJob)
+                        schedulerJob = period.createJob(scheduler, job, handle_job)
                         if schedulerJob is not None:
                             job.set_job(schedulerJob)
                             job.set_logger(log)
