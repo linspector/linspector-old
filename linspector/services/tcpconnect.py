@@ -1,8 +1,8 @@
 """
-The tcpconnect service. This is to check if a service on a specific port is reachable.
+The tcpconnect service. This is to check if a TCP service on a specific
+port is reachable.
 
-This should just return 0 on success and NOT 0 on error. Just to make internals generic to just report this code and
-not use a parser.
+This should just return 0 on success and NOT 0 on error.
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
