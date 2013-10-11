@@ -131,8 +131,8 @@ def main():
     frontend = LishFrontend(jobs=jobs, scheduler=scheduler, linspectorConfig=linConf)
 
     log.debug("shutting down scheduler")
-    logging.shutdown()
     scheduler.shutdown(wait=True)
+    logging.shutdown()
 
 
 if __name__ == "__main__":
