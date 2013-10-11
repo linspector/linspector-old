@@ -73,7 +73,15 @@ class Job:
     def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
         if executionSucessful:
             if self.jobThreshold > 0:
-                self.jobThreshold -= 1
+                #TODO: maybe set threshold_handling for each service optionally; will override core setting!
+                if self.core["threshold_handling"] == "reset":
+                    # Reset counter to 0
+                    self.log.debug("Threshold Reset")
+                    self.jobThreshold = 0
+                else:
+                    # Decrement the counter (default)
+                    self.log.debug("Threshold Decrement")
+                    self.jobThreshold -= 1
         else:
             self.jobThreshold += 1
 
