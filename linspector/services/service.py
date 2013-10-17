@@ -54,6 +54,9 @@ class Service(object):
         if KEY_PERIODS in kwargs:
             self.add_periods(kwargs[KEY_PERIODS])
 
+    def get_type(self):
+        return str(self.__class__)
+
     def add_arguments(self, args):
         for key, val in args.items():
             self._args[key] = val
@@ -123,6 +126,7 @@ class Service(object):
             self.set_execution_successful(False)
             self._threshold -= 1
             raise e
+
 
 
 

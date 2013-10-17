@@ -23,6 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-class Frontend():
-    def __init__(self, **kwargs):
-        return
+class Frontend(object):
+    def __init__(self, linspectorInterface):
+        self.interface = linspectorInterface

@@ -20,6 +20,27 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-class Interface():
-    def __init__(self):
-        pass
+class LinspectorInterface(object):
+    def __init__(self, jobs, scheduler, linspectorConfig):
+        self.jobs = jobs
+        self._scheduler = scheduler
+        self._config = linspectorConfig
+        self._recompute_job_hex_strings()
+
+    def _recompute_job_hex_strings(self):
+        self.jobHex = []
+        for job in self.jobs:
+            self.jobHex.append(job.hex_string())
+
+    def get_job_hex_strings(self):
+        return self.jobHex
+
+    def find_job_by_hex_string(self, hexString):
+        for job in self.jobs:
+            if job.hex_string() == hexString:
+                return job
+
+    def get_enabled_layouts(self):
+        self._config.get_enabled_layouts()
+
+

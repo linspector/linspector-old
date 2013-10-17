@@ -19,6 +19,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+
 __version__ = "0.1.7"
 __default_config__ = "./examples/minimal.json"
 
@@ -28,6 +29,7 @@ import logging.handlers
 import os
 import os.path as path
 
+from linspector.core.interface import LinspectorInterface
 from linspector.config.parser import FullConfigParser
 from linspector.core.job import Job
 from linspector.core.scheduler import Scheduler
@@ -128,7 +130,8 @@ def main():
 
     take care of signals etc. to sthutdown the threads when stopping linspector.
     '''
-    frontend = LishFrontend(jobs=jobs, scheduler=scheduler, linspectorConfig=linConf)
+    interface = LinspectorInterface(jobs, scheduler, linConf)
+    LishFrontend(interface)
 
     log.debug("shutting down scheduler")
     scheduler.shutdown(wait=True)

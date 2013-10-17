@@ -31,12 +31,12 @@ __version__ = "0.1.1"
 
 
 class LishFrontend(Frontend):
-    def __init__(self, **kwargs):
-
+    def __init__(self, linpsectorInterface):
+        super(LishFrontend, self)
         #print(kwargs)
         #self.jobs = kwargs["jobs"]
 
-        commander = LishCommander(kwargs)
+        commander = LishCommander(linpsectorInterface)
         run = True
         while run:
             try:
@@ -55,8 +55,8 @@ class CommandBase(Cmd, object):
         super(CommandBase, self).__init__()
         self._needs_update = False
 
-    def get_completion(self, args, text, showOnZeroText=True):
-        if len(text) == 0 and showOnZeroText:
+    def get_completion(self, args, text):
+        if len(text) == 0:
             return args
         else:
             return [x for x in args if x.startswith(text)]
@@ -127,25 +127,25 @@ class HostgroupCommander(Exit, object):
         print("gives you control over a member of the hostgroup")
 
 
+
+
 class LishCommander(Exit, ShellCommander, LogCommander):
-    def __init__(self, kwargs):
+    def __init__(self, linspectorInterface):
 
         super(LishCommander, self).__init__()
 
         self.prompt = "<Lish>: "
 
-        self._linConf = kwargs["linspectorConfig"]
-        self._jobs = kwargs["jobs"]
-        self._scheduler = kwargs["scheduler"]
+        self.interface = linspectorInterface
 
-        self._hostgroupArgs = ["list", "select"]
+
 
     def do_hostgroup(self, text):
         args = shsplit(text)
 
         if args[0] == "list":
             print("current active Hostgroups:\n")
-            for l in self._linConf.get_enabled_layouts():
+            for l in self.interface.get_enabled_layouts():
                 print l.get_name()
                 space = 4 * " "
                 for hg in l.get_hostgroups():
@@ -168,7 +168,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
     def complete_hostgroup(self, text, line, begidx, endidx):
         if begidx == 10:
-            return [x for x in self._hostgroupArgs if x.startswith(text)] if len(text) > 0 else self._hostgroupArgs
+            return self.get_completion(["list", "select"], text)
 
     def help_hostgroup(self):
         print "usage:\n\t" + \
@@ -183,23 +183,53 @@ class LishCommander(Exit, ShellCommander, LogCommander):
     def help_python(self):
         print "executes python using 'exec'."
 
+    def print_jobs_infos(self, job):
+        print "Job: " + job.hex_string() + "\n" + \
+              "Host: " + job.host + "\n" + \
+              "Service: " + job.service.get_type() + "\n" + \
+              "Members: " + str([member.name for member in job.members])
+
+
+
     def do_job(self, text):
-        if text == "disable":
-            pass
-        elif text == "enable":
-            pass
+        text = shsplit(text)
+        job_hex = text[0]
+        job = self.interface.find_job_by_hex_string(job_hex)
+
+        if job is None:
+            print "first parameter must be a job hex id! get a List of all ids by typing 'jobs list'\n"
+            self.help_job()
+
+        if len(text) == 1:
+            self.print_jobs_infos(job)
+            return
+
+        cmd = text[1]
+        if cmd in ["enable", "disable"]:
+            if "n" in cmd:
+                job.enable()
+            else:
+                job.disable()
         else:
             print "invalid or missing parameter\n"
             self.help_job()
 
+    def complete_job(self, text, line, begidx, endidx):
+        if begidx == 4:
+            return self.get_completion(self.interface.get_job_hex_strings(), text)
+        elif begidx == 13:
+            return self.get_completion(["enable", "disable"], text)
+
     def help_job(self):
-        print "Job helper functions:\n\t" + \
-              "disable <ID>:\t\tdisable a job\n\t" + \
-              "enable <ID>:\t\tenable a job\n\t"
+        print '''usage:
+              <ID>              prints extended information about this job
+              <ID> enable:      enables a job
+              <ID> disable:     disables a job
+              '''
 
     def do_jobs(self, text):
         if text == "list":
-            for job in self._jobs:
+            for job in self.interface.jobs:
                 print job.pretty_string()
         else:
             print "invalid or missing parameter\n"
