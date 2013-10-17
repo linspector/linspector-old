@@ -32,21 +32,22 @@ def generateId():
 
 
 class Job:
-    def __init__(self, service, host, members, processors, core):
+    def __init__(self, service, host, members, processors, core, hostgroup):
         self.service = service
         self.host = host
         self.members = members
         self.processors = processors
         self.core = core
+        self.hostgroup = hostgroup
         self.jobInfos = []
         self.jobThreshold = 0
+        self._enabled = True
 
     def __str__(self):
         return str(self.__dict__)
 
-
     def __hex__(self):
-        return hex(crc32(str(self.service) + str(self.host) + str(self.members)))
+        return hex(crc32(str(self.hostgroup) + str(self.host) + str(self.service) + str(self.members)))
 
     def hex_string(self):
         ret = self.__hex__()
@@ -62,7 +63,9 @@ class Job:
         self.log = log
 
     def pretty_string(self):
-        return self.hex_string() + ": (" + str(self.host) + str(self.service) + str(self.job) + ")"
+        ret = (self.hex_string() + ": (Hostgroup: " + str(self.hostgroup.get_name()) +
+               " Host: " + str(self.host) + " Service: " + str(self.service) + " " + str(self.job) + ")")
+        return ret
 
     def set_job(self, job):
         self.job = job
@@ -70,7 +73,15 @@ class Job:
     def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
         if executionSucessful:
             if self.jobThreshold > 0:
-                self.jobThreshold -= 1
+                #TODO: maybe set threshold_handling for each service optionally; will override core setting!
+                if self.core["threshold_handling"] == "reset":
+                    # Reset counter to 0
+                    self.log.debug("Threshold Reset")
+                    self.jobThreshold = 0
+                else:
+                    # Decrement the counter (default)
+                    self.log.debug("Threshold Decrement")
+                    self.jobThreshold -= 1
         else:
             self.jobThreshold += 1
 
@@ -87,23 +98,32 @@ class Job:
     def handle_call(self):
         self.log.debug("handle call")
         self.log.debug(self.service)
-        try:
-            jobInfo = JobInfo(self.__hex__(), self.host, self.service)
-            self.service._execute(jobInfo)
-            jobInfo.set_execution_end()
+        if self._enabled:
+            try:
+                jobInfo = JobInfo(self.hex_string(), self.host, self.service)
+                self.service._execute(jobInfo)
+                jobInfo.set_execution_end()
 
-            self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
+                self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
 
-            self.log.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
+                self.log.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
 
-            self.jobInfos.append(jobInfo)
+                self.jobInfos.append(jobInfo)
 
-        except Exception, e:
-            self.log.debug(e)
+            except Exception, e:
+                self.log.debug(e)
+        else:
+            self.log.debug("Job " + self.hex_string() + " disabled")
+
+    def enable(self):
+        self._enabled = True
+
+    def disable(self):
+        self._enabled = False
 
 
 class JobInfo(object):
-    def __init__(self,jobHex, host, service):
+    def __init__(self, jobHex, host, service):
         self.id = generateId()
         self.jobHex = jobHex
         self.host = host

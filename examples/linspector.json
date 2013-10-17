@@ -170,6 +170,7 @@
         }
     },
     "layouts":{
+        "_comment": "https://github.com/linspector/linspector/wiki/Configuration-Layouts",
         "production":{ 
             "hostgroups":[ "group1" ],
             "enabled": true
@@ -184,13 +185,16 @@
         }
     },
     "core":{
+        "_comment": "https://github.com/linspector/linspector/wiki/Configuration-Core",
         "instance_name": "Master Monitoring (monitor.example.org)",
         "max_logfile_size": 1024000,
         "max_logfile_count": 4,
         "max_worker_threads": 8,
+        "threshold_handling": "reset",
         "members":[ "root" ],
         "backends": {
             "jsonrpc": {
+                "_comment": "https://github.com/linspector/linspector/wiki/Configuration-Core-Backends-JsonRPC",
                 "host": "127.0.0.1",
                 "port": "2323",
                 "username": "linspector",

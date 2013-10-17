@@ -1,5 +1,5 @@
 """
-The tcpconnect service. This is to check if a TCP service on a specific
+The udpconnect service. This is to check if a UDP service on a specific
 port is reachable.
 
 This should just return 0 on success and NOT 0 on error.
@@ -26,9 +26,9 @@ import socket
 from linspector.services.service import Service
 
 
-class TcpconnectService(Service):
+class UdpconnectService(Service):
     def __init__(self, **kwargs):
-        super(TcpconnectService, self).__init__(**kwargs)
+        super(UdpconnectService, self).__init__(**kwargs)
         
         args = self.get_arguments()
         if "port" in args:
@@ -41,27 +41,27 @@ class TcpconnectService(Service):
 
     def execute(self, jobInfo):
         try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         except socket.error, msg:
             jobInfo.set_errorcode(2)
-            jobInfo.set_message("[tcpconnect: " + jobInfo.jobHex + "] Could not create socket to host: " +
+            jobInfo.set_message("[udpconnect: " + jobInfo.jobHex + "] Could not create socket to host: " +
                                 jobInfo.get_host() + " on port: " + str(self.port) + " (" + str(msg) + ")")
 
         try:
             sock.connect((jobInfo.get_host(), self.port))
         except socket.error, msg:
             jobInfo.set_errorcode(1)
-            jobInfo.set_message("[tcpconnect: " + jobInfo.jobHex + "] Could not establish connection to host: " +
+            jobInfo.set_message("[udpconnect: " + jobInfo.jobHex + "] Could not establish connection to host: " +
                                 jobInfo.get_host() + " on port: " + str(self.port) + " (" + str(msg) + ")")
 
         if jobInfo.get_errorcode() == -1:
             jobInfo.set_execution_successful(True)
             jobInfo.set_errorcode(0)
-            jobInfo.set_message("[tcpconnect: " + jobInfo.jobHex + "] Connection successful established to host: " +
+            jobInfo.set_message("[udpconnect: " + jobInfo.jobHex + "] Connection successful established to host: " +
                                 jobInfo.get_host() + " on port: " + str(self.port))
 
         sock.close()
 
 
 def create(kwargs):
-    return TcpconnectService(**kwargs)
+    return UdpconnectService(**kwargs)

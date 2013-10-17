@@ -1,7 +1,8 @@
 """
-Lish is the Linspector Interactive Shell...
+Lish is the Linspector Interactive Shell.
 
-This  will become a commandline interface to Linspector. Think of a network switch or router like those from Cisco.
+This  will become a commandline interface to Linspector. Think of a
+network switch or router like those from Cisco.
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -21,13 +22,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-
 from linspector.frontends.frontend import Frontend
 import os
 from shlex import split as shsplit
 from cmd import Cmd
 
-__version__ = "0.1"
+__version__ = "0.1.1"
 
 
 class LishFrontend(Frontend):
@@ -128,7 +128,6 @@ class HostgroupCommander(Exit, object):
 
 
 class LishCommander(Exit, ShellCommander, LogCommander):
-
     def __init__(self, kwargs):
 
         super(LishCommander, self).__init__()
@@ -167,31 +166,44 @@ class LishCommander(Exit, ShellCommander, LogCommander):
                     except KeyboardInterrupt, key:
                         pass
 
+    def complete_hostgroup(self, text, line, begidx, endidx):
+        if begidx == 10:
+            return [x for x in self._hostgroupArgs if x.startswith(text)] if len(text) > 0 else self._hostgroupArgs
+
+    def help_hostgroup(self):
+        print "usage:\n\t" + \
+              "hostgroup list\n\t\t\t" + \
+              "prints a list of all hostgroups\n\t" + \
+              "hostgroup select HOSTGROUPNAME\n\t\t\t" + \
+              "select a hostgroup to make changes on it"
+
     def do_python(self, text):
         exec text
+
+    def help_python(self):
+        print "executes python using 'exec'."
+
+    def do_job(self, text):
+        if text == "disable":
+            pass
+        elif text == "enable":
+            pass
+        else:
+            print "invalid or missing parameter\n"
+            self.help_job()
+
+    def help_job(self):
+        print "Job helper functions:\n\t" + \
+              "disable <ID>:\t\tdisable a job\n\t" + \
+              "enable <ID>:\t\tenable a job\n\t"
 
     def do_jobs(self, text):
         if text == "list":
             for job in self._jobs:
                 print job.pretty_string()
+        else:
+            print "invalid or missing parameter\n"
+            self.help_jobs()
 
     def help_jobs(self):
-        print "Job helper functions"
-
-    def help_python(self):
-        print '''
-            executes python using 'exec'.
-            '''
-
-    def help_hostgroup(self):
-        print '''
-            usage:
-                hostgroup list
-                                prints a list of all hostgroups
-                hostgroup select HOSTGROUPNAME
-                                select a hostgroup to make changes on it
-            '''
-
-    def complete_hostgroup(self, text, line, begidx, endidx):
-        if begidx == 10:
-            return [x for x in self._hostgroupArgs if x.startswith(text)] if len(text) > 0 else self._hostgroupArgs
+        print "Joblist helper functions:\n\t" + "list:\t\t\tlists all jobs"
