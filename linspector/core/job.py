@@ -71,6 +71,10 @@ class Job:
     def set_job(self, job):
         self.job = job
 
+    def set_enabled(self, enabled=True):
+        self._enabled = enabled
+
+
     def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
         if executionSucessful:
             if self.jobThreshold > 0:
@@ -91,7 +95,7 @@ class Job:
             self.handle_alarm(jobInfo, self.jobThreshold - serviceThreshold)
 
     def handle_alarm(self, jobInfo, thresholdOffset):
-        for member in self.service.get_hostgroup().get_members():
+        for member in self.members:
             #TODO: Put Tasks in a run queue and execute them in a background thread. FIFO! Reduces delay in core.
             for task in member.get_tasks():
                 task.execute(jobInfo.get_message(), self.core)
@@ -116,11 +120,7 @@ class Job:
         else:
             self.log.debug("Job " + self.hex_string() + " disabled")
 
-    def enable(self):
-        self._enabled = True
 
-    def disable(self):
-        self._enabled = False
 
 
 class JobInfo(object):

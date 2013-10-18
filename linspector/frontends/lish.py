@@ -200,10 +200,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
         cmd = text[1]
         if cmd in ["enable", "disable"]:
-            if "n" in cmd:
-                job.enable()
-            else:
-                job.disable()
+            job.set_enabled("n" in cmd)
         else:
             print "invalid or missing parameter\n"
             self.help_job()

@@ -19,7 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from os.path import isfile
 from os.path import join
-import json
 import imp
 
 from layouts import Layout
@@ -92,7 +91,16 @@ class ConfigParser:
             config = cfgFile.read()
         
         self.log.info("reading Config: " + configFilename)
-        return json.loads(config)
+
+        if self.configFilename.endswith(".yaml") or configFilename.endswith("yml"):
+            import yaml
+            return yaml.load(config)
+        elif configFilename.endswith(".json"):
+            import json
+            return json.loads(config)
+        else:
+            print "could not determine config format. Only json and yaml are supported for now"
+            exit(2)
 
     def _create_raw_Object(self, jsonDict, msgName, creator):
         """
@@ -220,21 +228,23 @@ class FullConfigParser(ConfigParser):
         
         :param configFilename: the configuration file to parse
         """
-        self.jsonDict = self._read_json_config(configFilename)
+
+
+        self.dict = self._read_json_config(configFilename)
 
         # first step
-        creator = lambda name, values: Layout(name,**values)
-        layouts = self._create_raw_Object(self.jsonDict[KEY_LAYOUTS], "Layout", creator)
+        creator = lambda name, values: Layout(name, **values)
+        layouts = self._create_raw_Object(self.dict[KEY_LAYOUTS], "Layout", creator)
 
         creator = lambda name, values: Member(name, **values)
-        members = self._create_raw_Object(self.jsonDict[KEY_MEMBERS], "Member", creator)
+        members = self._create_raw_Object(self.dict[KEY_MEMBERS], "Member", creator)
 
 
         creator = lambda name, values: HostGroup(name, **values)
-        self.hostgroups = self._create_raw_Object(self.jsonDict[KEY_HOSTGROUPS], "Hostgroup", creator)
+        self.hostgroups = self._create_raw_Object(self.dict[KEY_HOSTGROUPS], "Hostgroup", creator)
         
         creator = parsePeriodList
-        periods = self._create_raw_Object(self.jsonDict[KEY_PERIODS], "Period", creator)
+        periods = self._create_raw_Object(self.dict[KEY_PERIODS], "Period", creator)
 
         #2. import and replace
         items_func = lambda hostgroup: hostgroup.get_services()
@@ -280,7 +290,7 @@ class FullConfigParser(ConfigParser):
             for service in hg.get_services():
                 service.set_hostgroup(hg)
         core = None
-        if "core" in self.jsonDict:
-            core = self.jsonDict["core"]
+        if "core" in self.dict:
+            core = self.dict["core"]
 
         return linConf, core

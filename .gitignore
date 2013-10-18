@@ -17,3 +17,5 @@ plugins
 .metadata
 
 examples/private.json
+examples/private.yaml
+examples/private.yml
