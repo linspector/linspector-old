@@ -127,8 +127,6 @@ class HostgroupCommander(Exit, object):
         print("gives you control over a member of the hostgroup")
 
 
-
-
 class LishCommander(Exit, ShellCommander, LogCommander):
     def __init__(self, linspectorInterface):
 
@@ -137,8 +135,6 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         self.prompt = "<Lish>: "
 
         self.interface = linspectorInterface
-
-
 
     def do_hostgroup(self, text):
         args = shsplit(text)
@@ -188,8 +184,6 @@ class LishCommander(Exit, ShellCommander, LogCommander):
               "Host: " + job.host + "\n" + \
               "Service: " + job.service.get_type() + "\n" + \
               "Members: " + str([member.name for member in job.members])
-
-
 
     def do_job(self, text):
         text = shsplit(text)
