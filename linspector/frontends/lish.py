@@ -89,10 +89,6 @@ class Exit(CommandBase, object):
     def help_exit(self):
         print("exits linspector")
 
-    #TODO: do we really need this: ???
-    #do_EOF = do_exit
-    #help_EOF = help_exit
-
 
 class LogCommander(Cmd, object):
     def do_log(self, text):
