@@ -63,8 +63,8 @@ class Job:
         self.log = log
 
     def pretty_string(self):
-        ret = (self.hex_string() + ": (Hostgroup: " + str(self.hostgroup.get_name()) +
-               " Host: " + str(self.host) + " Service: " + str(self.service) + " " + str(self.job) + ") Enabled: " +
+        ret = (self.hex_string() + ": Hostgroup: " + str(self.hostgroup.get_name()) +
+               " Host: " + str(self.host) + " Service: " + str(self.service) + " " + str(self.job) + " Enabled: " +
                str(self._enabled))
         return ret
 
@@ -73,7 +73,6 @@ class Job:
 
     def set_enabled(self, enabled=True):
         self._enabled = enabled
-
 
     def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
         if executionSucessful:

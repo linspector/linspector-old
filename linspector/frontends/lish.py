@@ -181,10 +181,16 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         print "executes python using 'exec'."
 
     def print_jobs_infos(self, job):
-        print "Job: " + job.hex_string() + "\n" + \
-              "Host: " + job.host + "\n" + \
-              "Service: " + job.service.get_type() + "\n" + \
-              "Members: " + str([member.name for member in job.members])
+        #TODO: fix the output for "interval" and "next run"
+        print "Job:\t\t" + job.hex_string() + "\n" + \
+              "Hostgroup:\t" + job.hostgroup.get_name() + "\n" + \
+              "Host:\t\t" + job.host + "\n" + \
+              "Service:\t" + str(job.service) + "\n" + \
+              "Members:\t" + str([member.name for member in job.members]) + "\n" + \
+              "Interval:\t" + str(job.job) + "\n" + \
+              "Next run:\t" + str(job.job) + "\n" + \
+              "Enabled:\t" + str(job._enabled) + "\n" + \
+              "Fails:\t\t" + str(job.jobThreshold)
 
     def do_job(self, text):
         text = shsplit(text)
