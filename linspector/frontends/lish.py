@@ -27,7 +27,14 @@ import os
 from shlex import split as shsplit
 from cmd import Cmd
 
-__version__ = "0.1.1"
+__version__ = "0.2"
+
+PURPLE = "\033[95m"
+BLUE   = "\033[94m"
+GREEN  = "\033[92m"
+YELLOW = "\033[93m"
+RED    = "\033[91m"
+END    = "\033[0m"
 
 
 class LishFrontend(Frontend):
