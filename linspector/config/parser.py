@@ -240,6 +240,8 @@ class FullConfigParser(ConfigParser):
 
         creator = lambda name, values: HostGroup(name, **values)
         self.hostgroups = self._create_raw_Object(self.dict[KEY_HOSTGROUPS], "Hostgroup", creator)
+
+
         
         creator = parsePeriodList
         periods = self._create_raw_Object(self.dict[KEY_PERIODS], "Period", creator)

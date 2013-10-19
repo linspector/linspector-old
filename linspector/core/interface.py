@@ -19,6 +19,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
+from collections import OrderedDict
 
 
 class LinspectorInterface(object):
@@ -37,9 +38,24 @@ class LinspectorInterface(object):
         return self.jobHex
 
     def find_job_by_hex_string(self, hexString):
+        if hexString is None:
+            return None
         for job in self.jobs:
             if job.hex_string() == hexString:
                 return job
+
+    def get_job_info_dict(self, job):
+        d = OrderedDict()
+        d["Job"] = job.hex_string()
+        d["Hostgroup"] = job.hostgroup.get_name()
+        d["Host"] = job.host
+        d["Service"] = str(job.service)
+        d["Members"] = str([member.name for member in job.members])
+        d["Interval"] = str(job.job.trigger)
+        d["Next run"] = str(job.job.next_run_time)
+        d["Enabled"] = str(job._enabled)
+        d["Fails"] = str(job.jobThreshold)
+        return d
 
     def get_enabled_layouts(self):
         self._config.get_enabled_layouts()

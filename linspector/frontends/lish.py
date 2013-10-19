@@ -186,17 +186,19 @@ class LishCommander(Exit, ShellCommander, LogCommander):
     def help_python(self):
         print "executes python using 'exec'."
 
+    def print_color(self, color, text):
+        print color + str(text) + END
+
+    def print_dict(self, dict):
+        for key, val in dict.items():
+            tab = ":\t"
+            if len(str(key)) < 7:
+                tab += "\t"
+
+            print str(key) + tab + str(val)
+
     def print_jobs_infos(self, job):
-        #TODO: fix the output for "interval" and "next run"
-        print "Job:\t\t" + job.hex_string() + "\n" + \
-              "Hostgroup:\t" + job.hostgroup.get_name() + "\n" + \
-              "Host:\t\t" + job.host + "\n" + \
-              "Service:\t" + str(job.service) + "\n" + \
-              "Members:\t" + str([member.name for member in job.members]) + "\n" + \
-              "Interval:\t" + str(job.job.trigger) + "\n" + \
-              "Next run:\t" + str(job.job.next_run_time) + "\n" + \
-              "Enabled:\t" + str(job._enabled) + "\n" + \
-              "Fails:\t\t" + str(job.jobThreshold)
+        self.print_dict(self.interface.get_job_info_dict(job))
 
     def do_job(self, text):
         text = shsplit(text)
@@ -206,6 +208,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         if job is None:
             print RED + "first parameter must be a job hex id! get a List of all ids by typing 'jobs list'\n" + END
             self.help_job()
+            return
 
         if len(text) == 1:
             self.print_jobs_infos(job)
