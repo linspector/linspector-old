@@ -219,7 +219,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         if cmd in ["enable", "disable"]:
             job.set_enabled("n" in cmd)
         else:
-            print "invalid or missing parameter\n"
+            print RED + "invalid or missing parameter\n" + END
             self.help_job()
 
     def complete_job(self, text, line, begidx, endidx):
@@ -240,7 +240,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             for job in self.interface.jobs:
                 print job.pretty_string()
         else:
-            print "invalid or missing parameter\n"
+            print RED + "invalid or missing parameter\n" + END
             self.help_jobs()
 
     def help_jobs(self):
