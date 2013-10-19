@@ -75,7 +75,7 @@ class ConfigParser:
         for layout in config.get_layouts():
             layout._to_config_dict(configDict)
 
-    def _read_json_config(self, configFilename):
+    def _read_config_file(self, configFilename):
         """
         reads the config File and returns a dictionary, while lowering the first keys
         
@@ -229,8 +229,7 @@ class FullConfigParser(ConfigParser):
         :param configFilename: the configuration file to parse
         """
 
-
-        self.dict = self._read_json_config(configFilename)
+        self.dict = self._read_config_file(configFilename)
 
         # first step
         creator = lambda name, values: Layout(name, **values)
@@ -238,7 +237,6 @@ class FullConfigParser(ConfigParser):
 
         creator = lambda name, values: Member(name, **values)
         members = self._create_raw_Object(self.dict[KEY_MEMBERS], "Member", creator)
-
 
         creator = lambda name, values: HostGroup(name, **values)
         self.hostgroups = self._create_raw_Object(self.dict[KEY_HOSTGROUPS], "Hostgroup", creator)
