@@ -22,10 +22,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from linspector.frontends.frontend import Frontend
 import os
-from shlex import split as shsplit
+import socket
 from cmd import Cmd
+from shlex import split as shsplit
+
+from linspector.frontends.frontend import Frontend
 
 __version__ = "0.2"
 
@@ -140,7 +142,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
         super(LishCommander, self).__init__()
 
-        self.prompt = "\033[94m<Lish>:\033[0m "
+        self.prompt = "\033[94m<Lish@" + socket.gethostname() + ">:\033[0m "
 
         self.interface = linspectorInterface
 
