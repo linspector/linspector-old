@@ -33,8 +33,8 @@ __version__ = "0.2"
 
 PURPLE = "\033[95m"
 BLUE   = "\033[94m"
-GREEN  = "\033[92m"
 YELLOW = "\033[93m"
+GREEN  = "\033[92m"
 RED    = "\033[91m"
 END    = "\033[0m"
 
@@ -208,7 +208,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         job = self.interface.find_job_by_hex_string(job_hex)
 
         if job is None:
-            print "first parameter must be a job hex id! get a List of all ids by typing 'jobs list'\n"
+            print RED + "first parameter must be a job hex id! get a List of all ids by typing 'jobs list'\n" + END
             self.help_job()
 
         if len(text) == 1:
