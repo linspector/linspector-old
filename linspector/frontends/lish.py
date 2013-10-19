@@ -195,7 +195,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             if len(str(key)) < 7:
                 tab += "\t"
 
-            print str(key) + tab + str(val)
+            print GREEN + str(key) + END + tab + YELLOW + str(val) + END
 
     def print_jobs_infos(self, job):
         self.print_dict(self.interface.get_job_info_dict(job))
