@@ -197,8 +197,8 @@ class LishCommander(Exit, ShellCommander, LogCommander):
               "Host:\t\t" + job.host + "\n" + \
               "Service:\t" + str(job.service) + "\n" + \
               "Members:\t" + str([member.name for member in job.members]) + "\n" + \
-              "Interval:\t" + str(job.job) + "\n" + \
-              "Next run:\t" + str(job.job) + "\n" + \
+              "Interval:\t" + str(job.job.trigger) + "\n" + \
+              "Next run:\t" + str(job.job.next_run_time) + "\n" + \
               "Enabled:\t" + str(job._enabled) + "\n" + \
               "Fails:\t\t" + str(job.jobThreshold)
 
