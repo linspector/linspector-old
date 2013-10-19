@@ -47,7 +47,7 @@ class Job:
         return str(self.__dict__)
 
     def __hex__(self):
-        return hex(crc32(str(self.hostgroup) + str(self.host) + str(self.service) + str(self.members)))
+        return hex(crc32(str(self.hostgroup) + str(self.host) + str(self.service)))
 
     def hex_string(self):
         ret = self.__hex__()
@@ -118,8 +118,6 @@ class Job:
                 self.log.debug(e)
         else:
             self.log.debug("Job " + self.hex_string() + " disabled")
-
-
 
 
 class JobInfo(object):

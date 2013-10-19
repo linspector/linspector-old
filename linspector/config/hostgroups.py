@@ -61,7 +61,10 @@ class HostGroup(object):
         self.processors = []
         if tmp in kwargs:
             self.add_processors(kwargs[tmp])
-        
+
+    def __str__(self):
+        return self.name
+
     def _to_config_dict(self, configDict):
         me = {}
         me["members"] = [member.nameid for member in self.get_members()]
@@ -110,24 +113,6 @@ class HostGroup(object):
     
     def get_members(self):
         return self.members 
-
-    def __str__(self):
-        if True:
-            return str(self.__dict__)
-        ret = "HostGroup: " + self.name + "\n"
-        ret += "members: {\n"
-        for itm in self.members:
-            ret += str(itm) + "\n"
-        ret += "}\n"
-        ret += "hosts: {\n"
-        for itm in self.hosts:
-            ret += str(itm) + "\n"
-        ret += "}\n"
-        ret += "services: {\n"
-        for itm in self._services:
-            ret += str(itm) + "\n"
-        ret += "}\n"
-        return ret
 
 
 class HostGroupService:
