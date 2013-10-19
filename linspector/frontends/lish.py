@@ -49,7 +49,7 @@ class LishFrontend(Frontend):
         run = True
         while run:
             try:
-                commander.cmdloop("\033[92mLish - Linspector interactive shell (" + __version__ + ")\033[0m")
+                commander.cmdloop(GREEN + "Lish - Linspector interactive shell (" + __version__ + ")" + END)
             except KeyboardInterrupt, ki:
                 run = False
             except Exception, err:
@@ -142,7 +142,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
         super(LishCommander, self).__init__()
 
-        self.prompt = "\033[94m<Lish@" + socket.gethostname() + ">:\033[0m "
+        self.prompt = BLUE + "<Lish@" + socket.gethostname() + ">: " + END
 
         self.interface = linspectorInterface
 
