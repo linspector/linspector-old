@@ -40,7 +40,7 @@ class LishFrontend(Frontend):
         run = True
         while run:
             try:
-                commander.cmdloop("Lish - Linspector interactive shell (" + __version__ + ")")
+                commander.cmdloop("\033[92mLish - Linspector interactive shell (" + __version__ + ")\033[0m")
             except KeyboardInterrupt, ki:
                 run = False
             except Exception, err:
@@ -133,7 +133,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
         super(LishCommander, self).__init__()
 
-        self.prompt = "<Lish>: "
+        self.prompt = "\033[94m<Lish>:\033[0m "
 
         self.interface = linspectorInterface
 
@@ -168,11 +168,12 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             return self.get_completion(["list", "select"], text)
 
     def help_hostgroup(self):
-        print "usage:\n\t" + \
-              "hostgroup list\n\t\t\t" + \
-              "prints a list of all hostgroups\n\t" + \
-              "hostgroup select HOSTGROUPNAME\n\t\t\t" + \
-              "select a hostgroup to make changes on it"
+        print '''usage:
+              hostgroup list
+              prints a list of all hostgroups
+              hostgroup select HOSTGROUPNAME
+              select a hostgroup to make changes on it
+              '''
 
     def do_python(self, text):
         exec text
@@ -234,4 +235,6 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             self.help_jobs()
 
     def help_jobs(self):
-        print "Joblist helper functions:\n\t" + "list:\t\t\tlists all jobs"
+        print '''usage:
+              list              lists all jobs
+              '''
