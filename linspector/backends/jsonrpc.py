@@ -1,5 +1,5 @@
 """
-A JSON-RPC backend using HTTP.
+The Linspector JSON-RPC backend.
 
 Uses: http://deavid.github.io/bjsonrpc/
 
@@ -44,8 +44,7 @@ class JsonrpcBackend(Backend):
 
     def run(self):
         while True:
-            s = createserver(host=self.host, port=self.port, handler_factory=ServerHandler)
-            s.serve()
+            server = createserver(host=self.host, port=self.port, handler_factory=ServerHandler).serve()
 
 
 class ServerHandler(BaseHandler):
