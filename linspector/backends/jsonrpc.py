@@ -19,9 +19,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import time
+
 from linspector.backends.backend import Backend
 
 
 class JsonrpcBackend(Backend):
     def __init__(self, **kwargs):
+        super(Backend, self).__init__(**kwargs)
         return
+
+    def run(self):
+        while True:
+            print "foo"
+            time.sleep(5)

@@ -1,6 +1,7 @@
 """
-Backends can be a http service or xml-rpc service; let's say background threads providing an interface somewhere. They
-should run as background threads.
+Backends can be a http service or xml-rpc service; let's say
+background threads providing an interface somewhere. They should
+run as background threads.
 
 Backends are absolutely no requirement for running Linspector.
 
@@ -22,7 +23,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import threading
 
-class Backend():
+
+class Backend(threading.Thread):
     def __init__(self, **kwargs):
-        return
+        threading.Thread.__init__(self)
