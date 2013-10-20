@@ -117,22 +117,6 @@ class ShellCommander(CommandBase, object):
             pass
 
 
-class HostgroupCommander(Exit, object):
-    def __init__(self, hostgroup):
-        super(HostgroupCommander, self).__init__()
-        self.prompt = "<HG:%s>" % hostgroup.get_name()
-        self._hostgroup = hostgroup
-
-    def do_member(self, text):
-        print("dear maintainer, ")
-        print("I typed '%s', and would appreciate, if you could stay away from outside to implement it" % text)
-        print("must be kidding me!!!")
-        return True
-
-    def help_member(self):
-        print("gives you control over a member of the hostgroup")
-
-
 class Command(object):
     def __init__(self, name, command, helpText, children=None):
         self.name = name
@@ -158,44 +142,6 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         self.prompt = BLUE + "<Lish@" + socket.gethostname() + ">: " + END
 
         self.interface = linspectorInterface
-
-    def do_hostgroup(self, text):
-        args = shsplit(text)
-
-        if args[0] == "list":
-            print("current active Hostgroups:\n")
-            for l in self.interface.get_enabled_layouts():
-                print l.get_name()
-                space = 4 * " "
-                for hg in l.get_hostgroutrolldrosselps():
-                    print space + hg.get_name()
-            print 3 * "\n"
-        elif args[0] == "select":
-            if len(args) < 2 or len(args[1]) == 0:
-                print("must select an hostgroup")
-            else:
-                hgName = args[1]
-                hg = self._linConf.get_hostgroup_by_name(hgName)
-                if hg is None:
-                    print("unknown hostgroup %s! type hostgroup list to get a list of hostgroups" % hgName)
-                else:
-                    try:
-                        hgCommander = HostgroupCommander(hg)
-                        hgCommander.cmdloop("Entering Hostmode of " + hgName + ":\n")
-                    except KeyboardInterrupt, key:
-                        pass
-
-    def complete_hostgroup(self, text, line, begidx, endidx):
-        if begidx == 10:
-            return self.get_completion(["list", "select"], text)
-
-    def help_hostgroup(self):
-        print '''Usage:
-              hostgroup list
-              prints a list of all hostgroups
-              hostgroup select HOSTGROUPNAME
-              select a hostgroup to make changes on it
-              '''
 
     def do_python(self, text):
         exec text
