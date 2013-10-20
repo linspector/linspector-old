@@ -42,10 +42,8 @@ END    = "\033[0m"
 class LishFrontend(Frontend):
     def __init__(self, linpsectorInterface):
         super(LishFrontend, self)
-        #print(kwargs)
-        #self.jobs = kwargs["jobs"]
-
         commander = LishCommander(linpsectorInterface)
+
         run = True
         while run:
             try:
@@ -87,7 +85,7 @@ class Exit(CommandBase, object):
         return self.can_exit()
 
     def help_exit(self):
-        print("exits linspector")
+        print("Exits Linspector")
 
 
 class Command(object):
@@ -109,11 +107,9 @@ class CommandTree(object):
 
 class LishCommander(Exit):
     def __init__(self, linspectorInterface):
-
         super(LishCommander, self).__init__()
 
         self.prompt = BLUE + "<Lish@" + socket.gethostname() + ">: " + END
-
         self.interface = linspectorInterface
 
     def do_python(self, text):
