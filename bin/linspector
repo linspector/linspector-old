@@ -45,6 +45,7 @@ def parse_args():
                "information.",
         prog="linspector")
 
+    #TODO: add --nocolor to disable colored output in lish
     parser.add_argument("--version", action="version", version="%(prog)s " + str(__version__))
     #TODO: make the config file a required field without -c or --config at the end eg: linspector config.json
     parser.add_argument("-c", "--config", default=__default_config__,
