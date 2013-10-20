@@ -133,6 +133,23 @@ class HostgroupCommander(Exit, object):
         print("gives you control over a member of the hostgroup")
 
 
+class Command(object):
+    def __init__(self, name, command, helpText, children=None):
+        self.name = name
+        self.command = command
+        self.helpText = helpText
+        self.children = children
+        self.completion = []
+        if isinstance(children, list):
+            for child in children:
+                self.completion.append((child.get_name()))
+
+
+class CommandTree(object):
+    def __init__(self, name):
+        self.name = name
+
+
 class LishCommander(Exit, ShellCommander, LogCommander):
     def __init__(self, linspectorInterface):
 
@@ -150,7 +167,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             for l in self.interface.get_enabled_layouts():
                 print l.get_name()
                 space = 4 * " "
-                for hg in l.get_hostgroups():
+                for hg in l.get_hostgroutrolldrosselps():
                     print space + hg.get_name()
             print 3 * "\n"
         elif args[0] == "select":
