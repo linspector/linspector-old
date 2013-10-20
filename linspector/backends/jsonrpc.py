@@ -29,7 +29,7 @@ from bjsonrpc import createserver
 from linspector.backends.backend import Backend
 
 
-class JsonrpcBackend(Backend, BaseHandler):
+class JsonrpcBackend(Backend):
     def __init__(self, interface, config, **kwargs):
         super(Backend, self).__init__(**kwargs)
         self.interface = interface
