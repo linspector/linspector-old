@@ -42,12 +42,17 @@ class JsonrpcBackend(Backend):
         if config["backends"]["jsonrpc"]["port"]:
             self.port = config["backends"]["jsonrpc"]["port"]
 
+        ServerHandler.interface = interface
+
     def run(self):
         while True:
             server = createserver(host=self.host, port=self.port, handler_factory=ServerHandler).serve()
 
 
 class ServerHandler(BaseHandler):
+
+    interface = None
+
     def time(self):
         return time.time()
 
