@@ -51,7 +51,7 @@ class LinspectorInterface(object):
         d["Host"] = job.host
         d["Service"] = str(job.service)
         d["Members"] = str([member.name for member in job.members])
-        d["Interval"] = str(job.job.trigger)
+        d["Period"] = str(job.job.trigger)
         d["Next run"] = str(job.job.next_run_time)
         d["Enabled"] = str(job._enabled)
         d["Fails"] = str(job.jobThreshold)
@@ -59,5 +59,18 @@ class LinspectorInterface(object):
 
     def get_enabled_layouts(self):
         self._config.get_enabled_layouts()
+
+    def _set_jobs_enabled(self, jobs, enabled=True):
+        for job in jobs:
+            job.set_enabled(enabled)
+
+    def _compare_jobs(self, job_arg_getter, compare):
+        return [job for job in self.jobs if job_arg_getter(job) == compare]
+
+    def set_host_jobs_enabled(self, host, enabled=True):
+        self._set_jobs_enabled(self._compare_jobs(lambda job: job.host, host), enabled)
+
+    def set_hostgroup_jobs_enabled(self, hostgroupName, enabled=True):
+        self._set_jobs_enabled(self._compare_jobs(lambda job: job.hostgroup.get_name(), hostgroupName), enabled)
 
 
