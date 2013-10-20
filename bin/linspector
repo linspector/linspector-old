@@ -127,16 +127,10 @@ def main():
 
     interface = LinspectorInterface(jobs, scheduler, linConf)
 
-    #x = JsonrpcBackend(interface)
-    #x.daemon = True
-    #x.start()
-    #TODO: load all backends in a loop
-    '''
-    for backend in backends.enabled
-        backend.start
-
-    take care of signals etc. to sthutdown the threads when stopping linspector.
-    '''
+    if core["jsonrpc_backend"]:
+        jsonrpc = JsonrpcBackend(interface)
+        jsonrpc.daemon = True
+        jsonrpc.start()
 
     LishFrontend(interface)
 
