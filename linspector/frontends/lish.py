@@ -281,3 +281,16 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
     def help_license(self):
         print '''Show license information'''
+
+    def do_man(self, text):
+        try:
+            with open(os.path.dirname(os.path.abspath(__file__)) + "/../../man/" + text + ".md"):
+                os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../man/" + text + ".md")
+        except IOError:
+            self.print_color(RED, "Manual page \"" + text + "\" not found.")
+            self.help_man()
+
+    def help_man(self):
+        print '''usage:
+              man <PAGE>        Show manual page
+              '''
