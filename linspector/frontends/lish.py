@@ -275,3 +275,9 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
     def help_about(self):
         print '''Show information about Linspector'''
+
+    def do_license(self, text):
+        os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../LICENSE")
+
+    def help_license(self):
+        print '''Show license information'''
