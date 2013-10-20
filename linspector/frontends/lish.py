@@ -90,14 +90,6 @@ class Exit(CommandBase, object):
         print("exits linspector")
 
 
-class LogCommander(Cmd, object):
-    def do_log(self, text):
-        print("executed %s" % text)
-
-    def help_log(self):
-        print("manage logging")
-
-
 class Command(object):
     def __init__(self, name, command, helpText, children=None):
         self.name = name
@@ -115,7 +107,7 @@ class CommandTree(object):
         self.name = name
 
 
-class LishCommander(Exit, LogCommander):
+class LishCommander(Exit):
     def __init__(self, linspectorInterface):
 
         super(LishCommander, self).__init__()
@@ -207,6 +199,12 @@ class LishCommander(Exit, LogCommander):
             return self.get_completion(bins, text, False)
         except:
             pass
+
+    def do_log(self, text):
+        print("executed %s" % text)
+
+    def help_log(self):
+        print("manage logging")
 
     def do_about(self, text):
         self.print_color(GREEN,  "Linspector Monitoring\n")
