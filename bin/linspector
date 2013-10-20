@@ -126,15 +126,21 @@ def main():
 
     interface = LinspectorInterface(jobs, scheduler, linConf)
 
-    try:
-        core["jsonrpc_backend"]
-    except KeyError:
-        log.debug("jsonrpc_backend not set in core")
-    else:
-        if core["jsonrpc_backend"]:
-            jsonrpc = JsonrpcBackend(interface, core)
-            jsonrpc.daemon = True
-            jsonrpc.start()
+    if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
+        jsonrpc = JsonrpcBackend(interface, core)
+        jsonrpc.daemon = True
+        jsonrpc.start()
+
+
+    #try:
+    #    core["jsonrpc_backend"]
+    #except KeyError:
+    #    log.debug("jsonrpc_backend not set in core")
+    #else:
+    #    if core["jsonrpc_backend"]:
+    #       jsonrpc = JsonrpcBackend(interface, core)
+    #        jsonrpc.daemon = True
+    #        jsonrpc.start()
 
     LishFrontend(interface)
 
