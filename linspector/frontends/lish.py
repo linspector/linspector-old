@@ -190,7 +190,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             return self.get_completion(["list", "select"], text)
 
     def help_hostgroup(self):
-        print '''usage:
+        print '''Usage:
               hostgroup list
               prints a list of all hostgroups
               hostgroup select HOSTGROUPNAME
@@ -201,7 +201,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         exec text
 
     def help_python(self):
-        print "executes python using 'exec'."
+        print "Executes Python code using 'exec'."
 
     def print_color(self, color, text):
         print color + str(text) + END
@@ -223,7 +223,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         job = self.interface.find_job_by_hex_string(job_hex)
 
         if job is None:
-            print RED + "first parameter must be a job hex id! get a List of all ids by typing 'jobs list'\n" + END
+            self.print_color(RED, "First parameter must be a job ID. Get a List of all IDs by typing 'jobs list'")
             self.help_job()
             return
 
@@ -235,7 +235,7 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         if cmd in ["enable", "disable"]:
             job.set_enabled("n" in cmd)
         else:
-            print RED + "invalid or missing parameter\n" + END
+            self.print_color(RED, "Invalid or missing parameter")
             self.help_job()
 
     def complete_job(self, text, line, begidx, endidx):
@@ -245,10 +245,10 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             return self.get_completion(["enable", "disable"], text)
 
     def help_job(self):
-        print '''usage:
-              <ID>              prints extended information about this job
-              <ID> enable:      enables a job
-              <ID> disable:     disables a job
+        print '''Usage:
+              <ID>              Prints extended information about this job
+              <ID> enable:      Enables a job
+              <ID> disable:     Disables a job
               '''
 
     def do_jobs(self, text):
@@ -256,12 +256,12 @@ class LishCommander(Exit, ShellCommander, LogCommander):
             for job in self.interface.jobs:
                 print job.pretty_string()
         else:
-            print RED + "invalid or missing parameter\n" + END
+            self.print_color(RED, "Invalid or missing parameter")
             self.help_jobs()
 
     def help_jobs(self):
-        print '''usage:
-              list              lists all jobs
+        print '''Usage:
+              list              Lists all jobs
               '''
 
     def do_about(self, text):
@@ -285,12 +285,13 @@ class LishCommander(Exit, ShellCommander, LogCommander):
     def do_man(self, text):
         try:
             with open(os.path.dirname(os.path.abspath(__file__)) + "/../../man/" + text + ".md"):
+                #TODO: maybe convert markdown to plain text before displaying it and write own pager in pure Python
                 os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../man/" + text + ".md")
         except IOError:
             self.print_color(RED, "Manual page \"" + text + "\" not found.")
             self.help_man()
 
     def help_man(self):
-        print '''usage:
-              man <PAGE>        Show manual page
+        print '''Usage:
+              man <PAGE>        Show manual page <PAGE>
               '''
