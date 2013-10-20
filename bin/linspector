@@ -124,17 +124,19 @@ def main():
                             job.set_logger(log)
                             jobs.append(job)
 
-    #x = JsonrpcBackend()
+    interface = LinspectorInterface(jobs, scheduler, linConf)
+
+    #x = JsonrpcBackend(interface)
     #x.daemon = True
     #x.start()
-    #TODO: Load Backend Threads here before initializing the frontend.
+    #TODO: load all backends in a loop
     '''
     for backend in backends.enabled
         backend.start
 
     take care of signals etc. to sthutdown the threads when stopping linspector.
     '''
-    interface = LinspectorInterface(jobs, scheduler, linConf)
+
     LishFrontend(interface)
 
     log.debug("shutting down scheduler")

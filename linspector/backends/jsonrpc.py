@@ -25,11 +25,11 @@ from linspector.backends.backend import Backend
 
 
 class JsonrpcBackend(Backend):
-    def __init__(self, **kwargs):
+    def __init__(self, interface, **kwargs):
         super(Backend, self).__init__(**kwargs)
-        return
+        self.interface = interface
 
     def run(self):
         while True:
-            print "foo"
+            print "hello from JsonrpcBackend thread..."
             time.sleep(5)

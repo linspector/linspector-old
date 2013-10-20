@@ -27,5 +27,6 @@ import threading
 
 
 class Backend(threading.Thread):
-    def __init__(self, **kwargs):
+    def __init__(self, interface, **kwargs):
         threading.Thread.__init__(self)
+        self.interface = interface
