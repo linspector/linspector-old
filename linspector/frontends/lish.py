@@ -266,11 +266,12 @@ class LishCommander(Exit, ShellCommander, LogCommander):
 
     def do_about(self, text):
         self.print_color(GREEN,  "Linspector Monitoring\n")
-        self.print_color(YELLOW,  "Developers:")
+        self.print_color(YELLOW, "Developers:")
         self.print_color(BLUE,   " - Johannes Findeisen <hanez@linspector.org>")
         self.print_color(BLUE,   " - Rafael Timmerberg <ruff@linspector.org>\n")
         self.print_color(PURPLE, "(c) 2011 - 2013")
         self.print_color(PURPLE, "Web: http://linspector.org")
+        self.print_color(PURPLE, "License: GNU Affero General Public License Version 3.0")
 
     def help_about(self):
         print '''Show information about Linspector'''
