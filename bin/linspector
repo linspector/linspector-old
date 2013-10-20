@@ -28,7 +28,6 @@ import logging
 import logging.handlers
 import os
 import os.path as path
-import threading
 
 from linspector.core.interface import LinspectorInterface
 from linspector.config.parser import FullConfigParser
@@ -128,7 +127,7 @@ def main():
     interface = LinspectorInterface(jobs, scheduler, linConf)
 
     if core["jsonrpc_backend"]:
-        jsonrpc = JsonrpcBackend(interface)
+        jsonrpc = JsonrpcBackend(interface, core)
         jsonrpc.daemon = True
         jsonrpc.start()
 
