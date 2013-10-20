@@ -263,3 +263,14 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         print '''usage:
               list              lists all jobs
               '''
+
+    def do_about(self, text):
+        self.print_color(GREEN,  "Linspector Monitoring\n")
+        self.print_color(YELLOW,  "Developers:")
+        self.print_color(BLUE,   " - Johannes Findeisen <hanez@linspector.org>")
+        self.print_color(BLUE,   " - Rafael Timmerberg <ruff@linspector.org>\n")
+        self.print_color(PURPLE, "(c) 2011 - 2013")
+        self.print_color(PURPLE, "Web: http://linspector.org")
+
+    def help_about(self):
+        print '''Show information about Linspector'''
