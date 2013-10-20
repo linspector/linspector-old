@@ -98,25 +98,6 @@ class LogCommander(Cmd, object):
         print("manage logging")
 
 
-class ShellCommander(CommandBase, object):
-    def do_shell(self, text):
-        os.system(text)
-
-    def help_shell(self):
-        print("execute any shell command. Can also be achieved by a '!' prefix")
-
-    def complete_shell(self, text, line, begidx, endidx):
-        try:
-            PATH = os.environ['PATH'].split(os.pathsep)
-            bins = []
-            for p in PATH:
-                bins.extend(os.listdir(p))
-
-            return self.get_completion(bins, text, False)
-        except:
-            pass
-
-
 class Command(object):
     def __init__(self, name, command, helpText, children=None):
         self.name = name
@@ -134,7 +115,7 @@ class CommandTree(object):
         self.name = name
 
 
-class LishCommander(Exit, ShellCommander, LogCommander):
+class LishCommander(Exit, LogCommander):
     def __init__(self, linspectorInterface):
 
         super(LishCommander, self).__init__()
@@ -209,6 +190,23 @@ class LishCommander(Exit, ShellCommander, LogCommander):
         print '''Usage:
               list              Lists all jobs
               '''
+
+    def do_shell(self, text):
+        os.system(text)
+
+    def help_shell(self):
+        print("execute any shell command. Can also be achieved by a '!' prefix")
+
+    def complete_shell(self, text, line, begidx, endidx):
+        try:
+            PATH = os.environ['PATH'].split(os.pathsep)
+            bins = []
+            for p in PATH:
+                bins.extend(os.listdir(p))
+
+            return self.get_completion(bins, text, False)
+        except:
+            pass
 
     def do_about(self, text):
         self.print_color(GREEN,  "Linspector Monitoring\n")
