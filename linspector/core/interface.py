@@ -56,6 +56,7 @@ class LinspectorInterface(object):
         d["Next run"] = str(job.job.next_run_time)
         d["Runs"] = str(job.job.runs)
         d["Enabled"] = str(job._enabled)
+        d["Threshold"] = str(job.service.get_threshold())
         d["Fails"] = str(job.jobThreshold)
         return d
 
