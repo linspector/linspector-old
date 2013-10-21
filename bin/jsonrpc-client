@@ -28,4 +28,7 @@ time1 = c.call.time()
 # do something here ...
 print "Time:", time1
 print "Delta:", c.call.delta(time1)
-print c.call.test()
+
+print c.call.get_job_info_by_id("3bf60380")
+
+print c.call.set_job_enabled("3bf60380", False)
