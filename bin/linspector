@@ -77,7 +77,7 @@ def setup_logging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfil
     consoleHandler = logging.StreamHandler()
     consoleHandler.setLevel(logLevel)
 
-    fileHandler = logging.handlers.RotatingFileHandler(logfile, maxBytes=1024000, backupCount=4)
+    fileHandler = logging.handlers.RotatingFileHandler(logfile, maxBytes=10485760, backupCount=4)
     fileHandler.setLevel(logfileLevel)
 
     consoleFormatter = logging.Formatter('[%(levelname)s]: %(message)s')
