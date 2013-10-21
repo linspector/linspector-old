@@ -39,6 +39,7 @@ class Job:
         self.processors = processors
         self.core = core
         self.hostgroup = hostgroup
+        #TODO: limit the size of this list; else it is a memory leak
         self.jobInfos = []
         self.jobThreshold = 0
         self._enabled = True
