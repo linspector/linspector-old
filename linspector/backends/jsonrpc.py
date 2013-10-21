@@ -21,6 +21,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import json
 import time
 
 from bjsonrpc.handlers import BaseHandler
@@ -43,15 +44,17 @@ class JsonrpcBackend(Backend):
             self.port = config["backends"]["jsonrpc"]["port"]
 
         ServerHandler.interface = interface
+        ServerHandler.config = config
 
     def run(self):
         while True:
-            server = createserver(host=self.host, port=self.port, handler_factory=ServerHandler).serve()
+            server = createserver(host=self.host, port=self.port, handler_factory=ServerHandler)
+            server.serve()
 
 
 class ServerHandler(BaseHandler):
-
     interface = None
+    config = None
 
     def time(self):
         return time.time()
@@ -59,5 +62,15 @@ class ServerHandler(BaseHandler):
     def delta(self, start):
         return time.time() - start
 
-    def test(self):
-        return "test"
+    def get_job_list(self):
+        pass
+
+    def get_job_info_by_id(self, job_hex):
+        job = ServerHandler.interface.find_job_by_hex_string(job_hex)
+        job_dict = ServerHandler.interface.get_job_info_dict(job)
+        return json.dumps(job_dict, ensure_ascii=False)
+
+    def set_job_enabled(self, job_hex, enabled=True):
+        job = ServerHandler.interface.find_job_by_hex_string(job_hex)
+        job.set_enabled(enabled)
+        return True
