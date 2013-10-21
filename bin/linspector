@@ -133,7 +133,8 @@ def main():
     LishFrontend(interface)
 
     log.debug("shutting down scheduler")
-    scheduler.shutdown(wait=True)
+    #TODO: make "wait" configurable because when it is True a shutdown can take long time
+    scheduler.shutdown(wait=False)
     logging.shutdown()
 
 
