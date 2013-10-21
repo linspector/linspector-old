@@ -58,6 +58,13 @@ class LinspectorInterface(object):
         d["Fails"] = str(job.jobThreshold)
         return d
 
+    def get_job_list(self):
+        job_list = []
+        for job in self.jobs:
+            d = self.get_job_info_dict(job)
+            job_list.append(d)
+        return job_list
+
     def get_enabled_layouts(self):
         self._config.get_enabled_layouts()
 
