@@ -184,6 +184,7 @@ class LishCommander(Exit):
 
     def help_jobs(self):
         print '''Usage:
+              count             Show count of all jobs
               list              Lists all jobs
               '''
 
