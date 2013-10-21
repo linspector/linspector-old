@@ -19,6 +19,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
+
 from collections import OrderedDict
 
 
@@ -72,5 +73,3 @@ class LinspectorInterface(object):
 
     def set_hostgroup_jobs_enabled(self, hostgroupName, enabled=True):
         self._set_jobs_enabled(self._compare_jobs(lambda job: job.hostgroup.get_name(), hostgroupName), enabled)
-
-
