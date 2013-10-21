@@ -206,10 +206,10 @@ class LishCommander(Exit):
             pass
 
     def do_log(self, text):
-        print("executed %s" % text)
+        print '''executed %s''' % text
 
     def help_log(self):
-        print("manage logging")
+        print '''Manage logging'''
 
     def do_about(self, text):
         self.print_color(GREEN,  "Linspector Monitoring\n")
