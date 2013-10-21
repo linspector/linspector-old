@@ -30,3 +30,5 @@ print c.call.get_job_list()
 print c.call.get_job_info_by_id("3950d44b")
 
 print c.call.set_job_enabled("3950d44b", False)
+
+print c.call.get_job_count()

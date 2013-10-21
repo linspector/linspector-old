@@ -60,6 +60,10 @@ class ServerHandler(BaseHandler):
         job_list = ServerHandler.interface.get_job_list()
         return json.dumps(job_list, ensure_ascii=False)
 
+    def get_job_count(self):
+        job_count = ServerHandler.interface.get_job_count()
+        return json.dumps(job_count, ensure_ascii=False)
+
     def get_job_info_by_id(self, job_hex):
         job = ServerHandler.interface.find_job_by_hex_string(job_hex)
         job_dict = ServerHandler.interface.get_job_info_dict(job)

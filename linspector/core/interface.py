@@ -67,6 +67,10 @@ class LinspectorInterface(object):
             job_list.append(d)
         return job_list
 
+    def get_job_count(self):
+        count = len(self.jobs)
+        return count
+
     def get_enabled_layouts(self):
         self._config.get_enabled_layouts()
 

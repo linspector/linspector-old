@@ -176,6 +176,8 @@ class LishCommander(Exit):
                     PURPLE + " Service" + END + ": " + job_dict["Service"] + \
                     PURPLE + " Next run" + END + ": " + job_dict["Next run"] + \
                     PURPLE + " Enabled" + END + ": " + job_dict["Enabled"]
+        elif text == "count":
+            print GREEN + "Job Count" + END + ":\t" + str(self.interface.get_job_count())
         else:
             self.print_color(RED, "Invalid or missing parameter")
             self.help_jobs()
