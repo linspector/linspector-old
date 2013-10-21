@@ -170,10 +170,12 @@ class LishCommander(Exit):
         if text == "list":
             for job in self.interface.jobs:
                 job_dict = self.interface.get_job_info_dict(job)
-                print GREEN + job_dict["Job"] + END + ":\tHostgroup: " + job_dict["Hostgroup"] + \
-                    ": Host: " + job_dict["Host"]
-                print "\t\tService: " + job_dict["Service"]
-                print "\t\tNext run: " + job_dict["Next run"] + ": Enabled: " + job_dict["Enabled"]
+                print GREEN + job_dict["Job"] + END + ":\t" + \
+                    PURPLE + "Hostgroup" + END + ": " + job_dict["Hostgroup"] + \
+                    PURPLE + " Host" + END + ": " + job_dict["Host"] + \
+                    PURPLE + " Service" + END + ": " + job_dict["Service"] + \
+                    PURPLE + " Next run" + END + ": " + job_dict["Next run"] + \
+                    PURPLE + " Enabled" + END + ": " + job_dict["Enabled"]
         else:
             self.print_color(RED, "Invalid or missing parameter")
             self.help_jobs()
