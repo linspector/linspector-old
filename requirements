@@ -1,0 +1,5 @@
+APScheduler==2.1.0
+bjsonrpc==0.2.1
+paramiko==1.11.0
+pysnmp==4.2.4
+PyYAML==3.10
