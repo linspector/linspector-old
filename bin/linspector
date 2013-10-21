@@ -80,7 +80,6 @@ def setup_logging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfil
     fileHandler = logging.handlers.RotatingFileHandler(logfile, maxBytes=1024000, backupCount=4)
     fileHandler.setLevel(logfileLevel)
 
-
     consoleFormatter = logging.Formatter('[%(levelname)s]: %(message)s')
     #TODO: if debug with file and function else without that
     fileFormatter = logging.Formatter('%(asctime)s %(pathname)s %(module)s %(funcName)s %(lineno)d [%(levelname)s]: %(message)s')
@@ -130,17 +129,6 @@ def main():
         jsonrpc = JsonrpcBackend(interface, core)
         jsonrpc.daemon = True
         jsonrpc.start()
-
-
-    #try:
-    #    core["jsonrpc_backend"]
-    #except KeyError:
-    #    log.debug("jsonrpc_backend not set in core")
-    #else:
-    #    if core["jsonrpc_backend"]:
-    #       jsonrpc = JsonrpcBackend(interface, core)
-    #        jsonrpc.daemon = True
-    #        jsonrpc.start()
 
     LishFrontend(interface)
 
