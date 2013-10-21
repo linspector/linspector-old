@@ -56,14 +56,9 @@ class ServerHandler(BaseHandler):
     interface = None
     config = None
 
-    def time(self):
-        return time.time()
-
-    def delta(self, start):
-        return time.time() - start
-
     def get_job_list(self):
-        pass
+        job_list = ServerHandler.interface.get_job_list()
+        return json.dumps(job_list, ensure_ascii=False)
 
     def get_job_info_by_id(self, job_hex):
         job = ServerHandler.interface.find_job_by_hex_string(job_hex)
