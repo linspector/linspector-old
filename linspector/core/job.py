@@ -63,12 +63,6 @@ class Job:
     def set_logger(self, log):
         self.log = log
 
-    def pretty_string(self):
-        ret = (self.hex_string() + ": Hostgroup: " + str(self.hostgroup.get_name()) +
-               " Host: " + str(self.host) + " Service: " + str(self.service) + " " + str(self.job) + " Enabled: " +
-               str(self._enabled))
-        return ret
-
     def set_job(self, job):
         self.job = job
 
