@@ -67,12 +67,39 @@ class LinspectorInterface(object):
             job_list.append(d)
         return job_list
 
+    def get_job_list_by_hostgroup(self, hostgroup):
+        job_list = []
+        for job in self.jobs:
+            if hostgroup == job.hostgroup.get_name():
+                d = self.get_job_info_dict(job)
+                job_list.append(d)
+        return job_list
+
+    def get_job_list_by_host(self, host):
+        job_list = []
+        for job in self.jobs:
+            if host == job.host:
+                d = self.get_job_info_dict(job)
+                job_list.append(d)
+        return job_list
+
     def get_job_count(self):
         count = len(self.jobs)
         return count
 
-    def get_enabled_layouts(self):
-        self._config.get_enabled_layouts()
+    def get_job_count_by_hostgroup(self, hostgroup):
+        job_count = 0
+        for job in self.jobs:
+            if hostgroup == job.hostgroup.get_name():
+                job_count += 1
+        return job_count
+
+    def get_job_count_by_host(self, host):
+        job_count = 0
+        for job in self.jobs:
+            if host == job.host:
+                job_count += 1
+        return job_count
 
     def _set_jobs_enabled(self, jobs, enabled=True):
         for job in jobs:
@@ -86,3 +113,36 @@ class LinspectorInterface(object):
 
     def set_hostgroup_jobs_enabled(self, hostgroupName, enabled=True):
         self._set_jobs_enabled(self._compare_jobs(lambda job: job.hostgroup.get_name(), hostgroupName), enabled)
+
+    def get_hostgroup_list(self):
+        pass
+
+    def get_hostgroup_count(self):
+        pass
+
+    def get_host_list(self):
+        pass
+
+    def get_host_list_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_host_count(self):
+        pass
+
+    def get_host_count_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_services_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_services_by_host(self, host):
+        pass
+
+    def get_service_count_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_service_count_by_host(self, host):
+        pass
+
+    def get_enabled_layouts(self):
+        self._config.get_enabled_layouts()

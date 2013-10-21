@@ -60,8 +60,24 @@ class ServerHandler(BaseHandler):
         job_list = ServerHandler.interface.get_job_list()
         return json.dumps(job_list, ensure_ascii=False)
 
+    def get_job_list_by_hostgroup(self, hostgroup):
+        job_list = ServerHandler.interface.get_job_list_by_hostgroup(hostgroup)
+        return json.dumps(job_list, ensure_ascii=False)
+
+    def get_job_list_by_host(self, host):
+        job_list = ServerHandler.interface.get_job_list_by_host(host)
+        return json.dumps(job_list, ensure_ascii=False)
+
     def get_job_count(self):
         job_count = ServerHandler.interface.get_job_count()
+        return json.dumps(job_count, ensure_ascii=False)
+
+    def get_job_count_by_hostgroup(self, hostgroup):
+        job_count = ServerHandler.interface.get_job_count_by_hostgroup(hostgroup)
+        return json.dumps(job_count, ensure_ascii=False)
+
+    def get_job_count_by_host(self, host):
+        job_count = ServerHandler.interface.get_job_count_by_host(host)
         return json.dumps(job_count, ensure_ascii=False)
 
     def get_job_info_by_id(self, job_hex):
@@ -73,3 +89,33 @@ class ServerHandler(BaseHandler):
         job = ServerHandler.interface.find_job_by_hex_string(job_hex)
         job.set_enabled(enabled)
         return True
+
+    def get_hostgroup_list(self):
+        pass
+
+    def get_hostgroup_count(self):
+        pass
+
+    def get_host_list(self):
+        pass
+
+    def get_host_list_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_host_count(self):
+        pass
+
+    def get_host_count_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_services_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_services_by_host(self, host):
+        pass
+
+    def get_service_count_by_hostgroup(self, hostgroup):
+        pass
+
+    def get_service_count_by_host(self, host):
+        pass
