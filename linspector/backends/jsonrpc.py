@@ -47,9 +47,8 @@ class JsonrpcBackend(Backend):
         ServerHandler.config = config
 
     def run(self):
-        while True:
-            server = createserver(host=self.host, port=self.port, handler_factory=ServerHandler)
-            server.serve()
+        server = createserver(host=self.host, port=self.port, handler_factory=ServerHandler)
+        server.serve()
 
 
 class ServerHandler(BaseHandler):
