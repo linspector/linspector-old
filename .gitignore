@@ -7,12 +7,10 @@ nbproject
 
 *.so
 
-distfiles
 docs
-documentation
 local
 log
-plugins
+
 .metadata
 
 examples/private*
