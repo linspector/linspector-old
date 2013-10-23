@@ -109,6 +109,9 @@ def main():
 
     scheduler = Scheduler()
 
+    '''
+    The next lines should go over to a thread class into background (thread queue)
+    '''
     scheduler.start()
     jobs = []
 
@@ -126,6 +129,10 @@ def main():
                             job.set_job(schedulerJob)
                             job.set_logger(log)
                             jobs.append(job)
+
+    '''
+    the next stuff could stay here but needs access to the "jobs" list from above
+    '''
 
     interface = LinspectorInterface(jobs, scheduler, linConf)
 
