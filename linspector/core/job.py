@@ -2,7 +2,7 @@
 This is what job_function needs as parameter for each job to successfully
 execute.
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
