@@ -2,7 +2,7 @@
 The interface class should contain all stuff for frontend/backend
 communication to the Linspector core.
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
