@@ -65,7 +65,6 @@ class LinspectorInterface(object):
         d["last Enabled"] = None
         d["Last Threshold Override"] = None
         d["Last Escalation"] = None
-
         return d
 
     def get_job_list(self):
