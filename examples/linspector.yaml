@@ -90,6 +90,7 @@ core:
   max_logfile_count: 4
   max_worker_threads: 8
   jsonrpc_backend: False
+  shutdown_wait: False
   members:
     - "linspector"
     - "root"
