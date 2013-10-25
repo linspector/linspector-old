@@ -92,35 +92,49 @@ Examples:
 ### Configuration
 
 *   `config @hostgroup add %host`
+
 *   `config @hostgroup %host del ?service`
+
 *   `config @hostgroup %host add ?service "OBJECT"`
 
 ### Job Management
 
 *   `jobs @all table`
+
 *   `jobs @all list`
+
 *   `jobs ?service list`
 
 *   `jobs $hostgroup list`
 
 *   `jobs @hostgroup enable`
+
 *   `jobs %host enable`
+
 *   `jobs %host list`
+
 *   `jobs @all list`
 
 *   `jobs ?tcpconnect list` (what about args?)
+
 *   `jobs ?tcpconnect disable`
+
 *   `jobs %host`
 
 *   `jobs @all list 10-20` (list job 10 to 20)
 
 *   `jobs !jobid enable` (enable two jobs)
+
 *   `jobs !jobid1,jobid2 diable` (disable two jobs)
 
 *   `jobs &hostgroup %host list`
+
 *   `jobs &hostgroup %host disable` (disable all jobs for `%host` in `&hostgroup`)
+
 *   `jobs &hostgroup %host ?service disable` (disable a service for `%host` in  `&hostgroup`)
+
 *   `jobs &hostgroup %host ?service disable`
 
 *   `jobs !4b22e5e7 enable`
+
 *   `jobs !4b22e5e7,4b22e5e6 enable`
