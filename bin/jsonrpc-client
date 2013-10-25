@@ -25,7 +25,7 @@ from bjsonrpc import connect
 
 c = connect()
 
-#print c.call.get_job_list()
+print c.call.get_job_list()
 
 #print c.call.get_job_info_by_id("3950d44b")
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7 -tt
 
 """
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.10"
+__version__ = "0.11"
 __default_config__ = "./examples/minimal.json"
 
 import argparse
@@ -28,11 +28,12 @@ import logging
 import logging.handlers
 import os
 import os.path as path
+import Queue
 import time
 
+from linspector.linspector import Linspector
 from linspector.core.interface import LinspectorInterface
 from linspector.config.parser import FullConfigParser
-from linspector.core.job import Job
 from linspector.core.scheduler import Scheduler
 from linspector.backends.jsonrpc import JsonrpcBackend
 from linspector.frontends.lish import LishFrontend
@@ -67,13 +68,14 @@ def parse_args():
 
 
 def setup_logging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfileLevel=logging.DEBUG):
+    #TODO: catch all log messages (apscheduler etc.); make logging more generic to support libraries logging
     logfile = path.expanduser(logfile)
     if not path.exists(path.dirname(logfile)):
         os.makedirs(path.dirname(logfile))
 
-    logging.basicConfig(level=logging.WARNING)
+    #logging.basicConfig(level=logging.WARNING)
     log = logging.getLogger(__name__)
-    #log.setLevel(logging.DEBUG)
+    log.setLevel(logging.DEBUG)
 
     consoleHandler = logging.StreamHandler()
     consoleHandler.setLevel(logLevel)
@@ -93,13 +95,9 @@ def setup_logging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfil
     return log
 
 
-def handle_job(jobInfo):
-    jobInfo.handle_call()
-
-
 def main():
     args = parse_args()
-    #TODO: catch all log messages (apscheduler etc.); make logging more generic to support libraries logging
+
     log = setup_logging(args.logfile, args.loglevel)
 
     log.info("parsed arguments")
@@ -108,33 +106,20 @@ def main():
     linConf, core = configParser.parse_config(args.config)
 
     scheduler = Scheduler()
-
-    '''
-    The next lines should go over to a thread class into background (thread queue)
-    '''
     scheduler.start()
-    jobs = []
 
-    for layout in linConf.get_enabled_layouts():
-        for hostgroup in layout.get_hostgroups():
-            #time.sleep(1)
-            for service in hostgroup.get_services():
-                for host in hostgroup.get_hosts():
-                    #time.sleep(0.5)
-                    for period in service.get_periods():
-                        #time.sleep(0.1)
-                        job = Job(service, host, hostgroup.get_members(), hostgroup.get_processors(), core, hostgroup)
-                        schedulerJob = period.createJob(scheduler, job, handle_job)
-                        if schedulerJob is not None:
-                            job.set_job(schedulerJob)
-                            job.set_logger(log)
-                            jobs.append(job)
+    q = Queue.Queue()
+    linspector = Linspector(linConf, core, scheduler, log, q)
+    linspector.daemon = True
+    linspector.start()
 
-    '''
-    the next stuff could stay here but needs access to the "jobs" list from above
-    '''
+    while True:
+        if q.qsize() < 1:
+            time.sleep(1)
+        else:
+            break
 
-    interface = LinspectorInterface(jobs, scheduler, linConf)
+    interface = LinspectorInterface(q.get(), scheduler, linConf)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         jsonrpc = JsonrpcBackend(interface, core)
@@ -144,8 +129,12 @@ def main():
     LishFrontend(interface)
 
     log.debug("shutting down scheduler")
-    #TODO: make "wait" configurable because when it is True a shutdown can take long time
-    scheduler.shutdown(wait=False)
+
+    shutdown_wait = True
+    if "shutdown_wait" in core:
+        shutdown_wait = core["shutdown_wait"]
+
+    scheduler.shutdown(wait=shutdown_wait)
     logging.shutdown()
 
 

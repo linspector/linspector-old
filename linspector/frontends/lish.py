@@ -4,7 +4,7 @@ Lish is the Linspector Interactive Shell.
 This  will become a commandline interface to Linspector. Think of a
 network switch or router like those from Cisco.
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -175,6 +175,8 @@ class LishCommander(Exit):
                     PURPLE + " Host" + END + ": " + job_dict["Host"] + \
                     PURPLE + " Service" + END + ": " + job_dict["Service"] + \
                     PURPLE + " Next run" + END + ": " + job_dict["Next run"] + \
+                    PURPLE + " Runs" + END + ": " + job_dict["Runs"] + \
+                    PURPLE + " Fails" + END + ": " + job_dict["Fails"] + \
                     PURPLE + " Enabled" + END + ": " + job_dict["Enabled"]
         elif text == "count":
             print GREEN + "Job Count" + END + ":\t" + str(self.interface.get_job_count())
