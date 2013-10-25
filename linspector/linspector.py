@@ -49,7 +49,6 @@ class Linspector(threading.Thread):
                 for service in hostgroup.get_services():
                     for host in hostgroup.get_hosts():
                         for period in service.get_periods():
-                            time.sleep(3)
                             job = Job(service,
                                       host,
                                       hostgroup.get_members(),
@@ -62,3 +61,4 @@ class Linspector(threading.Thread):
                                 job.set_logger(self.log)
                                 jobs.append(job)
                                 self.q.put(jobs)
+                                time.sleep(3)
