@@ -42,9 +42,13 @@ class IntervalPeriod(Period):
         self.start_date = start_date      # when to first execute 
         self.comment = comment            # comment
         
-    def createJob(self, scheduler, jobInfo, func):
+    def createJob(self, scheduler, jobInfo, func, **kwargs):
+        start_date = self.start_date
+        if kwargs["start_date"]:
+            start_date = kwargs["start_date"]
+
         return scheduler.add_interval_job(func, weeks=self.weeks, hours=self.hours, minutes=self.minutes,
-                                          seconds=self.seconds, start_date=self.start_date, args=[jobInfo])
+                                          seconds=self.seconds, start_date=start_date, args=[jobInfo])
 
     def __str__(self):
         ret = "IntervalPeriod(Name: " + self.name + ")"
@@ -70,10 +74,14 @@ class CronPeriod(Period):
         ret = "CronPeriod(Name: " + self.name + ")"
         return ret
         
-    def createJob(self, scheduler, jobInfo, func):
+    def createJob(self, scheduler, jobInfo, func, **kwargs):
+        start_date = self.start_date
+        if kwargs["start_date"]:
+            start_date = kwargs["start_date"]
+
         return scheduler.add_cron_job(func, year=self.year, month=self.month, day=self.day, week=self.week,
                                       day_of_week=self.day_of_week, hour=self.hour, minute=self.minute,
-                                      second=self.second, start_date=self.start_date, args=[jobInfo])
+                                      second=self.second, start_date=start_date, args=[jobInfo])
             
         
 class DatePeriod(Period):
@@ -86,7 +94,7 @@ class DatePeriod(Period):
         ret = "DatePeriod(Name: " + self.name + ", " + str(self.date) + ")"
         return ret
         
-    def createJob(self, scheduler, jobInfo, func):
+    def createJob(self, scheduler, jobInfo, func, **kwargs):
         try:
             return scheduler.add_date_job(func=func, date=self.date, args=[jobInfo])
         except Exception, e:

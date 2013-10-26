@@ -73,9 +73,9 @@ def setup_logging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfil
     if not path.exists(path.dirname(logfile)):
         os.makedirs(path.dirname(logfile))
 
-    #logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.WARNING)
     log = logging.getLogger(__name__)
-    log.setLevel(logging.DEBUG)
+    #log.setLevel(logging.DEBUG)
 
     consoleHandler = logging.StreamHandler()
     consoleHandler.setLevel(logLevel)
@@ -105,7 +105,8 @@ def main():
     configParser = FullConfigParser(log)
     linConf, core = configParser.parse_config(args.config)
 
-    scheduler = Scheduler()
+    scheduler = Scheduler({"apscheduler.threadpool.max_threads": 1000})
+    print scheduler._threadpool
     scheduler.start()
 
     q = Queue.Queue()
@@ -122,6 +123,11 @@ def main():
         jsonrpc = JsonrpcBackend(interface, core)
         jsonrpc.daemon = True
         jsonrpc.start()
+
+    # Just for debug purposes:
+    #while True:
+    #    print "Threads: " + '%d/%d' % (scheduler._threadpool.num_threads, scheduler._threadpool.max_threads)
+    #    time.sleep(0.5)
 
     LishFrontend(interface)
 

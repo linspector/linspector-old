@@ -20,8 +20,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import datetime
 import threading
-import time
 
 from core.job import Job
 
@@ -43,22 +43,25 @@ class Linspector(threading.Thread):
         jobInfo.handle_call()
 
     def run(self):
+        start_date = datetime.datetime.now()
+        time_delta = 0
         jobs = []
         for layout in self.linConf.get_enabled_layouts():
             for hostgroup in layout.get_hostgroups():
                 for service in hostgroup.get_services():
                     for host in hostgroup.get_hosts():
                         for period in service.get_periods():
+                            time_delta += 2
+                            new_start_date = start_date + datetime.timedelta(seconds=time_delta)
                             job = Job(service,
                                       host,
                                       hostgroup.get_members(),
                                       hostgroup.get_processors(),
                                       self.core,
                                       hostgroup)
-                            schedulerJob = period.createJob(self.scheduler, job, handle_job)
+                            schedulerJob = period.createJob(self.scheduler, job, handle_job, start_date=new_start_date)
                             if schedulerJob is not None:
                                 job.set_job(schedulerJob)
                                 job.set_logger(self.log)
                                 jobs.append(job)
                                 self.q.put(jobs)
-                                time.sleep(3)
