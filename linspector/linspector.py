@@ -51,7 +51,7 @@ class Linspector(threading.Thread):
                 for service in hostgroup.get_services():
                     for host in hostgroup.get_hosts():
                         for period in service.get_periods():
-                            time_delta += 2
+                            time_delta += 2.315379
                             new_start_date = start_date + datetime.timedelta(seconds=time_delta)
                             job = Job(service,
                                       host,
