@@ -113,11 +113,8 @@ def main():
     linspector.daemon = True
     linspector.start()
 
-    while True:
-        if q.qsize() < 1:
-            time.sleep(1)
-        else:
-            break
+    while q.qsize() < 1:
+        time.sleep(1)
 
     interface = LinspectorInterface(q.get(), scheduler, linConf)
 
