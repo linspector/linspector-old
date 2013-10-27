@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.11.1"
+__version__ = "0.11.2"
 __default_config__ = "./examples/minimal.json"
 
 import argparse
@@ -79,13 +79,14 @@ def main():
     if not path.exists(path.dirname(logfile)):
         os.makedirs(path.dirname(logfile))
 
-    #logger.propagate = False
-    logging.basicConfig(level=args.loglevel)
-    #file_handler = logging.handlers.RotatingFileHandler(args.logfile, maxBytes=10485760, backupCount=4)
-    #file_formatter = logging.Formatter('%(asctime)s %(pathname)s %(module)s %(funcName)s %(lineno)d [%(levelname)s]: %(message)s')
-    #file_handler.setFormatter(file_formatter)
-    #file_handler.setLevel(level=args.loglevel)
-    #logger.addHandler(file_handler)
+    root_logger = logging.getLogger()
+
+    formatter = logging.Formatter(logging.BASIC_FORMAT)
+    handler = logging.handlers.RotatingFileHandler(args.logfile, maxBytes=10485760, backupCount=4)
+    handler.setFormatter(formatter)
+
+    root_logger.addHandler(handler)
+    root_logger.setLevel(args.loglevel)
 
     configParser = FullConfigParser()
     linConf, core = configParser.parse_config(args.config)
