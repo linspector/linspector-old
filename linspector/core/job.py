@@ -105,7 +105,7 @@ class Job:
 
                 self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
 
-                logger.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
+                logger.info("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
 
                 self.jobInfos.append(jobInfo)
 
