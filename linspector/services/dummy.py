@@ -57,7 +57,7 @@ class DummyService(Service):
 
         self.sleep = random.randint(3, 15)
         if "sleep" in args:
-            self.port = args["sleep"]
+            self.sleep = args["sleep"]
 
         self.fail = 0
         if "fail" in args:
