@@ -40,6 +40,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import time
+import random
 
 from logging import getLogger
 
@@ -54,7 +55,7 @@ class DummyService(Service):
 
         args = self.get_arguments()
 
-        self.sleep = 1
+        self.sleep = random.randint(3, 15)
         if "sleep" in args:
             self.port = args["sleep"]
 
