@@ -19,8 +19,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+from logging import getLogger
 #from pysnmp.entity.rfc3413.oneliner import cmdgen
+
 from linspector.services.service import Service
+
+logger = getLogger(__name__)
 
 
 class SnmpgetService(Service):

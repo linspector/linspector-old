@@ -38,6 +38,8 @@ from linspector.core.scheduler import Scheduler
 from linspector.backends.jsonrpc import JsonrpcBackend
 from linspector.frontends.lish import LishFrontend
 
+logger = logging.getLogger(__name__)
+
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -49,7 +51,7 @@ def parse_args():
     #TODO: add --nocolor to disable colored output in lish
     parser.add_argument("--version", action="version", version="%(prog)s " + str(__version__))
     #TODO: make the config file a required field without -c or --config at the end eg: linspector config.json
-    parser.add_argument("-c", "--config", default=__default_config__,
+    parser.add_argument("-c", "--config", default=__default_config__, metavar="FILE",
                         help="select configfile to use")
     parser.add_argument("-l", "--logfile", default="./log/linspector.log", metavar="FILE",
                         help="set logfile to use")
@@ -67,50 +69,29 @@ def parse_args():
     return parser.parse_args()
 
 
-def setup_logging(logfile="./log/linspector.log", logLevel=logging.ERROR, logfileLevel=logging.DEBUG):
-    #TODO: catch all log messages (apscheduler etc.); make logging more generic to support libraries logging
-    logfile = path.expanduser(logfile)
-    if not path.exists(path.dirname(logfile)):
-        os.makedirs(path.dirname(logfile))
-
-    logging.basicConfig(level=logging.WARNING)
-    log = logging.getLogger(__name__)
-    #log.setLevel(logging.DEBUG)
-
-    consoleHandler = logging.StreamHandler()
-    consoleHandler.setLevel(logLevel)
-
-    fileHandler = logging.handlers.RotatingFileHandler(logfile, maxBytes=10485760, backupCount=4)
-    fileHandler.setLevel(logfileLevel)
-
-    consoleFormatter = logging.Formatter('[%(levelname)s]: %(message)s')
-    #TODO: if debug with file and function else without that
-    fileFormatter = logging.Formatter('%(asctime)s %(pathname)s %(module)s %(funcName)s %(lineno)d [%(levelname)s]: %(message)s')
-
-    consoleHandler.setFormatter(consoleFormatter)
-    fileHandler.setFormatter(fileFormatter)
-
-    log.addHandler(consoleHandler)
-    log.addHandler(fileHandler)
-    return log
-
-
 def main():
     args = parse_args()
 
-    log = setup_logging(args.logfile, args.loglevel)
+    logfile = path.expanduser(args.logfile)
+    if not path.exists(path.dirname(logfile)):
+        os.makedirs(path.dirname(logfile))
 
-    log.info("parsed arguments")
+    #logger.propagate = False
+    logging.basicConfig(level=args.loglevel)
+    #file_handler = logging.handlers.RotatingFileHandler(args.logfile, maxBytes=10485760, backupCount=4)
+    #file_formatter = logging.Formatter('%(asctime)s %(pathname)s %(module)s %(funcName)s %(lineno)d [%(levelname)s]: %(message)s')
+    #file_handler.setFormatter(file_formatter)
+    #file_handler.setLevel(level=args.loglevel)
+    #logger.addHandler(file_handler)
 
-    configParser = FullConfigParser(log)
+    configParser = FullConfigParser()
     linConf, core = configParser.parse_config(args.config)
 
     scheduler = Scheduler({"apscheduler.threadpool.max_threads": 1000})
-    print scheduler._threadpool
     scheduler.start()
 
     q = Queue.Queue()
-    linspector = Linspector(linConf, core, scheduler, log, q)
+    linspector = Linspector(linConf, core, scheduler, q)
     linspector.daemon = True
     linspector.start()
 
@@ -131,7 +112,7 @@ def main():
 
     LishFrontend(interface)
 
-    log.debug("shutting down scheduler")
+    logger.debug("shutting down scheduler")
 
     shutdown_wait = True
     if "shutdown_wait" in core:

@@ -24,7 +24,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import os
 import socket
+
 from cmd import Cmd
+from logging import getLogger
 from shlex import split as shsplit
 
 from linspector.frontends.frontend import Frontend
@@ -37,6 +39,8 @@ YELLOW = "\033[93m"
 GREEN  = "\033[92m"
 RED    = "\033[91m"
 END    = "\033[0m"
+
+logger = getLogger(__name__)
 
 
 class LishFrontend(Frontend):

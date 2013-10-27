@@ -26,7 +26,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import urllib
+
+from logging import getLogger
+
 from linspector.services.service import Service
+
+logger = getLogger(__name__)
 
 
 class HttpService(Service):

@@ -20,8 +20,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 # http://code.activestate.com/recipes/409689-icmplib-library-for-creating-and-reading-icmp-pack/
-from linspector.services.service import Service
 import struct
+
+from logging import getLogger
+
+from linspector.services.service import Service
+
+logger = getLogger(__name__)
 
 
 class Packet(object):

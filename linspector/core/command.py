@@ -18,16 +18,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import subprocess as sp
+
 from subprocess import Popen
 from subprocess import CalledProcessError
 from datetime import datetime as dt
+from logging import getLogger
+
+logger = getLogger(__name__)
 
 #TODO: Move this to shell.py service file. this definitely is shell execution. (hanez)
 
+
 class Command:
-    def __init__(self, command, log):
+    def __init__(self, command):
         self.command = command
-        self.log = log
         self.output = None
         self.error = None
         self.retcode = 0
@@ -46,12 +50,12 @@ class Command:
 
         try:
             self.commandStart = dt.now()
-            self.log.info("calling command " + str(self.command) + " at " + str(self.commandStart))
+            logger.info("calling command " + str(self.command) + " at " + str(self.commandStart))
             #self.output=sp.check_output(self.command.split())
             process = Popen(self.command, stdout=sp.PIPE, stderr=sp.PIPE, shell=True)
             self.output, self.error = process.communicate()
-            self.log.debug(str(self.output))
-            self.log.debug(str(self.error))
+            logger.debug(str(self.output))
+            logger.debug(str(self.error))
             self.retcode = process.poll()
         except CalledProcessError:
             self.error = CalledProcessError.output

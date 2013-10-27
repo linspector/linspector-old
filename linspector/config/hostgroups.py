@@ -17,6 +17,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 class HostGroupException(Exception):
     def __init__(self, msg):
@@ -124,7 +128,7 @@ class HostGroupService:
         return "HostgroupService { " + str([str(s) for s in self.services]) + ", " + str([p.name for p in self.periods]) + "}"
 
 
-def parseHostGroupList(hostgroups, hosts, members, periods, services, log):
+def parseHostGroupList(hostgroups, hosts, members, periods, services):
     parsedHostGroups = []
     for hgname, hgValues in hostgroups.items():
         hostGroup = HostGroup(hgname)
@@ -141,7 +145,7 @@ def parseHostGroupList(hostgroups, hosts, members, periods, services, log):
                 if service is not None: 
                     services.append(service)
                 else:
-                    log.w("could not find HostService(" + str(serviceName) + ") for host " + host.name)
+                    logger.warning("could not find HostService(" + str(serviceName) + ") for host " + host.name)
             hostGroupPeriods = [p for p in periods if p.name in servicePeriods]
             hostGroup.services.append(HostGroupService(services, hostGroupPeriods))
         parsedHostGroups.append(hostGroup)

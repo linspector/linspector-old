@@ -25,6 +25,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import threading
 
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 class Backend(threading.Thread):
     def __init__(self, interface, **kwargs):

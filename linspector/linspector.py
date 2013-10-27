@@ -23,7 +23,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import datetime
 import threading
 
+from logging import getLogger
+
 from core.job import Job
+
+logger = getLogger(__name__)
 
 
 def handle_job(jobInfo):
@@ -31,11 +35,10 @@ def handle_job(jobInfo):
 
 
 class Linspector(threading.Thread):
-    def __init__(self, linConf, core, scheduler, log, q):
+    def __init__(self, linConf, core, scheduler, q):
         self.linConf = linConf
         self.core = core
         self.scheduler = scheduler
-        self.log = log
         self.q = q
         threading.Thread.__init__(self)
 
@@ -62,6 +65,5 @@ class Linspector(threading.Thread):
                             schedulerJob = period.createJob(self.scheduler, job, handle_job, start_date=new_start_date)
                             if schedulerJob is not None:
                                 job.set_job(schedulerJob)
-                                job.set_logger(self.log)
                                 jobs.append(job)
                                 self.q.put(jobs)

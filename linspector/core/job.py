@@ -22,6 +22,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import datetime
 from binascii import crc32
+from logging import getLogger
+
+logger = getLogger(__name__)
 
 
 def generateId():
@@ -60,9 +63,6 @@ class Job:
             ret = "0" + ret
         return ret
 
-    def set_logger(self, log):
-        self.log = log
-
     def set_job(self, job):
         self.job = job
 
@@ -85,7 +85,7 @@ class Job:
             self.jobThreshold += 1
 
         if self.jobThreshold >= serviceThreshold:
-            self.log.debug("Threshold reached!")
+            logger.debug("Threshold reached!")
             self.handle_alarm(jobInfo, self.jobThreshold - serviceThreshold)
 
     def handle_alarm(self, jobInfo, thresholdOffset):
@@ -95,8 +95,8 @@ class Job:
                 task.execute(jobInfo.get_message(), self.core)
 
     def handle_call(self):
-        self.log.debug("handle call")
-        self.log.debug(self.service)
+        logger.debug("handle call")
+        logger.debug(self.service)
         if self._enabled:
             try:
                 jobInfo = JobInfo(self.hex_string(), self.host, self.service)
@@ -105,14 +105,14 @@ class Job:
 
                 self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
 
-                self.log.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
+                logger.debug("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
 
                 self.jobInfos.append(jobInfo)
 
             except Exception, e:
-                self.log.debug(e)
+                logger.debug(e)
         else:
-            self.log.debug("Job " + self.hex_string() + " disabled")
+            logger.debug("Job " + self.hex_string() + " disabled")
 
 
 class JobInfo(object):

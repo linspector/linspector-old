@@ -23,8 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
 import smtplib
+
 from email.mime.text import MIMEText
+from logging import getLogger
+
 from linspector.tasks.task import Task
+
+logger = getLogger(__name__)
 
 
 class MailTask(Task):

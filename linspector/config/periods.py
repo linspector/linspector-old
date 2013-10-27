@@ -18,6 +18,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 class Period(object):
     def __init__(self, name):

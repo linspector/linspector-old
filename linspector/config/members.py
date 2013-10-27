@@ -19,6 +19,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import re
 
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 class Member:
     def __init__(self, id, name="",  comment="", tasks=None):
@@ -58,7 +62,7 @@ class MemberFilter:
         return "Filter:" + str(self.filter) + " Value:" + self.value
 
 
-def parseMemberList(members, filters, log):
+def parseMemberList(members, filters):
     parsedMembers = [Member(nameid, **values) for nameid, values in members.items()]
     for member in parsedMembers:
         mFilter = []
@@ -72,6 +76,6 @@ def parseMemberList(members, filters, log):
                 memberFilter.command = re.sub('@member', replacement, filt.command)
                 mFilter.append(memberFilter)
             if not found:
-                log.w("filter: " + filtername + " is not defined in member " + member.name)
+                logger.warning("filter: " + filtername + " is not defined in member " + member.name)
         member.filters = mFilter
     return parsedMembers

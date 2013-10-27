@@ -17,9 +17,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import imp
+
+from logging import getLogger
 from os.path import isfile
 from os.path import join
-import imp
 
 from layouts import Layout
 from hostgroups import HostGroup
@@ -43,6 +45,8 @@ KEY_MEMBERS    = "members"
 KEY_PERIODS    = "periods"
 KEY_CORE       = "core"
 
+logger = getLogger(__name__)
+
 
 class ConfigurationException(Exception):
     def __init__(self, msg, log):
@@ -54,13 +58,10 @@ class ConfigurationException(Exception):
 
 
 class ConfigParser:
-    def __init__(self, log):
+    def __init__(self):
         """
         initializes a new ConfigParser Object
-        
-        :param log: pre configured logger Object to post messages while parsing"
         """
-        self.log = log
         self.hostgroups = {}
         self.members = {}
         self.periods = {}
@@ -83,14 +84,14 @@ class ConfigParser:
         """
         if not isfile(configFilename):
             msg = "config file not found at " + str(configFilename)
-            raise ConfigurationException(msg, self.log)
+            raise ConfigurationException(msg, logger)
         
         self.configFilename = configFilename
         
         with open(configFilename) as cfgFile:
             config = cfgFile.read()
         
-        self.log.info("reading Config: " + configFilename)
+        logger.info("reading Config: " + configFilename)
 
         if self.configFilename.endswith(".yaml") or configFilename.endswith("yml"):
             import yaml
@@ -118,8 +119,8 @@ class ConfigParser:
                 item = creator(key, val)
                 items.append(item)
             except Exception:
-                self.log.warning("ignoring " + msgName + ": " + key + "! reason:")
-                self.log.warning(str(Exception))
+                logger.warning("ignoring " + msgName + ": " + key + "! reason:")
+                logger.warning(str(Exception))
         return items
 
     def _load_module(self, clazz, modPart):
@@ -163,15 +164,15 @@ class ConfigParser:
                     if class_check(item):
                         repl.append(item)
                     else:
-                        self.log.warning("Ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
+                        logger.warning("Ignoring class " + clazzItem["class"] + "! It does not pass the class check!")
 
                 except ImportError, err:
-                    self.log.warning("Could not import " + clazz + ": " + str(clazzItem) + "! reason")
-                    self.log.warning(str(err))
+                    logger.warning("Could not import " + clazz + ": " + str(clazzItem) + "! reason")
+                    logger.warning(str(err))
                 except KeyError, k:
-                    self.log.warning("Key " + str(k) + " not in classItem " + str(clazzItem))
+                    logger.warning("Key " + str(k) + " not in classItem " + str(clazzItem))
                 except Exception, e:
-                    self.log.warning("Error while replacing class ( " + clazz + " ): " + str(e))
+                    logger.warning("Error while replacing class ( " + clazz + " ): " + str(e))
 
             del items[:]
             items.extend(repl)
@@ -241,8 +242,6 @@ class FullConfigParser(ConfigParser):
         creator = lambda name, values: HostGroup(name, **values)
         self.hostgroups = self._create_raw_Object(self.dict[KEY_HOSTGROUPS], "Hostgroup", creator)
 
-
-        
         creator = parsePeriodList
         periods = self._create_raw_Object(self.dict[KEY_PERIODS], "Period", creator)
 

@@ -19,7 +19,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+from logging import getLogger
+
 from linspector.tasks.task import Task
+
+logger = getLogger(__name__)
 
 
 class SmsTask(Task):

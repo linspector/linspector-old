@@ -24,7 +24,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import paramiko
 import pprint
 import os
+
+from logging import getLogger
+
 from linspector.services.service import Service
+
+logger = getLogger(__name__)
 
 
 class SshService(Service):

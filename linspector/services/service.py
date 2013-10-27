@@ -17,12 +17,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+from logging import getLogger
+
 KEY_PARSER    = "parser"
 KEY_COMMENT   = "comment"
 KEY_THRESHOLD = "threshold"
 KEY_FAILS     = "fails"
 KEY_PERIODS   = "periods"
 KEY_ARGS      = "args"
+
+logger = getLogger(__name__)
 
 
 class Service(object):

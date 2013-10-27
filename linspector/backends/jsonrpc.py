@@ -22,12 +22,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import json
-import time
 
 from bjsonrpc.handlers import BaseHandler
 from bjsonrpc import createserver
+from logging import getLogger
 
 from linspector.backends.backend import Backend
+
+logger = getLogger(__name__)
 
 
 class JsonrpcBackend(Backend):
