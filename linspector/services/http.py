@@ -2,10 +2,11 @@
 The http service.
 
 This is for checking the availability and output of HTTP services. Basic HTTP
-content could be fetched and compared.HTTPS is not validating the server certificate!
+content could be fetched and compared.HTTPS is not validating the server
+certificate!
 
-This should just return 0 on success and NOT 0 on error. Just to make internals generic
-to just report this code and not use a parser.
+This should just return 0 on success and NOT 0 on error. Just to make internals
+generic to just report this code and not use a parser.
 
 Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
 
@@ -37,8 +38,12 @@ logger = getLogger(__name__)
 class HttpService(Service):
     def __init__(self, **kwargs):
         super(HttpService, self).__init__(**kwargs)
-        
+
         args = self.get_arguments()
+        if "content" in args:
+            self.content = args["content"]
+        else:
+            raise Exception("There is no content set")
         
         self.method = "get"
         if "method" in args:
@@ -63,14 +68,23 @@ class HttpService(Service):
     def needs_arguments(self):
         return True
 
-    def execute(self):
+    def execute(self, jobInfo):
         params = urllib.urlencode(self.params)
+
         if self.method is "get":
             f = urllib.urlopen(self.protocol + "://" + self._host + ":" + self.port + self.path + "?%s" % params)
         elif self.method is "post":
             f = urllib.urlopen(self.protocol + "://" + self._host + ":" + self.port + self.path, params)
 
-        #print f.read()
+        if self.content not in f.read():
+            jobInfo.set_errorcode(1)
+            jobInfo.set_message("[http: " + jobInfo.jobHex + "] Content not found on host: " +
+                                jobInfo.get_host() + " on port: " + str(self.port))
+        elif jobInfo.get_errorcode() == -1:
+            jobInfo.set_execution_successful(True)
+            jobInfo.set_errorcode(0)
+            jobInfo.set_message("[http: " + jobInfo.jobHex + "] Content found on host: " +
+                                jobInfo.get_host() + " on port: " + str(self.port))
 
 
 def create(kwargs):
