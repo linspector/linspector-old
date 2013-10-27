@@ -73,6 +73,7 @@ def handle_job(jobInfo):
 
 
 def main():
+    global linspector_configuration
     args = parse_args()
 
     logfile = path.expanduser(args.logfile)
