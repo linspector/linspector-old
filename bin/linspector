@@ -115,9 +115,9 @@ def main():
                                   hostgroup.get_processors(),
                                   core,
                                   hostgroup)
-                        schedulerJob = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
-                        if schedulerJob is not None:
-                            job.set_job(schedulerJob)
+                        scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
+                        if scheduler_job is not None:
+                            job.set_job(scheduler_job)
                             jobs.append(job)
 
     interface = LinspectorInterface(jobs, scheduler, linspector_configuration)
