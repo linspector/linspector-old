@@ -88,8 +88,13 @@ def main():
     root_logger.addHandler(handler)
     root_logger.setLevel(args.loglevel)
 
-    configParser = FullConfigParser()
-    linConf, core = configParser.parse_config(args.config)
+    try:
+        config_parser = FullConfigParser()
+        linspector_configuration, core = config_parser.parse_config(args.config)
+    except Exception, msg:
+        print("Configuration error: " + str(msg) + "; Exiting now.")
+        logger.error(msg)
+        exit()
 
     scheduler = Scheduler({"apscheduler.threadpool.max_threads": 1000})
     scheduler.start()
@@ -97,7 +102,7 @@ def main():
     start_date = datetime.datetime.now()
     time_delta = 0
     jobs = []
-    for layout in linConf.get_enabled_layouts():
+    for layout in linspector_configuration.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             for service in hostgroup.get_services():
                 for host in hostgroup.get_hosts():
@@ -115,7 +120,7 @@ def main():
                             job.set_job(schedulerJob)
                             jobs.append(job)
 
-    interface = LinspectorInterface(jobs, scheduler, linConf)
+    interface = LinspectorInterface(jobs, scheduler, linspector_configuration)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         jsonrpc = JsonrpcBackend(interface, core)
