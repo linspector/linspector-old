@@ -89,7 +89,9 @@ class Exit(CommandBase, object):
         return self.can_exit()
 
     def help_exit(self):
-        print("Exits Linspector")
+        print('''
+Exits Linspector
+''')
 
 
 class Command(object):
@@ -120,7 +122,9 @@ class LishCommander(Exit):
         exec text
 
     def help_python(self):
-        print("Executes Python code using 'exec'.")
+        print('''
+Executes Python code using 'exec'
+''')
 
     def print_color(self, color, text):
         print(color + str(text) + END)
@@ -164,11 +168,12 @@ class LishCommander(Exit):
             return self.get_completion(["enable", "disable"], text)
 
     def help_job(self):
-        print('''Usage:
+        print('''
+Usage:
   <ID>:         Prints extended information about this job
   <ID> enable:  Enables a job
   <ID> disable: Disables a job
-  ''')
+''')
 
     def do_jobs(self, text):
         if text == "list":
@@ -189,39 +194,47 @@ class LishCommander(Exit):
             self.help_jobs()
 
     def help_jobs(self):
-        print('''Usage:
+        print('''
+Usage:
   count: Show count of all jobs
-  list:  Lists all jobs''')
+  list:  Lists all jobs
+''')
 
     def do_host(self, text):
         pass
 
     def help_host(self):
-        print('''Usage:
+        print('''
+Usage:
   <HOST>:         Prints extended information about <HOST>
   <HOST> enable:  Enables all jobs for <HOST>
   <HOST> disable: Disables all jobs for <HOST>
-  <HOST> list:    Lists all jobs for <HOST>''')
+  <HOST> list:    Lists all jobs for <HOST>
+''')
 
     def do_hostgroup(self, text):
         pass
 
     def help_hostgroup(self):
-        print('''Usage:
+        print('''
+Usage:
   <HOSTGROUP>:         Prints extended information about <HOSTGROUP>
   <HOSTGROUP> enable:  Enables all jobs for <HOSTGROUP>
   <HOSTGROUP> disable: Disables all jobs for <HOSTGROUP>
-  <HOSTGROUP> list:    Lists all jobs for <HOSTGROUP>''')
+  <HOSTGROUP> list:    Lists all jobs for <HOSTGROUP>
+''')
 
     def do_hostgrouphost(self, text):
         pass
 
     def help_hostgrouphost(self):
-        print('''Usage:
+        print('''
+Usage:
   <HOSTGROUP> <HOST>:         Prints extended information about <HOST> in <HOSTGROUP>
   <HOSTGROUP> <HOST> enable:  Enables all jobs for <HOST> in <HOSTGROUP>
   <HOSTGROUP> <HOST> disable: Disables all jobs for <HOST> in <HOSTGROUP>
-  <HOSTGROUP> <HOST> list:    Lists all jobs for <HOST> in <HOSTGROUP>''')
+  <HOSTGROUP> <HOST> list:    Lists all jobs for <HOST> in <HOSTGROUP>
+''')
 
     def do_shell(self, text):
         os.system(text)
@@ -251,8 +264,10 @@ class LishCommander(Exit):
                 self.help_log()
 
     def help_log(self):
-        print('''Usage:
-  tail: Do a "tail -F" on the linspector logfile (Ctrl+C to exit)''')
+        print('''
+Usage:
+  tail: Do a "tail -F" on the linspector logfile (Ctrl+C to exit)
+''')
 
     def do_status(self, text):
         # TODO: print instance name from core config
@@ -266,7 +281,9 @@ class LishCommander(Exit):
         #print GREEN + "Core Version" + END + ":\t" + __linspector_version__
 
     def help_status(self):
-        print('''Show status information about the Linspector instance''')
+        print('''
+Show status information about the Linspector instance
+''')
 
     def do_about(self, text):
         self.print_color(GREEN,  "Linspector Monitoring\n")
@@ -278,13 +295,17 @@ class LishCommander(Exit):
         self.print_color(PURPLE, "License: GNU Affero General Public License Version 3.0")
 
     def help_about(self):
-        print('''Show information about Linspector''')
+        print('''
+Show information about Linspector
+''')
 
     def do_license(self, text):
         os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../LICENSE")
 
     def help_license(self):
-        print('''Show license information''')
+        print('''
+Show license information
+''')
 
     def do_man(self, text):
         try:
@@ -296,5 +317,7 @@ class LishCommander(Exit):
             self.help_man()
 
     def help_man(self):
-        print('''Usage:
-  <PAGE>: Show manual page <PAGE>''')
+        print('''
+Usage:
+  <PAGE>: Show manual page <PAGE>
+''')
