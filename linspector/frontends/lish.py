@@ -241,10 +241,18 @@ class LishCommander(Exit):
             pass
 
     def do_log(self, text):
-        pass
+        if text == "tail":
+            try:
+                # TODO: do the tail on the logfile set by args and not a static path
+                with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
+                    os.system("tail -F " + os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log")
+            except IOError:
+                self.print_color(RED, "Logfile not found.")
+                self.help_log()
 
     def help_log(self):
-        print('''Manage logging''')
+        print('''Usage:
+  tail: Do a "tail -F" on the linspector logfile (Ctrl+C to exit)''')
 
     def do_status(self, text):
         # TODO: print instance name from core config
