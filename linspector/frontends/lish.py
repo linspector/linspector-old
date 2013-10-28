@@ -200,7 +200,8 @@ class LishCommander(Exit):
         print('''Usage:
   <HOST>:         Prints extended information about <HOST>
   <HOST> enable:  Enables all jobs for <HOST>
-  <HOST> disable: Disables all jobs for <HOST>''')
+  <HOST> disable: Disables all jobs for <HOST>
+  <HOST> list:    Lists all jobs for <HOST>''')
 
     def do_hostgroup(self, text):
         pass
@@ -209,16 +210,18 @@ class LishCommander(Exit):
         print('''Usage:
   <HOSTGROUP>:         Prints extended information about <HOSTGROUP>
   <HOSTGROUP> enable:  Enables all jobs for <HOSTGROUP>
-  <HOSTGROUP> disable: Disables all jobs for <HOSTGROUP>''')
+  <HOSTGROUP> disable: Disables all jobs for <HOSTGROUP>
+  <HOSTGROUP> list:    Lists all jobs for <HOSTGROUP>''')
 
     def do_hostgrouphost(self, text):
         pass
 
     def help_hostgrouphost(self):
         print('''Usage:
-  <HOSTGROUP> <HOST>          Prints extended information about <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST>:         Prints extended information about <HOST> in <HOSTGROUP>
   <HOSTGROUP> <HOST> enable:  Enables all jobs for <HOST> in <HOSTGROUP>
-  <HOSTGROUP> <HOST> disable: Disables all jobs for <HOST> in <HOSTGROUP>''')
+  <HOSTGROUP> <HOST> disable: Disables all jobs for <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST> list:    Lists all jobs for <HOST> in <HOSTGROUP>''')
 
     def do_shell(self, text):
         os.system(text)
@@ -238,15 +241,15 @@ class LishCommander(Exit):
             pass
 
     def do_log(self, text):
-        print('''executed %s''' % text)
+        pass
 
     def help_log(self):
         print('''Manage logging''')
 
     def do_status(self, text):
-        # print instance name from core config
+        # TODO: print instance name from core config
         print GREEN + "Hostname" + END + ":\t" + socket.gethostname()
-        # print instance uptime
+        # TODO: print instance uptime
         print GREEN + "Job Count" + END + ":\t" + str(self.interface.get_job_count())
         thread_info = self.interface.get_thread_count()
         print GREEN + "Threads" + END + ":\t" + str(thread_info["Num Threads"]) + "/" + str(thread_info["Max Threads"])
