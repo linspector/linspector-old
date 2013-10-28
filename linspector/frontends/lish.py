@@ -170,9 +170,9 @@ Executes Python code using 'exec'
     def help_job(self):
         print('''
 Usage:
-  <ID>:         Prints extended information about this job
-  <ID> enable:  Enables a job
-  <ID> disable: Disables a job
+  <ID>          Prints extended information about this job
+  <ID> enable   Enables a job
+  <ID> disable  Disables a job
 ''')
 
     def do_jobs(self, text):
@@ -196,8 +196,8 @@ Usage:
     def help_jobs(self):
         print('''
 Usage:
-  count: Show count of all jobs
-  list:  Lists all jobs
+  count  Show count of all jobs
+  list   Lists all jobs
 ''')
 
     def do_host(self, text):
@@ -206,10 +206,10 @@ Usage:
     def help_host(self):
         print('''
 Usage:
-  <HOST>:         Prints extended information about <HOST>
-  <HOST> enable:  Enables all jobs for <HOST>
-  <HOST> disable: Disables all jobs for <HOST>
-  <HOST> list:    Lists all jobs for <HOST>
+  <HOST>          Prints extended information about <HOST>
+  <HOST> enable   Enables all jobs for <HOST>
+  <HOST> disable  Disables all jobs for <HOST>
+  <HOST> list     Lists all jobs for <HOST>
 ''')
 
     def do_hostgroup(self, text):
@@ -218,10 +218,10 @@ Usage:
     def help_hostgroup(self):
         print('''
 Usage:
-  <HOSTGROUP>:         Prints extended information about <HOSTGROUP>
-  <HOSTGROUP> enable:  Enables all jobs for <HOSTGROUP>
-  <HOSTGROUP> disable: Disables all jobs for <HOSTGROUP>
-  <HOSTGROUP> list:    Lists all jobs for <HOSTGROUP>
+  <HOSTGROUP>          Prints extended information about <HOSTGROUP>
+  <HOSTGROUP> enable   Enables all jobs for <HOSTGROUP>
+  <HOSTGROUP> disable  Disables all jobs for <HOSTGROUP>
+  <HOSTGROUP> list     Lists all jobs for <HOSTGROUP>
 ''')
 
     def do_hostgrouphost(self, text):
@@ -230,10 +230,10 @@ Usage:
     def help_hostgrouphost(self):
         print('''
 Usage:
-  <HOSTGROUP> <HOST>:         Prints extended information about <HOST> in <HOSTGROUP>
-  <HOSTGROUP> <HOST> enable:  Enables all jobs for <HOST> in <HOSTGROUP>
-  <HOSTGROUP> <HOST> disable: Disables all jobs for <HOST> in <HOSTGROUP>
-  <HOSTGROUP> <HOST> list:    Lists all jobs for <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST>          Prints extended information about <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST> enable   Enables all jobs for <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST> disable  Disables all jobs for <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST> list     Lists all jobs for <HOST> in <HOSTGROUP>
 ''')
 
     def do_shell(self, text):
@@ -266,7 +266,7 @@ Usage:
     def help_log(self):
         print('''
 Usage:
-  tail: Do a "tail -F" on the linspector logfile (Ctrl+C to exit)
+  tail  Do a "tail -F" on the linspector logfile (Ctrl+C to exit)
 ''')
 
     def do_status(self, text):
@@ -319,5 +319,5 @@ Show license information
     def help_man(self):
         print('''
 Usage:
-  <PAGE>: Show manual page <PAGE>
+  <PAGE>  Show manual page <PAGE>
 ''')
