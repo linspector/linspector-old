@@ -31,7 +31,7 @@ from shlex import split as shsplit
 
 from linspector.frontends.frontend import Frontend
 
-__version__ = "0.2.2-alpha"
+__version__ = "0.2.3-alpha"
 
 PURPLE = "\033[95m"
 BLUE   = "\033[94m"
