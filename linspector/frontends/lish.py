@@ -261,6 +261,9 @@ class LishCommander(Exit):
         print GREEN + "Job Count" + END + ":\t" + str(self.interface.get_job_count())
         thread_info = self.interface.get_thread_count()
         print GREEN + "Threads" + END + ":\t" + str(thread_info["Num Threads"]) + "/" + str(thread_info["Max Threads"])
+        print GREEN + "Lish Version" + END + ":\t" + __version__
+        # TODO: print Linspector version
+        #print GREEN + "Core Version" + END + ":\t" + __linspector_version__
 
     def help_status(self):
         print('''Show status information about the Linspector instance''')
