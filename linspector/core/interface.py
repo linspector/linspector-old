@@ -156,3 +156,7 @@ class LinspectorInterface(object):
 
     def get_enabled_layouts(self):
         self._config.get_enabled_layouts()
+
+    def get_thread_count(self):
+        return {"Num Threads": str(self._scheduler._threadpool.num_threads),
+                "Max Threads": str(self._scheduler._threadpool.max_threads)}

@@ -244,7 +244,12 @@ class LishCommander(Exit):
         print('''Manage logging''')
 
     def do_status(self, text):
-        print('''executed %s''' % text)
+        # print instance name from core config
+        print GREEN + "Hostname" + END + ":\t" + socket.gethostname()
+        # print instance uptime
+        print GREEN + "Job Count" + END + ":\t" + str(self.interface.get_job_count())
+        thread_info = self.interface.get_thread_count()
+        print GREEN + "Threads" + END + ":\t" + str(thread_info["Num Threads"]) + "/" + str(thread_info["Max Threads"])
 
     def help_status(self):
         print('''Show status information about the Linspector instance''')
