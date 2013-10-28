@@ -31,7 +31,7 @@ from shlex import split as shsplit
 
 from linspector.frontends.frontend import Frontend
 
-__version__ = "0.2"
+__version__ = "0.2.1-alpha"
 
 PURPLE = "\033[95m"
 BLUE   = "\033[94m"
@@ -120,10 +120,10 @@ class LishCommander(Exit):
         exec text
 
     def help_python(self):
-        print "Executes Python code using 'exec'."
+        print("Executes Python code using 'exec'.")
 
     def print_color(self, color, text):
-        print color + str(text) + END
+        print(color + str(text) + END)
 
     def print_dict(self, dict):
         for key, val in dict.items():
@@ -131,7 +131,7 @@ class LishCommander(Exit):
             if len(str(key)) < 7:
                 tab += "\t"
 
-            print GREEN + str(key) + END + tab + YELLOW + str(val) + END
+            print(GREEN + str(key) + END + tab + YELLOW + str(val) + END)
 
     def print_jobs_infos(self, job):
         self.print_dict(self.interface.get_job_info_dict(job))
@@ -164,11 +164,11 @@ class LishCommander(Exit):
             return self.get_completion(["enable", "disable"], text)
 
     def help_job(self):
-        print '''Usage:
-              <ID>              Prints extended information about this job
-              <ID> enable:      Enables a job
-              <ID> disable:     Disables a job
-              '''
+        print('''Usage:
+  <ID>:         Prints extended information about this job
+  <ID> enable:  Enables a job
+  <ID> disable: Disables a job
+  ''')
 
     def do_jobs(self, text):
         if text == "list":
@@ -189,16 +189,42 @@ class LishCommander(Exit):
             self.help_jobs()
 
     def help_jobs(self):
-        print '''Usage:
-              count             Show count of all jobs
-              list              Lists all jobs
-              '''
+        print('''Usage:
+  count: Show count of all jobs
+  list:  Lists all jobs''')
+
+    def do_host(self, text):
+        pass
+
+    def help_host(self):
+        print('''Usage:
+  <HOST>:         Prints extended information about <HOST>
+  <HOST> enable:  Enables all jobs for <HOST>
+  <HOST> disable: Disables all jobs for <HOST>''')
+
+    def do_hostgroup(self, text):
+        pass
+
+    def help_hostgroup(self):
+        print('''Usage:
+  <HOSTGROUP>:         Prints extended information about <HOSTGROUP>
+  <HOSTGROUP> enable:  Enables all jobs for <HOSTGROUP>
+  <HOSTGROUP> disable: Disables all jobs for <HOSTGROUP>''')
+
+    def do_hostgrouphost(self, text):
+        pass
+
+    def help_hostgrouphost(self):
+        print('''Usage:
+  <HOSTGROUP> <HOST>          Prints extended information about <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST> enable:  Enables all jobs for <HOST> in <HOSTGROUP>
+  <HOSTGROUP> <HOST> disable: Disables all jobs for <HOST> in <HOSTGROUP>''')
 
     def do_shell(self, text):
         os.system(text)
 
     def help_shell(self):
-        print("execute any shell command. Can also be achieved by a '!' prefix")
+        print("Execute any shell command. Can also be achieved by a '!' prefix")
 
     def complete_shell(self, text, line, begidx, endidx):
         try:
@@ -212,10 +238,16 @@ class LishCommander(Exit):
             pass
 
     def do_log(self, text):
-        print '''executed %s''' % text
+        print('''executed %s''' % text)
 
     def help_log(self):
-        print '''Manage logging'''
+        print('''Manage logging''')
+
+    def do_status(self, text):
+        print('''executed %s''' % text)
+
+    def help_status(self):
+        print('''Show status information about the Linspector instance''')
 
     def do_about(self, text):
         self.print_color(GREEN,  "Linspector Monitoring\n")
@@ -227,13 +259,13 @@ class LishCommander(Exit):
         self.print_color(PURPLE, "License: GNU Affero General Public License Version 3.0")
 
     def help_about(self):
-        print '''Show information about Linspector'''
+        print('''Show information about Linspector''')
 
     def do_license(self, text):
         os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../LICENSE")
 
     def help_license(self):
-        print '''Show license information'''
+        print('''Show license information''')
 
     def do_man(self, text):
         try:
@@ -245,6 +277,5 @@ class LishCommander(Exit):
             self.help_man()
 
     def help_man(self):
-        print '''Usage:
-              man <PAGE>        Show manual page <PAGE>
-              '''
+        print('''Usage:
+  <PAGE>: Show manual page <PAGE>''')
