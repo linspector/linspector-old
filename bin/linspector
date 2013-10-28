@@ -108,9 +108,11 @@ def main():
         config_parser = FullConfigParser()
         linspector_configuration, core = config_parser.parse_config(args.config)
     except Exception, msg:
-        print("Configuration error: " + str(msg) + "; Exiting now.")
+        print("Configuration error: " + str(msg) + ". Exiting now.")
         logger.error(msg)
         exit()
+
+    print("Scheduling jobs. Be patient...")
 
     scheduler = Scheduler({"apscheduler.threadpool.max_threads": args.threads})
     scheduler.start()
@@ -142,6 +144,8 @@ def main():
         jsonrpc = JsonrpcBackend(interface, core)
         jsonrpc.daemon = True
         jsonrpc.start()
+
+    print("Ready! Type \"help\" to view available commands or \"help COMMAND\" to view the commands help")
 
     LishFrontend(interface)
 
