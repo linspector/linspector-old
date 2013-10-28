@@ -21,7 +21,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
 __version__ = "0.11.2"
-__default_config__ = "./examples/minimal.json"
 
 import argparse
 import datetime
@@ -47,23 +46,41 @@ def parse_args():
                "information.",
         prog="linspector")
 
-    #TODO: add --nocolor to disable colored output in lish
     parser.add_argument("--version", action="version", version="%(prog)s " + str(__version__))
-    #TODO: make the config file a required field without -c or --config at the end eg: linspector config.json
-    parser.add_argument("-c", "--config", default=__default_config__, metavar="FILE",
-                        help="select configfile to use")
+
+    parser.add_argument("config", metavar="CONFIGFILE",
+                        help="The configfile to use")
+
+    parser.add_argument("-n", "--nocolor",
+                        help="Disable colored output")
+
     parser.add_argument("-l", "--logfile", default="./log/linspector.log", metavar="FILE",
-                        help="set logfile to use")
+                        help="Set logfile to use (default: ./log/linspector.log)")
+
+    parser.add_argument("-c", "--logcount", default=5,
+                        help="Maximum number of logfiles in rotation (default: 5)")
+
+    parser.add_argument("-m", "--logsize", default=10485760,
+                        help="Maximum logfile size in Bytes (default: 10485760)")
+
+    parser.add_argument("-t", "--threads", default=1000,
+                        help="Maximum number of scheduler threads (default: 1000)")
+
+    parser.add_argument("-x", "--delay", default=2.315379,
+                        help="Seconds delay between scheduled jobs (default: 2.315379)")
 
     output = parser.add_mutually_exclusive_group()
     output.add_argument("-q", "--quiet", action="store_const", dest="loglevel", const=logging.ERROR,
-                        help="output only errors")
+                        help="Output only errors")
+
     output.add_argument("-w", "--warning", action="store_const", dest="loglevel", const=logging.WARNING,
-                        help="output warnings")
+                        help="Output warnings")
+
     output.add_argument("-v", "--verbose", action="store_const", dest="loglevel", const=logging.INFO,
-                        help="output info messages")
+                        help="Output info messages")
+
     output.add_argument("-d", "--debug", action="store_const", dest="loglevel", const=logging.DEBUG,
-                        help="output debug messages")
+                        help="Output debug messages")
     output.set_defaults(loglevel=logging.INFO)
     return parser.parse_args()
 
@@ -81,11 +98,9 @@ def main():
         os.makedirs(path.dirname(logfile))
 
     root_logger = logging.getLogger()
-
-    formatter = logging.Formatter(logging.BASIC_FORMAT)
-    handler = logging.handlers.RotatingFileHandler(args.logfile, maxBytes=10485760, backupCount=4)
+    formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+    handler = logging.handlers.RotatingFileHandler(args.logfile, maxBytes=args.logsize, backupCount=args.logcount)
     handler.setFormatter(formatter)
-
     root_logger.addHandler(handler)
     root_logger.setLevel(args.loglevel)
 
@@ -97,7 +112,7 @@ def main():
         logger.error(msg)
         exit()
 
-    scheduler = Scheduler({"apscheduler.threadpool.max_threads": 1000})
+    scheduler = Scheduler({"apscheduler.threadpool.max_threads": args.threads})
     scheduler.start()
 
     start_date = datetime.datetime.now()
@@ -108,7 +123,7 @@ def main():
             for service in hostgroup.get_services():
                 for host in hostgroup.get_hosts():
                     for period in service.get_periods():
-                        time_delta += 2.315379
+                        time_delta += args.delay
                         new_start_date = start_date + datetime.timedelta(seconds=time_delta)
                         job = Job(service,
                                   host,
