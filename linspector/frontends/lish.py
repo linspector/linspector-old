@@ -262,11 +262,20 @@ Usage:
             except IOError:
                 self.print_color(RED, "Logfile not found.")
                 self.help_log()
+        elif text == "less":
+            try:
+                # TODO: do the tail on the logfile set by args and not a static path
+                with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
+                    os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log")
+            except IOError:
+                self.print_color(RED, "Logfile not found.")
+                self.help_log()
 
     def help_log(self):
         print('''
 Usage:
-  tail  Do a "tail -F" on the linspector logfile (Ctrl+C to exit)
+  less  less on the linspector logfile (press "q" to exit)
+  tail  tail on the linspector logfile (Ctrl+C to exit)
 ''')
 
     def do_status(self, text):
