@@ -254,19 +254,27 @@ Usage:
             pass
 
     def do_log(self, text):
-        if text == "tail":
-            try:
-                # TODO: do the tail on the logfile set by args and not a static path
-                with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
-                    os.system("tail -F " + os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log")
-            except IOError:
-                self.print_color(RED, "Logfile not found.")
-                self.help_log()
-        elif text == "less":
+        if text == "less":
             try:
                 # TODO: do the less on the logfile set by args and not a static path
                 with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
                     os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log")
+            except IOError:
+                self.print_color(RED, "Logfile not found.")
+                self.help_log()
+        elif text == "more":
+            try:
+                # TODO: do the more on the logfile set by args and not a static path
+                with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
+                    os.system("more " + os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log")
+            except IOError:
+                self.print_color(RED, "Logfile not found.")
+                self.help_log()
+        elif text == "tail":
+            try:
+                # TODO: do the tail on the logfile set by args and not a static path
+                with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
+                    os.system("tail -F " + os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log")
             except IOError:
                 self.print_color(RED, "Logfile not found.")
                 self.help_log()
@@ -275,7 +283,8 @@ Usage:
         print('''
 Usage:
   less  less on the linspector logfile (press "q" to exit)
-  tail  tail on the linspector logfile (Ctrl+C to exit)
+  more  more on the linspector logfile (press "q" to exit)
+  tail  tail (-F) on the linspector logfile (Ctrl+C to exit)
 ''')
 
     def do_status(self, text):
