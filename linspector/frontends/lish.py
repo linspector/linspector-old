@@ -264,7 +264,7 @@ Usage:
                 self.help_log()
         elif text == "less":
             try:
-                # TODO: do the tail on the logfile set by args and not a static path
+                # TODO: do the less on the logfile set by args and not a static path
                 with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
                     os.system("less " + os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log")
             except IOError:
