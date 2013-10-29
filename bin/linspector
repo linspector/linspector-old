@@ -149,7 +149,9 @@ def main():
         jsonrpc.daemon = True
         jsonrpc.start()
 
-    print("Ready! Type \"help\" to view available commands or \"help COMMAND\" to view the commands help")
+    print("Ready!")
+
+    print("Type \"help\" to view available commands or \"help COMMAND\" to view the commands help")
 
     LishFrontend(interface)
 
