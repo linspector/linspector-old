@@ -23,6 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
 import smtplib
+import time
 
 from email.mime.text import MIMEText
 from logging import getLogger
@@ -50,6 +51,7 @@ class MailTask(Task):
         #self.recipient = kwargs["args"]["rcpt"]
 
     def execute(self, msg, taskArgs):
+        #time.sleep(3)
         if "rcpt" not in taskArgs:
             logger.debug("Could not execute Mail Task! No recipient given!")
             raise "Could not execute Mail Task! No recipient given!"
