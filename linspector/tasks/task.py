@@ -1,7 +1,7 @@
 """
-The task class.
+The task classes.
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -20,6 +20,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from logging import getLogger
+from threading import Event, Thread
+
 
 logger = getLogger(__name__)
 
@@ -37,3 +39,37 @@ class Task:
 
     def execute(self, msg, args):
         pass
+
+
+class TaskList(object):
+    def __init__(self, tasks):
+        self.tasks = tasks
+        self.event = Event()
+        self.taskInfos = []
+        task_thread = Thread(target=self._run_worker_thread)
+        task_thread.setDaemon(True)
+        task_thread.start()
+
+    def _run_worker_thread(self):
+        while True:
+            if len(self.taskInfos) == 0:
+                self.event.clear()
+                self.event.wait()
+            msg, taskInfos = self.taskInfos[0]
+            del self.taskInfos[0]
+            try:
+                for taskInfo in taskInfos:
+                    task = self.find_task_by_name(taskInfo["class"])
+                    if task:
+                        task.execute(msg, taskInfo["args"])
+            except:
+                pass
+
+    def find_task_by_name(self, clazzName):
+        for task in self.tasks:
+            if task.get_task_type() == clazzName:
+                return task
+
+    def execute_task_infos(self, msg, taskInfos):
+        self.taskInfos.append((msg, taskInfos))
+        self.event.set()

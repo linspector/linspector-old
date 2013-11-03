@@ -32,7 +32,7 @@ from periods import CronPeriod, DatePeriod, IntervalPeriod
 from linspector.services.service import Service
 from linspector.processors.processor import Processor
 from linspector.parsers.parser import Parser
-from linspector.tasks.TaskList import TaskList
+from linspector.tasks.task import TaskList
 
 MOD_SERVICES   = "services"
 MOD_PROCESSORS = "processors"
@@ -218,9 +218,6 @@ def parsePeriodList(name, values):
 
 
 class FullConfigParser(ConfigParser):
-
-
-
     def parse_config(self, configFilename):
         """
         parses the json configuration and returns a list of layouts, 
@@ -264,10 +261,6 @@ class FullConfigParser(ConfigParser):
         class_check = lambda processor: isinstance(processor, Processor)
         self.replace_with_import(self.hostgroups, MOD_PROCESSORS, items_func, class_check)
 
-        #items_func = lambda member: member.get_tasks()
-        #class_check = lambda task: isinstance(task, Task)
-        #self.replace_with_import(members, MOD_TASKS, items_func, class_check)
-
         services = []
         for hg in self.hostgroups:
             services.extend(hg.get_services())
@@ -295,7 +288,6 @@ class FullConfigParser(ConfigParser):
         linConf.set_members(members)
         linConf.set_periods(periods)
         linConf.set_task_list(taskList)
-
 
         for hg in self.hostgroups:
             for service in hg.get_services():
