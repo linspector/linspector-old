@@ -45,6 +45,10 @@ class Job:
         self.hostgroup = hostgroup
         #TODO: limit the size of this list; else it is a memory leak
         self.jobInfos = []
+        self.jobIndex = 0
+        self.jobInfoSize = 10
+        for i in range(self.jobInfoSize):
+            self.jobInfos.append(None)
         self.jobThreshold = 0
         self._enabled = True
 
@@ -69,6 +73,13 @@ class Job:
 
     def set_enabled(self, enabled=True):
         self._enabled = enabled
+
+    def add_job_Info(self, jobInfo):
+        self.jobIndex += 1
+        if self.jobIndex > self.jobInfoSize:
+            self.jobIndex = 0
+        self.jobInfos[self.jobIndex] = jobInfo
+
 
     def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
         if executionSucessful:
@@ -106,8 +117,7 @@ class Job:
                 self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
 
                 logger.info("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
-
-                self.jobInfos.append(jobInfo)
+                self.add_job_Info(jobInfo)
 
             except Exception, e:
                 logger.debug(e)
