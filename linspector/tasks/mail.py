@@ -3,7 +3,7 @@ The mail task.
 
 http://docs.python.org/2/library/email-examples.html#
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -33,8 +33,6 @@ logger = getLogger(__name__)
 
 
 class MailTask(Task):
-
-
     def __init__(self, **kwargs):
         mandatory_args = ["host", "password", "from", "username"]
         for arg in mandatory_args:
@@ -52,7 +50,7 @@ class MailTask(Task):
         #self.recipient = kwargs["args"]["rcpt"]
 
     def execute(self, msg, taskArgs):
-        if "recipient" not in taskArgs:
+        if "rcpt" not in taskArgs:
             raise "could not execute Mail Task! No recipient given!"
 
         logger.debug("Eecuting Task!")
@@ -62,10 +60,10 @@ class MailTask(Task):
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
         message['From'] = self.fromName
-        message['To'] = taskArgs["recipient"]
+        message['To'] = taskArgs["rcpt"]
         s = smtplib.SMTP(self.host, self.port)
         #s.login(self.userName, self.password)
-        s.sendmail(self.fromName, taskArgs["recipient"], message.as_string())
+        s.sendmail(self.fromName, taskArgs["rcpt"], message.as_string())
         s.quit()
 
 
