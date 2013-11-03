@@ -54,7 +54,6 @@ class MailTask(Task):
     def execute(self, msg, taskArgs):
         if "recipient" not in taskArgs:
             raise "could not execute Mail Task! No recipient given!"
-
         message = MIMEText(msg)
         message['Subject'] = msg
         now = datetime.datetime.now()

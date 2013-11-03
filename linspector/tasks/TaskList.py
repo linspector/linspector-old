@@ -30,7 +30,7 @@ class TaskList(object):
         for taskInfo in taskInfos:
             task = self.find_task_by_name(taskInfo["class"])
             if task:
-                task.execute(taskInfo["args"])
+                task.execute(msg, taskInfo["args"])
 
 
 

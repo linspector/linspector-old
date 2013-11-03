@@ -13,8 +13,8 @@
     "members":{
         "root":{
             "name": "root",
-            "_tasks": [
-                { "class":"jabber", "type": "jabber", "args": { "rcpt": "hanez@systemchaos.org" }}
+            "tasks": [
+                { "class":"mail", "type": "jabber", "args": { "rcpt": "hanez@systemchaos.org" }}
             ]
         }
     },
@@ -25,10 +25,10 @@
     },
     "hostgroups":{
         "a":{
-            "members": ["hanez"],
+            "members": ["root"],
             "hosts": [ "a", "b", "c", "d", "e"],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 1 }
             ]
         }
     },
