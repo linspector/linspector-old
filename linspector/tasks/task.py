@@ -25,6 +25,9 @@ logger = getLogger(__name__)
 
 
 class Task:
+    def raise_config_exception(self, typeDict, name):
+        raise Exception("typeDict " + str(typeDict) + " has no " + str(name) + " argument!")
+
     def set_task_type(self, taskType):
         self._taskType = taskType
 

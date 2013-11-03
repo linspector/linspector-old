@@ -33,13 +33,23 @@ logger = getLogger(__name__)
 
 
 class MailTask(Task):
+
+
     def __init__(self, **kwargs):
-        if not "type" in kwargs:
-            raise Exception("'type' not in typeDict " + str(kwargs))
-        if not "args" in kwargs:
-            raise Exception("typeDict " + str(kwargs) + " has no arguments!")
-        self.set_task_type(kwargs["type"])
-        self.recipient = kwargs["args"]["rcpt"]
+        mandatory_args = ["host", "password", "from", "username"]
+        for arg in mandatory_args:
+            if not arg in kwargs:
+                self.raise_config_exception(kwargs, arg)
+        self.host = kwargs["host"]
+        self.password = kwargs["password"]
+        self.fromName = kwargs["from"]
+        self.userName = kwargs["username"]
+        self.port = 25
+        if "port" in kwargs:
+            self.port = kwargs["port"]
+
+        #self.set_task_type(kwargs["type"])
+        #self.recipient = kwargs["args"]["rcpt"]
 
     def execute(self, msg, core):
         message = MIMEText(msg)
@@ -47,11 +57,11 @@ class MailTask(Task):
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
         #TODO: totally unstable just to use values from core. make checks before...!
-        message['From'] = core["tasks"]["mail"]["from"]
+        message['From'] = self.fromName
         message['To'] = self.recipient
-        s = smtplib.SMTP(core["tasks"]["mail"]["host"], core["tasks"]["mail"]["port"])
-        s.login(core["tasks"]["mail"]["username"], core["tasks"]["mail"]["password"])
-        s.sendmail(core["tasks"]["mail"]["from"], self.recipient, message.as_string())
+        s = smtplib.SMTP(self.host, self.port)
+        s.login(self.userName, self.password)
+        s.sendmail(self.fromName, self.recipient, message.as_string())
         s.quit()
 
 
