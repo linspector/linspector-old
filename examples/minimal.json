@@ -38,9 +38,6 @@
     },
     "core":{
         "instance_name": "Master Monitor 01 (monitor01.linspector.org)",
-        "max_logfile_size": 1024000,
-        "max_logfile_count": 4,
-        "max_worker_threads": 1000,
         "threshold_handling": "reset",
         "shutdown_wait": "False",
         "members":[ "linspector", "root" ],
