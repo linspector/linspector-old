@@ -64,6 +64,7 @@ class TaskList(object):
                         logger.debug("Starting Task Execution...")
                         task.execute(msg, taskInfo["args"])
             except:
+                logger.debug("Something failed!")
                 pass
 
     def find_task_by_name(self, clazzName):

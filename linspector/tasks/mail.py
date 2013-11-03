@@ -51,7 +51,8 @@ class MailTask(Task):
 
     def execute(self, msg, taskArgs):
         if "rcpt" not in taskArgs:
-            raise "could not execute Mail Task! No recipient given!"
+            logger.debug("Could not execute Mail Task! No recipient given!")
+            raise "Could not execute Mail Task! No recipient given!"
 
         logger.debug("Eecuting Task!")
 
