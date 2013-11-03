@@ -61,6 +61,7 @@ class TaskList(object):
                 for taskInfo in taskInfos:
                     task = self.find_task_by_name(taskInfo["class"])
                     if task:
+                        logger.debug("Starting Task Execution...")
                         task.execute(msg, taskInfo["args"])
             except:
                 pass

@@ -54,15 +54,17 @@ class MailTask(Task):
     def execute(self, msg, taskArgs):
         if "recipient" not in taskArgs:
             raise "could not execute Mail Task! No recipient given!"
+
+        logger.debug("Eecuting Task!")
+
         message = MIMEText(msg)
         message['Subject'] = msg
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
-        #TODO: totally unstable just to use values from core. make checks before...!
         message['From'] = self.fromName
         message['To'] = taskArgs["recipient"]
         s = smtplib.SMTP(self.host, self.port)
-        s.login(self.userName, self.password)
+        #s.login(self.userName, self.password)
         s.sendmail(self.fromName, taskArgs["recipient"], message.as_string())
         s.quit()
 

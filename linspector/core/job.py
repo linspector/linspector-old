@@ -78,18 +78,17 @@ class Job:
             self.jobIndex = 0
         self.jobInfos[self.jobIndex] = jobInfo
 
-
     def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
         if executionSucessful:
             if self.jobThreshold > 0:
                 #TODO: maybe set threshold_handling for each service optionally; will override core setting!
                 if self.core["threshold_handling"] == "reset":
                     # Reset counter to 0
-                    self.log.debug("Threshold Reset")
+                    logger.debug("Threshold Reset")
                     self.jobThreshold = 0
                 else:
                     # Decrement the counter (default)
-                    self.log.debug("Threshold Decrement")
+                    logger.debug("Threshold Decrement")
                     self.jobThreshold -= 1
         else:
             self.jobThreshold += 1
@@ -101,7 +100,6 @@ class Job:
     def handle_alarm(self, jobInfo, thresholdOffset):
         for member in self.members:
             self.taskList.execute_task_infos(jobInfo.get_message(), member.get_tasks())
-
 
     def handle_call(self):
         logger.debug("handle call")
