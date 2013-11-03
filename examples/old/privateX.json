@@ -1,0 +1,346 @@
+{
+    "members":{
+        "root":{
+            "name": "root",
+            "_tasks": [
+                { "class":"jabber", "type": "jabber", "args": { "rcpt": "hanez@systemchaos.org" }}
+            ]
+        },
+        "hanez":{
+            "name": "admin",
+            "_tasks": [
+                { "class":"mail", "type": "mail", "args": { "rcpt": "you@hanez.org" }}
+            ]
+        },
+        "linspector":{
+            "name": "linspector admin",
+            "_tasks": [
+                { "class":"jabber", "type": "jabber", "args": { "rcpt": "hanez@systemchaos.org" }}
+            ]
+        }
+    },
+    "periods": {
+        "fast": { "seconds": 15 },
+        "medium": { "seconds": 120 },
+        "slow": { "seconds": 480 }
+    },
+    "hostgroups":{
+        "a":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "b":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "c":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "d":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "e":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "f":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "g":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "h":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "i":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "j":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "k":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "l":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "m":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "n":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        },
+        "o":{
+            "members": ["hanez"],
+            "hosts": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "v", "w",
+                       "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
+                       "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
+            "services":[
+                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+            ]
+        }
+    },
+    "layouts":{
+        "main":{
+            "hostgroups": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" ],
+            "enabled": true
+        }
+    },
+    "core":{
+        "instance_name": "Master Monitor 01 (monitor01.systemchaos.org)",
+        "max_logfile_size": 1024000,
+        "max_logfile_count": 4,
+        "max_worker_threads": 1000,
+        "threshold_handling": "reset",
+        "shutdown_wait": "False",
+        "members":[ "linspector", "root" ],
+        "jsonrpc_backend": "True",
+        "backends": {
+            "jsonrpc": {
+                "_comment": "https://github.com/linspector/linspector/wiki/Configuration-Core-Backends-JsonRPC",
+                "host": "127.0.0.1",
+                "port": 10123,
+                "username": "linspector",
+                "password": "linspector"
+            }
+        },
+        "tasks": {
+            "jabber":{
+                "host": "systemchaos.org",
+                "port": 5222,
+                "username": "linspector",
+                "password": "linspector",
+                "debug": ["always"]
+            },
+            "mail":{
+                "host": "a.mx.systemchaos.org",
+                "port": 25,
+                "from": "linspector@systemchaos.org",
+                "username": "you@hanez.org",
+                "password": "uffff"
+            },
+            "tweet":{
+                "consumer_key": "consumer_key",
+                "consumer_secret": "consumer_secret",
+                "access_token_key": "access_token_key",
+                "access_token_secret": "access_token_secret"
+            }
+        }
+    }
+}
