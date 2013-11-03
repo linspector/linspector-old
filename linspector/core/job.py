@@ -45,10 +45,8 @@ class Job:
         self.hostgroup = hostgroup
         #TODO: limit the size of this list; else it is a memory leak
         self.jobInfos = []
-        self.jobIndex = 0
+        self.jobIndex = -1
         self.jobInfoSize = 10
-        for i in range(self.jobInfoSize):
-            self.jobInfos.append(None)
         self.jobThreshold = 0
         self._enabled = True
 
