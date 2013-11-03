@@ -4,8 +4,8 @@
             "host": "localhost",
             "port": 25,
             "from": "linspector@linspector.org",
-            "username": "you@hanez.org",
-            "password": "uffff"
+            "username": "",
+            "password": ""
         }
     },
     "members":{
@@ -37,7 +37,7 @@
         }
     },
     "core":{
-        "instance_name": "Master Monitor 01 (monitor01.systemchaos.org)",
+        "instance_name": "Master Monitor 01 (monitor01.linspector.org)",
         "max_logfile_size": 1024000,
         "max_logfile_count": 4,
         "max_worker_threads": 1000,
@@ -47,7 +47,6 @@
         "jsonrpc_backend": "True",
         "backends": {
             "jsonrpc": {
-                "_comment": "https://github.com/linspector/linspector/wiki/Configuration-Core-Backends-JsonRPC",
                 "host": "127.0.0.1",
                 "port": 10123,
                 "username": "linspector",
