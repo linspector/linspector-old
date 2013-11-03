@@ -1,20 +1,18 @@
 {
     "tasks": {
-
-            "mail":{
-                "host": "a.mx.systemchaos.org",
-                "port": 25,
-                "from": "linspector@systemchaos.org",
-                "username": "you@hanez.org",
-                "password": "uffff"
-            }
-
-        },
+        "mail":{
+            "host": "localhost",
+            "port": 25,
+            "from": "linspector@linspector.org",
+            "username": "you@hanez.org",
+            "password": "uffff"
+        }
+    },
     "members":{
         "root":{
             "name": "root",
             "tasks": [
-                { "class":"mail", "type": "jabber", "args": { "rcpt": "hanez@systemchaos.org" }}
+                { "class":"mail", "type": "foo", "args": { "rcpt": "hanez@linspector.org" }}
             ]
         }
     },
