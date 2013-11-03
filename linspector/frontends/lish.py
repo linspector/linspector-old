@@ -94,16 +94,102 @@ Exits Linspector
 ''')
 
 
-class Command(object):
-    def __init__(self, name, command, helpText, children=None):
-        self.name = name
-        self.command = command
-        self.helpText = helpText
+class BaseCommand(object):
+
+    def set_command(self, cmd):
+        self.command = cmd
+
+    def can_execute(self):
+        if self.command.children is not None:
+            return False
+        else:
+            return True
+
+    def execute(self, text):
+        text = shsplit(text)
+        if len(text) == 0 and self.can_execute():
+            self.do_action()
+        else:
+            pass
+
+    def do_action(self):
+        pass
+
+
+def get_list():
+    return []
+
+
+class Command(Cmd, object):
+    def __init__(self, alias, interface, shortHelp=None, extendedHelp=None, completion=get_list, func=None, children=None):
+        super(Command, self).__init__()
+        self.interface = interface
+        self.alias = alias
+        self.shortHelp = shortHelp
+        self.completion = completion
+        self.extendedHelp = extendedHelp
+        self.func = func
         self.children = children
-        self.completion = []
-        if isinstance(children, list):
-            for child in children:
-                self.completion.append((child.get_name()))
+
+    def get_short_help(self):
+        if self.shortHelp is not None:
+            return str(self.shortHelp)
+        else:
+            return "undocumented. see help %s for further information." % str(self.alias)
+
+    def get_children(self):
+        if self.children is None:
+            self.children = []
+        return self.children
+
+    def find_child_by_alias(self, alias):
+        pass
+
+    def get_extended_help(self):
+        return self.extendedHelp
+
+    def print_help(self):
+        help = self.get_extended_help()
+        if help is not None:
+            print help
+        elif len(self.get_children()) > 0:
+            print "%s usage:\n" % str(self.alias)
+            for child in self.get_children():
+                print child.alias + "\t\t" + child.short_help() + "\n"
+        else:
+            print "invalid or unsupported syntax"
+        print "\n"
+
+    def default(self, line):
+        if len(line) == 0:
+            if self.func is not None:
+                return self.func(self.interface)
+            else:
+                self.print_help()
+        else:
+            line = shsplit(line)
+
+            if len(line) > 0 and line[0] in [child.alias for child in self.get_children()]:
+                pass
+
+
+    def completenames(self, text, *ignored):
+        ret = super(Command, self).completenames(text, *ignored)
+        if len(self.get_children()) > 0:
+            func = lambda alias: True
+            if len(text) > 0:
+                func = lambda alias:  alias.startswith(text)
+            ret.extend([cmd.alias for cmd in self.children if func(cmd.alias)])
+        return ret
+
+    def completedefault(self, text, *ignored):
+        pass
+
+    def do_help(self, arg):
+        if arg:
+            pass
+        else:
+            pass
 
 
 class CommandTree(object):

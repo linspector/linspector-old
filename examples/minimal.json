@@ -26,7 +26,7 @@
     "hostgroups":{
         "a":{
             "members": ["root"],
-            "hosts": [ "a", "b", "c", "d", "e"],
+            "hosts": [ "a"],
             "services":[
                 { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 1 }
             ]
@@ -34,7 +34,7 @@
     },
     "layouts":{
         "main":{
-            "hostgroups": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" ],
+            "hostgroups": [ "a" ],
             "enabled": true
         }
     },

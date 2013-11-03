@@ -16,10 +16,31 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
+from threading import Event, Thread
 
 class TaskList(object):
     def __init__(self, tasks):
         self.tasks = tasks
+        self.event = Event()
+        self.taskInfos = []
+        Thread(target=self._run_worker_thread).start()
+
+    def _run_worker_thread(self):
+        while True:
+            if len(self.taskInfos) == 0:
+                self.event.clear()
+                self.event.wait()
+            msg, taskInfos = self.taskInfos[0]
+            del self.taskInfos[0]
+            try:
+
+                for taskInfo in taskInfos:
+                    task = self.find_task_by_name(taskInfo["class"])
+                    if task:
+                        task.execute(msg, taskInfo["args"])
+            except:
+                pass
+
 
     def find_task_by_name(self, clazzName):
         for task in self.tasks:
@@ -27,10 +48,8 @@ class TaskList(object):
                 return task
 
     def execute_task_infos(self, msg, taskInfos):
-        for taskInfo in taskInfos:
-            task = self.find_task_by_name(taskInfo["class"])
-            if task:
-                task.execute(msg, taskInfo["args"])
+        self.taskInfos.append((msg, taskInfos))
+        self.event.set()
 
 
 
