@@ -35,12 +35,13 @@ def generateId():
 
 
 class Job:
-    def __init__(self, service, host, members, processors, core, hostgroup):
+    def __init__(self, service, host, members, processors, core, taskList, hostgroup):
         self.service = service
         self.host = host
         self.members = members
         self.processors = processors
         self.core = core
+        self.taskList = taskList
         self.hostgroup = hostgroup
         #TODO: limit the size of this list; else it is a memory leak
         self.jobInfos = []
@@ -90,9 +91,8 @@ class Job:
 
     def handle_alarm(self, jobInfo, thresholdOffset):
         for member in self.members:
-            #TODO: Put Tasks in a run queue and execute them in a background thread. FIFO! Reduces delay in core.
-            for task in member.get_tasks():
-                task.execute(jobInfo.get_message(), self.core)
+            self.taskList.execute_task_infos(jobInfo.get_message(), member.get_tasks())
+
 
     def handle_call(self):
         logger.debug("handle call")

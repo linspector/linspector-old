@@ -30,6 +30,7 @@ class LinspectorConfig(object):
         self._hostgroups = None
         self._members = None
         self._periods = None
+        self._tasks = None
 
     def set_hostgroups(self, hostgroups):
         self._hostgroups = hostgroups
@@ -75,3 +76,9 @@ class LinspectorConfig(object):
 
     def get_period_by_name(self, name):
         return self._get_by_name(self.get_periods(), name)
+
+    def set_task_list(self, taskList):
+        self.taskList = taskList
+
+    def get_task_list(self):
+        return self.taskList

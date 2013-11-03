@@ -32,7 +32,7 @@ from periods import CronPeriod, DatePeriod, IntervalPeriod
 from linspector.services.service import Service
 from linspector.processors.processor import Processor
 from linspector.parsers.parser import Parser
-from linspector.tasks.task import Task
+from linspector.tasks.TaskList import TaskList
 
 MOD_SERVICES   = "services"
 MOD_PROCESSORS = "processors"
@@ -44,6 +44,7 @@ KEY_HOSTGROUPS = "hostgroups"
 KEY_MEMBERS    = "members"
 KEY_PERIODS    = "periods"
 KEY_CORE       = "core"
+KEY_TASKS      = "tasks"
 
 logger = getLogger(__name__)
 
@@ -69,7 +70,7 @@ class ConfigParser:
         self._loadedMods = {MOD_SERVICES: {}, MOD_PROCESSORS: {}, MOD_TASKS: {}, MOD_PARSERS: {}}
         
     def _create_new_config_dict(self):
-        return {"members": {}, "periods": {}, "hostgroups": {}, "layouts": {}, "core": {}}
+        return {"members": {}, "periods": {}, "hostgroups": {}, "layouts": {}, "core": {}, "tasks": {}}
         
     def create_config(self, config):
         configDict = self._create_new_config_dict()
@@ -217,6 +218,9 @@ def parsePeriodList(name, values):
 
 
 class FullConfigParser(ConfigParser):
+
+
+
     def parse_config(self, configFilename):
         """
         parses the json configuration and returns a list of layouts, 
@@ -232,7 +236,7 @@ class FullConfigParser(ConfigParser):
 
         self.dict = self._read_config_file(configFilename)
 
-        # first step
+        #1.
         creator = lambda name, values: Layout(name, **values)
         layouts = self._create_raw_Object(self.dict[KEY_LAYOUTS], "Layout", creator)
 
@@ -245,6 +249,12 @@ class FullConfigParser(ConfigParser):
         creator = parsePeriodList
         periods = self._create_raw_Object(self.dict[KEY_PERIODS], "Period", creator)
 
+        #1.1 get Tasks
+        creator = lambda name, values: self._load_module(name, MOD_TASKS).create(values).set_task_type(name)
+        tasks = self._create_raw_Object(self.dict[KEY_TASKS], "Task", creator)
+        taskList = TaskList(tasks)
+
+
         #2. import and replace
         items_func = lambda hostgroup: hostgroup.get_services()
         class_check = lambda service: isinstance(service, Service)
@@ -254,9 +264,9 @@ class FullConfigParser(ConfigParser):
         class_check = lambda processor: isinstance(processor, Processor)
         self.replace_with_import(self.hostgroups, MOD_PROCESSORS, items_func, class_check)
 
-        items_func = lambda member: member.get_tasks()
-        class_check = lambda task: isinstance(task, Task)
-        self.replace_with_import(members, MOD_TASKS, items_func, class_check)
+        #items_func = lambda member: member.get_tasks()
+        #class_check = lambda task: isinstance(task, Task)
+        #self.replace_with_import(members, MOD_TASKS, items_func, class_check)
 
         services = []
         for hg in self.hostgroups:
@@ -284,6 +294,8 @@ class FullConfigParser(ConfigParser):
         linConf.set_hostgroups(self.hostgroups)
         linConf.set_members(members)
         linConf.set_periods(periods)
+        linConf.set_task_list(taskList)
+
 
         for hg in self.hostgroups:
             for service in hg.get_services():

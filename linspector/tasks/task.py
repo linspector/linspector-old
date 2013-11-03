@@ -30,9 +30,10 @@ class Task:
 
     def set_task_type(self, taskType):
         self._taskType = taskType
+        return self
 
     def get_task_type(self):
         return self._taskType
 
-    def execute(self, msg):
+    def execute(self, msg, args):
         pass

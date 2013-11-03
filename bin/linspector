@@ -93,7 +93,7 @@ def handle_job(jobInfo):
 
 
 def main():
-    global linspector_configuration
+    global linConf
     args = parse_args()
 
     logfile = path.expanduser(args.logfile)
@@ -109,7 +109,7 @@ def main():
 
     try:
         config_parser = FullConfigParser()
-        linspector_configuration, core = config_parser.parse_config(args.config)
+        linConf, core = config_parser.parse_config(args.config)
     except Exception, msg:
         print("Configuration error: " + str(msg) + ". Exiting now.")
         logger.error(msg)
@@ -124,7 +124,7 @@ def main():
     start_date = datetime.datetime.now()
     time_delta = 0
     jobs = []
-    for layout in linspector_configuration.get_enabled_layouts():
+    for layout in linConf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             for service in hostgroup.get_services():
                 for host in hostgroup.get_hosts():
@@ -136,13 +136,14 @@ def main():
                                   hostgroup.get_members(),
                                   hostgroup.get_processors(),
                                   core,
+                                  linConf.get_task_list(),
                                   hostgroup)
                         scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
                         if scheduler_job is not None:
                             job.set_job(scheduler_job)
                             jobs.append(job)
 
-    interface = LinspectorInterface(jobs, scheduler, linspector_configuration)
+    interface = LinspectorInterface(jobs, scheduler, linConf)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         jsonrpc = JsonrpcBackend(interface, core)
