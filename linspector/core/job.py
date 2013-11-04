@@ -36,11 +36,12 @@ class Job:
         self.core = core
         self.taskList = taskList
         self.hostgroup = hostgroup
-        #TODO: limit the size of this list; else it is a memory leak
         self.jobInfos = []
         self.jobIndex = -1
         self.jobInfoSize = 10
         self.jobThreshold = 0
+        self.job_fails = 0
+        self.job_wins = 0
         self._enabled = True
 
     def __str__(self):
@@ -83,7 +84,9 @@ class Job:
                     # Decrement the counter (default)
                     logger.debug("Threshold Decrement")
                     self.jobThreshold -= 1
+            self.job_wins += 1
         else:
+            self.job_fails += 1
             self.jobThreshold += 1
 
         if self.jobThreshold >= serviceThreshold:
