@@ -5,10 +5,12 @@ This is for checking the availability and output of HTTP services. Basic HTTP
 content could be fetched and compared.HTTPS is not validating the server
 certificate!
 
+Uses: https://github.com/kennethreitz/requests in the near future!
+
 This should just return 0 on success and NOT 0 on error. Just to make internals
 generic to just report this code and not use a parser.
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
