@@ -27,13 +27,6 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 
-def generateId():
-    i = 0
-    while True:
-        yield i
-        i += 1
-
-
 class Job:
     def __init__(self, service, host, members, processors, core, taskList, hostgroup):
         self.service = service
@@ -123,7 +116,6 @@ class Job:
 
 class JobInfo(object):
     def __init__(self, jobHex, host, service):
-        self.id = generateId()
         self.jobHex = jobHex
         self.host = host
         self.service = service
