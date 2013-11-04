@@ -125,31 +125,29 @@ class Service(object):
     def needs_arguments(self):
         return False
 
-    def _execute(self, jobInfo):
+    def execute(self, job):
         try:
-            self.pre_execute(jobInfo)
-
-            self.execute(jobInfo)
-            self.parse_result(jobInfo)
-            self.post_execute(jobInfo)
+            self.pre_execute(job)
+            self.execute(job)
+            #self.parse_result(job)
+            self.post_execute(job)
         except Exception, e:
-            self.set_execution_successful(False)
+            job.set_execution_successful(False)
             self._threshold -= 1
             raise e
 
-    def execute(self, jobInfo):
+    ##def execute(self):
+    #    pass
+
+    def pre_execute(self, job):
         pass
 
-    def pre_execute(self, jobInfo):
-        pass
-
-    def parse_result(self, jobInfo):
-
+    def parse_result(self, job):
         result = []
         for parser in self.get_parser():
-            result.append(parser.parse(jobInfo))
+            result.append(parser.parse(job))
 
         return result
 
-    def post_execute(self, jobInfo):
+    def post_execute(self, job):
         pass

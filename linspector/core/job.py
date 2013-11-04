@@ -28,21 +28,29 @@ logger = getLogger(__name__)
 
 
 class Job:
-    def __init__(self, service, host, members, processors, core, taskList, hostgroup):
+    def __init__(self, service, host, members, processors, core, task_list, hostgroup):
         self.service = service
         self.host = host
         self.members = members
         self.processors = processors
         self.core = core
-        self.taskList = taskList
+        self.task_list = task_list
         self.hostgroup = hostgroup
-        self.jobInfos = []
-        self.jobIndex = -1
-        self.jobInfoSize = 10
-        self.jobThreshold = 0
+        self.job_infos = []
+        self.job_index = -1
+        self.job_info_size = 10
+        self.job_threshold = 0
         self.job_fails = 0
         self.job_wins = 0
-        self._enabled = True
+        self.enabled = True
+        self.result = None
+        self.scheduler_job = None
+        self.execution_begin = datetime.now()
+        self.execution_end = None
+        self.errorcode = -1
+        self.message = None
+        self.execution_success = False
+        self.jobHex = self.hex_string()
 
     def __str__(self):
         return str(self.__dict__)
@@ -60,72 +68,60 @@ class Job:
             ret = "0" + ret
         return ret
 
-    def set_job(self, job):
-        self.job = job
+    def set_job(self, scheduler_job):
+        self.scheduler_job = scheduler_job
 
     def set_enabled(self, enabled=True):
-        self._enabled = enabled
+        self.enabled = enabled
 
-    def add_job_Info(self, jobInfo):
-        self.jobIndex += 1
-        if self.jobIndex > self.jobInfoSize:
-            self.jobIndex = 0
-        self.jobInfos[self.jobIndex] = jobInfo
+    def add_job_info(self, job_info):
+        self.job_index += 1
+        if self.job_index > self.job_info_size:
+            self.job_index = 0
+        self.job_infos[self.job_index] = job_info
 
-    def handle_threshold(self, jobInfo, serviceThreshold, executionSucessful):
-        if executionSucessful:
-            if self.jobThreshold > 0:
+    def handle_threshold(self, service_threshold, execution_sucessful):
+        if execution_sucessful:
+            if self.job_threshold > 0:
                 #TODO: maybe set threshold_handling for each service optionally; will override core setting!
                 if self.core["threshold_handling"] == "reset":
-                    # Reset counter to 0
                     logger.debug("Threshold Reset")
-                    self.jobThreshold = 0
+                    self.job_threshold = 0
                 else:
-                    # Decrement the counter (default)
                     logger.debug("Threshold Decrement")
-                    self.jobThreshold -= 1
+                    self.job_threshold -= 1
             self.job_wins += 1
         else:
             self.job_fails += 1
-            self.jobThreshold += 1
+            self.job_threshold += 1
 
-        if self.jobThreshold >= serviceThreshold:
+        if self.job_threshold >= service_threshold:
             logger.debug("Threshold reached!")
-            self.handle_alarm(jobInfo, self.jobThreshold - serviceThreshold)
+            self.handle_alarm()
 
-    def handle_alarm(self, jobInfo, thresholdOffset):
+    def handle_alarm(self):
         for member in self.members:
-            self.taskList.execute_task_infos(jobInfo.get_message(), member.get_tasks())
+            self.task_list.execute_task_infos(self.get_message(), member.get_tasks())
 
     def handle_call(self):
         logger.debug("handle call")
         logger.debug(self.service)
-        if self._enabled:
+        if self.enabled:
             try:
-                jobInfo = JobInfo(self.hex_string(), self.host, self.service)
-                self.service._execute(jobInfo)
-                jobInfo.set_execution_end()
+                self.service.execute(self)
+                self.set_execution_end()
+                self.handle_threshold(self.service.get_threshold(), self.was_execution_successful())
+                logger.info("Code: " + str(self.get_errorcode()) + ", Message: " + str(self.get_message()))
 
-                self.handle_threshold(jobInfo, self.service.get_threshold(), jobInfo.was_execution_successful())
-
-                logger.info("Code: " + str(jobInfo.get_errorcode()) + ", Message: " + str(jobInfo.get_message()))
-                self.add_job_Info(jobInfo)
-
+                self.reset_errorcode(-1)
+                self.set_execution_successful(False)
             except Exception, e:
                 logger.debug(e)
         else:
             logger.debug("Job " + self.hex_string() + " disabled")
 
-
-class JobInfo(object):
-    def __init__(self, jobHex, host, service):
-        self.jobHex = jobHex
-        self.host = host
-        self.service = service
-        self.executionBegin = datetime.now()
-        self._errorcode = -1
-        self._message = None
-        self._executionSuccess = False
+    def reset_errorcode(self, errorcode):
+        self.errorcode = errorcode
 
     def get_host(self):
         return self.host
@@ -134,22 +130,22 @@ class JobInfo(object):
         self.result = result
 
     def set_execution_end(self):
-        self.executionEnd = datetime.now()
+        self.execution_end = datetime.now()
 
     def set_execution_successful(self, successful):
-        self._executionSuccess = successful
+        self.execution_success = successful
 
     def was_execution_successful(self):
-        return self._executionSuccess
+        return self.execution_success
 
     def set_message(self, msg):
-        self._message = msg
+        self.message = msg
 
     def get_message(self):
-        return self._message
+        return self.message
 
     def set_errorcode(self, errcode):
-        self._errorcode = errcode
+        self.errorcode = errcode
 
     def get_errorcode(self):
-        return self._errorcode
+        return self.errorcode
