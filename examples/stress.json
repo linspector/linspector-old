@@ -28,16 +28,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "b":{
@@ -46,16 +46,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "c":{
@@ -64,16 +64,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "d":{
@@ -82,16 +82,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "e":{
@@ -100,16 +100,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "f":{
@@ -118,16 +118,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "g":{
@@ -136,16 +136,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "h":{
@@ -154,16 +154,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "i":{
@@ -172,16 +172,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "j":{
@@ -190,16 +190,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "k":{
@@ -208,16 +208,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "l":{
@@ -226,16 +226,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "m":{
@@ -244,16 +244,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "n":{
@@ -262,16 +262,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         },
         "o":{
@@ -280,16 +280,16 @@
                        "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm",
                        "nn", "oo", "pp", "qq", "vv", "ww", "xx", "yy", "zz" ],
             "services":[
-                { "class": "dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
-                { "class": "dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 2, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 3, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 4, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 5, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 6, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 7, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 8, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 9, "fail": 1 }, "periods": ["fast"], "threshold": 3 },
+                { "class": "etc/dummy", "args": { "sleep": 10, "fail": 1 }, "periods": ["fast"], "threshold": 3 }
             ]
         }
     },
