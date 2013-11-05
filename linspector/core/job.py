@@ -85,10 +85,10 @@ class Job:
             if self.job_threshold > 0:
                 #TODO: maybe set threshold_handling for each service optionally; will override core setting!
                 if self.core["threshold_handling"] == "reset":
-                    logger.info("Job " + self.hex_string() + "Threshold Reset")
+                    logger.info("Job " + self.hex_string() + ", Threshold Reset")
                     self.job_threshold = 0
                 else:
-                    logger.info("Job " + self.hex_string() + "Threshold Decrement")
+                    logger.info("Job " + self.hex_string() + ", Threshold Decrement")
                     self.job_threshold -= 1
             self.job_wins += 1
         else:
@@ -96,7 +96,7 @@ class Job:
             self.job_threshold += 1
 
         if self.job_threshold >= service_threshold:
-            logger.info("Job " + self.hex_string() + "Threshold reached!")
+            logger.info("Job " + self.hex_string() + ", Threshold reached!")
             self.handle_alarm()
 
     def handle_alarm(self):
@@ -111,7 +111,7 @@ class Job:
                 self.service.execute(self)
                 self.set_execution_end()
                 self.handle_threshold(self.service.get_threshold(), self.was_execution_successful())
-                logger.info("Code: " + str(self.get_errorcode()) + ", Message: " + str(self.get_message()))
+                logger.info("Job " + self.hex_string() + ", Code: " + str(self.get_errorcode()) + ", Message: " + str(self.get_message()))
 
                 self.reset_errorcode(-1)
                 self.set_execution_successful(False)
