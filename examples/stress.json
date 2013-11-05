@@ -12,7 +12,7 @@
         "hanez":{
             "name": "admin",
             "tasks": [
-                { "class":"mail", "type": "foo", "args": { "_rcpt": "hanez@linspector.org" }}
+                { "class":"mail", "type": "error", "args": { "_rcpt": "hanez@linspector.org" }}
             ]
         }
     },
