@@ -1,7 +1,7 @@
 """
-The MongoDB processor
+The syslog task
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -20,15 +20,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from logging import getLogger
-from linspector.processors.processor import Processor
+
+from linspector.tasks.task import Task
 
 logger = getLogger(__name__)
 
 
-class MongodbProcessor(Processor):
+class SyslogTask(Task):
     def __init__(self, **kwargs):
-        Processor.__init__(self, **kwargs)
+        pass
 
 
 def create(kwargs):
-    return MongodbProcessor(**kwargs)
+    return SyslogTask(**kwargs)
