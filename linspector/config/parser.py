@@ -30,13 +30,9 @@ from config import LinspectorConfig
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
 from linspector.services.service import Service
-from linspector.processors.processor import Processor
-from linspector.parsers.parser import Parser
 from linspector.tasks.task import TaskList
 
 MOD_SERVICES   = "services"
-MOD_PROCESSORS = "processors"
-MOD_PARSERS    = "parsers"
 MOD_TASKS      = "tasks"
 
 KEY_LAYOUTS    = "layouts"
@@ -67,7 +63,7 @@ class ConfigParser:
         self.members = {}
         self.periods = {}
         self.layouts = {}
-        self._loadedMods = {MOD_SERVICES: {}, MOD_PROCESSORS: {}, MOD_TASKS: {}, MOD_PARSERS: {}}
+        self._loadedMods = {MOD_SERVICES: {}, MOD_TASKS: {}}
         
     def _create_new_config_dict(self):
         return {"members": {}, "periods": {}, "hostgroups": {}, "layouts": {}, "core": {}, "tasks": {}}
@@ -225,7 +221,7 @@ class FullConfigParser(ConfigParser):
         parses the full config
         Parsing will be done in 3 steps:
         1. get raw Config Objects by just passing the values defined inside the config
-        2. replace references by objects, import services, tasks, parsers and processors
+        2. replace references by objects, import services and tasks
         3. do sanity checks
         
         :param configFilename: the configuration file to parse
@@ -256,18 +252,10 @@ class FullConfigParser(ConfigParser):
         items_func = lambda hostgroup: hostgroup.get_services()
         class_check = lambda service: isinstance(service, Service)
         self.replace_with_import(self.hostgroups, MOD_SERVICES, items_func, class_check)
-        
-        items_func = lambda hostgroup: hostgroup.get_processors()
-        class_check = lambda processor: isinstance(processor, Processor)
-        self.replace_with_import(self.hostgroups, MOD_PROCESSORS, items_func, class_check)
 
         services = []
         for hg in self.hostgroups:
             services.extend(hg.get_services())
-
-        items_func = lambda service: service.get_parser()
-        class_check = lambda parser: isinstance(parser, Parser)
-        self.replace_with_import(services, MOD_PARSERS, items_func, class_check)
 
         #replace object pointer
         id_list_func = lambda hostgroup: hostgroup.get_members()
