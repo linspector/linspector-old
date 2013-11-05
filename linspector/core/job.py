@@ -112,7 +112,9 @@ class Job:
                 self.service.execute(self)
                 self.set_execution_end()
                 self.handle_threshold(self.service.get_threshold(), self.was_execution_successful())
-                logger.info("Job " + self.hex_string() + ", Code: " + str(self.get_errorcode()) + ", Message: " + str(self.get_message()))
+                logger.info("Job " + self.hex_string() +
+                            ", Code: " + str(self.get_errorcode()) +
+                            ", Message: " + str(self.get_message()))
 
                 self.reset_errorcode(-1)
                 self.set_execution_successful(False)
