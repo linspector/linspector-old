@@ -84,6 +84,7 @@ class Job:
         if execution_sucessful:
             if self.job_threshold > 0:
                 #TODO: maybe set threshold_handling for each service optionally; will override core setting!
+                #TODO: reset should be default; decrement should be optional
                 if self.core["threshold_handling"] == "reset":
                     logger.info("Job " + self.hex_string() + ", Threshold Reset")
                     self.job_threshold = 0
