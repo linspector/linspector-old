@@ -253,6 +253,10 @@ class FullConfigParser(ConfigParser):
         class_check = lambda service: isinstance(service, Service)
         self.replace_with_import(self.hostgroups, MOD_SERVICES, items_func, class_check)
 
+        #items_func = lambda member: member.get_tasks()
+        #class_check = lambda task: isinstance(task, Task)
+        #self.replace_with_import(members, MOD_TASKS, items_func, class_check)
+
         services = []
         for hg in self.hostgroups:
             services.extend(hg.get_services())
