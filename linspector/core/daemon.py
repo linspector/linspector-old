@@ -1,6 +1,5 @@
 """
-
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -23,27 +22,13 @@ import os
 import time
 import atexit
 
-from signal import SIGTERM
 from logging import getLogger
+from signal import SIGTERM
 
 logger = getLogger(__name__)
 
 
-class LinspectorDaemon(Daemon):
-    def run(self):
-        while True:
-            try:
-                a = 2
-                #logger.writeLogToFile(_logfile, "Running!")
-                print "running!"
-            except Exception as err:
-                #logger.writeLogToFile(_logfile, str(err))
-                print "failed"
-                sys.exit(1)
-            time.sleep(1)
-
-
-class Daemon:
+class LinspectorDaemon():
     """
     A generic daemon class.
 
