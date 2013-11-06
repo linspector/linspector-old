@@ -89,8 +89,8 @@ class Job:
             self.job_index = 0
         self.job_infos[self.job_index] = job_info
 
-    def handle_threshold(self, service_threshold, execution_sucessful):
-        if execution_sucessful:
+    def handle_threshold(self, service_threshold, execution_successful):
+        if execution_successful:
             if self.job_threshold > 0:
                 if "threshold_reset" in self.core and self.core["threshold_reset"]:
                     logger.info("Job " + self.hex_string() + ", Threshold Reset")
