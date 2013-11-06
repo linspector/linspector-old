@@ -61,6 +61,7 @@ class LinspectorInterface(object):
         d["Enabled"] = str(job.enabled)
         d["Threshold"] = str(job.service.get_threshold())
         d["Fails"] = str(job.job_threshold)
+        d["Status"] = str(job.status)
         #d["Last Run"] = None
         #d["Last Fail"] = None
         #d["Last Success"] = None

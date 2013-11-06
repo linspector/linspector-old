@@ -51,6 +51,15 @@ class Job:
         self.message = None
         self.execution_success = False
         self.jobHex = self.hex_string()
+        """
+        NONE     job was not executed
+        OK       when everything is fine
+        WARNING  when a job has errors but not the threshold overridden
+        RECOVER  when a job recovers e.g. the threshold decrements (not implemented)
+        ERROR    when a jobs threshold is overridden
+        UNKNOWN  when a job throws an exception which is not handled by the job itself (not implemented)
+        """
+        self.status = "NONE"
 
     def __str__(self):
         return str(self.__dict__)
@@ -83,26 +92,28 @@ class Job:
     def handle_threshold(self, service_threshold, execution_sucessful):
         if execution_sucessful:
             if self.job_threshold > 0:
-                #TODO: maybe set threshold_handling for each service optionally; will override core setting!
-                #TODO: reset should be default; decrement should be optional
-                if self.core["threshold_handling"] == "reset":
+                if "threshold_reset" in self.core and self.core["threshold_reset"]:
                     logger.info("Job " + self.hex_string() + ", Threshold Reset")
                     self.job_threshold = 0
                 else:
                     logger.info("Job " + self.hex_string() + ", Threshold Decrement")
                     self.job_threshold -= 1
+
+            self.status = "OK"
             self.job_wins += 1
         else:
+            self.status = "WARNING"
             self.job_fails += 1
             self.job_threshold += 1
 
         if self.job_threshold >= service_threshold:
             logger.info("Job " + self.hex_string() + ", Threshold reached!")
+            self.status = "ERROR"
             self.handle_alarm()
 
     def handle_alarm(self):
         for member in self.members:
-            self.task_list.execute_task_infos(self.get_message(), member.get_tasks())
+            self.task_list.execute_task_infos(self.status + " " + self.get_message(), member.get_tasks())
 
     def handle_call(self):
         logger.debug("handle call")

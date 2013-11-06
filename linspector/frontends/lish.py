@@ -272,6 +272,7 @@ Usage:
                     PURPLE + " Next run" + END + ": " + job_dict["Next run"] + \
                     PURPLE + " Runs" + END + ": " + job_dict["Runs"] + \
                     PURPLE + " Fails" + END + ": " + job_dict["Fails"] + \
+                    PURPLE + " Status" + END + ": " + job_dict["Status"] + \
                     PURPLE + " Enabled" + END + ": " + job_dict["Enabled"]
         elif text == "count":
             print GREEN + "Job Count" + END + ":\t" + str(self.interface.get_job_count())
