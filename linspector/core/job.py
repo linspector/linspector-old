@@ -40,8 +40,8 @@ class Job:
         self.job_index = -1
         self.job_info_size = 10
         self.job_threshold = 0
-        self.job_fails = 0
-        self.job_wins = 0
+        self.job_overall_fails = 0
+        self.job_overall_wins = 0
         self.enabled = True
         self.result = None
         self.scheduler_job = None
@@ -100,10 +100,10 @@ class Job:
                     self.job_threshold -= 1
 
             self.status = "OK"
-            self.job_wins += 1
+            self.job_overall_wins += 1
         else:
             self.status = "WARNING"
-            self.job_fails += 1
+            self.job_overall_fails += 1
             self.job_threshold += 1
 
         if self.job_threshold >= service_threshold:
