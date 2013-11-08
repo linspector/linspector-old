@@ -323,6 +323,15 @@ Usage:
   <HOSTGROUP> <HOST> list     Lists all jobs for <HOST> in <HOSTGROUP>
 ''')
 
+    def do_hostgroupmember(self, text):
+        pass
+
+    def help_hostgroupmember(self):
+        print('''
+Usage:
+  <HOSTGROUP> <MEMBER>  Prints extended information about <MEMBER> in <HOSTGROUP>
+''')
+
     def do_shell(self, text):
         os.system(text)
 
