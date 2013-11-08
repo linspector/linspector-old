@@ -35,40 +35,44 @@ logger = getLogger(__name__)
 
 class MailTask(Task):
     def __init__(self, **kwargs):
-        mandatory_args = ["host", "password", "from", "username"]
-        for arg in mandatory_args:
-            if not arg in kwargs:
-                self.raise_config_exception(kwargs, arg)
-        self.host = kwargs["host"]
-        self.password = kwargs["password"]
-        self.fromName = kwargs["from"]
-        self.userName = kwargs["username"]
+        super(MailTask, self).__init__(**kwargs)
+
+        args = self.get_arguments()
+
+        if "sender" in args:
+            self.sender = args["sender"]
+        else:
+            raise Exception("There is no sender set")
+
+        if "rcpt" in args:
+            self.rcpt = args["rcpt"]
+        else:
+            raise Exception("There is no rcpt set")
+
+        self.host = "localhost"
+        if "host" in args:
+            self.host = args["host"]
+
         self.port = 25
-        if "port" in kwargs:
-            self.port = kwargs["port"]
+        if "port" in args:
+            self.port = args["port"]
 
-        #self.set_task_type(kwargs["type"])
-        #self.recipient = kwargs["args"]["rcpt"]
+        # ...and so on for all possible args
 
-    def execute(self, msg, taskArgs):
-        #time.sleep(3)
-        if "rcpt" not in taskArgs:
-            logger.debug("Could not execute Mail Task! No recipient given!")
-            raise "Could not execute Mail Task! No recipient given!"
-
+    def execute(self, msg):
         logger.debug("Eecuting Task!")
 
         message = MIMEText(msg)
         message['Subject'] = msg
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
-        message['From'] = self.fromName
-        message['To'] = taskArgs["rcpt"]
+        message['From'] = self.sender
+        message['To'] = self.rcpt["rcpt"]
         s = smtplib.SMTP(self.host, self.port)
         #s.login(self.userName, self.password)
-        s.sendmail(self.fromName, taskArgs["rcpt"], message.as_string())
+        s.sendmail(self.sender, self.rcpt["rcpt"], message.as_string())
         s.quit()
 
 
-def create(taskDict):
-    return MailTask(**taskDict)
+def create(kwargs):
+    return MailTask(**kwargs)

@@ -28,13 +28,11 @@ logger = getLogger(__name__)
 
 
 class Job:
-    def __init__(self, service, host, members, processors, core, task_list, hostgroup):
+    def __init__(self, service, host, members, core, hostgroup):
         self.service = service
         self.host = host
         self.members = members
-        self.processors = processors
         self.core = core
-        self.task_list = task_list
         self.hostgroup = hostgroup
         self.job_infos = []
         self.job_index = -1
@@ -113,7 +111,10 @@ class Job:
 
     def handle_alarm(self):
         for member in self.members:
-            self.task_list.execute_task_infos(self.status + " " + self.get_message(), member.get_tasks())
+            for task in member.get_tasks():
+                task.execute(str(self.get_message()))
+                #print task
+                logger.info("DO TASK EXECUTION HERE! NOT IMPLEMENTED!")
 
     def handle_call(self):
         logger.debug("handle call")

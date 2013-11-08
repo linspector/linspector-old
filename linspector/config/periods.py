@@ -30,8 +30,8 @@ class Period(object):
     def get_name(self):
         return self.name
         
-    def createJob(self, scheduler, jobInfo, func):
-        pass
+    #def createJob(self, scheduler, jobInfo, func):
+    #    pass
         
 
 class IntervalPeriod(Period):

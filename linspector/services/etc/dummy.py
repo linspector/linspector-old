@@ -63,8 +63,8 @@ class DummyService(Service):
         if "fail" in args:
             self.fail = args["fail"]
 
-    def needs_arguments(self):
-        return False
+    #def needs_arguments(self):
+    #    return False
 
     def execute(self, job):
 

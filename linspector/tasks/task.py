@@ -22,25 +22,51 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 from logging import getLogger
 from threading import Event, Thread
 
+KEY_TYPE = "type"
+KEY_ARGS = "args"
 
 logger = getLogger(__name__)
 
 
 class Task:
-    def raise_config_exception(self, typeDict, name):
-        raise Exception("typeDict " + str(typeDict) + " has no " + str(name) + " argument!")
+    def __init__(self, **kwargs):
 
-    def set_task_type(self, taskType):
-        self._taskType = taskType
-        return self
+        self._args = {}
+
+        if KEY_ARGS in kwargs:
+            self.add_arguments(kwargs[KEY_ARGS])
+        elif self.needs_arguments():
+            raise Exception("Error: needs arguments but none provided!")
+
+        self._type = None
+        if KEY_TYPE in kwargs:
+            self._type = kwargs[KEY_TYPE]
 
     def get_task_type(self):
-        return self._taskType
+        return str(self.__class__)
 
-    def execute(self, msg, args):
-        pass
+    def add_arguments(self, args):
+        for key, val in args.items():
+            self._args[key] = val
+
+    def get_arguments(self):
+        return self._args
+
+    def set_member(self, member):
+        self.member = member
+
+    def needs_arguments(self):
+        return False
+
+    def execute(self, job):
+        try:
+            self.execute(job)
+        except Exception, e:
+            logger.debug("Task execute failed!!!")
+            raise e
 
 
+"""
 class TaskList(object):
     def __init__(self, tasks):
         self.tasks = tasks
@@ -75,3 +101,4 @@ class TaskList(object):
     def execute_task_infos(self, msg, taskInfos):
         self.taskInfos.append((msg, taskInfos))
         self.event.set()
+"""

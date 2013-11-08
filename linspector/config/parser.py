@@ -30,7 +30,7 @@ from config import LinspectorConfig
 from periods import CronPeriod, DatePeriod, IntervalPeriod
 
 from linspector.services.service import Service
-from linspector.tasks.task import TaskList
+from linspector.tasks.task import Task
 
 MOD_SERVICES   = "services"
 MOD_TASKS      = "tasks"
@@ -40,7 +40,6 @@ KEY_HOSTGROUPS = "hostgroups"
 KEY_MEMBERS    = "members"
 KEY_PERIODS    = "periods"
 KEY_CORE       = "core"
-KEY_TASKS      = "tasks"
 
 logger = getLogger(__name__)
 
@@ -66,7 +65,7 @@ class ConfigParser:
         self._loadedMods = {MOD_SERVICES: {}, MOD_TASKS: {}}
         
     def _create_new_config_dict(self):
-        return {"members": {}, "periods": {}, "hostgroups": {}, "layouts": {}, "core": {}, "tasks": {}}
+        return {"members": {}, "periods": {}, "hostgroups": {}, "layouts": {}, "core": {}}
         
     def create_config(self, config):
         configDict = self._create_new_config_dict()
@@ -231,59 +230,52 @@ class FullConfigParser(ConfigParser):
 
         #1.
         creator = lambda name, values: Layout(name, **values)
-        layouts = self._create_raw_Object(self.dict[KEY_LAYOUTS], "Layout", creator)
+        self.layouts = self._create_raw_Object(self.dict[KEY_LAYOUTS], "Layout", creator)
 
+        #TODO: self.members is empty after this!!!!!! BUG!!!
         creator = lambda name, values: Member(name, **values)
-        members = self._create_raw_Object(self.dict[KEY_MEMBERS], "Member", creator)
+        self.members = self._create_raw_Object(self.dict[KEY_MEMBERS], "Member", creator)
 
         creator = lambda name, values: HostGroup(name, **values)
         self.hostgroups = self._create_raw_Object(self.dict[KEY_HOSTGROUPS], "Hostgroup", creator)
 
         creator = parsePeriodList
-        periods = self._create_raw_Object(self.dict[KEY_PERIODS], "Period", creator)
-
-        #1.1 get Tasks
-        creator = lambda name, values: self._load_module(name, MOD_TASKS).create(values).set_task_type(name)
-        tasks = self._create_raw_Object(self.dict[KEY_TASKS], "Task", creator)
-        taskList = TaskList(tasks)
-
+        self.periods = self._create_raw_Object(self.dict[KEY_PERIODS], "Period", creator)
 
         #2. import and replace
         items_func = lambda hostgroup: hostgroup.get_services()
         class_check = lambda service: isinstance(service, Service)
         self.replace_with_import(self.hostgroups, MOD_SERVICES, items_func, class_check)
-
-        #items_func = lambda member: member.get_tasks()
-        #class_check = lambda task: isinstance(task, Task)
-        #self.replace_with_import(members, MOD_TASKS, items_func, class_check)
-
         services = []
         for hg in self.hostgroups:
             services.extend(hg.get_services())
 
+        items_func = lambda member: member.get_tasks()
+        class_check = lambda task: isinstance(task, Task)
+        self.replace_with_import(self.members, MOD_TASKS, items_func, class_check)
+        tasks = []
+        for m in self.members:
+            tasks.extend(m.get_tasks())
+
         #replace object pointer
         id_list_func = lambda hostgroup: hostgroup.get_members()
-        id_get_func = lambda member: member.get_id()
-        self.replace_pointer(self.hostgroups, members, id_list_func, id_get_func)
+        id_get_func = lambda member: member.get_name()
+        self.replace_pointer(self.hostgroups, self.members, id_list_func, id_get_func)
 
         id_list_func = lambda service: service.get_periods()
         id_get_func = lambda period: period.get_name()
-        self.replace_pointer(services, periods, id_list_func, id_get_func)
+        self.replace_pointer(services, self.periods, id_list_func, id_get_func)
 
         id_list_func = lambda layout: layout.get_hostgroups()
         id_get_func = lambda hostgroup: hostgroup.get_name()
-        self.replace_pointer(layouts, self.hostgroups, id_list_func, id_get_func)
+        self.replace_pointer(self.layouts, self.hostgroups, id_list_func, id_get_func)
 
         linConf = LinspectorConfig()
-        linConf.set_layouts(layouts)
+        linConf.set_layouts(self.layouts)
         linConf.set_hostgroups(self.hostgroups)
-        linConf.set_members(members)
-        linConf.set_periods(periods)
-        linConf.set_task_list(taskList)
+        linConf.set_members(self.members)
+        linConf.set_periods(self.periods)
 
-        for hg in self.hostgroups:
-            for service in hg.get_services():
-                service.set_hostgroup(hg)
         core = None
         if "core" in self.dict:
             core = self.dict["core"]

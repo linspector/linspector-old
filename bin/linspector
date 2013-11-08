@@ -134,9 +134,7 @@ def main():
                         job = Job(service,
                                   host,
                                   hostgroup.get_members(),
-                                  hostgroup.get_processors(),
                                   core,
-                                  linConf.get_task_list(),
                                   hostgroup)
                         scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
                         if scheduler_job is not None:

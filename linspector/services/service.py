@@ -19,7 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from logging import getLogger
 
-KEY_PARSER    = "parser"
 KEY_COMMENT   = "comment"
 KEY_THRESHOLD = "threshold"
 KEY_FAILS     = "fails"
@@ -37,10 +36,6 @@ class Service(object):
             self.add_arguments(kwargs[KEY_ARGS])
         elif self.needs_arguments():
             raise Exception("Error: needs arguments but none provided!")
-
-        self._parser = []
-        if KEY_PARSER in kwargs:
-            self.add_parser(kwargs[KEY_PARSER])
         
         self._comment = None
         if KEY_COMMENT in kwargs:
@@ -61,8 +56,9 @@ class Service(object):
     def __str__(self):
         return self.get_name() + " " + repr(self._args)
 
-    def get_type(self):
-        return str(self.__class__)
+    #TODO: not used somewhere
+    #def get_service_type(self):
+    #    return str(self.__class__)
 
     def get_name(self):
         return self.__class__.__name__
@@ -70,10 +66,11 @@ class Service(object):
     def add_arguments(self, args):
         for key, val in args.items():
             self._args[key] = val
-            
-    def add_argument(self, key, value):
-        self._args[key] = value
-        
+
+    #TODO: not used somewhere
+    #def add_argument(self, key, value):
+    #    self._args[key] = value
+
     def get_arguments(self):
         return self._args
 
@@ -135,9 +132,6 @@ class Service(object):
             job.set_execution_successful(False)
             self._threshold -= 1
             raise e
-
-    ##def execute(self):
-    #    pass
 
     def pre_execute(self, job):
         pass

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -24,58 +24,42 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 
+class MemberException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+    def __str__(self):
+        return repr(self.msg)
+
+
+class MemberMissingArgumentException(MemberException):
+    def __init__(self, missingArgument, memberName):
+        super(MemberMissingArgumentException, self).__init__("no " + missingArgument + " defined for member " + memberName)
+
+
 class Member:
-    def __init__(self, id, name="",  comment="", tasks=None):
-        self.id = id
+    def __init__(self, name="", **kwargs):
         self.name = name
-        self.tasks = []
-        self.add_task(tasks)
-        self.comment = comment
+        tmp = "tasks"
+        self.__tasks = []
+        if not tmp in kwargs:
+            raise MemberMissingArgumentException(tmp, name)
+        self.add_tasks(kwargs[tmp])
 
-    def get_id(self):
-        return self.id
-
-    def add_task(self, task):
-        if task is None:
-            return
-        if isinstance(task, list):
-            self.tasks.extend(task)
+    def __add_internal(self, l, item):
+        if isinstance(item, list):
+            l.extend(item)
         else:
-            self.tasks.append(task)
+            l.append(item)
+
+    def add_tasks(self, tasks):
+        self.__add_internal(self.get_tasks(), tasks)
     
     def get_tasks(self):
-        return self.tasks
+        return self.__tasks
 
     def __str__(self):
         ret = "Member Id: " + self.nameid + " Name: " + self.name + " Filters: " + str(self.phone)
         for f in self.filters:
             ret += str(f)
         return ret
-
-
-class MemberFilter:
-    def __init__(self, filter, Value):
-        self.filter = filter
-        self.value = Value
-
-    def __str__(self):
-        return "Filter:" + str(self.filter) + " Value:" + self.value
-
-
-def parseMemberList(members, filters):
-    parsedMembers = [Member(nameid, **values) for nameid, values in members.items()]
-    for member in parsedMembers:
-        mFilter = []
-        for filtername, replacement in member.filters.items():
-            found = False
-            for filt in filters:
-                if filt.name != filtername:
-                    continue
-                found = True
-                memberFilter = filt.clone()
-                memberFilter.command = re.sub('@member', replacement, filt.command)
-                mFilter.append(memberFilter)
-            if not found:
-                logger.warning("filter: " + filtername + " is not defined in member " + member.name)
-        member.filters = mFilter
-    return parsedMembers

@@ -8,7 +8,7 @@
                     "type": "error",
                     "args": { "host": "localhost",
                               "port": 25,
-                              "from": "linspector@linspector.org",
+                              "sender": "linspector@linspector.org",
                               "username": "",
                               "password": "",
                               "rcpt": "hanez@linspector.org"
@@ -18,14 +18,15 @@
                     "class": "mail",
                     "type": "warning",
                     "args": { "host": "localhost",
-                              "from": "linspector@linspector.org",
+                              "sender": "linspector@linspector.org",
                               "rcpt": "warning@linspector.org"
                     }
                 },
                 {
                     "class": "mail",
                     "type": "ok",
-                    "args": { "rcpt": "warning@linspector.org" }
+                    "args": { "sender": "linspector@linspector.org",
+                              "rcpt": "warning@linspector.org" }
                 }
             ]
         },
@@ -55,6 +56,30 @@
                     "periods": ["fast"],
                     "threshold": 1,
                     "args": { "sleep": 1, "fail": 1 }
+                },
+                {
+                    "class": "etc/dummy",
+                    "periods": ["fast"],
+                    "threshold": 1,
+                    "args": { "sleep": 10, "fail": 0 }
+                }
+            ]
+        },
+        "b":{
+            "members": ["root", "hannes"],
+            "hosts": [ "b"],
+            "services":[
+                {
+                    "class": "etc/dummy",
+                    "periods": ["fast"],
+                    "threshold": 1,
+                    "args": { "sleep": 1, "fail": 1 }
+                },
+                {
+                    "class": "etc/dummy",
+                    "periods": ["fast"],
+                    "threshold": 1,
+                    "args": { "sleep": 10, "fail": 0 }
                 }
             ]
         }
@@ -62,6 +87,10 @@
     "layouts":{
         "main":{
             "hostgroups": [ "a" ],
+            "enabled": true
+        },
+        "gooo":{
+            "hostgroups": [ "b" ],
             "enabled": true
         }
     },
