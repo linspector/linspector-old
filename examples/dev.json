@@ -55,13 +55,13 @@
                     "class": "etc/dummy",
                     "periods": ["fast"],
                     "threshold": 1,
-                    "args": { "sleep": 1, "fail": 1 }
+                    "args": { "sleep": 1, "fail": true }
                 },
                 {
                     "class": "etc/dummy",
                     "periods": ["fast"],
                     "threshold": 1,
-                    "args": { "sleep": 10, "fail": 0 }
+                    "args": { "sleep": 10, "fail": false }
                 }
             ]
         },
@@ -73,13 +73,13 @@
                     "class": "etc/dummy",
                     "periods": ["fast"],
                     "threshold": 1,
-                    "args": { "sleep": 1, "fail": 1 }
+                    "args": { "sleep": 1, "fail": true }
                 },
                 {
                     "class": "etc/dummy",
                     "periods": ["fast"],
                     "threshold": 1,
-                    "args": { "sleep": 10, "fail": 0 }
+                    "args": { "sleep": 10, "fail": false }
                 }
             ]
         }
@@ -91,7 +91,7 @@
         },
         "gooo":{
             "hostgroups": [ "b" ],
-            "enabled": true
+            "enabled": false
         }
     },
     "core":{

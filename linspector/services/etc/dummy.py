@@ -59,7 +59,7 @@ class DummyService(Service):
         if "sleep" in args:
             self.sleep = args["sleep"]
 
-        self.fail = 0
+        self.fail = False
         if "fail" in args:
             self.fail = args["fail"]
 
@@ -70,7 +70,7 @@ class DummyService(Service):
 
         time.sleep(self.sleep)
 
-        if self.fail > 0:
+        if self.fail:
             job.set_errorcode(1)
             job.set_message("[dummy: " + job.jobHex + "] Failed on host: " + job.get_host() +
                             " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
