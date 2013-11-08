@@ -97,9 +97,9 @@
     "core":{
         "instance_name": "Master Monitor 01 (monitor01.linspector.org)",
         "threshold_handling": "reset",
-        "shutdown_wait": "False",
+        "shutdown_wait": false,
         "members":[ "linspector", "root" ],
-        "jsonrpc_backend": "True",
+        "jsonrpc_backend": true,
         "backends": {
             "jsonrpc": {
                 "host": "127.0.0.1",
