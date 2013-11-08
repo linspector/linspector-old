@@ -1,0 +1,83 @@
+{
+    "members":{
+        "root":{
+            "name": "root",
+            "tasks": [
+                {
+                    "class": "mail",
+                    "type": "error",
+                    "args": { "host": "localhost",
+                              "port": 25,
+                              "from": "linspector@linspector.org",
+                              "username": "",
+                              "password": "",
+                              "rcpt": "hanez@linspector.org"
+                    }
+                },
+                {
+                    "class": "mail",
+                    "type": "warning",
+                    "args": { "host": "localhost",
+                              "from": "linspector@linspector.org",
+                              "rcpt": "warning@linspector.org"
+                    }
+                },
+                {
+                    "class": "mail",
+                    "type": "ok",
+                    "args": { "rcpt": "warning@linspector.org" }
+                }
+            ]
+        },
+        "hannes":{
+            "name": "hannes",
+            "tasks": [
+                {
+                    "class": "mail",
+                    "type": "ok",
+                    "args": { "rcpt": "warning@linspector.org" }
+                }
+            ]
+        }
+    },
+    "periods": {
+        "fast": { "seconds": 15 },
+        "medium": { "seconds": 120 },
+        "slow": { "seconds": 480 }
+    },
+    "hostgroups":{
+        "a":{
+            "members": ["root", "hannes"],
+            "hosts": [ "a"],
+            "services":[
+                {
+                    "class": "etc/dummy",
+                    "periods": ["fast"],
+                    "threshold": 1,
+                    "args": { "sleep": 1, "fail": 1 }
+                }
+            ]
+        }
+    },
+    "layouts":{
+        "main":{
+            "hostgroups": [ "a" ],
+            "enabled": true
+        }
+    },
+    "core":{
+        "instance_name": "Master Monitor 01 (monitor01.linspector.org)",
+        "threshold_handling": "reset",
+        "shutdown_wait": "False",
+        "members":[ "linspector", "root" ],
+        "jsonrpc_backend": "True",
+        "backends": {
+            "jsonrpc": {
+                "host": "127.0.0.1",
+                "port": 10123,
+                "username": "linspector",
+                "password": "linspector"
+            }
+        }
+    }
+}
