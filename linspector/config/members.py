@@ -17,8 +17,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import re
-
 from logging import getLogger
 
 logger = getLogger(__name__)
@@ -41,7 +39,7 @@ class Member:
     def __init__(self, name="", **kwargs):
         self.name = name
         tmp = "tasks"
-        self.__tasks = []
+        self.tasks = []
         if not tmp in kwargs:
             raise MemberMissingArgumentException(tmp, name)
         self.add_tasks(kwargs[tmp])
@@ -59,7 +57,7 @@ class Member:
         return self.__tasks
 
     def __str__(self):
-        ret = "Member Id: " + self.nameid + " Name: " + self.name + " Filters: " + str(self.phone)
-        for f in self.filters:
-            ret += str(f)
+        ret = "Member: " + self.name + " Tasks: "
+        for t in self.tasks:
+            ret += str(t)
         return ret

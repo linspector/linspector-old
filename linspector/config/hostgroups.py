@@ -60,11 +60,6 @@ class HostGroup(object):
         tmp = "parents"
         if tmp in kwargs:
             self.add_parents(kwargs[tmp])
-        
-        tmp = "processors"
-        self.processors = []
-        if tmp in kwargs:
-            self.add_processors(kwargs[tmp])
 
     def __str__(self):
         return self.name
@@ -90,9 +85,6 @@ class HostGroup(object):
             
     def add_hosts(self, host):
         self.__add_internal(self.get_hosts(), host)
-    
-    def add_processors(self, processor):
-        self.__add_internal(self.get_processors(), processor)
          
     def add_parents(self, parent):
         self.__add_internal(self.get_parents(), parent)
@@ -102,9 +94,6 @@ class HostGroup(object):
     
     def get_parents(self):
         return self.parents
-         
-    def get_processors(self):
-        return self.processors
     
     def get_services(self):
         return self.__services
