@@ -76,13 +76,12 @@ class TaskExecutor(object):
         self.event = Event()
         self.taskInfos = []
         task_thread = Thread(target=self._run_worker_thread)
-        task_thread.setDaemon(True)
         self._instantEnd = False
         self._running = True
         task_thread.start()
 
     def _run_worker_thread(self):
-        while self.is_running() or not self.instand_end():
+        while self.is_running() or not self.is_instant_end():
             if len(self.taskInfos) == 0:
                 self.event.clear()
                 self.event.wait()
@@ -105,10 +104,12 @@ class TaskExecutor(object):
 
     def stop(self):
         self._running = False
+        self.event.set()
 
     def stop_immediately(self):
-        self.stop()
+        self._running = False
         self._instantEnd = True
+        self.event.set()
 
     def schedule_task(self, msg, task):
         self.taskInfos.append((msg, task))

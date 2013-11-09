@@ -158,13 +158,16 @@ def main():
 
     logger.debug("shutting down scheduler")
 
-
     shutdown_wait = True
     if "shutdown_wait" in core:
         shutdown_wait = core["shutdown_wait"]
 
     scheduler.shutdown(wait=shutdown_wait)
     logging.shutdown()
+    if shutdown_wait:
+        TaskExecutor.Instance().stop()
+    else:
+        TaskExecutor.Instance().stop_immediately()
 
 
 if __name__ == "__main__":
