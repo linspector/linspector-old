@@ -108,12 +108,15 @@ class Job:
         if self.job_threshold >= service_threshold:
             logger.info("Job " + self.hex_string() + ", Threshold reached!")
             self.status = "ERROR"
-            self.handle_alarm()
+
+        self.handle_alarm()
 
     def handle_alarm(self):
         for member in self.members:
             for task in member.get_tasks():
-                TaskExecutor.Instance().schedule_task(self.get_message(), task)
+                if self.status.lower() == task.get_task_type_name():
+                    logger.debug("Executing Task of type: " + self.status)
+                    TaskExecutor.Instance().schedule_task(self.status + " " + self.get_message(), task)
 
     def handle_call(self):
         logger.debug("handle call")

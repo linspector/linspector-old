@@ -42,7 +42,7 @@
         }
     },
     "periods": {
-        "fast": { "seconds": 15 },
+        "fast": { "seconds": 3 },
         "medium": { "seconds": 120 },
         "slow": { "seconds": 480 }
     },
@@ -54,14 +54,14 @@
                 {
                     "class": "etc/dummy",
                     "periods": ["fast"],
-                    "threshold": 1,
+                    "threshold": 10,
                     "args": { "sleep": 1, "fail": true }
                 },
                 {
                     "class": "etc/dummy",
                     "periods": ["fast"],
                     "threshold": 1,
-                    "args": { "sleep": 10, "fail": false }
+                    "args": { "sleep": 1, "fail": false }
                 }
             ]
         },
