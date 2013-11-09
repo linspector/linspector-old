@@ -1,18 +1,13 @@
 {
-    "tasks": {
-        "mail":{
-            "host": "localhost",
-            "port": 25,
-            "from": "linspector@linspector.org",
-            "username": "",
-            "password": ""
-        }
-    },
     "members":{
         "hanez":{
             "_name": "admin",
             "tasks": [
-                { "class":"alert/mail", "type": "error", "args": { "_rcpt": "hanez@linspector.org" }}
+                {
+                  "class":"alert/mail",
+                  "type": "error",
+                  "args": { "rcpt": "hanez@linspector.org", "sender": "linspector@linspector.org" }
+                }
             ]
         }
     },
