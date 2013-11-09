@@ -4,7 +4,7 @@
             "name": "root",
             "tasks": [
                 {
-                    "class": "mail",
+                    "class": "alert/mail",
                     "type": "error",
                     "args": { "host": "localhost",
                               "port": 25,
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "class": "mail",
+                    "class": "alert/mail",
                     "type": "warning",
                     "args": { "host": "localhost",
                               "sender": "linspector@linspector.org",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "class": "mail",
+                    "class": "alert/mail",
                     "type": "ok",
                     "args": { "sender": "linspector@linspector.org",
                               "rcpt": "warning@linspector.org" }
@@ -34,7 +34,7 @@
             "name": "hannes",
             "tasks": [
                 {
-                    "class": "mail",
+                    "class": "alert/mail",
                     "type": "ok",
                     "args": { "rcpt": "warning@linspector.org" }
                 }

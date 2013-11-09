@@ -12,7 +12,7 @@
         "root":{
             "name": "root",
             "tasks": [
-                { "class":"mail", "type": "error", "args": { "_rcpt": "hanez@linspector.org" }}
+                { "class":"alert/mail", "type": "error", "args": { "_rcpt": "hanez@linspector.org" }}
             ]
         }
     },
