@@ -36,24 +36,24 @@ class HostGroupMissingArgumentException(HostGroupException):
 
 
 class HostGroup(object):
-    def __init__(self, name, **kwargs):
-        self.name = name
+    def __init__(self, _name, **kwargs):
+        self.name = _name
         tmp = "members"
         self.members = []
         if not tmp in kwargs:
-            raise HostGroupMissingArgumentException(tmp, name)
+            raise HostGroupMissingArgumentException(tmp, _name)
         self.add_members(kwargs[tmp])
         
         tmp = "hosts"
         self.hosts = []
         if not tmp in kwargs:
-            raise HostGroupMissingArgumentException(tmp, name)
+            raise HostGroupMissingArgumentException(tmp, _name)
         self.add_hosts(kwargs[tmp])
         
         tmp = "services"
         self.__services = []
         if not tmp in kwargs:
-            raise HostGroupMissingArgumentException(tmp, name)
+            raise HostGroupMissingArgumentException(tmp, _name)
         self.add_services(kwargs[tmp])
         
         self.parents = []

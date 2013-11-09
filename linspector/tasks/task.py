@@ -28,7 +28,7 @@ KEY_ARGS = "args"
 logger = getLogger(__name__)
 
 
-class Task:
+class Task(object):
     def __init__(self, **kwargs):
 
         self._args = {}

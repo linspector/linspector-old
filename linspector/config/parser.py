@@ -114,9 +114,9 @@ class ConfigParser:
             try:
                 item = creator(key, val)
                 items.append(item)
-            except Exception:
+            except Exception, e:
                 logger.warning("ignoring " + msgName + ": " + key + "! reason:")
-                logger.warning(str(Exception))
+                logger.warning(str(e))
         return items
 
     def _load_module(self, clazz, modPart):
