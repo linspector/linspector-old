@@ -36,12 +36,12 @@ class MemberMissingArgumentException(MemberException):
 
 
 class Member:
-    def __init__(self, _name, **kwargs):
-        self.name = _name
+    def __init__(self, name, **kwargs):
+        self.name = name
         tmp = "tasks"
         self.__tasks = []
         if not tmp in kwargs:
-            raise MemberMissingArgumentException(tmp, _name)
+            raise MemberMissingArgumentException(tmp, name)
         self.add_tasks(kwargs[tmp])
 
     def __add_internal(self, l, item):

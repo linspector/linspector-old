@@ -1,7 +1,7 @@
 {
     "members":{
         "root":{
-            "name": "root",
+            "_name": "root",
             "tasks": [
                 {
                     "class": "alert/mail",
@@ -31,7 +31,7 @@
             ]
         },
         "hannes":{
-            "name": "hannes",
+            "_name": "hannes",
             "tasks": [
                 {
                     "class": "alert/mail",

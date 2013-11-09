@@ -10,7 +10,7 @@
     },
     "members":{
         "hanez":{
-            "name": "admin",
+            "_name": "admin",
             "tasks": [
                 { "class":"alert/mail", "type": "error", "args": { "_rcpt": "hanez@linspector.org" }}
             ]
