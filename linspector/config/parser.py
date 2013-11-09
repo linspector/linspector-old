@@ -153,7 +153,6 @@ class ConfigParser:
             items = items_func(obj)
             for clazzItem in items:
                 try:
-
                     clazz = clazzItem["class"]
                     mod = self._load_module(clazz, modPart)
                     item = mod.create(clazzItem)

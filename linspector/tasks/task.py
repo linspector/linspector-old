@@ -46,6 +46,9 @@ class Task(object):
     def get_task_type(self):
         return str(self.__class__)
 
+    def get_task_type_name(self):
+        return str(self._type)
+
     def add_arguments(self, args):
         for key, val in args.items():
             self._args[key] = val
@@ -78,7 +81,6 @@ class TaskExecutor(object):
         self._running = True
         task_thread.start()
 
-
     def _run_worker_thread(self):
         while self.is_running() or not self.instand_end():
             if len(self.taskInfos) == 0:
@@ -95,7 +97,7 @@ class TaskExecutor(object):
             except Exception, e:
                 logger.error("Error " + str(e))
 
-    def is_instand_end(self):
+    def is_instant_end(self):
         return self._instantEnd
 
     def is_running(self):
