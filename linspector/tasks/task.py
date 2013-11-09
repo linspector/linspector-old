@@ -21,6 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from logging import getLogger
 from threading import Event, Thread
+from linspector.utils.singleton import Singleton
 
 KEY_TYPE = "type"
 KEY_ARGS = "args"
@@ -66,14 +67,8 @@ class Task(object):
             raise e
 
 
-
+@Singleton
 class TaskExecutor(object):
-    _instance = None
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(TaskExecutor, cls).__init__()
-        return cls._instance
-
     def __init__(self):
         self.event = Event()
         self.taskInfos = []

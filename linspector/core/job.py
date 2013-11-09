@@ -23,6 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 from datetime import datetime
 from binascii import crc32
 from logging import getLogger
+from linspector.tasks.task import TaskExecutor
 
 logger = getLogger(__name__)
 
@@ -112,9 +113,7 @@ class Job:
     def handle_alarm(self):
         for member in self.members:
             for task in member.get_tasks():
-                task.execute(str(self.get_message()))
-                #print task
-                logger.info("DO TASK EXECUTION HERE! NOT IMPLEMENTED!")
+                TaskExecutor.Instance().schedule_task(self.get_message(), task)
 
     def handle_call(self):
         logger.debug("handle call")

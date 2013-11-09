@@ -35,6 +35,7 @@ from linspector.core.interface import LinspectorInterface
 from linspector.core.job import Job
 from linspector.core.scheduler import Scheduler
 from linspector.frontends.lish import LishFrontend
+from linspector.tasks.task import TaskExecutor
 
 logger = logging.getLogger(__name__)
 
@@ -120,6 +121,7 @@ def main():
     scheduler = Scheduler({"apscheduler.threadpool.core_threads": args.corethreads,
                            "apscheduler.threadpool.max_threads": args.threads})
     scheduler.start()
+    TaskExecutor.Instance()
 
     start_date = datetime.datetime.now()
     time_delta = 0
@@ -155,6 +157,7 @@ def main():
     LishFrontend(interface)
 
     logger.debug("shutting down scheduler")
+
 
     shutdown_wait = True
     if "shutdown_wait" in core:
