@@ -1,4 +1,8 @@
-TODO file... just empty because there so many things to fix before adding 
-features.
+TODO:
+ - Parent alerting (escalation)
+ - Core Error alerting to core["members"] on internal errors
+ - Add more services
+ - Add more tasks e.g. storage in mongodb or mariadb and some more alerts like jabber and SMS
 
-Fee free to add wishes to the Issue Tracker at GitHub.
+---
+Feel free to add more wishes to the Issue Tracker at GitHub.
