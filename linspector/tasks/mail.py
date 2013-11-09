@@ -67,10 +67,10 @@ class MailTask(Task):
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
         message['From'] = self.sender
-        message['To'] = self.rcpt["rcpt"]
+        message['To'] = self.rcpt
         s = smtplib.SMTP(self.host, self.port)
         #s.login(self.userName, self.password)
-        s.sendmail(self.sender, self.rcpt["rcpt"], message.as_string())
+        s.sendmail(self.sender, self.rcpt, message.as_string())
         s.quit()
 
 

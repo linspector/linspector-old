@@ -66,39 +66,54 @@ class Task(object):
             raise e
 
 
-"""
-class TaskList(object):
-    def __init__(self, tasks):
-        self.tasks = tasks
+
+class TaskExecutor(object):
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(TaskExecutor, cls).__init__()
+        return cls._instance
+
+    def __init__(self):
         self.event = Event()
         self.taskInfos = []
         task_thread = Thread(target=self._run_worker_thread)
         task_thread.setDaemon(True)
+        self._instantEnd = False
+        self._running = True
         task_thread.start()
 
+
     def _run_worker_thread(self):
-        while True:
+        while self.is_running() or not self.instand_end():
             if len(self.taskInfos) == 0:
                 self.event.clear()
                 self.event.wait()
-            msg, taskInfos = self.taskInfos[0]
-            del self.taskInfos[0]
+
             try:
+                msg, taskInfos = self.taskInfos[0]
+                del self.taskInfos[0]
                 for taskInfo in taskInfos:
                     task = self.find_task_by_name(taskInfo["class"])
                     if task:
                         logger.debug("Starting Task Execution...")
                         task.execute(msg, taskInfo["args"])
-            except:
-                logger.debug("Something failed!")
-                pass
+            except Exception, e:
+                logger.error("Error " + str(e))
 
-    def find_task_by_name(self, clazzName):
-        for task in self.tasks:
-            if task.get_task_type() == clazzName:
-                return task
+    def is_instand_end(self):
+        return self._instantEnd
 
-    def execute_task_infos(self, msg, taskInfos):
-        self.taskInfos.append((msg, taskInfos))
+    def is_running(self):
+        return self._running
+
+    def stop(self):
+        self._running = False
+
+    def stop_immediately(self):
+        self.stop()
+        self._instantEnd = True
+
+    def schedule_task(self, msg, task):
+        self.taskInfos.append((msg, task))
         self.event.set()
-"""
