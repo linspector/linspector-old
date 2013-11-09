@@ -1,26 +1,6 @@
 """
 Dummy service for debugging and testing
 
-This should just return 0 on success and 1 on error.
-
-Example json service config for fail:
-
-{
-    "class": "dummy",
-    "args": { "sleep": 3, "fail": 1 },
-    "periods": ["fast"],
-    "threshold": 3
-}
-
-For Success:
-
-{
-    "class": "dummy",
-    "args": { "sleep": 3, "fail": 0 },
-    "periods": ["fast"],
-    "threshold": 3
-}
-
 Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
@@ -50,6 +30,25 @@ logger = getLogger(__name__)
 
 
 class DummyService(Service):
+    """
+    This should just return 0 on success and 1 on error.
+
+    Example json service config for fail:
+    {
+        "class": "dummy",
+        "args": { "sleep": 3, "fail": true },
+        "periods": ["fast"],
+        "threshold": 3
+    }
+
+    For Success:
+    {
+        "class": "dummy",
+        "args": { "sleep": 3, "fail": false },
+        "periods": ["fast"],
+        "threshold": 3
+    }
+    """
     def __init__(self, **kwargs):
         super(DummyService, self).__init__(**kwargs)
 
@@ -63,8 +62,8 @@ class DummyService(Service):
         if "fail" in args:
             self.fail = args["fail"]
 
-    #def needs_arguments(self):
-    #    return False
+    def needs_arguments(self):
+        return False
 
     def execute(self, job):
 
@@ -72,13 +71,13 @@ class DummyService(Service):
 
         if self.fail:
             job.set_errorcode(1)
-            job.set_message("[dummy: " + job.jobHex + "] Failed on host: " + job.get_host() +
+            job.set_message("[etc/dummy: " + job.jobHex + "] Failed on host: " + job.get_host() +
                             " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
 
         if job.get_errorcode() == -1:
             job.set_execution_successful(True)
             job.set_errorcode(0)
-            job.set_message("[dummy: " + job.jobHex + "] Success on host: " + job.get_host() +
+            job.set_message("[etc/dummy: " + job.jobHex + "] Success on host: " + job.get_host() +
                             " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
 
 
