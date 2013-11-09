@@ -86,13 +86,12 @@ class TaskExecutor(object):
                 self.event.wait()
 
             try:
-                msg, taskInfos = self.taskInfos[0]
+                msg, task = self.taskInfos[0]
                 del self.taskInfos[0]
-                for taskInfo in taskInfos:
-                    task = self.find_task_by_name(taskInfo["class"])
-                    if task:
-                        logger.debug("Starting Task Execution...")
-                        task.execute(msg, taskInfo["args"])
+                if task:
+                    logger.debug("Starting Task Execution...")
+                    task.execute(msg)
+
             except Exception, e:
                 logger.error("Error " + str(e))
 
