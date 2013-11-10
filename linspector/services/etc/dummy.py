@@ -71,14 +71,18 @@ class DummyService(Service):
 
         if self.fail:
             job.set_errorcode(1)
-            job.set_message("[etc/dummy: " + job.jobHex + "] Failed on host: " + job.get_host() +
-                            " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
+            #job.set_message("[etc/dummy: " + job.jobHex + "] Failed on host: " + job.get_host() +
+            #                " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
+
+            job.set_response({"Message": "Failed", "Sleep": str(self.sleep), "Fail": str(self.fail)})
 
         if job.get_errorcode() == -1:
             job.set_execution_successful(True)
             job.set_errorcode(0)
-            job.set_message("[etc/dummy: " + job.jobHex + "] Success on host: " + job.get_host() +
-                            " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
+            #job.set_message("[etc/dummy: " + job.jobHex + "] Success on host: " + job.get_host() +
+            #                " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
+
+            job.set_response({"Message": "Success", "Sleep": str(self.sleep), "Fail": str(self.fail)})
 
 
 def create(kwargs):

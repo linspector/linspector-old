@@ -59,6 +59,7 @@ class Job:
         UNKNOWN  when a job throws an exception which is not handled by the job itself (not implemented)
         """
         self.status = "NONE"
+        self.response = None
 
     def __str__(self):
         return str(self.__dict__)
@@ -116,7 +117,7 @@ class Job:
             for task in member.get_tasks():
                 if self.status.lower() == task.get_task_type_name():
                     logger.debug("Executing Task of type: " + self.status)
-                    TaskExecutor.Instance().schedule_task(self.status + " " + self.get_message(), task)
+                    TaskExecutor.Instance().schedule_task(self.get_response_message(), task)
 
     def handle_call(self):
         logger.debug("handle call")
@@ -143,8 +144,17 @@ class Job:
     def get_host(self):
         return self.host
 
+    def get_hostgroup(self):
+        return self.hostgroup
+
     def set_result(self, result):
         self.result = result
+
+    def get_response(self):
+        return self.response
+
+    def set_response(self, response):
+        self.response = response
 
     def set_execution_end(self):
         self.execution_end = datetime.now()
@@ -166,3 +176,8 @@ class Job:
 
     def get_errorcode(self):
         return self.errorcode
+
+    def get_response_message(self):
+        message = str(self.status) + " [CLASS: " + str(self.jobHex) + "] " + \
+            str(self.get_hostgroup) + " " + str(self.get_host()) + " " + str(self.get_response())
+        return message
