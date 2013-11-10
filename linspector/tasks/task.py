@@ -78,6 +78,7 @@ class TaskExecutor(object):
         task_thread = Thread(target=self._run_worker_thread)
         self._instantEnd = False
         self._running = True
+        task_thread.daemon = True
         task_thread.start()
 
     def _run_worker_thread(self):
