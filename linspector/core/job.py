@@ -179,5 +179,5 @@ class Job:
 
     def get_response_message(self):
         message = str(self.status) + " [CLASS: " + str(self.jobHex) + "] " + \
-            str(self.get_hostgroup) + " " + str(self.get_host()) + " " + str(self.get_response())
+            str(self.get_hostgroup()) + " " + str(self.get_host()) + " " + str(self.get_response())
         return message
