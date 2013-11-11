@@ -25,6 +25,7 @@ from linspector.utils.singleton import Singleton
 
 KEY_TYPE = "type"
 KEY_ARGS = "args"
+KEY_CLASS = "class"
 
 logger = getLogger(__name__)
 
@@ -33,21 +34,25 @@ class Task(object):
     def __init__(self, **kwargs):
 
         self._args = {}
-
         if KEY_ARGS in kwargs:
             self.add_arguments(kwargs[KEY_ARGS])
         elif self.needs_arguments():
             raise Exception("Error: needs arguments but none provided!")
+
+        if KEY_CLASS in kwargs:
+            self.name = kwargs[KEY_CLASS]
+        else:
+            self.name = self.__class__
 
         self._type = None
         if KEY_TYPE in kwargs:
             self._type = kwargs[KEY_TYPE]
 
     def get_task_type(self):
-        return str(self.__class__)
-
-    def get_task_type_name(self):
         return str(self._type)
+
+    def get_config_name(self):
+        return str(self.name)
 
     def add_arguments(self, args):
         for key, val in args.items():

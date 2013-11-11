@@ -24,19 +24,25 @@ KEY_THRESHOLD = "threshold"
 KEY_FAILS     = "fails"
 KEY_PERIODS   = "periods"
 KEY_ARGS      = "args"
+KEY_CLASS     = "class"
 
 logger = getLogger(__name__)
 
 
 class Service(object):
     def __init__(self, **kwargs):
-
+        self.name = None
         self._args = {}
         if KEY_ARGS in kwargs:
             self.add_arguments(kwargs[KEY_ARGS])
         elif self.needs_arguments():
             raise Exception("Error: needs arguments but none provided!")
-        
+
+        if KEY_CLASS in kwargs:
+            self.name = kwargs[KEY_CLASS]
+        else:
+            self.name = self.__class__
+
         self._comment = None
         if KEY_COMMENT in kwargs:
             self._comment = kwargs[KEY_COMMENT]    
@@ -54,14 +60,18 @@ class Service(object):
             self.add_periods(kwargs[KEY_PERIODS])
 
     def __str__(self):
-        return self.get_name() + " " + repr(self._args)
+        return self.get_config_name() + " " + repr(self._args)
 
     #TODO: not used somewhere
     #def get_service_type(self):
     #    return str(self.__class__)
 
-    def get_name(self):
-        return self.__class__.__name__
+    def set_config_name(self, name):
+        self.name = name
+        return self
+
+    def get_config_name(self):
+        return self.name
 
     def add_arguments(self, args):
         for key, val in args.items():
