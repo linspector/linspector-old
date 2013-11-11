@@ -36,8 +36,6 @@ class Job:
         self.core = core
         self.hostgroup = hostgroup
         self.job_threshold = 0
-        self.job_overall_fails = 0
-        self.job_overall_wins = 0
         self.enabled = True
         self.scheduler_job = None
         self.job_id = self.hex_string()
@@ -51,6 +49,7 @@ class Job:
         """
         self.status = "NONE"
         self.last_execution = None
+        self.job_information = JobInformation(self.job_id, hostgroup, host, service, members)
 
     def __str__(self):
         return str(self.__dict__)
@@ -88,10 +87,10 @@ class Job:
                     self.job_threshold -= 1
 
             self.status = "OK"
-            self.job_overall_wins += 1
+            self.job_information.inc_job_overall_wins()
         else:
             self.status = "WARNING"
-            self.job_overall_fails += 1
+            self.job_information.inc_job_overall_fails()
             self.job_threshold += 1
 
         if self.job_threshold >= service_threshold:
@@ -205,3 +204,9 @@ class JobInformation(object):
 
     def inc_job_overall_fails(self):
         self.job_overall_fails += 1
+
+    def get_job_overall_wins(self):
+        return self.job_overall_wins
+
+    def inc_job_overall_wins(self):
+        self.job_overall_wins += 1
