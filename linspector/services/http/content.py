@@ -63,19 +63,17 @@ class HttpContentService(Service):
     def needs_arguments(self):
         return True
 
-    def execute(self, job):
-        r = requests.get(self.protocol + "://" + job.get_host() + ":" + self.port + self.path)
+    def execute(self, execution):
 
+        r = requests.get(self.protocol + "://" + execution.get_host_name() + ":" + self.port + self.path)
+
+        d = {"Expected": str(self.content)}
+        error_code = 0
+        msg = "Success"
         if self.content not in r.text:
-            job.set_errorcode(1)
-            job.set_message("[http/content: " + job.jobHex + "] Failed on host: " + job.get_host() +
-                            " Content: " + str(self.content) + " not found.")
-
-        if job.get_errorcode() == -1:
-            job.set_execution_successful(True)
-            job.set_errorcode(0)
-            job.set_message("[http/content: " + job.jobHex + "] Success on host: " + job.get_host() +
-                            " Content: " + str(self.content) + " found.")
+            error_code = 1
+            msg = "Failed"
+        execution.set_result(error_code, msg, d)
 
 
 def create(kwargs):
