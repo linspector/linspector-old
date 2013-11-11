@@ -104,32 +104,32 @@ class Job:
             logger.info("Job " + self.hex_string() + ", Threshold reached!")
             self.status = "ERROR"
 
-        self.handle_alarm()
-
-    def handle_alarm(self):
+    def handle_tasks(self, msg):
         for member in self.members:
             for task in member.get_tasks():
                 if self.status.lower() == task.get_task_type_name():
                     logger.debug("Executing Task of type: " + self.status)
-                    TaskExecutor.Instance().schedule_task(self.get_response_message(), task)
+                    TaskExecutor.Instance().schedule_task(msg, task)
 
     def handle_call(self):
         logger.debug("handle call")
         logger.debug(self.service)
         if self.enabled:
+            self.last_execution = None
             try:
-                execution = JobExecution()
-                self.service.execute(execution)
+                self.last_execution = JobExecution(self.get_host())
+                self.service.execute(self.last_execution)
             except Exception, e:
                 logger.debug(e)
-            execution.set_execution_end()
-            self.handle_threshold(self.service.get_threshold(), execution.was_successful())
+
+            self.last_execution.set_execution_end()
+            self.handle_threshold(self.service.get_threshold(), self.last_execution.was_successful())
             logger.info("Job " + self.hex_string() +
-                        ", Code: " + str(execution.get) +
-                        ", Message: " + str(self.get_message()))
+                ", Code: " + str(self.last_execution.get_error_code()) +
+                ", Message: " + str(self.last_execution.get_message()))
+            self.handle_tasks(self.last_execution.get_response_message(self))
         else:
             logger.info("Job " + self.hex_string() + " disabled")
-
 
     def get_host(self):
         return self.host
@@ -138,20 +138,14 @@ class Job:
         return self.hostgroup
 
 
-
-
-
-
-
-
 class JobExecution(object):
     def __init__(self, host):
         self.execution_start = datetime.now()
         self.execution_end = -1
         self.host = host
         self.error_code = -1
-        self.message = ""
-        self.kwargs = {}
+        self.message = None
+        self.kwargs = None
 
     def get_host_name(self):
         return self.host
@@ -171,14 +165,17 @@ class JobExecution(object):
     def was_successful(self):
         return self.get_error_code() == 0
 
-    def set_result(self, error_code=0, message="", **kwargs):
+    def set_result(self, error_code=0, message="", kwargs=None):
         self.error_code = error_code
         self.message = message
         self.kwargs = kwargs
 
     def get_response_message(self, job):
-        return str(job.status) + " [CLASS: " + str(job.jobHex) + "] " + \
-            str(self.get_hostgroup()) + " " + str(self.get_host()) + \
-            " Message:" + str(self.get_message()) + " " + str(self.get_kwargs())
-
+        msg = str(job.status) + " [CLASS: " + str(job.jobHex) + "] " + \
+            str(job.get_hostgroup()) + " " + str(job.get_host())
+        if self.get_message() is not None:
+            msg += " Message:" + str(self.get_message())
+        if self.get_kwargs() is not None:
+            msg += " " + str(self.get_kwargs())
+        return msg
 

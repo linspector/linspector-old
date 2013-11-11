@@ -75,7 +75,7 @@ class DummyService(Service):
         if self.fail:
             error_code = 1
             msg = "Failed"
-        execution.set_result(error_code, msg, *d)
+        execution.set_result(error_code, msg, d)
 
 
 
