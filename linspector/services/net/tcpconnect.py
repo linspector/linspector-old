@@ -44,28 +44,28 @@ class TcpconnectService(Service):
     def needs_arguments(self):
         return True
 
-    def execute(self, jobInfo):
+    def execute(self, execution):
+
+        error_code = 0
+        msg = "Connection successful established"
+        e = "None"
+
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        except socket.error, msg:
-            jobInfo.set_errorcode(2)
-            jobInfo.set_message("[tcpconnect: " + jobInfo.jobHex + "] Could not create socket to host: " +
-                                jobInfo.get_host() + " on port: " + str(self.port) + " (" + str(msg) + ")")
+        except socket.error, e:
+            error_code = 2
+            msg = "Could not create socket"
 
         try:
-            sock.connect((jobInfo.get_host(), self.port))
-        except socket.error, msg:
-            jobInfo.set_errorcode(1)
-            jobInfo.set_message("[tcpconnect: " + jobInfo.jobHex + "] Could not establish connection to host: " +
-                                jobInfo.get_host() + " on port: " + str(self.port) + " (" + str(msg) + ")")
-
-        if jobInfo.get_errorcode() == -1:
-            jobInfo.set_execution_successful(True)
-            jobInfo.set_errorcode(0)
-            jobInfo.set_message("[tcpconnect: " + jobInfo.jobHex + "] Connection successful established to host: " +
-                                jobInfo.get_host() + " on port: " + str(self.port))
+            sock.connect((execution.get_host_name(), self.port))
+        except socket.error, e:
+            error_code = 1
+            msg = "Could not establish connection"
 
         sock.close()
+
+        d = {"Port": self.port, "Exception": e}
+        execution.set_result(error_code, msg, d)
 
 
 def create(kwargs):
