@@ -63,19 +63,17 @@ class HttpCodeService(Service):
     def needs_arguments(self):
         return True
 
-    def execute(self, job):
-        r = requests.get(self.protocol + "://" + job.get_host() + ":" + self.port + self.path)
+    def execute(self, execution):
 
+        r = requests.get(self.protocol + "://" + execution.get_host_name() + ":" + self.port + self.path)
+
+        d = {"Expected": str(self.code), "Code": str(r.status_code)}
+        error_code = 0
+        msg = "Success"
         if self.code != r.status_code:
-            job.set_errorcode(1)
-            job.set_message("[http/code: " + job.jobHex + "] Failed on host: " + job.get_host() +
-                            " Expected Code: " + str(self.code) + ", Code was: " + str(r.status_code))
-
-        if job.get_errorcode() == -1:
-            job.set_execution_successful(True)
-            job.set_errorcode(0)
-            job.set_message("[http/code: " + job.jobHex + "] Success on host: " + job.get_host() +
-                            " Expected Code: " + str(self.code) + ", Code was: " + str(r.status_code))
+            error_code = 1
+            msg = "Failed"
+        execution.set_result(error_code, msg, d)
 
 
 def create(kwargs):
