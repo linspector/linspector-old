@@ -119,8 +119,8 @@ class Job:
             self.last_execution.set_execution_end()
             self.handle_threshold(self.service.get_threshold(), self.last_execution.was_successful())
             logger.info("Job " + self.get_job_id() +
-                ", Code: " + str(self.last_execution.get_error_code()) +
-                ", Message: " + str(self.last_execution.get_message()))
+                        ", Code: " + str(self.last_execution.get_error_code()) +
+                        ", Message: " + str(self.last_execution.get_message()))
             self.handle_tasks(self.last_execution.get_response_message(self))
         else:
             logger.info("Job " + self.get_job_id() + " disabled")
