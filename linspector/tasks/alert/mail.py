@@ -60,7 +60,7 @@ class MailTask(Task):
         # ...and so on for all possible args
 
     def execute(self, msg):
-        logger.debug("Eecuting Task!")
+        logger.debug("Executing Mail Task!")
 
         message = MIMEText(msg)
         message['Subject'] = msg
