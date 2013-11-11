@@ -3,7 +3,7 @@ The ssh service This is for executing remote shell commands and retrieve the out
 
 This service is using paramiko (http://www.lag.net/paramiko/).
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
@@ -65,10 +65,3 @@ class SshService(Service):
 
 def create(kwargs):
     return SshService(**kwargs)
-    
-# def main():
-#     # service = SshService(parser, log, command='uptime')
-#     return
-#
-# if __name__ == "__main__":
-#     main()

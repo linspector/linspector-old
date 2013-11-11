@@ -1,7 +1,7 @@
 """
 The shell service. This is for executing local shell commands and retrieve the output.
 
-Copyright (c) 2011-2013 "Johannes Findeisen and Rafael Timmerberg"
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
 
