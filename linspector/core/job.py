@@ -68,6 +68,9 @@ class Job:
             ret = "0" + ret
         return ret
 
+    def get_job_id(self):
+        return self.job_id
+
     def set_job(self, scheduler_job):
         self.scheduler_job = scheduler_job
 
@@ -78,10 +81,10 @@ class Job:
         if execution_successful:
             if self.job_threshold > 0:
                 if "threshold_reset" in self.core and self.core["threshold_reset"]:
-                    logger.info("Job " + self.job_id + ", Threshold Reset")
+                    logger.info("Job " + self.get_job_id() + ", Threshold Reset")
                     self.job_threshold = 0
                 else:
-                    logger.info("Job " + self.job_id + ", Threshold Decrement")
+                    logger.info("Job " + self.get_job_id() + ", Threshold Decrement")
                     self.job_threshold -= 1
 
             self.status = "OK"
@@ -92,7 +95,7 @@ class Job:
             self.job_threshold += 1
 
         if self.job_threshold >= service_threshold:
-            logger.info("Job " + self.job_id + ", Threshold reached!")
+            logger.info("Job " + self.get_job_id() + ", Threshold reached!")
             self.status = "ERROR"
 
     def handle_tasks(self, msg):
@@ -115,12 +118,12 @@ class Job:
 
             self.last_execution.set_execution_end()
             self.handle_threshold(self.service.get_threshold(), self.last_execution.was_successful())
-            logger.info("Job " + self.job_id +
+            logger.info("Job " + self.get_job_id() +
                 ", Code: " + str(self.last_execution.get_error_code()) +
                 ", Message: " + str(self.last_execution.get_message()))
             self.handle_tasks(self.last_execution.get_response_message(self))
         else:
-            logger.info("Job " + self.job_id + " disabled")
+            logger.info("Job " + self.get_job_id() + " disabled")
 
     def get_host(self):
         return self.host
@@ -162,7 +165,7 @@ class JobExecution(object):
         self.kwargs = kwargs
 
     def get_response_message(self, job):
-        msg = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.job_id) + "] " + \
+        msg = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.get_job_id()) + "] " + \
             str(job.get_hostgroup()) + " " + str(job.get_host())
         if self.get_message() is not None:
             msg += " " + str(self.get_message())
