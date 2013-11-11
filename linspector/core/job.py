@@ -98,7 +98,7 @@ class Job:
     def handle_tasks(self, msg):
         for member in self.members:
             for task in member.get_tasks():
-                if self.status.lower() == task.get_task_type():
+                if self.status.lower() == task.get_task_type().lower():
                     logger.debug("Executing Task of type: " + self.status)
                     TaskExecutor.Instance().schedule_task(msg, task)
 
