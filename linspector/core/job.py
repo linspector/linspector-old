@@ -172,3 +172,36 @@ class JobExecution(object):
         if self.get_kwargs() is not None:
             msg += " " + str(self.get_kwargs())
         return msg
+
+
+class JobInformation(object):
+    def __init__(self, job_id, hostgroup, host, service, members):
+        self.job_id = job_id
+        self.hostgroup = hostgroup
+        self.host = host
+        self.service = service
+        self.members = members
+
+        self.period = None
+        self.next_run = None
+        self.runs = 0
+        self.enabled = None
+        self.threshold = 0
+        self.fails = 0
+        self.job_overall_fails = 0
+        self.job_overall_wins = 0
+        self.last_execution = None
+        self.last_run = None
+        self.last_fail = None
+        self.last_success = None
+        self.last_disabled = None
+        self.last_enabled = None
+        self.last_threshold_override = None
+        self.last_escalation = None
+        self.status = "NONE"
+
+    def get_job_overall_fails(self):
+        return self.job_overall_fails
+
+    def inc_job_overall_fails(self):
+        self.job_overall_fails += 1
