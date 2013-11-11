@@ -78,6 +78,5 @@ class DummyService(Service):
         execution.set_result(error_code, msg, d)
 
 
-
 def create(kwargs):
     return DummyService(**kwargs)

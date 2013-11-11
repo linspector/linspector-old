@@ -53,7 +53,7 @@ class Job:
         UNKNOWN  when a job throws an exception which is not handled by the job itself (not implemented)
         """
         self.status = "NONE"
-        self.response = None
+        self.last_execution = None
 
     def __str__(self):
         return str(self.__dict__)
@@ -171,7 +171,7 @@ class JobExecution(object):
         self.kwargs = kwargs
 
     def get_response_message(self, job):
-        msg = str(job.status) + " [CLASS: " + str(job.jobHex) + "] " + \
+        msg = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.jobHex) + "] " + \
             str(job.get_hostgroup()) + " " + str(job.get_host())
         if self.get_message() is not None:
             msg += " Message:" + str(self.get_message())

@@ -31,7 +31,6 @@ logger = getLogger(__name__)
 
 class Service(object):
     def __init__(self, **kwargs):
-        self.name = None
         self._args = {}
         if KEY_ARGS in kwargs:
             self.add_arguments(kwargs[KEY_ARGS])

@@ -32,7 +32,6 @@ logger = getLogger(__name__)
 
 class Task(object):
     def __init__(self, **kwargs):
-
         self._args = {}
         if KEY_ARGS in kwargs:
             self.add_arguments(kwargs[KEY_ARGS])
