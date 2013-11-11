@@ -35,15 +35,12 @@ class Job:
         self.members = members
         self.core = core
         self.hostgroup = hostgroup
-        self.job_infos = []
-        self.job_index = -1
-        self.job_info_size = 10
         self.job_threshold = 0
         self.job_overall_fails = 0
         self.job_overall_wins = 0
         self.enabled = True
         self.scheduler_job = None
-        self.jobHex = self.hex_string()
+        self.job_id = self.hex_string()
         """
         NONE     job was not executed
         OK       when everything is fine
@@ -77,20 +74,14 @@ class Job:
     def set_enabled(self, enabled=True):
         self.enabled = enabled
 
-    def add_job_info(self, job_info):
-        self.job_index += 1
-        if self.job_index > self.job_info_size:
-            self.job_index = 0
-        self.job_infos[self.job_index] = job_info
-
     def handle_threshold(self, service_threshold, execution_successful):
         if execution_successful:
             if self.job_threshold > 0:
                 if "threshold_reset" in self.core and self.core["threshold_reset"]:
-                    logger.info("Job " + self.hex_string() + ", Threshold Reset")
+                    logger.info("Job " + self.job_id + ", Threshold Reset")
                     self.job_threshold = 0
                 else:
-                    logger.info("Job " + self.hex_string() + ", Threshold Decrement")
+                    logger.info("Job " + self.job_id + ", Threshold Decrement")
                     self.job_threshold -= 1
 
             self.status = "OK"
@@ -101,7 +92,7 @@ class Job:
             self.job_threshold += 1
 
         if self.job_threshold >= service_threshold:
-            logger.info("Job " + self.hex_string() + ", Threshold reached!")
+            logger.info("Job " + self.job_id + ", Threshold reached!")
             self.status = "ERROR"
 
     def handle_tasks(self, msg):
@@ -124,12 +115,12 @@ class Job:
 
             self.last_execution.set_execution_end()
             self.handle_threshold(self.service.get_threshold(), self.last_execution.was_successful())
-            logger.info("Job " + self.hex_string() +
+            logger.info("Job " + self.job_id +
                 ", Code: " + str(self.last_execution.get_error_code()) +
                 ", Message: " + str(self.last_execution.get_message()))
             self.handle_tasks(self.last_execution.get_response_message(self))
         else:
-            logger.info("Job " + self.hex_string() + " disabled")
+            logger.info("Job " + self.job_id + " disabled")
 
     def get_host(self):
         return self.host
@@ -171,11 +162,10 @@ class JobExecution(object):
         self.kwargs = kwargs
 
     def get_response_message(self, job):
-        msg = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.jobHex) + "] " + \
+        msg = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.job_id) + "] " + \
             str(job.get_hostgroup()) + " " + str(job.get_host())
         if self.get_message() is not None:
-            msg += " Message:" + str(self.get_message())
+            msg += " " + str(self.get_message())
         if self.get_kwargs() is not None:
             msg += " " + str(self.get_kwargs())
         return msg
-
