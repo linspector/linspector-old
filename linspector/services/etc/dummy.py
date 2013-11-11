@@ -65,24 +65,18 @@ class DummyService(Service):
     def needs_arguments(self):
         return False
 
-    def execute(self, job):
+    def execute(self, execution):
 
         time.sleep(self.sleep)
 
+        d = {"Fail": str(self.fail), "Sleep": str(self.sleep)}
+        error_code = 0
+        msg = "Success"
         if self.fail:
-            job.set_errorcode(1)
-            #job.set_message("[etc/dummy: " + job.jobHex + "] Failed on host: " + job.get_host() +
-            #                " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
+            error_code = 1
+            msg = "Failed"
+        execution.set_result(error_code, msg, *d)
 
-            job.set_response({"Message": "Failed", "Sleep": str(self.sleep), "Fail": str(self.fail)})
-
-        if job.get_errorcode() == -1:
-            job.set_execution_successful(True)
-            job.set_errorcode(0)
-            #job.set_message("[etc/dummy: " + job.jobHex + "] Success on host: " + job.get_host() +
-            #                " Sleep: " + str(self.sleep) + " Fail: " + str(self.fail))
-
-            job.set_response({"Message": "Success", "Sleep": str(self.sleep), "Fail": str(self.fail)})
 
 
 def create(kwargs):
