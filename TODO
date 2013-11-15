@@ -1,6 +1,7 @@
 TODO:
  - Parent alerting (escalation)
  - Core Error alerting to core["members"] on internal errors
+ - Hostgroup Parents (if the Hostgroup "network" is down, don't alert for the server hosts)
  - Add more services
  - Add more tasks e.g. storage in mongodb or mariadb and some more alerts like jabber and SMS
 
