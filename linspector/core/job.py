@@ -108,14 +108,17 @@ class Job:
         logger.debug("handle call")
         logger.debug(self.service)
         if self.enabled:
+            self.job_information.set_execution_start()
+
             self.last_execution = None
             try:
-                self.last_execution = JobExecution(self.get_host())
+                self.last_execution = JobExecution(self.get_host(), self.job_information)
                 self.service.execute(self.last_execution)
             except Exception, e:
                 logger.debug(e)
 
-            self.last_execution.set_execution_end()
+            self.job_information.set_execution_end()
+
             self.handle_threshold(self.service.get_threshold(), self.last_execution.was_successful())
             logger.info("Job " + self.get_job_id() +
                         ", Code: " + str(self.last_execution.get_error_code()) +
@@ -132,7 +135,7 @@ class Job:
 
 
 class JobExecution(object):
-    def __init__(self, host):
+    def __init__(self, host, job_information):
         self.execution_start = datetime.now()
         self.execution_end = -1
         self.host = host
@@ -181,6 +184,9 @@ class JobInformation(object):
         self.service = service
         self.members = members
 
+        self.execution_start = -1
+        self.execution_end = -1
+
         self.period = None
         self.next_run = None
         self.runs = 0
@@ -198,6 +204,12 @@ class JobInformation(object):
         self.last_threshold_override = None
         self.last_escalation = None
         self.status = "NONE"
+
+    def set_execution_end(self):
+        self.execution_end = datetime.now()
+
+    def set_execution_start(self):
+        self.execution_start = datetime.now()
 
     def get_job_overall_fails(self):
         return self.job_overall_fails
