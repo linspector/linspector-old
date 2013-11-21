@@ -20,6 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from logging import getLogger
+from pymongo import MongoClient
 
 from linspector.tasks.task import Task
 
@@ -28,6 +29,31 @@ logger = getLogger(__name__)
 
 class MongodbTask(Task):
     def __init__(self, **kwargs):
+        super(MongodbTask, self).__init__(**kwargs)
+
+        args = self.get_arguments()
+
+        if "database" in args:
+            self.database = args["database"]
+        else:
+            raise Exception("There is no database set")
+
+        if "collection" in args:
+            self.collection = args["collection"]
+        else:
+            raise Exception("There is no collection set")
+
+        self.host = "localhost"
+        if "host" in args:
+            self.host = args["host"]
+
+        self.port = 27017
+        if "port" in args:
+            self.port = args["port"]
+
+        self.client = MongoClient(self.host, self.port)
+
+    def execute(self, job_information):
         pass
 
 
