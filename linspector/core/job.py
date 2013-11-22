@@ -117,7 +117,7 @@ class Job:
             finally:
                 self.job_information.set_execution_end()
 
-            execution.set_response_message(self)
+            self.job_information.set_response_message(execution.get_response_message(self))
             self.handle_threshold(self.service.get_threshold(), execution.was_successful())
             logger.info("Job " + self.get_job_id() +
                         ", Code: " + str(execution.get_error_code()) +
@@ -160,26 +160,21 @@ class JobExecution(object):
         self.error_code = -1
         self.message = None
         self.kwargs = None
-        self.response_message = None
 
     def set_result(self, error_code=0, message="", kwargs=None):
         self.error_code = error_code
         self.message = message
         self.kwargs = kwargs
 
-    def set_response_message(self, job):
-        self.response_message = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.get_job_id()) + "] " + \
+    def get_response_message(self, job):
+        msg = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.get_job_id()) + "] " + \
             str(job.get_hostgroup()) + " " + str(job.get_host())
         if self.get_message() is not None:
-            self.response_message += " " + str(self.get_message())
+            msg += " " + str(self.get_message())
         if self.get_kwargs() is not None:
-            self.response_message += " " + str(self.get_kwargs())
+            msg += " " + str(self.get_kwargs())
+        return msg
 
-    def get_response_message(self):
-        return self.response_message
-
-    def __str__(self):
-        return self.response_message
 
 class JobInformation(object):
     def __init__(self, job_id, hostgroup, host, service, members):
@@ -191,7 +186,7 @@ class JobInformation(object):
 
         self.execution_start = -1
         self.execution_end = -1
-        self.last_execution = JobExecution(host)
+        self.response_message = None
 
         self.period = None
         self.next_run = None
@@ -228,10 +223,13 @@ class JobInformation(object):
     def inc_job_overall_wins(self):
         self.job_overall_wins += 1
 
-    def get_last_execution(self):
-        return self.last_execution
+    def set_response_message(self, msg):
+        self.response_message = msg
+
+    def get_response_message(self):
+        return self.response_message
 
     def new_execution(self):
         self.set_execution_start()
-        self.last_execution._reset()
-        return self.last_execution
+        self.response_message = None
+        return JobExecution(self.host)
