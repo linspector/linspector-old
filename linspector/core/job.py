@@ -97,12 +97,12 @@ class Job:
             logger.info("Job " + self.get_job_id() + ", Threshold reached!")
             self.status = "ERROR"
 
-    def handle_tasks(self, msg):
+    def handle_tasks(self, job_information):
         for member in self.members:
             for task in member.get_tasks():
                 if self.status.lower() == task.get_task_type().lower():
                     logger.debug("Executing Task of type: " + self.status)
-                    TaskExecutor.Instance().schedule_task(msg, task)
+                    TaskExecutor.Instance().schedule_task(job_information, task)
 
     def handle_call(self):
         logger.debug("handle call")
@@ -123,7 +123,7 @@ class Job:
 
             self.job_information.set_response_message(self.last_execution.get_response_message(self))
 
-            self.handle_tasks(self.last_execution.get_response_message(self))
+            self.handle_tasks(self.job_information)
         else:
             logger.info("Job " + self.get_job_id() + " disabled")
 
@@ -209,6 +209,8 @@ class JobInformation(object):
     def inc_job_overall_wins(self):
         self.job_overall_wins += 1
 
+    def get_response_message(self):
+        return self.response_massage
+
     def set_response_message(self, msg):
-        print msg
         self.response_massage = msg

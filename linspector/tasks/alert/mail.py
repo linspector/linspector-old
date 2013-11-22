@@ -59,11 +59,11 @@ class MailTask(Task):
 
         # ...and so on for all possible args
 
-    def execute(self, msg):
+    def execute(self, job_information):
         logger.debug("Executing Mail Task!")
 
-        message = MIMEText(msg)
-        message['Subject'] = msg
+        message = MIMEText(job_information.get_response_message())
+        message['Subject'] = job_information.get_response_message()
         now = datetime.datetime.now()
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
         message['From'] = self.sender
