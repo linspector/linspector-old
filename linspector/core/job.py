@@ -120,6 +120,9 @@ class Job:
             logger.info("Job " + self.get_job_id() +
                         ", Code: " + str(self.last_execution.get_error_code()) +
                         ", Message: " + str(self.last_execution.get_message()))
+
+            self.job_information.set_response_message(self.last_execution.get_response_message(self))
+
             self.handle_tasks(self.last_execution.get_response_message(self))
         else:
             logger.info("Job " + self.get_job_id() + " disabled")
@@ -181,6 +184,7 @@ class JobInformation(object):
         self.service = service
         self.members = members
 
+        self.response_massage = None
         self.period = None
         self.next_run = None
         self.runs = 0
@@ -199,14 +203,12 @@ class JobInformation(object):
         self.last_escalation = None
         self.status = "NONE"
 
-    def get_job_overall_fails(self):
-        return self.job_overall_fails
-
     def inc_job_overall_fails(self):
         self.job_overall_fails += 1
 
-    def get_job_overall_wins(self):
-        return self.job_overall_wins
-
     def inc_job_overall_wins(self):
         self.job_overall_wins += 1
+
+    def set_response_message(self, msg):
+        print msg
+        self.response_massage = msg
