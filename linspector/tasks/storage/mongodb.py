@@ -57,7 +57,9 @@ class MongodbTask(Task):
 
     def execute(self, job_information):
         data = {"timestamp": str(datetime.datetime.now()),
-                "msg": job_information.get_response_message()}
+                "msg": job_information.get_response_message(),
+                "status": job_information.get_status(),
+                "job_id": job_information.get_job_id()}
         self.mongo_db_collection.insert(data)
 
 

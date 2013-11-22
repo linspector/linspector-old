@@ -87,15 +87,18 @@ class Job:
                     self.job_threshold -= 1
 
             self.status = "OK"
+            self.job_information.set_status(self.status)
             self.job_information.inc_job_overall_wins()
         else:
             self.status = "WARNING"
+            self.job_information.set_status(self.status)
             self.job_information.inc_job_overall_fails()
             self.job_threshold += 1
 
         if self.job_threshold >= service_threshold:
             logger.info("Job " + self.get_job_id() + ", Threshold reached!")
             self.status = "ERROR"
+            self.job_information.set_status(self.status)
 
     def handle_tasks(self, job_information):
         for member in self.members:
@@ -211,8 +214,17 @@ class JobInformation(object):
     def inc_job_overall_wins(self):
         self.job_overall_wins += 1
 
+    def get_job_id(self):
+        return self.job_id
+
     def get_response_message(self):
         return self.response_massage
 
     def set_response_message(self, msg):
         self.response_massage = msg
+
+    def get_status(self):
+        return self.status
+
+    def set_status(self, status):
+        self.status = status
