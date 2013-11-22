@@ -48,7 +48,6 @@ class Job:
         UNKNOWN  when a job throws an exception which is not handled by the job itself (not implemented)
         """
         self.status = "NONE"
-        self.last_execution = None
         self.job_information = JobInformation(self.job_id, hostgroup, host, service, members)
 
     def __str__(self):
@@ -97,33 +96,33 @@ class Job:
             logger.info("Job " + self.get_job_id() + ", Threshold reached!")
             self.status = "ERROR"
 
-    def handle_tasks(self, msg):
+    def handle_tasks(self, job_information):
         for member in self.members:
             for task in member.get_tasks():
                 if self.status.lower() == task.get_task_type().lower():
                     logger.debug("Executing Task of type: " + self.status)
-                    TaskExecutor.Instance().schedule_task(msg, task)
+                    TaskExecutor.Instance().schedule_task(job_information, task)
 
     def handle_call(self):
         logger.debug("handle call")
         logger.debug(self.service)
         if self.enabled:
-            self.job_information.set_execution_start()
 
-            self.last_execution = None
+
             try:
-                self.last_execution = JobExecution(self.get_host(), self.job_information)
-                self.service.execute(self.last_execution)
+                execution = self.job_information.new_execution()
+                self.service.execute(execution)
             except Exception, e:
                 logger.debug(e)
+            finally:
+                self.job_information.set_execution_end()
 
-            self.job_information.set_execution_end()
-
-            self.handle_threshold(self.service.get_threshold(), self.last_execution.was_successful())
+            execution.set_response_message(self)
+            self.handle_threshold(self.service.get_threshold(), execution.was_successful())
             logger.info("Job " + self.get_job_id() +
-                        ", Code: " + str(self.last_execution.get_error_code()) +
-                        ", Message: " + str(self.last_execution.get_message()))
-            self.handle_tasks(self.last_execution.get_response_message(self))
+                        ", Code: " + str(execution.get_error_code()) +
+                        ", Message: " + str(execution.get_message()))
+            self.handle_tasks(self.job_information)
         else:
             logger.info("Job " + self.get_job_id() + " disabled")
 
@@ -135,13 +134,12 @@ class Job:
 
 
 class JobExecution(object):
-    def __init__(self, host, job_information):
-        self.execution_start = datetime.now()
-        self.execution_end = -1
+    def __init__(self, host):
         self.host = host
         self.error_code = -1
         self.message = None
         self.kwargs = None
+        self.response_message = None
 
     def get_host_name(self):
         return self.host
@@ -152,29 +150,36 @@ class JobExecution(object):
     def get_kwargs(self):
         return self.kwargs
 
-    def set_execution_end(self):
-        self.execution_end = datetime.now()
-
     def get_error_code(self):
         return self.error_code
 
     def was_successful(self):
         return self.get_error_code() == 0
 
+    def _reset(self):
+        self.error_code = -1
+        self.message = None
+        self.kwargs = None
+        self.response_message = None
+
     def set_result(self, error_code=0, message="", kwargs=None):
         self.error_code = error_code
         self.message = message
         self.kwargs = kwargs
 
-    def get_response_message(self, job):
-        msg = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.get_job_id()) + "] " + \
+    def set_response_message(self, job):
+        self.response_message = str(job.status) + " [" + job.service.get_config_name() + ": " + str(job.get_job_id()) + "] " + \
             str(job.get_hostgroup()) + " " + str(job.get_host())
         if self.get_message() is not None:
-            msg += " " + str(self.get_message())
+            self.response_message += " " + str(self.get_message())
         if self.get_kwargs() is not None:
-            msg += " " + str(self.get_kwargs())
-        return msg
+            self.response_message += " " + str(self.get_kwargs())
 
+    def get_response_message(self):
+        return self.response_message
+
+    def __str__(self):
+        return self.response_message
 
 class JobInformation(object):
     def __init__(self, job_id, hostgroup, host, service, members):
@@ -186,6 +191,7 @@ class JobInformation(object):
 
         self.execution_start = -1
         self.execution_end = -1
+        self.last_execution = JobExecution(host)
 
         self.period = None
         self.next_run = None
@@ -195,7 +201,6 @@ class JobInformation(object):
         self.fails = 0
         self.job_overall_fails = 0
         self.job_overall_wins = 0
-        self.last_execution = None
         self.last_run = None
         self.last_fail = None
         self.last_success = None
@@ -222,3 +227,11 @@ class JobInformation(object):
 
     def inc_job_overall_wins(self):
         self.job_overall_wins += 1
+
+    def get_last_execution(self):
+        return self.last_execution
+
+    def new_execution(self):
+        self.set_execution_start()
+        self.last_execution._reset()
+        return self.last_execution

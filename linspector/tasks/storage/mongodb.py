@@ -38,10 +38,9 @@ class MongodbTask(Task):
         else:
             raise Exception("There is no database set")
 
+        self.collection = "default"
         if "collection" in args:
             self.collection = args["collection"]
-        else:
-            raise Exception("There is no collection set")
 
         self.host = "localhost"
         if "host" in args:
@@ -51,11 +50,12 @@ class MongodbTask(Task):
         if "port" in args:
             self.port = args["port"]
 
-        self.client = MongoClient(self.host, self.port)
+        self.mongo_client = MongoClient(self.host, self.port)
+        self.mongo_db = self.mongo_client[self.database]
+        self.mongo_db_collection = self.mongo_db[self.collection]
 
     def execute(self, job_information):
-        pass
-
+        self.mongo_db_collection.insert(job_information.__dict__)
 
 def create(kwargs):
     return MongodbTask(**kwargs)

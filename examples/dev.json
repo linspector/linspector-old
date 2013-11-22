@@ -3,6 +3,11 @@
         "root":{
             "_name": "root",
             "tasks": [
+                 {
+                    "class": "storage/mongodb",
+                    "type": "ok",
+                    "args": { "database" : "linspector" }
+                },
                 {
                     "class": "alert/mail",
                     "type": "error",
@@ -42,7 +47,7 @@
         }
     },
     "periods": {
-        "fast": { "seconds": 3 },
+        "fast": { "seconds": 8 },
         "medium": { "seconds": 120 },
         "slow": { "seconds": 480 }
     },
