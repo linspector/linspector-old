@@ -5,8 +5,14 @@
             "tasks": [
                  {
                     "class": "storage/mongodb",
-                    "type": "ok",
+                    "type": [ "ok", "warning", "error" ],
                     "args": { "database" : "linspector" }
+                },
+                {
+                    "class": "storage/logger",
+                    "type": [ "ok", "warning", "error" ],
+                    "args": { "directory": "/tmp/",
+                            "file": "data.log" }
                 },
                 {
                     "class": "alert/mail",
