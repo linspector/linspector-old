@@ -100,7 +100,7 @@ class Job:
     def handle_tasks(self, job_information):
         for member in self.members:
             for task in member.get_tasks():
-                if self.status.lower() == task.get_task_type().lower():
+                if self.status.lower() in task.get_task_type().lower():
                     logger.debug("Executing Task of type: " + self.status)
                     TaskExecutor.Instance().schedule_task(job_information, task)
 
