@@ -19,6 +19,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import datetime
 from logging import getLogger
 from pymongo import MongoClient
 
@@ -50,13 +51,14 @@ class MongodbTask(Task):
         if "port" in args:
             self.port = args["port"]
 
-        #self.mongo_client = MongoClient(self.host, self.port)
-        #self.mongo_db = self.mongo_client[self.database]
-        #self.mongo_db_collection = self.mongo_db[self.collection]
+        self.mongo_client = MongoClient(self.host, self.port)
+        self.mongo_db = self.mongo_client[self.database]
+        self.mongo_db_collection = self.mongo_db[self.collection]
 
     def execute(self, job_information):
-        #self.mongo_db_collection.insert(job_information.__dict__)
-        pass
+        data = {"timestamp": str(datetime.datetime.now()),
+                "msg": job_information.get_response_message()}
+        self.mongo_db_collection.insert(data)
 
 
 def create(kwargs):
