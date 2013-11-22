@@ -20,8 +20,8 @@
                     "args": { "host": "localhost",
                               "port": 25,
                               "sender": "linspector@linspector.org",
-                              "username": "",
-                              "password": "",
+                              "user": "",
+                              "pass": "",
                               "rcpt": "hanez@linspector.org"
                     }
                 },
