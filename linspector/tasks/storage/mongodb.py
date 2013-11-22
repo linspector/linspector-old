@@ -50,12 +50,14 @@ class MongodbTask(Task):
         if "port" in args:
             self.port = args["port"]
 
-        self.mongo_client = MongoClient(self.host, self.port)
-        self.mongo_db = self.mongo_client[self.database]
-        self.mongo_db_collection = self.mongo_db[self.collection]
+        #self.mongo_client = MongoClient(self.host, self.port)
+        #self.mongo_db = self.mongo_client[self.database]
+        #self.mongo_db_collection = self.mongo_db[self.collection]
 
     def execute(self, job_information):
-        self.mongo_db_collection.insert(job_information.__dict__)
+        #self.mongo_db_collection.insert(job_information.__dict__)
+        pass
+
 
 def create(kwargs):
     return MongodbTask(**kwargs)
