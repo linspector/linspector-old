@@ -80,7 +80,7 @@ class MailTask(Task):
             try:
                 s.login(self.username, self.password)
             except Exception, e:
-                logger.warning(e)
+                logger.error(e)
 
         s.sendmail(self.sender, self.rcpt, message.as_string())
         s.quit()
