@@ -46,9 +46,8 @@ class LoggerTask(Task):
         return True
 
     def execute(self, job_information):
-        now = datetime.datetime.now().strftime("%Y.%m.%d %H:%M:%S")
         f = open(self.directory + self.file, 'a')
-        f.write(now + ': ' + job_information.get_response_message() + '\n')
+        f.write(str(datetime.datetime.now()) + ': ' + job_information.get_response_message() + '\n')
         f.close()
 
 
