@@ -19,6 +19,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import datetime
 from logging import getLogger
 
 from linspector.tasks.task import Task
@@ -45,8 +46,9 @@ class LoggerTask(Task):
         return True
 
     def execute(self, job_information):
+        now = datetime.datetime.now().strftime("%Y.%m.%d %H:%M:%S")
         f = open(self.directory + self.file, 'a')
-        f.write(job_information.get_response_message() + '\n')
+        f.write(now + ': ' + job_information.get_response_message() + '\n')
         f.close()
 
 
