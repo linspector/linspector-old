@@ -23,7 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
 import smtplib
-import time
 
 from email.mime.text import MIMEText
 from logging import getLogger
@@ -57,7 +56,13 @@ class MailTask(Task):
         if "port" in args:
             self.port = args["port"]
 
-        # ...and so on for all possible args
+        self.username = None
+        if "username" in args:
+            self.username = args["username"]
+
+        self.password = None
+        if "password" in args:
+            self.password = args["password"]
 
     def execute(self, job_information):
         logger.debug("Executing Mail Task!")
@@ -68,8 +73,15 @@ class MailTask(Task):
         message['Date'] = now.strftime("%a, %d %b %Y %H:%M:%S")
         message['From'] = self.sender
         message['To'] = self.rcpt
+
         s = smtplib.SMTP(self.host, self.port)
-        #s.login(self.userName, self.password)
+
+        if self.username and self.password:
+            try:
+                s.login(self.username, self.password)
+            except Exception, e:
+                logger.warning(e)
+
         s.sendmail(self.sender, self.rcpt, message.as_string())
         s.quit()
 
