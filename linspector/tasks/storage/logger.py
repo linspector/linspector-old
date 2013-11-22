@@ -32,16 +32,20 @@ class LoggerTask(Task):
 
         args = self.get_arguments()
 
+        if "directory" in args:
+            self.directory = args["directory"]
+        else:
+            raise Exception("There is no directory set")
+
+        self.file = "data.log"
         if "file" in args:
             self.file = args["file"]
-        else:
-            raise Exception("There is no file set")
 
     def needs_arguments(self):
         return True
 
     def execute(self, job_information):
-        f = open(self.file, 'a')
+        f = open(self.directory + self.file, 'a')
         f.write(job_information.get_response_message() + '\n')
         f.close()
 
