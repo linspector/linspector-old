@@ -1,18 +1,13 @@
 {
-    "tasks": {
-        "mail":{
-            "host": "localhost",
-            "port": 25,
-            "from": "linspector@linspector.org",
-            "username": "",
-            "password": ""
-        }
-    },
     "members":{
         "root":{
             "_name": "root",
             "tasks": [
-                { "class":"alert/mail", "type": "error", "args": { "_rcpt": "hanez@linspector.org" }}
+                {
+                    "class": "storage/logger",
+                    "type": [ "ok", "warning", "error" ],
+                    "args": { "directory": "/tmp/", "file": "data.log" }
+                }
             ]
         }
     },
@@ -40,7 +35,7 @@
         "instance_name": "Master Monitor 01 (monitor01.linspector.org)",
         "threshold_handling": "reset",
         "shutdown_wait": false,
-        "members":[ "linspector", "root" ],
+        "members": [ "linspector", "root" ],
         "jsonrpc_backend": true,
         "backends": {
             "jsonrpc": {
