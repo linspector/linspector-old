@@ -4,9 +4,9 @@
             "_name": "admin",
             "tasks": [
                 {
-                  "class":"alert/mail",
-                  "type": "error",
-                  "args": { "rcpt": "hanez@linspector.org", "sender": "linspector@linspector.org" }
+                    "class": "storage/logger",
+                    "type": [ "ok", "warning", "error" ],
+                    "args": { "directory": "/tmp/", "file": "data.log" }
                 }
             ]
         }
