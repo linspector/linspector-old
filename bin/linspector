@@ -95,7 +95,7 @@ def handle_job(job):
 
 
 def main():
-    global linConf
+    global lin_conf
     args = parse_args()
 
     logfile = path.expanduser(args.logfile)
@@ -111,7 +111,7 @@ def main():
 
     try:
         config_parser = FullConfigParser()
-        linConf, core = config_parser.parse_config(args.config)
+        lin_conf, core = config_parser.parse_config(args.config)
     except Exception, msg:
         print("Configuration error: " + str(msg) + ". Exiting now.")
         logger.error(msg)
@@ -123,7 +123,7 @@ def main():
     TaskExecutor.Instance()
 
     job_count = 0
-    for layout in linConf.get_enabled_layouts():
+    for layout in lin_conf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             job_count += (hostgroup.get_services().__len__() * hostgroup.get_hosts().__len__())
 
@@ -132,7 +132,7 @@ def main():
     jobs = []
     count = 0
     percent = 0
-    for layout in linConf.get_enabled_layouts():
+    for layout in lin_conf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             for service in hostgroup.get_services():
                 for host in hostgroup.get_hosts():
@@ -161,7 +161,7 @@ def main():
 
     print("\nScheduled " + str(job_count) + " jobs")
 
-    interface = LinspectorInterface(jobs, scheduler, linConf)
+    interface = LinspectorInterface(jobs, scheduler, lin_conf)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         jsonrpc = JsonrpcBackend(interface, core)
