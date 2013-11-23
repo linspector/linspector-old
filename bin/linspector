@@ -161,7 +161,7 @@ def main():
 
     print("\nScheduled " + str(job_count) + " jobs")
 
-    interface = LinspectorInterface(jobs, scheduler, lin_conf)
+    interface = LinspectorInterface(jobs, scheduler, lin_conf, root_logger)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         jsonrpc = JsonrpcBackend(interface, core)

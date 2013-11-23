@@ -350,7 +350,9 @@ Usage:
             pass
 
     def do_log(self, text):
-        if text == "less":
+        text = shsplit(text)
+
+        if text[0] == "less":
             try:
                 # TODO: do the less on the logfile set by args and not a static path
                 with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
@@ -358,7 +360,13 @@ Usage:
             except IOError:
                 self.print_color(RED, "Logfile not found.")
                 self.help_log()
-        elif text == "more":
+        elif text[0] == "level":
+            if text[1] in ["debug", "error", "info", "warning"]:
+                self.interface.set_log_level(text[1])
+                self.print_color(GREEN, "Setting log level to: " + text[1])
+            else:
+                self.print_color(RED, "Log level " + text[1] + " not supported")
+        elif text[0] == "more":
             try:
                 # TODO: do the more on the logfile set by args and not a static path
                 with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
@@ -366,7 +374,7 @@ Usage:
             except IOError:
                 self.print_color(RED, "Logfile not found.")
                 self.help_log()
-        elif text == "tail":
+        elif text[0] == "tail":
             try:
                 # TODO: do the tail on the logfile set by args and not a static path
                 with open(os.path.dirname(os.path.abspath(__file__)) + "/../../log/linspector.log"):
@@ -378,9 +386,11 @@ Usage:
     def help_log(self):
         print('''
 Usage:
-  less  less on the linspector logfile (press "q" to exit)
-  more  more on the linspector logfile (press "q" to exit)
-  tail  tail (-F) on the linspector logfile (Ctrl+C to exit)
+  less          less on the linspector logfile (press "q" to exit)
+  level <LEVEL> set the log level to <LEVEL>
+                supported levels are debug, error, info, warning
+  more          more on the linspector logfile (press "q" to exit)
+  tail          tail (-F) on the linspector logfile (Ctrl+C to exit)
 ''')
 
     def do_status(self, text):

@@ -20,17 +20,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from collections import OrderedDict
-from logging import getLogger
+import logging
 
-logger = getLogger(__name__)
+from collections import OrderedDict
+
+logger = logging.getLogger(__name__)
 
 
 class LinspectorInterface(object):
-    def __init__(self, jobs, scheduler, linspectorConfig):
+    def __init__(self, jobs, scheduler, linspectorConfig, root_logger):
         self.jobs = jobs
         self._scheduler = scheduler
         self._config = linspectorConfig
+        self._root_logger = root_logger
         self._recompute_job_hex_strings()
 
     def _recompute_job_hex_strings(self):
@@ -161,3 +163,14 @@ class LinspectorInterface(object):
     def get_thread_count(self):
         return {"Num Threads": str(self._scheduler._threadpool.num_threads),
                 "Max Threads": str(self._scheduler._threadpool.max_threads)}
+
+    def set_log_level(self, log_level):
+        if log_level == "debug":
+            level = logging.DEBUG
+        elif log_level == "error":
+            level = logging.ERROR
+        elif log_level == "info":
+            level = logging.INFO
+        elif log_level == "warning":
+            level = logging.WARNING
+        self._root_logger.setLevel(level)
