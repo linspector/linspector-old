@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.14/AMNESIA"
+__version__ = "0.15/AMNESIA"
 
 import argparse
 import datetime
@@ -28,6 +28,7 @@ import logging
 import logging.handlers
 import os
 import os.path as path
+import sys
 
 from linspector.backends.jsonrpc import JsonrpcBackend
 from linspector.config.parser import FullConfigParser
@@ -116,21 +117,36 @@ def main():
         logger.error(msg)
         exit()
 
-    print("Scheduling jobs. Be patient...")
-
     scheduler = Scheduler({"apscheduler.threadpool.core_threads": args.corethreads,
                            "apscheduler.threadpool.max_threads": args.threads})
     scheduler.start()
     TaskExecutor.Instance()
 
+    job_count = 0
+    for layout in linConf.get_enabled_layouts():
+        for hostgroup in layout.get_hostgroups():
+            job_count += (hostgroup.get_services().__len__() * hostgroup.get_hosts().__len__())
+
     start_date = datetime.datetime.now()
     time_delta = 0
     jobs = []
+    count = 0
+    percent = 0
     for layout in linConf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             for service in hostgroup.get_services():
                 for host in hostgroup.get_hosts():
                     for period in service.get_periods():
+                        count += 1
+                        if job_count >= 100:
+                            if count % (job_count/100) == 0:
+                                percent += 1
+                                sys.stdout.write("Scheduling jobs. Be patient... " + str(percent) + "%\r")
+                                sys.stdout.flush()
+                        else:
+                            sys.stdout.write("Scheduling jobs. Be patient...\r")
+                            sys.stdout.flush()
+
                         time_delta += float(args.delay)
                         new_start_date = start_date + datetime.timedelta(seconds=time_delta)
                         job = Job(service,
@@ -143,14 +159,14 @@ def main():
                             job.set_job(scheduler_job)
                             jobs.append(job)
 
+    print("\nScheduled " + str(job_count) + " jobs")
+
     interface = LinspectorInterface(jobs, scheduler, linConf)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         jsonrpc = JsonrpcBackend(interface, core)
         jsonrpc.daemon = True
         jsonrpc.start()
-
-    print("Ready!")
 
     print("Type \"help\" to view available commands or \"help COMMAND\" to view the commands help")
 
