@@ -64,6 +64,9 @@ class MailTask(Task):
         if "password" in args:
             self.password = args["password"]
 
+    def needs_arguments(self):
+        return True
+
     def execute(self, job_information):
         logger.debug("Executing Mail Task!")
 

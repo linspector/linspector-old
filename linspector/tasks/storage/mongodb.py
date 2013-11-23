@@ -55,6 +55,9 @@ class MongodbTask(Task):
         self.mongo_db = self.mongo_client[self.database]
         self.mongo_db_collection = self.mongo_db[self.collection]
 
+    def needs_arguments(self):
+        return True
+
     def execute(self, job_information):
         data = {"timestamp": str(datetime.datetime.now()),
                 "msg": job_information.get_response_message(),
