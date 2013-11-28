@@ -48,6 +48,8 @@ class LishFrontend(Frontend):
         super(LishFrontend, self)
         commander = LishCommander(linpsectorInterface)
 
+        print("Type \"help\" to view available commands or \"help COMMAND\" to view the commands help")
+
         run = True
         while run:
             try:

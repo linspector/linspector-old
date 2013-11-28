@@ -168,8 +168,6 @@ def main():
         jsonrpc.daemon = True
         jsonrpc.start()
 
-    print("Type \"help\" to view available commands or \"help COMMAND\" to view the commands help")
-
     LishFrontend(interface)
 
     logger.debug("shutting down scheduler")
