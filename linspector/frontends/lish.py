@@ -44,9 +44,9 @@ logger = getLogger(__name__)
 
 
 class LishFrontend(Frontend):
-    def __init__(self, linpsectorInterface):
+    def __init__(self, linspectorInterface):
         super(LishFrontend, self)
-        commander = LishCommander(linpsectorInterface)
+        commander = LishCommander(linspectorInterface)
 
         print("Type \"help\" to view available commands or \"help COMMAND\" to view the commands help")
 
