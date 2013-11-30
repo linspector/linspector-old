@@ -28,11 +28,12 @@ logger = logging.getLogger(__name__)
 
 
 class LinspectorInterface(object):
-    def __init__(self, jobs, scheduler, linspectorConfig, root_logger):
+    def __init__(self, jobs, scheduler, config, root_logger, version):
         self.jobs = jobs
         self._scheduler = scheduler
-        self._config = linspectorConfig
+        self._config = config
         self._root_logger = root_logger
+        self._version = version
         self._recompute_job_hex_strings()
 
     def _recompute_job_hex_strings(self):
@@ -174,3 +175,6 @@ class LinspectorInterface(object):
         elif log_level == "warning":
             level = logging.WARNING
         self._root_logger.setLevel(level)
+
+    def get_version(self):
+        return self._version
