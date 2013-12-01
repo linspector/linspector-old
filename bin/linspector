@@ -70,8 +70,8 @@ def parse_args():
     parser.add_argument("-k", "--corethreads", default=200, type=int,
                         help="number of scheduler core threads (default: 200)")
 
-    parser.add_argument("-x", "--delay", default=0.153790, type=float,
-                        help="seconds delay between scheduled jobs (default: 0.153790)")
+    parser.add_argument("-x", "--delay", default=1.135791, type=float,
+                        help="seconds delay between scheduled jobs (default: 1.135791)")
 
     output = parser.add_mutually_exclusive_group()
     output.add_argument("-q", "--quiet", action="store_const", dest="loglevel", const=logging.ERROR,
