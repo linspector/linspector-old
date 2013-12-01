@@ -1,0 +1,13 @@
+
+0.16 - Date ??? Not released yet!
+
+ - Added a CHANGELOG file
+ - Added new urwid based frontend called urlish
+ - Added scheduling status to boot message
+ - Tweaked the default setting for arguments after a lot of testing
+   This should be tested a lot more with a many and less jobs
+ - Lots of improvements and bug fixes
+
+Older releases:
+
+ - No information available. Look into the commit log for that. Sorry!
