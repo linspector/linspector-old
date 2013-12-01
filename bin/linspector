@@ -178,6 +178,8 @@ def main():
         from linspector.frontends.lish import LishFrontend
         LishFrontend(interface)
 
+    print("Shutting down... please wait!")
+
     logger.debug("shutting down scheduler")
 
     shutdown_wait = True
