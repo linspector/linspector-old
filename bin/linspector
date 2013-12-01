@@ -64,14 +64,14 @@ def parse_args():
     parser.add_argument("-m", "--logsize", default=10485760, type=int,
                         help="maximum logfile size in bytes (default: 10485760)")
 
-    parser.add_argument("-t", "--threads", default=1000, type=int,
-                        help="maximum number of scheduler threads (default: 1000)")
+    parser.add_argument("-t", "--threads", default=3500, type=int,
+                        help="maximum number of scheduler threads (default: 3500)")
 
-    parser.add_argument("-k", "--corethreads", default=0, type=int,
-                        help="number of scheduler core threads (default: 0)")
+    parser.add_argument("-k", "--corethreads", default=200, type=int,
+                        help="number of scheduler core threads (default: 200)")
 
-    parser.add_argument("-x", "--delay", default=3.141592, type=float,
-                        help="seconds delay between scheduled jobs (default: 3.141592)")
+    parser.add_argument("-x", "--delay", default=0.153790, type=float,
+                        help="seconds delay between scheduled jobs (default: 0.153790)")
 
     output = parser.add_mutually_exclusive_group()
     output.add_argument("-q", "--quiet", action="store_const", dest="loglevel", const=logging.ERROR,
