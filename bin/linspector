@@ -30,7 +30,6 @@ import os
 import os.path as path
 import sys
 
-from linspector.backends.jsonrpc import JsonrpcBackend
 from linspector.config.parser import FullConfigParser
 from linspector.core.interface import LinspectorInterface
 from linspector.core.job import Job
@@ -163,6 +162,7 @@ def main():
     interface = LinspectorInterface(jobs, scheduler, lin_conf, root_logger, __version__)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
+        from linspector.backends.jsonrpc import JsonrpcBackend
         jsonrpc = JsonrpcBackend(interface, core)
         jsonrpc.daemon = True
         jsonrpc.start()
