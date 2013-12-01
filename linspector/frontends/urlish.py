@@ -1,5 +1,5 @@
 """
-clish is a urwid based Linspector Interactive Shell.
+urlish is the urwid based Linspector Interactive Shell.
 
 Uses: http://excess.org/urwid/
 
@@ -27,7 +27,7 @@ from logging import getLogger
 
 from linspector.frontends.frontend import Frontend
 
-__version__ = "0.1"
+__version__ = "0.1.1"
 
 logger = getLogger(__name__)
 
@@ -96,7 +96,7 @@ class CommandPrompt(urwid.Edit):
 
             elif command[0] in ('version', 'v'):
                 self.clear()
-                status_bar.set_text(" Linspector " + str(interface.get_version()))
+                status_bar.set_text(" Linspector " + str(interface.get_version()) + ", urlish " + __version__)
                 main_frame.set_focus('body')
 
             else:
@@ -150,9 +150,9 @@ def update(main_loop, user_data):
     main_loop.set_alarm_in(1, update)
 
 
-class ClishFrontend(Frontend):
+class UrlishFrontend(Frontend):
     def __init__(self, linspector_interface):
-        super(ClishFrontend, self)
+        super(UrlishFrontend, self)
 
         global job_list_box
         global command_prompt

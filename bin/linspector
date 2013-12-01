@@ -171,9 +171,9 @@ def main():
     if "frontend" in core and core["frontend"]:
         frontend = core["frontend"]
 
-    if frontend == "clish":
-        from linspector.frontends.clish import ClishFrontend
-        ClishFrontend(interface)
+    if frontend == "urlish":
+        from linspector.frontends.urlish import UrlishFrontend
+        UrlishFrontend(interface)
     else:
         from linspector.frontends.lish import LishFrontend
         LishFrontend(interface)
