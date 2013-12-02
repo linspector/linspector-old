@@ -20,6 +20,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+"""
+TODO:
+
+ - tasks should not be normal python threads; they should be created using the
+   multiprocessing library to make sure we could use more then one cpu core.
+   if we switch to celery for task execution at some time we even could use
+   celery for task execution. currently we support only one core when running
+   linspector... :(
+"""
+
 from datetime import datetime
 from binascii import crc32
 from logging import getLogger
