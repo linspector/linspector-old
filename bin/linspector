@@ -34,6 +34,7 @@ from linspector.config.parser import FullConfigParser
 from linspector.core.interface import LinspectorInterface
 from linspector.core.job import Job
 from linspector.core.scheduler import Scheduler
+from linspector.frontends.lish import LishFrontend
 from linspector.tasks.task import TaskExecutor
 
 logger = logging.getLogger(__name__)
@@ -167,16 +168,7 @@ def main():
         jsonrpc.daemon = True
         jsonrpc.start()
 
-    frontend = None
-    if "frontend" in core and core["frontend"]:
-        frontend = core["frontend"]
-
-    if frontend == "urlish":
-        from linspector.frontends.urlish import UrlishFrontend
-        UrlishFrontend(interface)
-    else:
-        from linspector.frontends.lish import LishFrontend
-        LishFrontend(interface)
+    LishFrontend(interface)
 
     print("Shutting down... please wait!")
 

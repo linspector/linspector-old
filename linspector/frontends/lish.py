@@ -31,7 +31,7 @@ from shlex import split as shsplit
 
 from linspector.frontends.frontend import Frontend
 
-__version__ = "0.2.3-alpha"
+__version__ = "0.3"
 
 PURPLE = "\033[95m"
 BLUE   = "\033[94m"
@@ -174,7 +174,6 @@ class Command(Cmd, object):
             if len(line) > 0 and line[0] in [child.alias for child in self.get_children()]:
                 pass
 
-
     def completenames(self, text, *ignored):
         ret = super(Command, self).completenames(text, *ignored)
         if len(self.get_children()) > 0:
@@ -200,11 +199,11 @@ class CommandTree(object):
 
 
 class LishCommander(Exit):
-    def __init__(self, linspectorInterface):
+    def __init__(self, linspector_interface):
         super(LishCommander, self).__init__()
 
         self.prompt = BLUE + "<Lish@" + socket.gethostname() + ">: " + END
-        self.interface = linspectorInterface
+        self.interface = linspector_interface
 
     def do_python(self, text):
         exec text
@@ -287,6 +286,20 @@ Usage:
 Usage:
   count  Show count of all jobs
   list   Lists all jobs
+''')
+
+    def do_gui(self, text):
+        try:
+            from linspector.frontends.lishgui import LishGui
+            gui = LishGui(self.interface)
+            gui.run()
+        except Exception, err:
+            self.print_color(RED, "Error: " + str(err) + ", no GUI support!")
+
+    def help_gui(self):
+        print('''
+Usage:
+  gui  start the graphical user interface
 ''')
 
     def do_host(self, text):

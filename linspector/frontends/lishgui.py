@@ -49,10 +49,6 @@ import urwid
 
 from logging import getLogger
 
-from linspector.frontends.frontend import Frontend
-
-__version__ = "0.1.2"
-
 logger = getLogger(__name__)
 
 
@@ -101,7 +97,7 @@ class CommandPrompt(urwid.Edit):
 
             elif command[0] in ('version', 'v'):
                 self.clear()
-                status_bar.set_text(" Linspector " + str(interface.get_version()) + ", urlish " + __version__)
+                status_bar.set_text(" Linspector " + str(interface.get_version()))
                 main_frame.set_focus('body')
 
             else:
@@ -233,59 +229,9 @@ class RootParentNode(urwid.ParentNode):
         return childclass(childdata, parent=self, key=key, depth=childdepth)
 
 
-class UrlishFrontend(Frontend):
+class LishGui():
     def __init__(self, linspector_interface):
-        super(UrlishFrontend, self)
-
-        global job_list_box
-        global command_prompt
-        global header_bar
-        global status_bar
-        global main_frame
-        global loop
-        global interface
-
-        palette = [('body', 'white', 'black'),
-                   ('foot_bar', 'white', 'black'),
-                   ('top', 'white', 'dark red'),
-                   ('status', 'white', 'dark blue'),
-                   ('prompt', 'white', 'black')]
-
-        foot_text = [('title', "Navigation:"), "    ",
-                     ('key', "UP"), ",", ('key', "DOWN"), ",",
-                     ('key', "PAGE UP"), ",", ('key', "PAGE DOWN"),
-                     "  ",
-                     ('key', "+"), ",",
-                     ('key', "-"), "  ",
-                     ('key', "LEFT"), "  ",
-                     ('key', "HOME"), "  ",
-                     ('key', "END")]
-
-        interface = linspector_interface
-
-        top_node = RootParentNode(get_example_tree())
-        job_list_box = urwid.TreeListBox(urwid.TreeWalker(top_node))
-        job_list_box.offset_rows = 1
-
-        header_message = ' Linspector (' + str(linspector_interface.get_version()) + ')'
-        header_bar = urwid.Text(header_message, align='left')
-        header = urwid.Pile([urwid.AttrMap(header_bar, 'top')])
-
-        command_prompt = CommandPrompt()
-
-        foot_bar = urwid.Text(foot_text, align='left')
-
-        welcome_message = ' Type ":h <Enter>" for help, ":q <Enter>" to quit'
-        status_bar = urwid.Text(welcome_message, align='left')
-        footer = urwid.Pile([urwid.AttrMap(foot_bar, 'foot_bar'),
-                             urwid.AttrMap(status_bar, 'status'),
-                             urwid.AttrMap(command_prompt, 'prompt')])
-
-        main_frame = urwid.Frame(body=job_list_box, header=header, footer=footer)
-
-        loop = urwid.MainLoop(main_frame, palette, unhandled_input=self.unhandled_input, handle_mouse=False)
-        loop.set_alarm_in(0, update)
-        loop.run()
+        self.interface = linspector_interface
 
     @staticmethod
     def unhandled_input(key):
@@ -316,6 +262,57 @@ class UrlishFrontend(Frontend):
         elif key in ('X'):
             #expand all nodes
             pass
+
+    def run(self):
+        global job_list_box
+        global command_prompt
+        global header_bar
+        global status_bar
+        global main_frame
+        global loop
+        global interface
+
+        palette = [('body', 'white', 'black'),
+                   ('foot_bar', 'white', 'black'),
+                   ('top', 'white', 'dark red'),
+                   ('status', 'white', 'dark blue'),
+                   ('prompt', 'white', 'black')]
+
+        foot_text = [('title', "Navigation:"), "    ",
+                     ('key', "UP"), ",", ('key', "DOWN"), ",",
+                     ('key', "PAGE UP"), ",", ('key', "PAGE DOWN"),
+                     "  ",
+                     ('key', "+"), ",",
+                     ('key', "-"), "  ",
+                     ('key', "LEFT"), "  ",
+                     ('key', "HOME"), "  ",
+                     ('key', "END")]
+
+        interface = self.interface
+
+        top_node = RootParentNode(get_example_tree())
+        job_list_box = urwid.TreeListBox(urwid.TreeWalker(top_node))
+        job_list_box.offset_rows = 1
+
+        header_message = ' Linspector (' + str(self.interface.get_version()) + ')'
+        header_bar = urwid.Text(header_message, align='left')
+        header = urwid.Pile([urwid.AttrMap(header_bar, 'top')])
+
+        command_prompt = CommandPrompt()
+
+        foot_bar = urwid.Text(foot_text, align='left')
+
+        welcome_message = ' Type ":h <Enter>" for help, ":q <Enter>" to quit'
+        status_bar = urwid.Text(welcome_message, align='left')
+        footer = urwid.Pile([urwid.AttrMap(foot_bar, 'foot_bar'),
+                             urwid.AttrMap(status_bar, 'status'),
+                             urwid.AttrMap(command_prompt, 'prompt')])
+
+        main_frame = urwid.Frame(body=job_list_box, header=header, footer=footer)
+
+        loop = urwid.MainLoop(main_frame, palette, unhandled_input=self.unhandled_input, handle_mouse=False)
+        loop.set_alarm_in(0, update)
+        loop.run()
 
 
 def update(main_loop, user_data):
