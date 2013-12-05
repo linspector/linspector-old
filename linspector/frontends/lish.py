@@ -266,7 +266,7 @@ Usage:
         if text == "list":
             for job in self.interface.jobs:
                 job_dict = self.interface.get_job_info_dict(job)
-                print GREEN + job_dict["Job"] + END + ":\t" + \
+                print GREEN + job_dict["Job"] + END + ": " + \
                     PURPLE + "Hostgroup" + END + ": " + job_dict["Hostgroup"] + \
                     PURPLE + " Host" + END + ": " + job_dict["Host"] + \
                     PURPLE + " Service" + END + ": " + job_dict["Service"] + \
