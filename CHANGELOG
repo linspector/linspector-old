@@ -1,11 +1,11 @@
-
-0.16 - Date ??? Not released yet!
+0.16 - Date ??? Next release is scheduled to christmas 2013
 
  - Added a CHANGELOG file
- - Added new urwid based frontend called urlish
+ - Added "gui" command to lish providing an urwid (curses) based interface to
+   Linspector
  - Added scheduling status to boot message
  - Tweaked the default setting for arguments after a lot of testing
-   This should be tested a lot more with a many and less jobs
+   This should be tested a lot more with many and less jobs
  - Lots of improvements and bug fixes
 
 Older releases:
