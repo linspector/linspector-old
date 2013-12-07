@@ -29,6 +29,8 @@ import logging.handlers
 import os
 import os.path as path
 import sys
+import multiprocessing
+from multiprocessing import Pool
 
 from linspector.config.parser import FullConfigParser
 from linspector.core.interface import LinspectorInterface
@@ -89,8 +91,12 @@ def parse_args():
     return parser.parse_args()
 
 
+pool = Pool(processes=16)
+print 'cpu_count() = %d\n' % multiprocessing.cpu_count()
+
+
 def handle_job(job):
-    job.handle_call()
+    result = pool.apply_async(job.handle_call())
 
 
 def main():
