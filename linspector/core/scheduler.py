@@ -24,6 +24,6 @@ from apscheduler.scheduler import Scheduler
 logger = getLogger(__name__)
 
 
-class Scheduler(Scheduler):
+class LinspectorScheduler(Scheduler):
     def test(self):
         pass

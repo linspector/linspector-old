@@ -38,7 +38,7 @@ from linspector.tasks.task import TaskExecutor
 logger = getLogger(__name__)
 
 
-class Job:
+class LinspectorJob:
     def __init__(self, service, host, members, core, hostgroup):
         self.service = service
         self.host = host
