@@ -20,6 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 from logging import getLogger
 from multiprocessing import Process
 
+from linspector.core.job import LinspectorJob
 from linspector.core.scheduler import LinspectorScheduler
 
 logger = getLogger(__name__)
@@ -48,3 +49,11 @@ class LinspectorWorker(Process):
 
     def shutdown(self, wait=True):
         self.scheduler.shutdown(wait=wait)
+
+    def create_job(self, jobs, service, host, hostgroup, core, period, start_date=None):
+        job = LinspectorJob(service, host, hostgroup.get_members(), core, hostgroup)
+        scheduler_job = period.createJob(self.scheduler, job, self.handle_job, start_date=start_date)
+
+        if scheduler_job is not None:
+            job.set_job(scheduler_job)
+            jobs.append(job)

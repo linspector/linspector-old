@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.15/AMNESIA"
+__version__ = "0.15.1/AMNESIA"
 
 import argparse
 import datetime
@@ -34,7 +34,6 @@ from multiprocessing import cpu_count
 
 from linspector.config.parser import FullConfigParser
 from linspector.core.interface import LinspectorInterface
-from linspector.core.job import LinspectorJob
 from linspector.core.worker import LinspectorWorker
 from linspector.frontends.lish import LishFrontend
 from linspector.tasks.task import TaskExecutor
@@ -159,18 +158,9 @@ def main():
 
                         time_delta += float(args.delay)
                         new_start_date = start_date + datetime.timedelta(seconds=time_delta)
-                        job = LinspectorJob(service,
-                                            host,
-                                            hostgroup.get_members(),
-                                            core,
-                                            hostgroup)
 
                         worker = workers[instance]
-                        scheduler_job = period.createJob(worker.get_scheduler(), job, worker.handle_job,
-                                                         start_date=new_start_date)
-                        if scheduler_job is not None:
-                            job.set_job(scheduler_job)
-                            jobs.append(job)
+                        worker.create_job(jobs, service, host, hostgroup, core, period, start_date=new_start_date)
 
                         instance += 1
                         if instance == args.instances:
