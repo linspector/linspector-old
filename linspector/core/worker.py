@@ -1,0 +1,50 @@
+"""
+Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
+
+This file is part of Linspector (http://linspector.org).
+
+Linspector is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
+
+from logging import getLogger
+from multiprocessing import Process
+
+from linspector.core.scheduler import LinspectorScheduler
+
+logger = getLogger(__name__)
+
+
+class LinspectorWorker(Process):
+    def __init__(self, name, core_threads, max_threads):
+        super(LinspectorWorker, self).__init__()
+
+        self._name = name
+        self.core_threads = core_threads
+        self.max_threads = max_threads
+
+        self.scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": self.core_threads,
+                                              "apscheduler.threadpool.max_threads": self.max_threads})
+        self.scheduler.start()
+
+    def handle_job(self, job):
+        job.handle_call()
+
+    def get_scheduler_name(self):
+        return "Process returned %s" % self.name + " " + str(self.scheduler)
+
+    def get_scheduler(self):
+        return self.scheduler
+
+    def shutdown(self, wait=True):
+        self.scheduler.shutdown(wait=wait)
