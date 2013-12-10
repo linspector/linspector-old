@@ -36,17 +36,17 @@ class LinspectorWorker(Process):
 
         self.scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": self.core_threads,
                                               "apscheduler.threadpool.max_threads": self.max_threads})
-
         self.scheduler.standalone = True
 
     def run(self):
         self.scheduler.start()
 
-    def handle_job(self, job):
+    @staticmethod
+    def handle_job(job):
         job.handle_call()
 
-    def get_scheduler_name(self):
-        return "Process returned %s" % self.name + " " + str(self.scheduler)
+    def get_name(self):
+        return self.name
 
     def get_scheduler(self):
         return self.scheduler
@@ -57,7 +57,6 @@ class LinspectorWorker(Process):
     def create_job(self, jobs, service, host, hostgroup, core, period, start_date=None):
         job = LinspectorJob(service, host, hostgroup.get_members(), core, hostgroup)
         scheduler_job = period.createJob(self.scheduler, job, self.handle_job, start_date=start_date)
-
         if scheduler_job is not None:
             job.set_job(scheduler_job)
             jobs.append(job)

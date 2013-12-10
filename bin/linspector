@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.15.1/AMNESIA"
+__version__ = "0.15.2/AMNESIA"
 
 import argparse
 import datetime
@@ -130,10 +130,6 @@ def main():
         process = LinspectorWorker(name, args.corethreads, args.threads)
         workers.append(process)
         process.daemon = True
-        #process.start()
-
-    for worker in workers:
-        print "RESULT is %s" % worker.get_scheduler_name()
 
     start_date = datetime.datetime.now()
     time_delta = 0
@@ -166,13 +162,14 @@ def main():
                         if instance == args.instances:
                             instance = 0
 
+    schedulers = []
     for worker in workers:
+        schedulers.append(worker.get_scheduler())
         worker.start()
 
     print("\nScheduled " + str(job_count) + " jobs")
 
-    #TODO: add a list of workers and not only the last one; just a hack to make it run for testing
-    interface = LinspectorInterface(jobs, worker.get_scheduler(), lin_conf, root_logger, __version__)
+    interface = LinspectorInterface(jobs, schedulers, lin_conf, root_logger, __version__)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         from linspector.backends.jsonrpc import JsonrpcBackend
