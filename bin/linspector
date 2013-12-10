@@ -30,8 +30,6 @@ import os
 import os.path as path
 import sys
 
-from multiprocessing import cpu_count
-
 from linspector.config.parser import FullConfigParser
 from linspector.core.interface import LinspectorInterface
 from linspector.core.worker import LinspectorWorker
@@ -62,9 +60,8 @@ def parse_args():
     parser.add_argument("-c", "--logcount", default=5, type=int,
                         help="maximum number of logfiles in rotation (default: 5)")
 
-    parser.add_argument("-i", "--instances", default=cpu_count(), type=int,
-                        help="number of scheduler instances (default: number of cpu cores available (" +
-                              str(cpu_count()) + "))")
+    parser.add_argument("-i", "--instances", default=1, type=int,
+                        help="number of scheduler instances (default: 1)")
 
     parser.add_argument("-m", "--logsize", default=10485760, type=int,
                         help="maximum logfile size in bytes (default: 10485760)")
