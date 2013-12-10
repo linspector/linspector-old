@@ -21,7 +21,8 @@
             "members": ["root"],
             "hosts": [ "a"],
             "services":[
-                { "class": "etc/dummy", "args": { "sleep": 1, "fail": true }, "periods": ["fast"], "threshold": 1 }
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": true }, "periods": ["fast"], "threshold": 1 },
+                { "class": "etc/dummy", "args": { "sleep": 1, "fail": false }, "periods": ["fast"], "threshold": 1 }
             ]
         }
     },
