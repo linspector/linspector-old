@@ -77,6 +77,7 @@ class Task(object):
 @Singleton
 class TaskExecutor(object):
     def __init__(self):
+        logger.debug("init taskExecutor")
         self.event = Event()
         self.taskInfos = []
         task_thread = Thread(target=self._run_worker_thread)
@@ -88,18 +89,22 @@ class TaskExecutor(object):
     def _run_worker_thread(self):
         while self.is_running() or not self.is_instant_end():
             if len(self.taskInfos) == 0:
+                logger.debug("waiting for jobs to add")
                 self.event.clear()
                 self.event.wait()
+                logger.debug("Task Executor waked up")
 
             try:
+                logger.debug("trying to get task information")
                 msg, task = self.taskInfos[0]
                 del self.taskInfos[0]
                 if task:
-                    logger.debug("Starting Task Execution...")
+                    logger.debug("Starting Task Execution of task: %s", str(task))
                     task.execute(msg)
 
             except Exception, e:
                 logger.error("Error " + str(e))
+        logger.debug("shutting down TaskExecutor!")
 
     def is_instant_end(self):
         return self._instantEnd
@@ -117,5 +122,7 @@ class TaskExecutor(object):
         self.event.set()
 
     def schedule_task(self, msg, task):
+        logger.debug("appending task '%s' for msg: %s", str(task), str(msg))
         self.taskInfos.append((msg, task))
+        logger.debug("%s task stored", str(len(self.taskInfos)))
         self.event.set()

@@ -114,7 +114,9 @@ def main():
         logger.error(msg)
         exit()
 
-    TaskExecutor.Instance()
+    task = TaskExecutor.Instance()
+    logger.debug("blah")
+    #logger.debug("task executor instance :%s", str(task))
 
     job_count = 0
     for layout in lin_conf.get_enabled_layouts():

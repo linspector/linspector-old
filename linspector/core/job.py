@@ -115,8 +115,11 @@ class LinspectorJob:
             for task in member.get_tasks():
                 if self.status.lower() in task.get_task_type().lower():
                     logger.debug("Executing Task of type: " + self.status)
-                    TaskExecutor.Instance().schedule_task(job_information, task)
+                    try:
 
+                        TaskExecutor.Instance().schedule_task(job_information, task)
+                    except Exception, e:
+                        logger.error("Error while executing: " + str(e))
     def handle_call(self):
         logger.debug("handle call")
         logger.debug(self.service)
