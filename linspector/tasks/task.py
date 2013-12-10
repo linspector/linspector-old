@@ -21,6 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from logging import getLogger
 from threading import Event, Thread
+from Queue import Queue
 from linspector.utils.singleton import Singleton
 
 KEY_TYPE = "type"
@@ -79,7 +80,7 @@ class TaskExecutor(object):
     def __init__(self):
         logger.debug("init taskExecutor")
         self.event = Event()
-        self.taskInfos = []
+        self.taskInfos = Queue()
         task_thread = Thread(target=self._run_worker_thread)
         self._instantEnd = False
         self._running = True
@@ -87,7 +88,9 @@ class TaskExecutor(object):
         task_thread.start()
 
     def _run_worker_thread(self):
+        logger.debug("start running taskExcecutor worker Thread")
         while self.is_running() or not self.is_instant_end():
+            '''
             if len(self.taskInfos) == 0:
                 logger.debug("waiting for jobs to add")
                 self.event.clear()
@@ -102,6 +105,14 @@ class TaskExecutor(object):
                     logger.debug("Starting Task Execution of task: %s", str(task))
                     task.execute(msg)
 
+            except Exception, e:
+                logger.error("Error " + str(e))
+            '''
+            try:
+                logger.debug("try to get queued task")
+                msg, task = self.taskInfos.get()
+                logger.debug("got task %s for msg: %s", str(task), str(msg))
+                task.execute(msg)
             except Exception, e:
                 logger.error("Error " + str(e))
         logger.debug("shutting down TaskExecutor!")
@@ -122,7 +133,10 @@ class TaskExecutor(object):
         self.event.set()
 
     def schedule_task(self, msg, task):
-        logger.debug("appending task '%s' for msg: %s", str(task), str(msg))
-        self.taskInfos.append((msg, task))
-        logger.debug("%s task stored", str(len(self.taskInfos)))
-        self.event.set()
+        try:
+            logger.debug("appending task '%s' for msg: %s", str(task), str(msg))
+            self.taskInfos.put((msg, task))
+        except Exception, e:
+            logger.debug("queue is probably full: %s", str(e))
+        #logger.debug("%s task Queued", str(len(self.taskInfos)))
+        #self.event.set()

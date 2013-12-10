@@ -115,7 +115,6 @@ def main():
         exit()
 
     task = TaskExecutor.Instance()
-    logger.debug("blah")
     #logger.debug("task executor instance :%s", str(task))
 
     job_count = 0
