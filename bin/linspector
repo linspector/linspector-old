@@ -130,7 +130,7 @@ def main():
         process = LinspectorWorker(name, args.corethreads, args.threads)
         workers.append(process)
         process.daemon = True
-        process.start()
+        #process.start()
 
     for worker in workers:
         print "RESULT is %s" % worker.get_scheduler_name()
@@ -165,6 +165,9 @@ def main():
                         instance += 1
                         if instance == args.instances:
                             instance = 0
+
+    for worker in workers:
+        worker.start()
 
     print("\nScheduled " + str(job_count) + " jobs")
 

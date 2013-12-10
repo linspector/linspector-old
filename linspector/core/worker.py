@@ -36,6 +36,10 @@ class LinspectorWorker(Process):
 
         self.scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": self.core_threads,
                                               "apscheduler.threadpool.max_threads": self.max_threads})
+
+        self.scheduler.standalone = True
+
+    def run(self):
         self.scheduler.start()
 
     def handle_job(self, job):
