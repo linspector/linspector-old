@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.15.2/AMNESIA"
+__version__ = "0.15.3/AMNESIA"
 
 import argparse
 import datetime
@@ -125,8 +125,7 @@ def main():
 
     workers = []
     for i in range(0, args.instances):
-        name = "LinspectorWorker-"+str(i)
-        process = LinspectorWorker(name, args.corethreads, args.threads)
+        process = LinspectorWorker(args.corethreads, args.threads)
         workers.append(process)
         process.daemon = True
 
@@ -161,12 +160,12 @@ def main():
                         if instance == args.instances:
                             instance = 0
 
+    print("\nScheduled " + str(job_count) + " jobs")
+
     schedulers = []
     for worker in workers:
         schedulers.append(worker.get_scheduler())
         worker.start()
-
-    print("\nScheduled " + str(job_count) + " jobs")
 
     interface = LinspectorInterface(jobs, schedulers, lin_conf, root_logger, __version__)
 

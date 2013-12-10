@@ -27,10 +27,9 @@ logger = getLogger(__name__)
 
 
 class LinspectorWorker(Process):
-    def __init__(self, name, core_threads, max_threads):
+    def __init__(self, core_threads, max_threads):
         super(LinspectorWorker, self).__init__()
 
-        self._name = name
         self.core_threads = core_threads
         self.max_threads = max_threads
 
@@ -46,7 +45,7 @@ class LinspectorWorker(Process):
         job.handle_call()
 
     def get_name(self):
-        return self.name
+        return self._name
 
     def get_scheduler(self):
         return self.scheduler
