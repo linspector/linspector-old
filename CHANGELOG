@@ -1,7 +1,6 @@
 0.16 - Date ??? Next release is scheduled to christmas 2013
 
  - Added a CHANGELOG file
- - Added multi core support by instantiating multiple scheduler instances
  - Added "gui" command to lish providing an urwid (curses) based interface to
    Linspector
  - Added scheduling status to boot message

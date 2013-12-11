@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.15.3/AMNESIA"
+__version__ = "0.15/AMNESIA"
 
 import argparse
 import datetime
@@ -29,10 +29,13 @@ import logging.handlers
 import os
 import os.path as path
 import sys
+import multiprocessing
+from multiprocessing import Pool
 
 from linspector.config.parser import FullConfigParser
 from linspector.core.interface import LinspectorInterface
-from linspector.core.worker import LinspectorWorker
+from linspector.core.job import LinspectorJob
+from linspector.core.scheduler import LinspectorScheduler
 from linspector.frontends.lish import LishFrontend
 from linspector.tasks.task import TaskExecutor
 
@@ -60,14 +63,11 @@ def parse_args():
     parser.add_argument("-c", "--logcount", default=5, type=int,
                         help="maximum number of logfiles in rotation (default: 5)")
 
-    parser.add_argument("-i", "--instances", default=1, type=int,
-                        help="number of scheduler instances (default: 1)")
-
     parser.add_argument("-m", "--logsize", default=10485760, type=int,
                         help="maximum logfile size in bytes (default: 10485760)")
 
-    parser.add_argument("-t", "--threads", default=1000, type=int,
-                        help="maximum number of scheduler threads (default: 1000)")
+    parser.add_argument("-t", "--threads", default=3500, type=int,
+                        help="maximum number of scheduler threads (default: 3500)")
 
     parser.add_argument("-k", "--corethreads", default=0, type=int,
                         help="number of scheduler core threads (default: 0)")
@@ -89,6 +89,14 @@ def parse_args():
                         help="output debug messages")
     output.set_defaults(loglevel=logging.INFO)
     return parser.parse_args()
+
+
+pool = Pool(processes=16)
+print 'cpu_count() = %d\n' % multiprocessing.cpu_count()
+
+
+def handle_job(job):
+    result = pool.apply_async(job.handle_call())
 
 
 def main():
@@ -114,26 +122,21 @@ def main():
         logger.error(msg)
         exit()
 
-    executor = TaskExecutor()
-    #logger.debug("task executor instance :%s", str(task))
+    scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": args.corethreads,
+                           "apscheduler.threadpool.max_threads": args.threads})
+    scheduler.start()
+    TaskExecutor.Instance()
 
     job_count = 0
     for layout in lin_conf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             job_count += (hostgroup.get_services().__len__() * hostgroup.get_hosts().__len__())
 
-    workers = []
-    for i in range(0, args.instances):
-        process = LinspectorWorker(args.corethreads, args.threads)
-        workers.append(process)
-        process.daemon = True
-
     start_date = datetime.datetime.now()
     time_delta = 0
     jobs = []
     count = 0
     percent = 0
-    instance = 0
     for layout in lin_conf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             for service in hostgroup.get_services():
@@ -151,22 +154,19 @@ def main():
 
                         time_delta += float(args.delay)
                         new_start_date = start_date + datetime.timedelta(seconds=time_delta)
-
-                        worker = workers[instance]
-                        worker.create_job(jobs, service, host, hostgroup, core, period, start_date=new_start_date, executor=executor)
-
-                        instance += 1
-                        if instance == args.instances:
-                            instance = 0
+                        job = LinspectorJob(service,
+                                            host,
+                                            hostgroup.get_members(),
+                                            core,
+                                            hostgroup)
+                        scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
+                        if scheduler_job is not None:
+                            job.set_job(scheduler_job)
+                            jobs.append(job)
 
     print("\nScheduled " + str(job_count) + " jobs")
 
-    schedulers = []
-    for worker in workers:
-        schedulers.append(worker.get_scheduler())
-        worker.start()
-
-    interface = LinspectorInterface(jobs, schedulers, lin_conf, root_logger, __version__)
+    interface = LinspectorInterface(jobs, scheduler, lin_conf, root_logger, __version__)
 
     if "jsonrpc_backend" in core and core["jsonrpc_backend"]:
         from linspector.backends.jsonrpc import JsonrpcBackend
@@ -184,15 +184,13 @@ def main():
     if "shutdown_wait" in core:
         shutdown_wait = core["shutdown_wait"]
 
-    for worker in workers:
-        worker.shutdown(shutdown_wait)
-        worker.terminate()
-
+    scheduler.shutdown(wait=shutdown_wait)
     logging.shutdown()
     if shutdown_wait:
         TaskExecutor.Instance().stop()
     else:
         TaskExecutor.Instance().stop_immediately()
+
 
 if __name__ == "__main__":
     main()

@@ -39,7 +39,7 @@ logger = getLogger(__name__)
 
 
 class LinspectorJob:
-    def __init__(self, service, host, members, core, hostgroup, executor):
+    def __init__(self, service, host, members, core, hostgroup):
         self.service = service
         self.host = host
         self.members = members
@@ -49,7 +49,6 @@ class LinspectorJob:
         self.enabled = True
         self.scheduler_job = None
         self.job_id = self.hex_string()
-        self.executor = executor
         """
         NONE     job was not executed
         OK       when everything is fine
@@ -116,11 +115,8 @@ class LinspectorJob:
             for task in member.get_tasks():
                 if self.status.lower() in task.get_task_type().lower():
                     logger.debug("Executing Task of type: " + self.status)
-                    try:
+                    TaskExecutor.Instance().schedule_task(job_information, task)
 
-                        self.executor.schedule_task(job_information, task)
-                    except Exception, e:
-                        logger.error("Error while executing: " + str(e))
     def handle_call(self):
         logger.debug("handle call")
         logger.debug(self.service)
