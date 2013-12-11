@@ -118,7 +118,7 @@ def main():
 
     scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": args.corethreads,
                            "apscheduler.threadpool.max_threads": args.threads})
-    scheduler.start()
+
     TaskExecutor.Instance()
 
     job_count = 0
@@ -157,6 +157,8 @@ def main():
                         if scheduler_job is not None:
                             job.set_job(scheduler_job)
                             jobs.append(job)
+
+    scheduler.start()
 
     print("\nScheduled " + str(job_count) + " jobs")
 
