@@ -21,6 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from logging import getLogger
 from threading import Event, Thread
+from time import sleep
 from Queue import Queue
 from linspector.utils.singleton import Singleton
 
@@ -75,7 +76,6 @@ class Task(object):
             raise e
 
 
-@Singleton
 class TaskExecutor(object):
     def __init__(self):
         logger.debug("init taskExecutor")
@@ -90,31 +90,14 @@ class TaskExecutor(object):
     def _run_worker_thread(self):
         logger.debug("start running taskExcecutor worker Thread")
         while self.is_running() or not self.is_instant_end():
-            '''
-            if len(self.taskInfos) == 0:
-                logger.debug("waiting for jobs to add")
-                self.event.clear()
-                self.event.wait()
-                logger.debug("Task Executor waked up")
-
             try:
-                logger.debug("trying to get task information")
-                msg, task = self.taskInfos[0]
-                del self.taskInfos[0]
-                if task:
-                    logger.debug("Starting Task Execution of task: %s", str(task))
-                    task.execute(msg)
-
-            except Exception, e:
-                logger.error("Error " + str(e))
-            '''
-            try:
-                logger.debug("try to get queued task")
+                logger.debug("try to get queued task from %s", self.taskInfos)
                 msg, task = self.taskInfos.get()
                 logger.debug("got task %s for msg: %s", str(task), str(msg))
                 task.execute(msg)
+                self.taskInfos.task_done()
             except Exception, e:
-                logger.error("Error " + str(e))
+                logger.error("Error: %s", e.message)
         logger.debug("shutting down TaskExecutor!")
 
     def is_instant_end(self):
@@ -125,18 +108,16 @@ class TaskExecutor(object):
 
     def stop(self):
         self._running = False
-        self.event.set()
 
     def stop_immediately(self):
         self._running = False
         self._instantEnd = True
-        self.event.set()
 
     def schedule_task(self, msg, task):
         try:
             logger.debug("appending task '%s' for msg: %s", str(task), str(msg))
             self.taskInfos.put((msg, task))
+            logger.debug("into queue: %s ", str(self.taskInfos))
         except Exception, e:
             logger.debug("queue is probably full: %s", str(e))
-        #logger.debug("%s task Queued", str(len(self.taskInfos)))
-        #self.event.set()
+

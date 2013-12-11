@@ -53,8 +53,8 @@ class LinspectorWorker(Process):
     def shutdown(self, wait=True):
         self.scheduler.shutdown(wait=wait)
 
-    def create_job(self, jobs, service, host, hostgroup, core, period, start_date=None):
-        job = LinspectorJob(service, host, hostgroup.get_members(), core, hostgroup)
+    def create_job(self, jobs, service, host, hostgroup, core, period, start_date=None, executor=None):
+        job = LinspectorJob(service, host, hostgroup.get_members(), core, hostgroup, executor)
         scheduler_job = period.createJob(self.scheduler, job, self.handle_job, start_date=start_date)
         if scheduler_job is not None:
             job.set_job(scheduler_job)
