@@ -28,6 +28,7 @@ import socket
 from cmd import Cmd
 from logging import getLogger
 from shlex import split as shsplit
+from string import join
 
 from linspector.frontends.frontend import Frontend
 
@@ -96,106 +97,171 @@ Exits Linspector
 ''')
 
 
-class BaseCommand(object):
-
-    def set_command(self, cmd):
-        self.command = cmd
-
-    def can_execute(self):
-        if self.command.children is not None:
-            return False
-        else:
-            return True
-
-    def execute(self, text):
-        text = shsplit(text)
-        if len(text) == 0 and self.can_execute():
-            self.do_action()
-        else:
-            pass
-
-    def do_action(self):
-        pass
 
 
 def get_list():
     return []
 
 
-class Command(Cmd, object):
-    def __init__(self, alias, interface, shortHelp=None, extendedHelp=None, completion=get_list, func=None, children=None):
-        super(Command, self).__init__()
+class CmdWrapper(Cmd, object):
+    def __init__(self, alias, interface,
+                 shortHelp="see 'help [command] for further details",
+                 extendedHelp="no extended Help available!",
+                 func=None,
+                 completion=None):
+        super(CmdWrapper, self).__init__()
         self.interface = interface
         self.alias = alias
         self.shortHelp = shortHelp
-        self.completion = completion
         self.extendedHelp = extendedHelp
-        self.func = func
-        self.children = children
 
-    def get_short_help(self):
-        if self.shortHelp is not None:
-            return str(self.shortHelp)
-        else:
-            return "undocumented. see help %s for further information." % str(self.alias)
+        self.func = func
+        self.children = []
+        self.isChild = False
+
+        self.completions = completion
+
+    def is_child(self):
+        return self.isChild
+
+    def set_child(self):
+        self.isChild = True
+
+    def add_child(self, child):
+        child.set_child()
+        self.children.append(child)
 
     def get_children(self):
-        if self.children is None:
-            self.children = []
         return self.children
 
     def find_child_by_alias(self, alias):
-        pass
+        for child in self.children:
+            if child.alias == alias:
+                return child
+        return None
 
-    def get_extended_help(self):
-        return self.extendedHelp
-
-    def print_help(self):
-        help = self.get_extended_help()
-        if help is not None:
-            print help
-        elif len(self.get_children()) > 0:
-            print "%s usage:\n" % str(self.alias)
-            for child in self.get_children():
-                print child.alias + "\t\t" + child.short_help() + "\n"
-        else:
-            print "invalid or unsupported syntax"
-        print "\n"
-
-    def default(self, line):
-        if len(line) == 0:
-            if self.func is not None:
-                return self.func(self.interface)
-            else:
-                self.print_help()
-        else:
-            line = shsplit(line)
-
-            if len(line) > 0 and line[0] in [child.alias for child in self.get_children()]:
-                pass
-
-    def completenames(self, text, *ignored):
-        ret = super(Command, self).completenames(text, *ignored)
-        if len(self.get_children()) > 0:
-            func = lambda alias: True
-            if len(text) > 0:
-                func = lambda alias:  alias.startswith(text)
-            ret.extend([cmd.alias for cmd in self.children if func(cmd.alias)])
-        return ret
-
-    def completedefault(self, text, *ignored):
-        pass
+    def has_children(self):
+        return len(self.children) > 0
 
     def do_help(self, arg):
         if arg:
-            pass
+            args = shsplit(arg)
+            child = self.find_child_by_alias(args[0])
+            if child:
+                child.do_help(join(args[1:]))
+        elif self.has_children():
+            hlp = "Help of %s Command:\n" % self.alias
+            for child in self.get_children():
+                hlp += "%s\t\t%s\n" % (child.alias, child.shortHelp)
+            print(hlp)
         else:
-            pass
+            print(self.extendedHelp)
+
+    def emptyline(self):
+        if self.func:
+            return self.func(self.interface, None)
+        elif self.is_child():
+            self.do_help(None)
+        else:
+            return super(CmdWrapper, self).emptyline()
+
+    def default(self, line):
+        cmds = shsplit(line)
+        restCmd = join(cmds[1:])
+
+        child = self.find_child_by_alias(cmds[0])
+        if child:
+            return child.onecmd(restCmd)
+        elif self.func:
+            return self.func(self.interface, restCmd)
+        else:
+            self.do_help(None)
+
+    def completenames(self, text, *ignored):
+        names = super(CmdWrapper, self).completenames(text, *ignored)
+        if self.has_children():
+            func = lambda alias: True
+            if len(text) > 0:
+                func = lambda alias: alias.startswith(text)
+            names.extend([child.alias for child in self.children if func(child.alias)])
+        return names
+
+    def complete_without_help(self, text):
+        compl = self.completenames(text)
+        if "help" in compl:
+            compl.remove("help")
+        return compl
+
+    def completedefault(self, text, line, *ignored):
+        if self.completions:
+            return self.completions(text)
+
+        cmds = shsplit(line)
+        if len(cmds) > 0:
+            child = self.find_child_by_alias(cmds[0])
+            if child:
+                rest = join(cmds[1:])
+                return child.completedefault(rest, rest, *ignored)
+
+        return self.complete_without_help(text)
+
+class NewLish(CmdWrapper):
+    def __init__(self, interface):
+        super(NewLish, self).__init__("", interface)
+
+        self.add_child(Job(interface))
+        self.add_child(Gui(interface))
+
+        jobs = CmdWrapper("jobs", interface,
+                          shortHelp="lists or counts jobs",
+                          extendedHelp='''
+                          list to get a list of jobs
+                          count to get a job count''')
 
 
-class CommandTree(object):
-    def __init__(self, name):
-        self.name = name
+
+
+
+class Job(CmdWrapper):
+    def __init__(self, interface):
+
+        def find_job(interface, restcmd):
+            cmds = shsplit(restcmd)
+            if len(cmds) > 0:
+                job = interface.find_job_by_hex_string(cmds[0])
+                if job:
+                    if len(cmds) > 1:
+                        cmd = cmds[1]
+                        if cmd in ["enable", "disable"]:
+                            job.set_enabled("n" in cmd)
+                    else:
+                        self.print_job_infos(job)
+            else:
+                self.do_help()
+
+        def complete_ids(text):
+            func = lambda hexString: True if not text else hexString.startswith(text)
+            return [s for s in self.interface.get_job_hex_strings if func(s)]
+
+        super(Job, self).__init__("job", interface,
+                shortHelp="handle Jobs and get Infos about it", func=find_job, completion=complete_ids)
+
+
+class Gui(CmdWrapper):
+    def __init__(self, interface):
+
+        def gui_cmd(*ignored):
+            try:
+                from linspector.frontends.lishgui import LishGui
+                gui = LishGui(self.interface)
+                gui.run()
+            except Exception, err:
+                print("no GUI support!")
+
+        super(CmdWrapper, self).__init__("gui", interface,
+                         shortHelp="Starts the linspector gui",
+                         extendedHelp="The Extended Lish Commander with a graphical user interface",
+                         func=gui_cmd)
 
 
 class LishCommander(Exit):
