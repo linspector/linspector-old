@@ -20,6 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from logging import getLogger
+from Queue import Queue
 from threading import Event, Thread
 from linspector.utils.singleton import Singleton
 
@@ -77,7 +78,7 @@ class Task(object):
 @Singleton
 class TaskExecutor(object):
     def __init__(self):
-        self.event = Event()
+        self.queue = Queue()
         self.taskInfos = []
         task_thread = Thread(target=self._run_worker_thread)
         self._instantEnd = False
@@ -87,16 +88,13 @@ class TaskExecutor(object):
 
     def _run_worker_thread(self):
         while self.is_running() or not self.is_instant_end():
-            if len(self.taskInfos) == 0:
-                self.event.clear()
-                self.event.wait()
 
             try:
-                msg, task = self.taskInfos[0]
-                del self.taskInfos[0]
+                msg, task = self.queue.get()
                 if task:
                     logger.debug("Starting Task Execution...")
                     task.execute(msg)
+                self.queue.task_done()
 
             except Exception, e:
                 logger.error("Error " + str(e))
@@ -109,13 +107,10 @@ class TaskExecutor(object):
 
     def stop(self):
         self._running = False
-        self.event.set()
 
     def stop_immediately(self):
         self._running = False
         self._instantEnd = True
-        self.event.set()
 
     def schedule_task(self, msg, task):
-        self.taskInfos.append((msg, task))
-        self.event.set()
+        self.queue.put((msg, task))
