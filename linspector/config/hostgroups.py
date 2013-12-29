@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from logging import getLogger
+import netaddr
 
 logger = getLogger(__name__)
 
@@ -82,10 +83,23 @@ class HostGroup(object):
 
     def add_members(self, member):
         self.__add_internal(self.get_members(), member)
-            
-    def add_hosts(self, host):
-        self.__add_internal(self.get_hosts(), host)
-         
+
+    def add_host(self, host):
+        if "/" in host:
+            try:
+                from IPy import IP
+                ips = list(str(ip) for ip in IP(host))
+                #ips = [str(ip) for ip in list(netaddr.IPNetwork(host))]
+                self.hosts.extend(ips)
+            except Exception, e:
+                logger.error("Could not explode IP-range (%s). Maybe you need the IPy module.\n%s" % (host, e))
+        else:
+            self.hosts.append(host)
+
+    def add_hosts(self, hosts):
+        for host in hosts:
+            self.add_host(host)
+
     def add_parents(self, parent):
         self.__add_internal(self.get_parents(), parent)
 

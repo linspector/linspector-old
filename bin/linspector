@@ -126,7 +126,8 @@ def main():
         for hostgroup in layout.get_hostgroups():
             job_count += (hostgroup.get_services().__len__() * hostgroup.get_hosts().__len__())
 
-    start_date = datetime.datetime.now()
+    start_date = datetime.datetime.now() + datetime.timedelta(seconds=30)
+
     time_delta = 0
     jobs = []
     count = 0
