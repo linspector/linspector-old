@@ -2,26 +2,44 @@
     "members":{
         "root":{
             "_name": "root",
+            "parent": "admin",
             "tasks": [
                 {
                     "class": "storage/logger",
-                    "type": [ "ok", "warning", "error" ],
+                    "type": [ "ok" ],
                     "args": { "directory": "/tmp/", "file": "data.log" }
+                }
+            ]
+        },
+        "admin":{
+            "_name": "admin",
+            "tasks": [
+                {
+                    "class": "alert/mail",
+                    "type": [ "ok", "warning", "error" ],
+                    "args": { "host": "localhost",
+                              "port": 25,
+                              "sender": "linspector@linspector.org",
+                              "username": "",
+                              "password": "",
+                              "rcpt": "hanez@linspector.org"
+                    }
                 }
             ]
         }
     },
     "periods": {
         "fast": { "seconds": 15 },
-        "medium": { "seconds": 120 },
-        "slow": { "seconds": 480 }
+        "medium": { "seconds": 60 },
+        "slow": { "seconds": 480 },
+        "now": {"date": "2013-12-29 00:09:00"}
     },
     "hostgroups":{
         "a":{
             "members": ["root"],
-            "hosts": [ "a"],
+            "hosts": [ "151.217.0.0/16"],
             "services":[
-                { "class": "etc/dummy", "args": { "sleep": 1, "fail": true }, "periods": ["fast"], "threshold": 1 }
+                { "class": "net/tcpconnect", "args":{ "port": 80 }, "periods": ["now"], "threshold": 1 }
             ]
         }
     },

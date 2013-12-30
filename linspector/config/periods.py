@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from logging import getLogger
+from apscheduler.util import convert_to_datetime
 
 logger = getLogger(__name__)
 
@@ -48,7 +49,7 @@ class IntervalPeriod(Period):
         
     def createJob(self, scheduler, jobInfo, func, **kwargs):
         start_date = self.start_date
-        if kwargs["start_date"]:
+        if "start_date" in kwargs:
             start_date = kwargs["start_date"]
 
         return scheduler.add_interval_job(func, weeks=self.weeks, hours=self.hours, minutes=self.minutes,
@@ -80,7 +81,8 @@ class CronPeriod(Period):
         
     def createJob(self, scheduler, jobInfo, func, **kwargs):
         start_date = self.start_date
-        if kwargs["start_date"]:
+
+        if "start_date" in kwargs:
             start_date = kwargs["start_date"]
 
         return scheduler.add_cron_job(func, year=self.year, month=self.month, day=self.day, week=self.week,
@@ -100,6 +102,12 @@ class DatePeriod(Period):
         
     def createJob(self, scheduler, jobInfo, func, **kwargs):
         try:
+            if "start_date" in kwargs:
+                earliest = kwargs["start_date"]
+                date = convert_to_datetime(self.date)
+                if date < earliest:
+                    self.date = earliest
+
             return scheduler.add_date_job(func=func, date=self.date, args=[jobInfo])
         except Exception, e:
-            return None
+            logger.error("exception while creating job out of DatePeriod!\n%s" % e)
