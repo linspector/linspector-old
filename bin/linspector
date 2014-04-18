@@ -117,7 +117,7 @@ def main():
         exit()
 
     scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": args.corethreads,
-                           "apscheduler.threadpool.max_threads": args.threads})
+                                     "apscheduler.threadpool.max_threads": args.threads})
 
     TaskExecutor.Instance()
 
@@ -152,6 +152,7 @@ def main():
                                             hostgroup.get_members(),
                                             core,
                                             hostgroup)
+
                         scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
                         scheduler_job.misfire_grace_time = 2
                         if scheduler_job is not None:
