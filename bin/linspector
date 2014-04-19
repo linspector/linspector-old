@@ -117,7 +117,7 @@ def main():
         exit()
 
     scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": args.corethreads,
-                           "apscheduler.threadpool.max_threads": args.threads})
+                                     "apscheduler.threadpool.max_threads": args.threads})
 
     TaskExecutor.Instance()
 
@@ -131,21 +131,19 @@ def main():
     time_delta = 0
     jobs = []
     count = 0
-    percent = 0
+    percent = float(0)
+    increment = float(100) / float(job_count )
     for layout in lin_conf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             for service in hostgroup.get_services():
                 for host in hostgroup.get_hosts():
                     for period in service.get_periods():
-                        count += 1
-                        if job_count >= 100:
-                            if count % (job_count/100) == 0:
-                                percent += 1
-                                sys.stdout.write("Scheduling jobs. Be patient... " + str(percent) + "%\r")
-                                sys.stdout.flush()
-                        else:
-                            sys.stdout.write("Scheduling jobs. Be patient...\r")
+                        percent += increment
+                        if percent >= count:
+                            sys.stdout.write("Scheduling jobs. Be patient... " + str(count) + "%\r")
                             sys.stdout.flush()
+                            while percent > count:
+                                count += 1
 
                         time_delta += float(args.delay)
                         new_start_date = start_date + datetime.timedelta(seconds=time_delta)
@@ -154,6 +152,7 @@ def main():
                                             hostgroup.get_members(),
                                             core,
                                             hostgroup)
+
                         scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
 
                         if scheduler_job is not None:
