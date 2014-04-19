@@ -1,7 +1,6 @@
 from linspector.transactions import HostgroupTransaction
 from linspector.core.job import LinspectorJob
 
-__author__ = 'rafael'
 
 def handle_job(job):
     job.handle_call()
@@ -12,11 +11,10 @@ class HostgroupHostTransaction(HostgroupTransaction):
         super(HostgroupHostTransaction).__init__(linspectorInterface, hostgroup)
         self.host = host
 
+
 class HostgroupAddHostTransaction(HostgroupHostTransaction):
     def __init__(self, linspectorInterface, hostgroup, host):
         super(HostgroupHostTransaction).__init__(linspectorInterface, hostgroup, host)
-
-
 
     def transact(self):
         hostgroup = self.interface.get_config().get_hostgroup_by_name(self.hostgroup)
@@ -36,9 +34,5 @@ class HostgroupAddHostTransaction(HostgroupHostTransaction):
                             scheduler_job.misfire_grace_time = 2
                             job.set_job(scheduler_job)
                             self.interface.add_job(job)
-
-
         else:
-            raise Exception("could not find hostgroup %s" % self.hostgroup )
-
-
+            raise Exception("could not find hostgroup %s" % self.hostgroup)

@@ -132,7 +132,7 @@ def main():
     jobs = []
     count = 0
     percent = float(0)
-    increment = float(100) / float(job_count )
+    increment = float(100) / float(job_count)
     for layout in lin_conf.get_enabled_layouts():
         for hostgroup in layout.get_hostgroups():
             for service in hostgroup.get_services():
