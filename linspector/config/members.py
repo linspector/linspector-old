@@ -44,6 +44,11 @@ class Member:
             raise MemberMissingArgumentException(tmp, name)
         self.add_tasks(kwargs[tmp])
 
+        tmp = "parent"
+        self.parent = None
+        if tmp in kwargs:
+            self.parent = kwargs[tmp]
+
     def __add_internal(self, l, item):
         if isinstance(item, list):
             l.extend(item)
@@ -58,6 +63,12 @@ class Member:
     
     def get_tasks(self):
         return self.__tasks
+
+    def has_parent(self):
+        return self.parent is not None
+
+    def get_parent(self):
+        return self.parent
 
     def __str__(self):
         ret = "Member: " + self.name + " Tasks: "
