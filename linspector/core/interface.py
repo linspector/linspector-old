@@ -41,6 +41,9 @@ class LinspectorInterface(object):
         for job in self.jobs:
             self.jobHex.append(job.hex_string())
 
+    def get_config(self):
+        return self._config
+
     def get_job_hex_strings(self):
         return self.jobHex
 
@@ -73,6 +76,9 @@ class LinspectorInterface(object):
         #d["Last Threshold Override"] = None
         #d["Last Escalation"] = None
         return d
+
+    def add_job(self, job):
+        self.jobs.append(job)
 
     def get_job_list(self):
         job_list = []

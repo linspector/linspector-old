@@ -154,8 +154,9 @@ def main():
                                             hostgroup)
 
                         scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
-                        scheduler_job.misfire_grace_time = 2
+
                         if scheduler_job is not None:
+                            scheduler_job.misfire_grace_time = 2
                             job.set_job(scheduler_job)
                             jobs.append(job)
 

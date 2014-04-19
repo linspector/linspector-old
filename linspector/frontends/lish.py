@@ -54,7 +54,8 @@ class LishFrontend(Frontend):
         run = True
         while run:
             try:
-                commander.cmdloop(GREEN + "Lish - Linspector interactive shell (" + __version__ + ")" + END)
+                print(GREEN + "Lish - Linspector interactive shell (" + __version__ + ")" + END)
+                commander.cmdloop()
             except KeyboardInterrupt, ki:
                 run = False
             except Exception, err:
@@ -217,8 +218,6 @@ class NewLish(CmdWrapper):
                           extendedHelp='''
                           list to get a list of jobs
                           count to get a job count''')
-
-
 
 
 
