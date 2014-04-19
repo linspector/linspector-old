@@ -159,9 +159,11 @@ def main():
                             job.set_job(scheduler_job)
                             jobs.append(job)
 
+    print("\nStarting Scheduler...")
+
     scheduler.start()
 
-    print("\nScheduled " + str(job_count) + " jobs")
+    print("Scheduled " + str(job_count) + " jobs")
 
     interface = LinspectorInterface(jobs, scheduler, lin_conf, root_logger, __version__)
 
