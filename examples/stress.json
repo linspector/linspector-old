@@ -12,7 +12,7 @@
         }
     },
     "periods": {
-        "fast": { "seconds": 60 },
+        "fast": { "seconds": 15 },
         "medium": { "seconds": 120 },
         "slow": { "seconds": 480 }
     },

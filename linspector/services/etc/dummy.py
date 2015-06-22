@@ -66,7 +66,7 @@ class DummyService(Service):
         return False
 
     def execute(self, execution):
-
+        #print(str(self.sleep))
         time.sleep(self.sleep)
 
         d = {"Fail": str(self.fail), "Sleep": str(self.sleep)}

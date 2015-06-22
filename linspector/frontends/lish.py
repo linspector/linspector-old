@@ -220,7 +220,6 @@ class NewLish(CmdWrapper):
                           count to get a job count''')
 
 
-
 class Job(CmdWrapper):
     def __init__(self, interface):
 
@@ -478,8 +477,8 @@ Usage:
         print GREEN + "Hostname" + END + ":\t" + socket.gethostname()
         # TODO: print instance uptime
         print GREEN + "Job Count" + END + ":\t" + str(self.interface.get_job_count())
-        thread_info = self.interface.get_thread_count()
-        print GREEN + "Threads" + END + ":\t" + str(thread_info["Num Threads"]) + "/" + str(thread_info["Max Threads"])
+        ###thread_info = self.interface.get_thread_count()
+        ###print GREEN + "Threads" + END + ":\t" + str(thread_info["Num Threads"]) + "/" + str(thread_info["Max Threads"])
         print GREEN + "Core Version" + END + ":\t" + self.interface.get_version()
         print GREEN + "Lish Version" + END + ":\t" + __version__
 
@@ -489,13 +488,12 @@ Show status information about the Linspector instance
 ''')
 
     def do_about(self, text):
-        self.print_color(GREEN,  "Linspector Monitoring\n")
+        self.print_color(GREEN,  "Linspector System Monitoring\n")
         self.print_color(YELLOW, "Developers:")
         self.print_color(BLUE,   " - Johannes Findeisen <hanez@linspector.org>")
-        self.print_color(BLUE,   " - Rafael Timmerberg <ruff@linspector.org>\n")
-        self.print_color(PURPLE, "(c) 2011 - 2013")
+        self.print_color(PURPLE, "(c) 2011 - 2015")
         self.print_color(PURPLE, "Web: http://linspector.org")
-        self.print_color(PURPLE, "License: GNU Affero General Public License Version 3.0")
+        self.print_color(PURPLE, "License: GNU General Public License Version 2")
 
     def help_about(self):
         print('''

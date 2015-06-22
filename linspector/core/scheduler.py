@@ -1,4 +1,5 @@
 """
+Copyright (c) 2014 by Johannes Findeisen
 Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
@@ -19,7 +20,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from logging import getLogger
 
-from apscheduler.scheduler import Scheduler
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
 logger = getLogger(__name__)
 

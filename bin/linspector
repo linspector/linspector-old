@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7 -tt
 
 """
+Copyright (c) 2014-2015 by Johannes Findeisen
 Copyright (c) 2011-2013 by Johannes Findeisen and Rafael Timmerberg
 
 This file is part of Linspector (http://linspector.org).
@@ -20,9 +21,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.15.1/AMNESIA"
+__version__ = "0.16/AMNESIA"
 
 import argparse
+import copy
 import datetime
 import logging
 import logging.handlers
@@ -33,9 +35,13 @@ import sys
 from linspector.config.parser import FullConfigParser
 from linspector.core.interface import LinspectorInterface
 from linspector.core.job import LinspectorJob
-from linspector.core.scheduler import LinspectorScheduler
+#from linspector.core.scheduler import LinspectorScheduler
 from linspector.frontends.lish import LishFrontend
 from linspector.tasks.task import TaskExecutor
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.jobstores.memory import MemoryJobStore
+from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
 logger = logging.getLogger(__name__)
 
@@ -67,8 +73,8 @@ def parse_args():
     parser.add_argument("-t", "--threads", default=3500, type=int,
                         help="maximum number of scheduler threads (default: 3500)")
 
-    parser.add_argument("-k", "--corethreads", default=0, type=int,
-                        help="number of scheduler core threads (default: 0)")
+    parser.add_argument("-p", "--processes", default=0, type=int,
+                        help="number of scheduler processes (default: 0)")
 
     parser.add_argument("-x", "--delay", default=1.135791, type=float,
                         help="seconds delay between scheduled jobs (default: 1.135791)")
@@ -115,9 +121,18 @@ def main():
         print("Configuration error: " + str(msg) + ". Exiting now.")
         logger.error(msg)
         exit()
-
-    scheduler = LinspectorScheduler({"apscheduler.threadpool.core_threads": args.corethreads,
-                                     "apscheduler.threadpool.max_threads": args.threads})
+    
+    jobstores = {
+        'memory': MemoryJobStore()
+    }
+    executors = {
+        'default': ThreadPoolExecutor(args.threads),
+        'processpool': ProcessPoolExecutor(args.processes)
+    }
+    job_defaults = {
+        'max_instances': 10000
+    }
+    scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults)
 
     TaskExecutor.Instance()
 

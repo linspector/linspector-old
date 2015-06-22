@@ -49,6 +49,7 @@ class LinspectorJob:
         self.enabled = True
         self.scheduler_job = None
         self.job_id = self.hex_string()
+
         """
         NONE     job was not executed
         OK       when everything is fine

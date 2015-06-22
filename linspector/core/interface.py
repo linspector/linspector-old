@@ -63,7 +63,7 @@ class LinspectorInterface(object):
         d["Members"] = str([member.name for member in job.members])
         d["Period"] = str(job.scheduler_job.trigger)
         d["Next run"] = str(job.scheduler_job.next_run_time)
-        d["Runs"] = str(job.scheduler_job.runs)
+        d["Runs"] = str(job.job_information.job_overall_fails)
         d["Enabled"] = str(job.enabled)
         d["Threshold"] = str(job.service.get_threshold())
         d["Fails"] = str(job.job_threshold)

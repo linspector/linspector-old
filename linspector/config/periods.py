@@ -52,8 +52,8 @@ class IntervalPeriod(Period):
         if "start_date" in kwargs:
             start_date = kwargs["start_date"]
 
-        return scheduler.add_interval_job(func, weeks=self.weeks, hours=self.hours, minutes=self.minutes,
-                                          seconds=self.seconds, start_date=start_date, args=[jobInfo])
+        return scheduler.add_job(func, trigger="interval", weeks=self.weeks, hours=self.hours, minutes=self.minutes,
+                                          seconds=self.seconds, start_date=start_date, args=[jobInfo], timezone="CET")
 
     def __str__(self):
         ret = "IntervalPeriod(Name: " + self.name + ")"
@@ -85,7 +85,7 @@ class CronPeriod(Period):
         if "start_date" in kwargs:
             start_date = kwargs["start_date"]
 
-        return scheduler.add_cron_job(func, year=self.year, month=self.month, day=self.day, week=self.week,
+        return scheduler.add_job(func, trigger="cron", year=self.year, month=self.month, day=self.day, week=self.week,
                                       day_of_week=self.day_of_week, hour=self.hour, minute=self.minute,
                                       second=self.second, start_date=start_date, args=[jobInfo])
             
@@ -108,6 +108,6 @@ class DatePeriod(Period):
                 if date < earliest:
                     self.date = earliest
 
-            return scheduler.add_date_job(func=func, date=self.date, args=[jobInfo])
+            return scheduler.add_job(func=func, trigger="date", date=self.date, args=[jobInfo])
         except Exception, e:
             logger.error("exception while creating job out of DatePeriod!\n%s" % e)
