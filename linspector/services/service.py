@@ -19,12 +19,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from logging import getLogger
 
-KEY_COMMENT   = "comment"
+KEY_COMMENT = "comment"
 KEY_THRESHOLD = "threshold"
-KEY_FAILS     = "fails"
-KEY_PERIODS   = "periods"
-KEY_ARGS      = "args"
-KEY_CLASS     = "class"
+KEY_FAILS = "fails"
+KEY_PERIODS = "periods"
+KEY_ARGS = "args"
+KEY_CLASS = "class"
 
 logger = getLogger(__name__)
 
