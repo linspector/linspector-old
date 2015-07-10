@@ -1,4 +1,4 @@
-APScheduler==2.1.0
+APScheduler==3.0.3
 bjsonrpc==0.2.1
 paramiko==1.11.0
 pysnmp==4.2.4
