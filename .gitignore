@@ -4,8 +4,8 @@
 nbproject
 
 *.py[cod]
-
 *.so
+*.swp
 
 docs
 local
