@@ -21,10 +21,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-__version__ = "0.16/AMNESIA"
+__version__ = "0.17"
 
 import argparse
-import copy
 import datetime
 import logging
 import logging.handlers
@@ -70,7 +69,7 @@ def parse_args():
     parser.add_argument("-m", "--logsize", default=10485760, type=int,
                         help="maximum logfile size in bytes (default: 10485760)")
 
-    parser.add_argument("-t", "--threads", default=3500, type=int,
+    parser.add_argument("-t", "--threads", default=20, type=int,
                         help="maximum number of scheduler threads (default: 3500)")
 
     parser.add_argument("-p", "--processes", default=0, type=int,
@@ -96,7 +95,12 @@ def parse_args():
 
 
 def handle_job(job):
+    print("HANDLE")
     job.handle_call()
+
+
+def tick(job):
+    print("TICK")
 
 
 def main():
@@ -117,17 +121,17 @@ def main():
     try:
         config_parser = FullConfigParser()
         lin_conf, core = config_parser.parse_config(args.config)
-    except Exception, msg:
+    except Exception as msg:
         print("Configuration error: " + str(msg) + ". Exiting now.")
         logger.error(msg)
         exit()
-    
+
     jobstores = {
         'memory': MemoryJobStore()
     }
     executors = {
         'default': ThreadPoolExecutor(args.threads),
-        'processpool': ProcessPoolExecutor(args.processes)
+        #'default': ProcessPoolExecutor(args.processes)
     }
     job_defaults = {
         'max_instances': 10000
@@ -141,7 +145,7 @@ def main():
         for hostgroup in layout.get_hostgroups():
             job_count += (hostgroup.get_services().__len__() * hostgroup.get_hosts().__len__())
 
-    start_date = datetime.datetime.now() + datetime.timedelta(seconds=30)
+    start_date = datetime.datetime.now()# + datetime.timedelta(seconds=1)
 
     time_delta = 0
     jobs = []
@@ -168,12 +172,15 @@ def main():
                                             core,
                                             hostgroup)
 
-                        scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
+                        #scheduler_job = period.createJob(scheduler, job, handle_job, start_date=new_start_date)
 
-                        if scheduler_job is not None:
-                            scheduler_job.misfire_grace_time = 2
-                            job.set_job(scheduler_job)
-                            jobs.append(job)
+                        #if scheduler_job is not None:
+                        #scheduler.misfire_grace_time = 2
+                        #print(new_start_date)
+                        scheduler_job = scheduler.add_job(tick, 'interval', start_date=new_start_date, seconds=3, timezone="CET", args=[job])
+                        #print(scheduler_job)
+                        job.set_job(scheduler_job)
+                        jobs.append(job)
 
     print("\nStarting Scheduler...")
 

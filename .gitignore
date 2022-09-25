@@ -16,3 +16,6 @@ log
 examples/private*
 linspector/services/private*
 NOTES.*
+
+linspector.iml
+

@@ -119,6 +119,7 @@ class LinspectorJob:
                     TaskExecutor.Instance().schedule_task(job_information, task)
 
     def handle_call(self):
+        print("\nHANDLE CALL")
         logger.debug("handle call")
         logger.debug(self.service)
         if self.enabled:

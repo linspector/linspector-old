@@ -30,10 +30,7 @@ class Period(object):
     
     def get_name(self):
         return self.name
-        
-    #def createJob(self, scheduler, jobInfo, func):
-    #    pass
-        
+
 
 class IntervalPeriod(Period):
     def __init__(self, name="", weeks=0, days=0, hours=0, minutes=0, seconds=0, start_date=None, comment=None):
@@ -47,13 +44,13 @@ class IntervalPeriod(Period):
         self.start_date = start_date      # when to first execute 
         self.comment = comment            # comment
         
-    def createJob(self, scheduler, jobInfo, func, **kwargs):
-        start_date = self.start_date
-        if "start_date" in kwargs:
-            start_date = kwargs["start_date"]
+    #def createJob(self, scheduler, jobInfo, func, **kwargs):
+    #    start_date = self.start_date
+    #    if "start_date" in kwargs:
+    #        start_date = kwargs["start_date"]
 
-        return scheduler.add_job(func, trigger="interval", weeks=self.weeks, hours=self.hours, minutes=self.minutes,
-                                          seconds=self.seconds, start_date=start_date, args=[jobInfo], timezone="CET")
+    #    return scheduler.add_job(func, trigger="interval", weeks=self.weeks, hours=self.hours, minutes=self.minutes,
+    #                                      seconds=self.seconds, start_date=start_date, args=[jobInfo], timezone="CET")
 
     def __str__(self):
         ret = "IntervalPeriod(Name: " + self.name + ")"
@@ -79,15 +76,15 @@ class CronPeriod(Period):
         ret = "CronPeriod(Name: " + self.name + ")"
         return ret
         
-    def createJob(self, scheduler, jobInfo, func, **kwargs):
-        start_date = self.start_date
+    #def createJob(self, scheduler, jobInfo, func, **kwargs):
+    #    start_date = self.start_date
 
-        if "start_date" in kwargs:
-            start_date = kwargs["start_date"]
+     #   if "start_date" in kwargs:
+     #       start_date = kwargs["start_date"]
 
-        return scheduler.add_job(func, trigger="cron", year=self.year, month=self.month, day=self.day, week=self.week,
-                                      day_of_week=self.day_of_week, hour=self.hour, minute=self.minute,
-                                      second=self.second, start_date=start_date, args=[jobInfo])
+     #   return scheduler.add_job(func, trigger="cron", year=self.year, month=self.month, day=self.day, week=self.week,
+     #                                 day_of_week=self.day_of_week, hour=self.hour, minute=self.minute,
+     #                                 second=self.second, start_date=start_date, args=[jobInfo])
             
         
 class DatePeriod(Period):
@@ -100,14 +97,14 @@ class DatePeriod(Period):
         ret = "DatePeriod(Name: " + self.name + ", " + str(self.date) + ")"
         return ret
         
-    def createJob(self, scheduler, jobInfo, func, **kwargs):
-        try:
-            if "start_date" in kwargs:
-                earliest = kwargs["start_date"]
-                date = convert_to_datetime(self.date)
-                if date < earliest:
-                    self.date = earliest
+    #def createJob(self, scheduler, jobInfo, func, **kwargs):
+    #    try:
+    #        if "start_date" in kwargs:
+    #            earliest = kwargs["start_date"]
+    #            date = convert_to_datetime(self.date)
+    #            if date < earliest:
+    #                self.date = earliest
 
-            return scheduler.add_job(func=func, trigger="date", date=self.date, args=[jobInfo])
-        except Exception, e:
-            logger.error("exception while creating job out of DatePeriod!\n%s" % e)
+    #        return scheduler.add_job(func=func, trigger="date", date=self.date, args=[jobInfo])
+    #    except Exception, e:
+    #        logger.error("exception while creating job out of DatePeriod!\n%s" % e)
